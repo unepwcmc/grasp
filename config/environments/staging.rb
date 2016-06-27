@@ -24,6 +24,15 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
+  config.middleware.use ExceptionNotification::Rack,
+    :slack => {
+      :webhook_url => ENV["SLACK_WEBHOOK_URL"],
+      :channel => "#grasp-database",
+      :additional_parameters => {
+        :mrkdwn => true
+      }
+  }
+
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass

@@ -18,6 +18,8 @@ gem 'dotenv-rails', '~> 2.1.1'
 
 # Logging'n'tracking
 gem 'appsignal', '~> 1.1.9'
+gem 'exception_notification', '~> 4.1.4'
+gem 'slack-notifier', '~> 1.5.1'
 
 group :development do
   # Docs

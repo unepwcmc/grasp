@@ -35,6 +35,16 @@ Rails.application.configure do
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
 
+  config.middleware.use ExceptionNotification::Rack,
+    :slack => {
+      :webhook_url => ENV["SLACK_WEBHOOK_URL"],
+      :channel => "#grasp-database",
+      :additional_parameters => {
+        :mrkdwn => true
+      }
+  }
+
+
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Specifies the header that your server uses for sending files.
