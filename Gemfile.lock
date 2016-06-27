@@ -176,7 +176,7 @@ PLATFORMS
 DEPENDENCIES
   appsignal (~> 1.1.9)
   byebug
-  capistrano (~> 3.4)
+  capistrano (~> 3.5)
   capistrano-bundler (~> 1.1)
   capistrano-passenger (~> 0.2.0)
   capistrano-rails

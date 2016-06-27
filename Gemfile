@@ -28,7 +28,7 @@ group :development do
 
   # Deployment
   gem 'capistrano-rails'
-  gem 'capistrano', '~> 3.4', require: false
+  gem 'capistrano', '~> 3.5', require: false
   gem 'capistrano-bundler', '~> 1.1', require: false
   gem 'capistrano-rvm',   '~> 0.1', require: false
   gem 'capistrano-passenger', '~> 0.2.0', require: false
