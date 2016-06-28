@@ -5,7 +5,7 @@ addons:
   postgresql: 9.4
 
 env:
-  - RAILS_ENV=test PG_HOST=localhost PG_USERNAME=postgres SECRET_KEY_BASE=1234
+  - RAILS_ENV=test PG_HOST=localhost PG_USERNAME=postgres SECRET_KEY_BASE=1a2b3cd4
 
 before_script:
   - bundle exec rake db:create db:migrate
