@@ -13,6 +13,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'react-rails'
+gem 'sprockets-coffee-react', '~> 4.0.0'
 
 # Configuration
 gem 'dotenv-rails', '~> 2.1.1'
