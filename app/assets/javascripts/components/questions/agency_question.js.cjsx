@@ -1,6 +1,6 @@
 class @AgencyQuestion extends Question
   render: ->
-    @show(
+    @render_if_visible(
       <div>
         <h1>{@state.question}</h1>
         <ul>{@renderAnswers()}</ul>

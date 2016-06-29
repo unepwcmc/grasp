@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require react
 //= require react_ujs
+//= require questions_repo
 //= require components
 //= require_tree .
 //

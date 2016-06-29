@@ -4,15 +4,19 @@ class @Question extends React.Component
 
     @state = @props.data
     @state.id = @props.id
-    window.questions[@state.id] = @
+    QuestionsRepo.register(@state.id, @)
 
-  show: (component) ->
+  render_if_visible: (component) ->
+    if @state.hidden
+      null
+    else
+      component
+
+  componentDidUpdate: ->
     if @state.hidden
       @hideChildren()
-      <div></div>
     else
       @showChildrenFor(@state.selected)
-      component
 
   handleChange: (e) =>
     @setState({selected: e.target.value})
@@ -24,10 +28,10 @@ class @Question extends React.Component
 
   hideChildren: =>
     (@state.shownChildren || []).map( (child) ->
-      window.questions[child].setState({hidden: true})
+      QuestionsRepo.fetch(child).setState({hidden: true})
     )
 
   showChildrenFor: (answer) ->
     (@state.children[answer] || []).map( (child) ->
-      window.questions[child].setState({hidden: false})
+      QuestionsRepo.fetch(child).setState({hidden: false})
     )
