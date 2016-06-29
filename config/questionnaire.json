@@ -38,9 +38,9 @@
       "children": {}
     }
   },
-  "structure": [
-    ["own_organisation", "select_agency"],
-    ["date_of_discovery"]
+  "pages": [
+    ["own_organisation", "own_organisation_2"],
+    ["date_of_discovery", "select_agency"]
   ],
   "state": "accepted",
   "validation_comment": "All good! :)"
