@@ -7,7 +7,7 @@
       "question": "Are you reporting on behalf of your own organisation?",
       "answers": ["Yes", "No"],
       "children": {
-        "No": ["own_organisation_2"]
+        "No": ["select_agency"]
       }
     },
     "select_agency": {
@@ -16,7 +16,8 @@
       "type": "agency",
       "question": "Select agency",
       "answers": [{"id": 1, "name": "Agency One"}, {"id": 2, "name": "Agency Two"}],
-      "children": {}
+      "children": {
+      }
     },
     "date_of_discovery": {
       "id": "date_of_discovery",
