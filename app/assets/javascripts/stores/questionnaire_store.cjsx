@@ -4,11 +4,11 @@ class QuestionnaireStore extends EventEmitter
   EVENT = "change"
   questionnaire = {}
 
-  load: (data) =>
+  load: (data) ->
     questionnaire = data
 
-  allVisible: =>
-    questionnaire.pages.map( (page) =>
+  allVisible: ->
+    questionnaire.pages.map( (page) ->
       page.filter( (question_id) ->
         questionnaire.questions[question_id].visible
       ).map( (question_id) ->
@@ -31,7 +31,7 @@ class QuestionnaireStore extends EventEmitter
     questionnaire.questions[key].visible = true
     @emit(EVENT)
 
-  fetch: (key) =>
+  fetch: (key) ->
     questionnaire.questions[key]
 
 module.exports = new QuestionnaireStore()
