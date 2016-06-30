@@ -10,16 +10,6 @@
         "No": ["own_organisation_2"]
       }
     },
-    "own_organisation_2": {
-      "id": "own_organisation_2",
-      "type": "single",
-      "visible": false,
-      "question": "hwhwhhwhwhwhwh",
-      "answers": ["Yes", "No"],
-      "children": {
-        "No": ["select_agency"]
-      }
-    },
     "select_agency": {
       "id": "select_agency",
       "visible": false,
@@ -33,14 +23,62 @@
       "visible": true,
       "type": "date",
       "question": "Date of discovery",
-      "answers": [],
       "selected": "25/12/2016",
+      "children": {}
+    },
+    "country_of_discovery": {
+      "id": "country_of_discovery",
+      "visible": true,
+      "type": "single",
+      "question": "Country of discovery",
+      "answers": [
+        "Angola",
+        "Burundi",
+        "Cameroon",
+        "Central African Republic",
+        "DRC",
+        "Congo",
+        "Ivory Coast",
+        "Equatorial Guinea",
+        "Gabon",
+        "Ghana",
+        "Guinea",
+        "Guinea Bissau",
+        "Indonesia",
+        "Liberia Malaysia",
+        "Mali",
+        "Nigeria",
+        "Rwanda",
+        "Senegal",
+        "Sierra Leone",
+        "South Sudan",
+        "Uganda"
+      ],
+      "children": {}
+    },
+    "type_of_location": {
+      "id": "type_of_location",
+      "visible": true,
+      "type": "single",
+      "question": "Type of location",
+      "answers": [
+        "Wild",
+        "Private premises",
+        "Airport",
+        "In transit",
+        "Other (please specify)"
+      ],
       "children": {}
     }
   },
   "pages": [
-    ["own_organisation", "own_organisation_2", "select_agency"],
-    ["date_of_discovery"]
+    [
+      "own_organisation",
+      "select_agency",
+      "date_of_discovery",
+      "country_of_discovery",
+      "type_of_location"
+    ]
   ],
   "state": "accepted",
   "validation_comment": "All good! :)"
