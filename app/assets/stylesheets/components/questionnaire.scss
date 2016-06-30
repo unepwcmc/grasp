@@ -1,0 +1,6 @@
+@import "utilities/bem";
+
+@include b(questionnaire) {
+  width: 80%;
+  margin: auto;
+}

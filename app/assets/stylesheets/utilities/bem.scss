@@ -7,18 +7,14 @@ $modifierseparator: '--';
   }
 }
 
-@mixin e($element, $this: &) {
+@mixin e($element) {
   @at-root {
-    @if($this != &) {
-      #{&} #{$this}#{$elementseparator+$element} { @content; }
-    } @else {
-      #{$this}#{$elementseparator+$element} { @content; }
-    }
+    &#{$elementseparator+$element} { @content; }
   }
 }
 
-@mixin m($modifier, $this: &) {
+@mixin m($modifier) {
   @at-root {
-    #{$this}#{$modifierseparator+$modifier} { @content; }
+    &#{$elementseparator+$element} { @content; }
   }
 }

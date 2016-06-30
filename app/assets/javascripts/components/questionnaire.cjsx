@@ -13,7 +13,7 @@ class Questionnaire extends React.Component
     QuestionnaireStore.addChangeListener(@onChange)
 
   render: ->
-    <div className="pages">
+    <div className="questionnaire">
       {@renderPages()}
     </div>
 
