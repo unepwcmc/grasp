@@ -12,6 +12,12 @@ class Question extends React.Component
     @hideChildren()
     @showChildrenFor(answer)
 
+  componentWillUnmount: ->
+    @hideChildren()
+
+  componentDidMount: ->
+    @showChildrenFor(@props.data.selected)
+
   hideChildren: =>
     (@state.shownChildren || []).map (child) ->
       QuestionnaireStore.hide(child)
