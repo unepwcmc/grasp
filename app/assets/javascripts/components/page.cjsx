@@ -15,7 +15,7 @@ module.exports = class Page extends React.Component
   renderQuestions: =>
     @props.questions.map( (question) ->
       switch question.type
-        when "single" then <SingleAnswerQuestion key={question.id} data={question}/>
-        when "agency" then <AgencyQuestion       key={question.id} data={question}/>
-        when "date"   then <DateQuestion         key={question.id} data={question}/>
+        when "single"     then <SingleAnswerQuestion key={question.id} data={question}/>
+        when "agency"     then <AgencyQuestion       key={question.id} data={question}/>
+        when "date"       then <DateQuestion         key={question.id} data={question}/>
     )

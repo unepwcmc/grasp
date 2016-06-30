@@ -7,16 +7,6 @@
       "question": "Are you reporting on behalf of your own organisation?",
       "answers": ["Yes", "No"],
       "children": {
-        "No": ["own_organisation_2"]
-      }
-    },
-    "own_organisation_2": {
-      "id": "own_organisation_2",
-      "type": "single",
-      "visible": false,
-      "question": "hwhwhhwhwhwhwh",
-      "answers": ["Yes", "No"],
-      "children": {
         "No": ["select_agency"]
       }
     },
@@ -26,7 +16,8 @@
       "type": "agency",
       "question": "Select agency",
       "answers": [{"id": 1, "name": "Agency One"}, {"id": 2, "name": "Agency Two"}],
-      "children": {}
+      "children": {
+      }
     },
     "date_of_discovery": {
       "id": "date_of_discovery",
@@ -39,7 +30,7 @@
     }
   },
   "pages": [
-    ["own_organisation", "own_organisation_2", "select_agency"],
+    ["own_organisation", "select_agency"],
     ["date_of_discovery"]
   ],
   "state": "accepted",
