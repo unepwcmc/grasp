@@ -1,0 +1,14 @@
+{
+  "name": "grasp",
+  "dependencies": {
+    "browserify": "~10.2.4",
+    "browserify-incremental": "^3.0.1",
+    "coffee-reactify": "^5.0.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10"
+  }
+}

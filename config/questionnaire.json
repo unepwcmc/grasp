@@ -1,0 +1,86 @@
+{
+  "questions": {
+    "own_organisation": {
+      "id": "own_organisation",
+      "visible": true,
+      "type": "single",
+      "question": "Are you reporting on behalf of your own organisation?",
+      "answers": ["Yes", "No"],
+      "children": {
+        "No": ["select_agency"]
+      }
+    },
+    "select_agency": {
+      "id": "select_agency",
+      "visible": false,
+      "type": "agency",
+      "question": "Select agency",
+      "answers": [{"id": 1, "name": "Agency One"}, {"id": 2, "name": "Agency Two"}],
+      "children": {
+      }
+    },
+    "date_of_discovery": {
+      "id": "date_of_discovery",
+      "visible": true,
+      "type": "date",
+      "question": "Date of discovery",
+      "selected": "25/12/2016",
+      "children": {}
+    },
+    "country_of_discovery": {
+      "id": "country_of_discovery",
+      "visible": true,
+      "type": "single",
+      "question": "Country of discovery",
+      "answers": [
+        "Angola",
+        "Burundi",
+        "Cameroon",
+        "Central African Republic",
+        "DRC",
+        "Congo",
+        "Ivory Coast",
+        "Equatorial Guinea",
+        "Gabon",
+        "Ghana",
+        "Guinea",
+        "Guinea Bissau",
+        "Indonesia",
+        "Liberia Malaysia",
+        "Mali",
+        "Nigeria",
+        "Rwanda",
+        "Senegal",
+        "Sierra Leone",
+        "South Sudan",
+        "Uganda"
+      ],
+      "children": {}
+    },
+    "type_of_location": {
+      "id": "type_of_location",
+      "visible": true,
+      "type": "single",
+      "question": "Type of location",
+      "answers": [
+        "Wild",
+        "Private premises",
+        "Airport",
+        "In transit",
+        "Other (please specify)"
+      ],
+      "children": {}
+    }
+  },
+  "pages": [
+    [
+      "own_organisation",
+      "select_agency",
+      "date_of_discovery",
+      "country_of_discovery",
+      "type_of_location"
+    ]
+  ],
+  "state": "accepted",
+  "validation_comment": "All good! :)"
+}
