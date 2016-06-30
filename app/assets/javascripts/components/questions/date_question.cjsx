@@ -5,7 +5,7 @@ class DateQuestion extends Question
   render: ->
     <div>
       <h1>{@props.data.question}</h1>
-      <input value={@props.selected} type="date"></input>
+      <input value={@props.data.selected} type="date"></input>
     </div>
 
 module.exports = DateQuestion
