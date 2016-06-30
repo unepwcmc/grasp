@@ -30,6 +30,7 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1', require: false
   gem 'capistrano-rvm',   '~> 0.1', require: false
   gem 'capistrano-passenger', '~> 0.2.0', require: false
+  gem 'capistrano-npm', '~> 1.0.2'
 end
 
 # Debugging
