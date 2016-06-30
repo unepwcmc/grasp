@@ -1,0 +1,10 @@
+@import "utilities/bem";
+
+@include b(answer) {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+
+  @include e(radio) {
+    margin-right: 1rem;
+  }
+}

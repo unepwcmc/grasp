@@ -3,7 +3,7 @@ Question = require("components/question")
 
 class DateQuestion extends Question
   render: ->
-    <div>
+    <div className="question">
       <h1>{@props.data.question}</h1>
       <input value={@props.data.selected} type="date"></input>
     </div>
