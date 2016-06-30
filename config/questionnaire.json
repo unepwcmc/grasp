@@ -1,6 +1,8 @@
 {
   "questions": {
     "own_organisation": {
+      "id": "own_organisation",
+      "visible": true,
       "type": "single",
       "question": "Are you reporting on behalf of your own organisation?",
       "answers": ["Yes", "No"],
@@ -9,8 +11,9 @@
       }
     },
     "own_organisation_2": {
+      "id": "own_organisation_2",
       "type": "single",
-      "hidden": true,
+      "visible": false,
       "question": "hwhwhhwhwhwhwh",
       "answers": ["Yes", "No"],
       "children": {
@@ -18,7 +21,8 @@
       }
     },
     "select_agency": {
-      "hidden": true,
+      "id": "select_agency",
+      "visible": false,
       "type": "agency",
       "question": "Select agency",
       "answers": [{"id": 1, "name": "Agency One"}, {"id": 2, "name": "Agency Two"}],
@@ -26,6 +30,7 @@
     },
     "date_of_discovery": {
       "id": "date_of_discovery",
+      "visible": true,
       "type": "date",
       "question": "Date of discovery",
       "answers": [],
@@ -33,9 +38,9 @@
       "children": {}
     }
   },
-  "structure": [
-    ["own_organisation", "select_agency"],
-    ["date_of_discovery"]
+  "pages": [
+    ["own_organisation", "own_organisation_2"],
+    ["date_of_discovery", "select_agency"]
   ],
   "state": "accepted",
   "validation_comment": "All good! :)"
