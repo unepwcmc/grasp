@@ -4,6 +4,7 @@ SingleAnswerQuestion = require("components/questions/single_answer_question")
 AgencyQuestion       = require("components/questions/agency_question")
 DateQuestion         = require("components/questions/date_question")
 TextQuestion         = require("components/questions/text_question")
+Form                 = require("components/questions/form")
 
 module.exports = class Page extends React.Component
   constructor: (props, context) ->
@@ -11,7 +12,7 @@ module.exports = class Page extends React.Component
     @state = {}
 
   render: ->
-    <div style={{borderBottom: "solid 1px #eee"}}>{@renderQuestions()}</div>
+    <div>{@renderQuestions()}</div>
 
   renderQuestions: =>
     @props.questions.map( (question) ->
@@ -20,4 +21,5 @@ module.exports = class Page extends React.Component
         when "agency"     then <AgencyQuestion       key={question.id} data={question}/>
         when "date"       then <DateQuestion         key={question.id} data={question}/>
         when "text"       then <TextQuestion         key={question.id} data={question}/>
+        when "form"       then <Form                 key={question.id} data={question}/>
     )

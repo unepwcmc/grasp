@@ -2,7 +2,19 @@
 
 class QuestionnaireStore extends EventEmitter
   EVENT = "change"
+  currentPage   = 0
   questionnaire = {}
+
+  currentPage: ->
+    currentPage
+
+  previousPage: ->
+    currentPage -= 1
+    @emit(EVENT)
+
+  nextPage: ->
+    currentPage += 1
+    @emit(EVENT)
 
   load: (data) ->
     questionnaire = data
@@ -16,22 +28,19 @@ class QuestionnaireStore extends EventEmitter
       )
     )
 
-  addChangeListener: (callback) =>
-    @on(EVENT, callback)
-
   selectAnswer: (key, answer) ->
     questionnaire.questions[key].selected = answer
-    @emit(EVENT)
-
-  hide: (key) =>
-    questionnaire.questions[key].visible = false
     @emit(EVENT)
 
   show: (key) =>
     questionnaire.questions[key].visible = true
     @emit(EVENT)
 
-  fetch: (key) ->
-    questionnaire.questions[key]
+  hide: (key) =>
+    questionnaire.questions[key].visible = false
+    @emit(EVENT)
+
+  addChangeListener: (callback) =>
+    @on(EVENT, callback)
 
 module.exports = new QuestionnaireStore()

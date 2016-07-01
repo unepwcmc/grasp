@@ -1,10 +1,11 @@
 React = require("react")
 Question = require("components/question")
 
-class NewAgencyForm extends Question
+class Form extends Question
   render: ->
-    <form>
-      <fieldset>
+    <div>
+      <h1>{@props.data.question}</h1>
+      <form>
         <label for="agency_name">Agency Name:</label>
         <input type="text" name="agency_name" id="agency_name"/><br/>
         <label for="contact_name">Contact Name:</label>
@@ -13,8 +14,7 @@ class NewAgencyForm extends Question
         <input type="text" name="telephone" id="telephone"/><br/>
         <label for="email">Email:</label>
         <input type="text" name="email" id="email"/><br/>
-        <input type="submit" value="Submit"/>
-      </fieldset>
-    </form>
+      </form>
+    </div>
 
-module.exports = NewAgencyForm
+module.exports = Form
