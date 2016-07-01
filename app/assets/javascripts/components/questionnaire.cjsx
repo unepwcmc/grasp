@@ -1,12 +1,13 @@
 React = require("react")
 QuestionnaireStore = require("stores/questionnaire_store")
-Page = require("components/page")
+Page               = require("components/page")
+PageControls       = require("components/page_controls")
 
 class Questionnaire extends React.Component
   constructor: (props, context) ->
     super(props, context)
     @state = {
-      currentPage: 0,
+      currentPage: QuestionnaireStore.currentPage(),
       pages: QuestionnaireStore.allVisible()
     }
 
@@ -16,16 +17,7 @@ class Questionnaire extends React.Component
   render: ->
     <div className="questionnaire">
       {@renderCurrentPage()}
-
-      <div className="page-controls">
-        <button onClick={@nextPage} className="page-controls__control">
-          Next step
-        </button>
-        <button onClick={@previousPage} className="page-controls__control page-controls__control">
-          Previous step
-        </button>
-      </div>
-
+      <PageControls maxPages={@state.pages.length} currentPage={@state.currentPage}/>
     </div>
 
   renderCurrentPage: =>
@@ -35,9 +27,10 @@ class Questionnaire extends React.Component
       null
 
   onChange: =>
-    @setState({pages: QuestionnaireStore.allVisible()})
+    @setState({
+      currentPage: QuestionnaireStore.currentPage(),
+      pages: QuestionnaireStore.allVisible()
+    })
 
-  previousPage: => @setState({currentPage: @state.currentPage-1})
-  nextPage:     => @setState({currentPage: @state.currentPage+1})
 
 module.exports = Questionnaire
