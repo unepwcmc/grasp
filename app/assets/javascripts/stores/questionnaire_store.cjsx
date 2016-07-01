@@ -32,6 +32,16 @@ class QuestionnaireStore extends EventEmitter
     questionnaire.questions[key].selected = answer
     @emit(EVENT)
 
+  addFile: (key, file) ->
+    questionnaire.questions[key].selected ||= []
+    questionnaire.questions[key].selected.push(file)
+    @emit(EVENT)
+
+  deleteFile: (key, fileIndex) ->
+    questionnaire.questions[key].selected ||= []
+    questionnaire.questions[key].selected.splice(fileIndex, 1)
+    @emit(EVENT)
+
   show: (key) =>
     questionnaire.questions[key].visible = true
     @emit(EVENT)
