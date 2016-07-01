@@ -24,7 +24,6 @@
       "visible": true,
       "type": "date",
       "question": "Date of discovery",
-      "selected": "25/12/2016",
       "children": {}
     },
     "country_of_discovery": {
