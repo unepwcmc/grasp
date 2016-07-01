@@ -1,0 +1,8 @@
+@import "utilities/bem";
+
+@include b(page-controls) {
+  @include e(control) {
+    margin-right: 2rem;
+    float: right;
+  }
+}

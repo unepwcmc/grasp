@@ -1,11 +1,13 @@
 React = require("react")
 QuestionnaireStore = require("stores/questionnaire_store")
-Page = require("components/page")
+Page               = require("components/page")
+PageControls       = require("components/page_controls")
 
 class Questionnaire extends React.Component
   constructor: (props, context) ->
     super(props, context)
     @state = {
+      currentPage: QuestionnaireStore.currentPage(),
       pages: QuestionnaireStore.allVisible()
     }
 
@@ -14,13 +16,21 @@ class Questionnaire extends React.Component
 
   render: ->
     <div className="questionnaire">
-      {@renderPages()}
+      {@renderCurrentPage()}
+      <PageControls maxPages={@state.pages.length} currentPage={@state.currentPage}/>
     </div>
 
-  renderPages: =>
-    @state.pages.map (page) -> <Page questions={page}/>
+  renderCurrentPage: =>
+    if @state.pages[@state.currentPage]
+      <Page questions={@state.pages[@state.currentPage]}/>
+    else
+      null
 
   onChange: =>
-    @setState({pages: QuestionnaireStore.allVisible()})
+    @setState({
+      currentPage: QuestionnaireStore.currentPage(),
+      pages: QuestionnaireStore.allVisible()
+    })
+
 
 module.exports = Questionnaire

@@ -36,7 +36,7 @@
         "Burundi",
         "Cameroon",
         "Central African Republic",
-        "DRC",
+        "Democratic Republic of Congo",
         "Congo",
         "Ivory Coast",
         "Equatorial Guinea",
@@ -45,7 +45,8 @@
         "Guinea",
         "Guinea Bissau",
         "Indonesia",
-        "Liberia Malaysia",
+        "Liberia",
+        "Malaysia",
         "Mali",
         "Nigeria",
         "Rwanda",
@@ -69,6 +70,35 @@
         "Other (please specify)"
       ],
       "children": {}
+    },
+    "genus": {
+      "id": "genus",
+      "visible": true,
+      "type": "single",
+      "question": "Ape (Genus)",
+      "answers": [
+        "Bonobo (pan)",
+        "Chimpanzee (pan)",
+        "Gorilla (gorilla)",
+        "Orang-utan (pongo)",
+        "Unknown"
+      ],
+      "children": {}
+    },
+    "intended_use": {
+      "id": "intended_use",
+      "visible": true,
+      "type": "single",
+      "question": "Intended use (Optional)",
+      "answers": [
+        "Trophy" ,
+        "Personal",
+        "circus or travelling exhibition",
+        "Zoo",
+        "Bushmeat",
+        "Unknown"
+      ],
+      "children": {}
     }
   },
   "pages": [
@@ -78,6 +108,9 @@
       "date_of_discovery",
       "country_of_discovery",
       "type_of_location"
+    ], [
+      "genus",
+      "intended_use"
     ]
   ],
   "state": "accepted",
