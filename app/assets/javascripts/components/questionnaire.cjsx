@@ -6,6 +6,7 @@ class Questionnaire extends React.Component
   constructor: (props, context) ->
     super(props, context)
     @state = {
+      currentPage: 0,
       pages: QuestionnaireStore.allVisible()
     }
 
@@ -14,13 +15,29 @@ class Questionnaire extends React.Component
 
   render: ->
     <div className="questionnaire">
-      {@renderPages()}
+      {@renderCurrentPage()}
+
+      <div className="page-controls">
+        <button onClick={@nextPage} className="page-controls__control">
+          Next step
+        </button>
+        <button onClick={@previousPage} className="page-controls__control page-controls__control">
+          Previous step
+        </button>
+      </div>
+
     </div>
 
-  renderPages: =>
-    @state.pages.map (page) -> <Page questions={page}/>
+  renderCurrentPage: =>
+    if @state.pages[@state.currentPage]
+      <Page questions={@state.pages[@state.currentPage]}/>
+    else
+      null
 
   onChange: =>
     @setState({pages: QuestionnaireStore.allVisible()})
+
+  previousPage: => @setState({currentPage: @state.currentPage-1})
+  nextPage:     => @setState({currentPage: @state.currentPage+1})
 
 module.exports = Questionnaire

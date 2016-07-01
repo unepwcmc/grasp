@@ -10,7 +10,7 @@ module.exports = class Page extends React.Component
     @state = {}
 
   render: ->
-    <div style={{borderBottom: "solid 1px #eee"}}>{@renderQuestions()}</div>
+    <div>{@renderQuestions()}</div>
 
   renderQuestions: =>
     @props.questions.map( (question) ->
