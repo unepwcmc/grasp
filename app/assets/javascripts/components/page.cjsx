@@ -3,6 +3,7 @@ QuestionnaireStore   = require("stores/questionnaire_store")
 SingleAnswerQuestion = require("components/questions/single_answer_question")
 AgencyQuestion       = require("components/questions/agency_question")
 DateQuestion         = require("components/questions/date_question")
+Form                 = require("components/questions/form")
 
 module.exports = class Page extends React.Component
   constructor: (props, context) ->
@@ -18,4 +19,5 @@ module.exports = class Page extends React.Component
         when "single"     then <SingleAnswerQuestion key={question.id} data={question}/>
         when "agency"     then <AgencyQuestion       key={question.id} data={question}/>
         when "date"       then <DateQuestion         key={question.id} data={question}/>
+        when "form"       then <Form                 key={question.id} data={question}/>
     )

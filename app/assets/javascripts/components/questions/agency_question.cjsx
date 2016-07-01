@@ -1,6 +1,6 @@
 React = require("react")
 Question = require("components/question")
-NewAgencyForm = require("components/questions/new_agency_form")
+Form = require("components/questions/form")
 
 class AgencyQuestion extends Question
   render: ->
@@ -27,7 +27,7 @@ class AgencyQuestion extends Question
 
   renderForm: =>
     if @props.data.selected == "form"
-      <NewAgencyForm/>
+      <Form/>
     else
       null
 
