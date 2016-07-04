@@ -28,7 +28,7 @@
     "numeric_example": {
       "id": "numeric_example",
       "visible": true,
-      "type": "numeric",
+      "type": "decimal_numeric",
       "question": "Test numeric",
       "children": {}
     },

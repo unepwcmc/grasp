@@ -1,12 +1,13 @@
 React = require("react")
-QuestionnaireStore   = require("stores/questionnaire_store")
-SingleAnswerQuestion = require("components/questions/single_answer_question")
-AgencyQuestion       = require("components/questions/agency_question")
-DateQuestion         = require("components/questions/date_question")
-TextQuestion         = require("components/questions/text_question")
-FileQuestion         = require("components/questions/file_question")
-NumericQuestion      = require("components/questions/numeric_question")
-Form                 = require("components/questions/form")
+QuestionnaireStore          = require("stores/questionnaire_store")
+SingleAnswerQuestion        = require("components/questions/single_answer_question")
+AgencyQuestion              = require("components/questions/agency_question")
+DateQuestion                = require("components/questions/date_question")
+TextQuestion                = require("components/questions/text_question")
+FileQuestion                = require("components/questions/file_question")
+NumericQuestion             = require("components/questions/numeric_question")
+DecimalNumericQuestion      = require("components/questions/decimal_numeric_question")
+Form                        = require("components/questions/form")
 
 module.exports = class Page extends React.Component
   constructor: (props, context) ->
@@ -19,11 +20,12 @@ module.exports = class Page extends React.Component
   renderQuestions: =>
     @props.questions.map( (question) ->
       switch question.type
-        when "single"     then <SingleAnswerQuestion key={question.id} data={question}/>
-        when "agency"     then <AgencyQuestion       key={question.id} data={question}/>
-        when "date"       then <DateQuestion         key={question.id} data={question}/>
-        when "text"       then <TextQuestion         key={question.id} data={question}/>
-        when "file"       then <FileQuestion         key={question.id} data={question}/>
-        when "numeric"    then <NumericQuestion      key={question.id} data={question}/>
-        when "form"       then <Form                 key={question.id} data={question}/>
+        when "single"             then <SingleAnswerQuestion        key={question.id} data={question}/>
+        when "agency"             then <AgencyQuestion              key={question.id} data={question}/>
+        when "date"               then <DateQuestion                key={question.id} data={question}/>
+        when "text"               then <TextQuestion                key={question.id} data={question}/>
+        when "file"               then <FileQuestion                key={question.id} data={question}/>
+        when "numeric"            then <NumericQuestion             key={question.id} data={question}/>
+        when "decimal_numeric"    then <DecimalNumericQuestion      key={question.id} data={question}/>
+        when "form"               then <Form                        key={question.id} data={question}/>
     )

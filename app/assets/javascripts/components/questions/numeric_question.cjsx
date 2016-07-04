@@ -6,14 +6,14 @@ class NumericQuestion extends Question
   render: ->
     <div className="question">
       <h1>{@props.data.question}</h1>
-      <button id="numeric__decrement" onClick={@decrement}>-</button>
+      <button onClick={@decrement}>-</button>
       <input type="number" onChange={@handleChange} value={@props.data.selected}/>
-      <button id="numeric__increment" onClick={@increment}>+</button>
+      <button onClick={@increment}>+</button>
     </div>
 
   increment: =>
     answer = parseInt(@props.data.selected || 0) + 1
-    if answer > 999 then answer = 999 else answer
+    if answer > 99 then answer = 99 else answer
     QuestionnaireStore.selectAnswer(@props.data.id, answer)
 
   decrement: =>
