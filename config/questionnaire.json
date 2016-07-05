@@ -25,6 +25,13 @@
       "question": "Date of discovery",
       "children": {}
     },
+    "numeric_example": {
+      "id": "numeric_example",
+      "visible": true,
+      "type": "decimal_numeric",
+      "question": "Test numeric",
+      "children": {}
+    },
     "country_of_discovery": {
       "id": "country_of_discovery",
       "visible": true,
@@ -203,6 +210,7 @@
       "own_organisation",
       "new_agency_contact",
       "date_of_discovery",
+      "numeric_example",
       "country_of_discovery",
       "type_of_location",
       "confiscated"
