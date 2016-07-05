@@ -4,8 +4,10 @@
     "browserify": "~10.2.4",
     "browserify-incremental": "^3.0.1",
     "coffee-reactify": "^5.0.0",
+    "es6-promise": "3.2.1",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "whatwg-fetch": "^1.0.0"
   },
   "license": "MIT",
   "engines": {

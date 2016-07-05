@@ -53,4 +53,7 @@ class QuestionnaireStore extends EventEmitter
   addChangeListener: (callback) =>
     @on(EVENT, callback)
 
+  saveAll: =>
+    alert("Saved!")
+
 module.exports = new QuestionnaireStore()
