@@ -1,5 +1,6 @@
 {EventEmitter} = require("events")
 $ = require('jquery')
+require('whatwg-fetch')
 
 class QuestionnaireStore extends EventEmitter
   EVENT = "change"
@@ -63,7 +64,10 @@ class QuestionnaireStore extends EventEmitter
         'Content-Type': 'application/json'
         'X-CSRF-Token': token
       },
-      body: JSON.stringify({data: questionnaire })
-    })
+      credentials: 'include',
+      body: JSON.stringify({ report: { data: questionnaire }})
+    }).then((response) ->
+      window.location = response.headers.get('Location')
+    )
 
 module.exports = new QuestionnaireStore()

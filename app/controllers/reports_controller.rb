@@ -7,12 +7,12 @@ class ReportsController < ApplicationController
     @report = File.read(Rails.root.join("config/questionnaire.json"))
   end
 
-  def create(report_params)
+  def create
     @report = Report.new(report_params)
     if @report.save
-      redirect_to :index, notice: "Report submitted successfully!"
+      head :created, location: reports_path
     else
-      redirect_to :index, notice: "There was an error submitting your report"
+      head 422, location: reports_path
     end
   end
 

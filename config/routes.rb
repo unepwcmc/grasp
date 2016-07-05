@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :reports, only: [:index, :new, :create]
-  get "/home", to: 'home#index', as: "home"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
