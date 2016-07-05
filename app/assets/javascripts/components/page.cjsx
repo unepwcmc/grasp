@@ -1,6 +1,6 @@
 React = require("react")
-QuestionnaireStore   = require("stores/questionnaire_store")
 SingleAnswerQuestion = require("components/questions/single_answer_question")
+MultiAnswerQuestion  = require("components/questions/multi_answer_question")
 AgencyQuestion       = require("components/questions/agency_question")
 DateQuestion         = require("components/questions/date_question")
 TextQuestion         = require("components/questions/text_question")
@@ -24,4 +24,5 @@ module.exports = class Page extends React.Component
         when "text"       then <TextQuestion         key={question.id} data={question}/>
         when "file"       then <FileQuestion         key={question.id} data={question}/>
         when "form"       then <Form                 key={question.id} data={question}/>
+        when "multi"      then <MultiAnswerQuestion  key={question.id} data={question}/>
     )
