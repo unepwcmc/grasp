@@ -16,10 +16,10 @@ module.exports = class FileQuestion extends Question
     </div>
 
   renderFiles: =>
-    @props.data.selected?.map (file, index) =>
+    @props.data.selected?.map (file) =>
       <p key={file.name + file.lastModifiedDate} className="file">
         {@renderImage(file)} {file.name}
-        <small style={{color: "red"}} onClick={@deleteFile.bind(@, index)}>x</small>
+        <small style={{color: "red"}} onClick={@deleteFile.bind(@, file)}>x</small>
       </p>
 
   renderImage: (file) =>
@@ -36,7 +36,7 @@ module.exports = class FileQuestion extends Question
     reader.readAsDataURL(file)
 
   addFile: (e) =>
-    QuestionnaireStore.addFile(@props.data.id, e.target.files[0])
+    QuestionnaireStore.addAnswer(@props.data.id, e.target.files[0])
 
-  deleteFile: (fileIndex) =>
-    QuestionnaireStore.deleteFile(@props.data.id, fileIndex)
+  deleteFile: (file) =>
+    QuestionnaireStore.removeAnswer(@props.data.id, file)

@@ -34,14 +34,16 @@ class QuestionnaireStore extends EventEmitter
     questionnaire.questions[key].selected = answer
     @emit(CHANGE_EVENT)
 
-  addFile: (key, file) ->
+  addAnswer: (key, answer) ->
     questionnaire.questions[key].selected ||= []
-    questionnaire.questions[key].selected.push(file)
+    questionnaire.questions[key].selected.push(answer)
     @emit(CHANGE_EVENT)
 
-  deleteFile: (key, fileIndex) ->
-    questionnaire.questions[key].selected ||= []
-    questionnaire.questions[key].selected.splice(fileIndex, 1)
+  removeAnswer: (key, answer) ->
+    questionnaire.questions[key].selected = (
+      questionnaire.questions[key].selected || []
+    ).filter (word) -> word isnt answer
+
     @emit(CHANGE_EVENT)
 
   show: (key) =>
