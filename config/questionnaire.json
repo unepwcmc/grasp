@@ -203,6 +203,22 @@
       ],
       "question": "Were there other illegal activities happening in tandem to this discovery?",
       "children": {}
+    },
+    "proximity": {
+      "id": "proximity",
+      "visible": true,
+      "type": "multi",
+      "answers": [
+        "Logging",
+        "Coltan mining",
+        "Coal mining",
+        "Oil drilling",
+        "Palm oil production",
+        "Construction",
+        "War / civil unrest"
+      ],
+      "question": "Was this discovery found in close proximity to any of these man-made disturbances?",
+      "children": {}
     }
   },
   "pages": [
@@ -223,7 +239,8 @@
       "prosecution",
       "prosecution_successful",
       "punishment",
-      "illegal_activities"
+      "illegal_activities",
+      "proximity"
     ]
   ],
   "state": "accepted",
