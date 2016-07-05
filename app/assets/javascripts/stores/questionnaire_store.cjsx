@@ -1,7 +1,9 @@
 {EventEmitter} = require("events")
 
 class QuestionnaireStore extends EventEmitter
-  EVENT = "change"
+  CHANGE_EVENT = "change"
+  VISIBILITY_EVENT = "visibility"
+
   currentPage   = 0
   questionnaire = {}
 
@@ -10,11 +12,11 @@ class QuestionnaireStore extends EventEmitter
 
   previousPage: ->
     currentPage -= 1
-    @emit(EVENT)
+    @emit(CHANGE_EVENT)
 
   nextPage: ->
     currentPage += 1
-    @emit(EVENT)
+    @emit(CHANGE_EVENT)
 
   load: (data) ->
     questionnaire = data
@@ -30,27 +32,32 @@ class QuestionnaireStore extends EventEmitter
 
   selectAnswer: (key, answer) ->
     questionnaire.questions[key].selected = answer
-    @emit(EVENT)
+    @emit(CHANGE_EVENT)
 
   addFile: (key, file) ->
     questionnaire.questions[key].selected ||= []
     questionnaire.questions[key].selected.push(file)
-    @emit(EVENT)
+    @emit(CHANGE_EVENT)
 
   deleteFile: (key, fileIndex) ->
     questionnaire.questions[key].selected ||= []
     questionnaire.questions[key].selected.splice(fileIndex, 1)
-    @emit(EVENT)
+    @emit(CHANGE_EVENT)
 
   show: (key) =>
     questionnaire.questions[key].visible = true
-    @emit(EVENT)
+    @emit(CHANGE_EVENT)
+    @emit(VISIBILITY_EVENT, key, "show")
 
   hide: (key) =>
     questionnaire.questions[key].visible = false
-    @emit(EVENT)
+    @emit(CHANGE_EVENT)
+    @emit(VISIBILITY_EVENT, key, "hide")
 
   addChangeListener: (callback) =>
-    @on(EVENT, callback)
+    @on(CHANGE_EVENT, callback)
+
+  addVisibilityListener: (callback) =>
+    @on(VISIBILITY_EVENT, callback)
 
 module.exports = new QuestionnaireStore()
