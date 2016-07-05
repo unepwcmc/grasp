@@ -54,6 +54,7 @@ class QuestionnaireStore extends EventEmitter
     @on(EVENT, callback)
 
   saveAll: =>
-    alert("Saved!")
+    console.dir(questionnaire)
+    # Use fetch here to make ajax request to post data to report model
 
 module.exports = new QuestionnaireStore()
