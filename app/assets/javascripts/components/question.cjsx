@@ -3,28 +3,31 @@ QuestionnaireStore = require("stores/questionnaire_store")
 
 class Question extends React.Component
   constructor: (props, context) ->
+    super(props, context)
     @state = {}
+
+  componentDidMount: =>
+    QuestionnaireStore.addVisibilityListener(@onVisibilityChange)
 
   handleChange: (e) =>
     answer = e.target.value
     QuestionnaireStore.selectAnswer(@props.data.id, answer)
 
-    @hideChildren()
     @showChildrenFor(answer)
 
-  componentWillUnmount: ->
-    @hideChildren()
+  showChildrenFor: (chosen) ->
+    for answer, children of @props.data.children
+      if chosen == answer
+        QuestionnaireStore.show(child) for child in children
+      else
+        QuestionnaireStore.hide(child) for child in children
 
-  componentDidMount: ->
-    @showChildrenFor(@props.data.selected)
+  onVisibilityChange: (key, change) =>
+    return if key != @props.data.id
 
-  hideChildren: =>
-    (@state.shownChildren || []).map (child) ->
-      QuestionnaireStore.hide(child)
-
-  showChildrenFor: (answer) ->
-    @setState({shownChildren: @props.data.children[answer]})
-    (@props.data.children[answer] || []).map (child) ->
-      QuestionnaireStore.show(child)
+    if(change == "hide")
+      @showChildrenFor(null)
+    else
+      @showChildrenFor(@props.data.selected)
 
 module.exports = Question

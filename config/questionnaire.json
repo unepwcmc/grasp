@@ -106,11 +106,118 @@
       ],
       "children": {}
     },
+    "confiscated": {
+      "id": "confiscated",
+      "visible": true,
+      "type": "single",
+      "question": "Were findings confiscated by law enforcement?",
+      "answers": [
+        "Yes",
+        "No",
+        "Don't know"
+      ],
+      "children": {
+        "Yes": ["arrests_made"]
+      }
+    },
     "photo": {
       "id": "photo",
       "visible": true,
       "type": "file",
       "question": "Do you have a photo?",
+      "children": {}
+    },
+    "arrests_made": {
+      "id": "arrests_made",
+      "visible": false,
+      "type": "single",
+      "question": "Were arrests made following confiscation?",
+      "answers": [
+        "Yes" ,
+        "No",
+        "Unknown"
+      ],
+      "children": {}
+    },
+    "arrests_made": {
+      "id": "arrests_made",
+      "visible": false,
+      "type": "single",
+      "question": "Were arrests made following confiscation?",
+      "answers": [
+        "Yes" ,
+        "No",
+        "Unknown"
+      ],
+      "children": {
+        "Yes": ["prosecution"]
+      }
+    },
+    "prosecution": {
+      "id": "prosecution",
+      "visible": false,
+      "type": "single",
+      "question": "Did arrests lead to a prosecution?",
+      "answers": [
+        "Yes" ,
+        "No",
+        "Unknown"
+      ],
+      "children": {
+        "Yes": ["prosecution_successful"]
+      }
+    },
+    "prosecution_successful": {
+      "id": "prosecution_successful",
+      "visible": false,
+      "type": "single",
+      "question": "Was the prosecution successful?",
+      "answers": [
+        "Yes" ,
+        "No",
+        "Unknown"
+      ],
+      "children": {
+        "Yes": ["punishment"]
+      }
+    },
+    "punishment": {
+      "id": "punishment",
+      "visible": false,
+      "type": "text",
+      "question": "What punishment or sentence was given?",
+      "children": {}
+    },
+    "illegal_activities": {
+      "id": "illegal_activities",
+      "visible": true,
+      "type": "multi",
+      "answers": [
+        "Trafficking of other animals",
+        "Plant trafficking",
+        "Drug trafficking",
+        "Arms trafficking",
+        "Illegal logging",
+        "Poaching",
+        "Other (please specify)"
+      ],
+      "question": "Were there other illegal activities happening in tandem to this discovery?",
+      "children": {}
+    },
+    "proximity": {
+      "id": "proximity",
+      "visible": true,
+      "type": "multi",
+      "answers": [
+        "Logging",
+        "Coltan mining",
+        "Coal mining",
+        "Oil drilling",
+        "Palm oil production",
+        "Construction",
+        "War / civil unrest"
+      ],
+      "question": "Was this discovery found in close proximity to any of these man-made disturbances?",
       "children": {}
     }
   },
@@ -121,11 +228,19 @@
       "date_of_discovery",
       "numeric_example",
       "country_of_discovery",
-      "type_of_location"
+      "type_of_location",
+      "confiscated"
     ], [
       "genus",
       "intended_use",
       "photo"
+    ], [
+      "arrests_made",
+      "prosecution",
+      "prosecution_successful",
+      "punishment",
+      "illegal_activities",
+      "proximity"
     ]
   ],
   "state": "accepted",
