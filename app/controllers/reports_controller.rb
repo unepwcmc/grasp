@@ -1,10 +1,10 @@
-class ReportController < ApplicationController
+class ReportsController < ApplicationController
   def index
     @reports = Report.all
   end
 
   def new
-    @report = Report.new
+    @report = File.read(Rails.root.join("config/questionnaire.json"))
   end
 
   def create(report_params)

@@ -1,4 +1,5 @@
 {EventEmitter} = require("events")
+$ = require('jquery')
 
 class QuestionnaireStore extends EventEmitter
   EVENT = "change"
@@ -54,7 +55,15 @@ class QuestionnaireStore extends EventEmitter
     @on(EVENT, callback)
 
   saveAll: =>
-    console.dir(questionnaire)
-    # Use fetch here to make ajax request to post data to report model
+    token = $('meta[name="csrf-token"]').attr('content')
+    fetch('/reports', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        'X-CSRF-Token': token
+      },
+      body: JSON.stringify({data: questionnaire })
+    })
 
 module.exports = new QuestionnaireStore()
