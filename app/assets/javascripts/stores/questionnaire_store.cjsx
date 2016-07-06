@@ -1,5 +1,4 @@
 {EventEmitter} = require("events")
-$ = require('jquery')
 require('whatwg-fetch')
 
 class QuestionnaireStore extends EventEmitter
@@ -56,7 +55,7 @@ class QuestionnaireStore extends EventEmitter
     @on(EVENT, callback)
 
   saveAll: =>
-    token = $('meta[name="csrf-token"]').attr('content')
+    token = document.getElementsByName("csrf-token")[0].content
     fetch('/reports', {
       method: 'POST',
       headers: {
