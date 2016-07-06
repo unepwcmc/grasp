@@ -72,9 +72,9 @@
         "Wild",
         "Private premises",
         "Airport",
-        "In transit",
-        "Other (please specify)"
+        "In transit"
       ],
+      "other": true,
       "children": {}
     },
     "genus": {
@@ -198,9 +198,9 @@
         "Drug trafficking",
         "Arms trafficking",
         "Illegal logging",
-        "Poaching",
-        "Other (please specify)"
+        "Poaching"
       ],
+      "other": true,
       "question": "Were there other illegal activities happening in tandem to this discovery?",
       "children": {}
     },

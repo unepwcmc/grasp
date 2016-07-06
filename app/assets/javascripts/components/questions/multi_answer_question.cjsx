@@ -8,7 +8,10 @@ class MultiAnswerQuestion extends Question
 
     <div className="question">
       <h1>{@props.data.question}</h1>
-      <ul>{@renderAnswers()}</ul>
+      <ul>
+        {@renderAnswers()}
+        {@renderOther()}
+      </ul>
     </div>
 
   renderAnswers: ->
@@ -31,5 +34,24 @@ class MultiAnswerQuestion extends Question
       QuestionnaireStore.addAnswer(@props.data.id, e.target.value)
     else
       QuestionnaireStore.removeAnswer(@props.data.id, e.target.value)
+
+  renderOther: =>
+    if @props.data.other
+      <li className="answer" key="other">
+        <div>
+          <input checked={"other" in @props.data.selected}
+            type="checkbox" className="answer__radio"
+            onChange={@handleChange} value="other"
+            name={@props.data.id}/>
+          <label>Other (please specify)</label>
+        </div>
+
+        {@renderOtherField()}
+      </li>
+
+  renderOtherField: =>
+    if "other" in @props.data.selected
+      <input type="text" value={@props.data.other_answer}
+        onChange={@handleOtherChange}/>
 
 module.exports = MultiAnswerQuestion

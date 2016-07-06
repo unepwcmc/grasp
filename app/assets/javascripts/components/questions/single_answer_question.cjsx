@@ -5,7 +5,10 @@ class SingleAnswerQuestion extends Question
   render: ->
     <div className="question">
       <h1>{@props.data.question}</h1>
-      <ul>{@renderAnswers()}</ul>
+      <ul>
+        {@renderAnswers()}
+        {@renderOther()}
+      </ul>
     </div>
 
   renderAnswers: ->
@@ -22,5 +25,20 @@ class SingleAnswerQuestion extends Question
         <label>{answer}</label>
       </li>
     )
+
+  renderOther: =>
+    if @props.data.other
+      <li className="answer" key="other">
+        <div>
+          <input checked={"other" == @props.data.selected}
+            type="radio" className="answer__radio"
+            onChange={@handleChange} value="other"
+            name={@props.data.id}
+          />
+          <label>Other (please specify)</label>
+        </div>
+
+        {@renderOtherField()}
+      </li>
 
 module.exports = SingleAnswerQuestion

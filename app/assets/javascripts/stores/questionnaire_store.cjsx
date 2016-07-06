@@ -34,6 +34,10 @@ class QuestionnaireStore extends EventEmitter
     questionnaire.questions[key].selected = answer
     @emit(CHANGE_EVENT)
 
+  updateOtherAnswer: (key, text) ->
+    questionnaire.questions[key].other_answer = text
+    @emit(CHANGE_EVENT)
+
   addAnswer: (key, answer) ->
     questionnaire.questions[key].selected ||= []
     questionnaire.questions[key].selected.push(answer)
