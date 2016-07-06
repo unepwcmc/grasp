@@ -1,4 +1,5 @@
 {EventEmitter} = require("events")
+require('whatwg-fetch')
 
 class QuestionnaireStore extends EventEmitter
   CHANGE_EVENT = "change"
@@ -65,5 +66,20 @@ class QuestionnaireStore extends EventEmitter
 
   addVisibilityListener: (callback) =>
     @on(VISIBILITY_EVENT, callback)
+
+  saveAll: =>
+    token = document.getElementsByName("csrf-token")[0].content
+    fetch('/reports', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        'X-CSRF-Token': token
+      },
+      credentials: 'include',
+      body: JSON.stringify({ report: { data: questionnaire }})
+    }).then((response) ->
+      window.location = response.headers.get('Location')
+    )
 
 module.exports = new QuestionnaireStore()

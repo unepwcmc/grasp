@@ -1,0 +1,18 @@
+<h1>All Reports</h1>
+
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Data</th>
+    <th>Created at</th>
+  </thead>
+  <tbody>
+    <% @reports.each do |report| %>
+      <tr>
+        <td><%= report.id %></td>
+        <td><%= report.data %></td>
+        <td><%= report.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

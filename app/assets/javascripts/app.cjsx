@@ -9,5 +9,5 @@ module.exports =
 
     render(
       <Questionnaire/>,
-      document.getElementById("container")
+      document.getElementById("report_container")
     )

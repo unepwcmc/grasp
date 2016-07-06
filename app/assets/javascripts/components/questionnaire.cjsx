@@ -2,6 +2,7 @@ React = require("react")
 QuestionnaireStore = require("stores/questionnaire_store")
 Page               = require("components/page")
 PageControls       = require("components/page_controls")
+SubmitButton       = require("components/submit_button")
 
 class Questionnaire extends React.Component
   constructor: (props, context) ->
@@ -18,6 +19,7 @@ class Questionnaire extends React.Component
     <div className="questionnaire">
       {@renderCurrentPage()}
       <PageControls maxPages={@state.pages.length} currentPage={@state.currentPage}/>
+      <SubmitButton/>
     </div>
 
   renderCurrentPage: =>
