@@ -497,51 +497,55 @@
     }
   },
   "pages": [
-    [
-      "own_organisation",
-      "new_agency_contact",
-      "date_of_discovery",
-
-      "country_of_discovery",
-      "angola_regions",
-      "burundi_regions",
-      "cameroon_regions",
-      "central_african_republic_regions",
-      "democratic_republic_of_congo_regions",
-      "congo_regions",
-      "ivory_coast_regions",
-      "equatorial_guinea_regions",
-      "gabon_regions",
-      "ghana_regions",
-      "guinea_regions",
-      "guinea_bissau_regions",
-      "indonesia_regions",
-      "liberia_regions",
-      "malaysia_regions",
-      "mali_regions",
-      "nigeria_regions",
-      "rwanda_regions",
-      "senegal_regions",
-      "sierra_leone_regions",
-      "south_sudan_regions",
-      "uganda_regions",
-
-      "numeric_example",
-      "location_coords",
-      "type_of_location",
-      "confiscated"
-    ], [
-      "genus",
-      "intended_use",
-      "photo"
-    ], [
-      "arrests_made",
-      "prosecution",
-      "prosecution_successful",
-      "punishment",
-      "illegal_activities",
-      "proximity"
-    ]
+    {
+      "title": "Incident",
+      "questions": [
+        "own_organisation",
+        "new_agency_contact",
+        "date_of_discovery",
+        "country_of_discovery",
+        "angola_regions",
+        "burundi_regions",
+        "cameroon_regions",
+        "central_african_republic_regions",
+        "democratic_republic_of_congo_regions",
+        "congo_regions",
+        "ivory_coast_regions",
+        "equatorial_guinea_regions",
+        "gabon_regions",
+        "ghana_regions",
+        "guinea_regions",
+        "guinea_bissau_regions",
+        "indonesia_regions",
+        "liberia_regions",
+        "malaysia_regions",
+        "mali_regions",
+        "nigeria_regions",
+        "rwanda_regions",
+        "senegal_regions",
+        "sierra_leone_regions",
+        "south_sudan_regions",
+        "uganda_regions",
+        "numeric_example",
+        "location_coords",
+        "type_of_location",
+        "confiscated"
+    ]}, {
+      "title": "About the ape(s)",
+      "questions": [
+        "genus",
+        "intended_use",
+        "photo"
+    ]}, {
+      "title": "Law enforcement and context",
+      "questions": [
+        "arrests_made",
+        "prosecution",
+        "prosecution_successful",
+        "punishment",
+        "illegal_activities",
+        "proximity"
+    ]}
   ],
 
   "state": "accepted",

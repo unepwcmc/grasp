@@ -23,13 +23,15 @@ class QuestionnaireStore extends EventEmitter
   load: (data) ->
     questionnaire = data
 
-  allVisible: ->
+  allPages: ->
     questionnaire.pages.map( (page) ->
-      page.filter( (question_id) ->
+      visibleQuestions = page.questions.filter( (question_id) ->
         questionnaire.questions[question_id].visible
       ).map( (question_id) ->
         questionnaire.questions[question_id]
       )
+
+      {title: page.title, questions: visibleQuestions}
     )
 
   selectAnswer: (key, answer) ->

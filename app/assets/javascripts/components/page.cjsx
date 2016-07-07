@@ -16,10 +16,13 @@ module.exports = class Page extends React.Component
     @state = {}
 
   render: ->
-    <div>{@renderQuestions()}</div>
+    <div>
+      <h1 className="page__title">{@props.data.title}</h1>
+      <div>{@renderQuestions()}</div>
+    </div>
 
   renderQuestions: =>
-    @props.questions.map( (question) ->
+    @props.data.questions.map( (question) ->
       switch question.type
         when "single"           then <SingleAnswerQuestion   key={question.id} data={question}/>
         when "agency"           then <AgencyQuestion         key={question.id} data={question}/>
