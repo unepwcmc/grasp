@@ -12,10 +12,12 @@ class QuestionnaireStore extends EventEmitter
 
   previousPage: ->
     currentPage -= 1
+    window.scrollTo(0, 0)
     @emit(CHANGE_EVENT)
 
   nextPage: ->
     currentPage += 1
+    window.scrollTo(0, 0)
     @emit(CHANGE_EVENT)
 
   load: (data) ->
