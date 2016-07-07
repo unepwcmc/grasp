@@ -8,10 +8,8 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div class="container">
-      <header class="header">GRASP</header>
-      <%= yield %>
-    </div>
+    <header class="header">GRASP</header>
+    <div class="container"><%= yield %></div>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   </body>

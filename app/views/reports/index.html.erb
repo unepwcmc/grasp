@@ -1,18 +1,24 @@
 <h1>All Reports</h1>
 
-<table>
+<table class="u-full-width">
   <thead>
     <th>ID</th>
-    <th>Data</th>
+    <th>Country of discovery</th>
+    <th>Genus</th>
     <th>Created at</th>
+    <th>Actions</th>
   </thead>
   <tbody>
     <% @reports.each do |report| %>
-      <tr>
-        <td><%= report.id %></td>
-        <td><%= report.data %></td>
-        <td><%= report.created_at %></td>
-      </tr>
+        <tr>
+          <td><%= report.id %></td>
+          <td><%= report.data["questions"]["country_of_discovery"]["selected"] %></td>
+          <td><%= report.data["questions"]["genus"]["selected"] %></td>
+          <td><%= report.created_at %></td>
+          <td>
+            <a href="<%= edit_report_path(report.id) %>">Edit</a>
+          </td>
+        </tr>
     <% end %>
   </tbody>
 </table>

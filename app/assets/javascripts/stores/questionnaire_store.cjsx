@@ -28,7 +28,8 @@ class QuestionnaireStore extends EventEmitter
     @emit(CHANGE_EVENT)
     @emit(PAGE_CHANGE_EVENT)
 
-  load: (data) ->
+  load: (data, id) ->
+    reportId = id if id?
     questionnaire = data
 
   allPages: ->

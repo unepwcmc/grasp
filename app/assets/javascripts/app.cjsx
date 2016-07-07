@@ -5,9 +5,6 @@ QuestionnaireStore = require("stores/questionnaire_store")
 
 module.exports =
   start: ->
-    QuestionnaireStore.load(questionnaire_json)
-
-    render(
-      <Questionnaire/>,
-      document.getElementById("report_container")
-    )
+    if containerEl = document.getElementById("report-container")
+      QuestionnaireStore.load(questionnaireJson, containerEl.getAttribute("data-report-id"))
+      render(<Questionnaire/>, containerEl)
