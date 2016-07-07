@@ -8,6 +8,7 @@ FileQuestion           = require("components/questions/file_question")
 Form                   = require("components/questions/form")
 NumericQuestion        = require("components/questions/numeric_question")
 DecimalNumericQuestion = require("components/questions/decimal_numeric_question")
+GpsQuestion            = require("components/questions/gps_question")
 
 module.exports = class Page extends React.Component
   constructor: (props, context) ->
@@ -29,4 +30,5 @@ module.exports = class Page extends React.Component
         when "decimal_numeric"  then <DecimalNumericQuestion key={question.id} data={question}/>
         when "form"             then <Form                   key={question.id} data={question}/>
         when "multi"            then <MultiAnswerQuestion    key={question.id} data={question}/>
+        when "gps"              then <GpsQuestion            key={question.id} data={question}/>
     )
