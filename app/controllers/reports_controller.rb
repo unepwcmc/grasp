@@ -8,11 +8,26 @@ class ReportsController < ApplicationController
   end
 
   def create
-    @report = Report.new(data: params.require(:report)[:data])
+    @report = Report.new(report_params)
     if @report.save
-      head :created, location: reports_path
+      #head :created, location: reports_path
+      render json: @report
     else
       head 422, location: reports_path
     end
   end
+
+  def update
+    @report = Report.find(params[:id])
+    if @report.update(report_params)
+      render json: @report
+    else
+      head 422, location: reports_path
+    end
+  end
+
+  private
+    def report_params
+      {data: params.require(:report)[:data]}
+    end
 end

@@ -8,4 +8,4 @@ module.exports = class SubmitButton extends React.Component
     </div>
 
   saveReport: =>
-    QuestionnaireStore.saveAll()
+    QuestionnaireStore.submitReport()
