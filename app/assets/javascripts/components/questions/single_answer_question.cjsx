@@ -4,7 +4,7 @@ Question = require("components/question")
 class SingleAnswerQuestion extends Question
   render: ->
     <div className="question">
-      <h1>{@props.data.question}</h1>
+      <h3>{@props.data.question}</h3>
       <ul>
         {@renderAnswers()}
         {@renderOther()}
@@ -14,29 +14,30 @@ class SingleAnswerQuestion extends Question
   renderAnswers: ->
     @props.data.answers.map( (answer) =>
       <li className="answer" key={answer}>
-        <input
-          checked={@props.data.selected == answer}
-          type="radio"
-          className="answer__radio"
-          onChange={@handleChange}
-          value={answer}
-          name={@props.data.id}
-        />
-        <label>{answer}</label>
+        <label htmlFor={@props.data.id + answer}>
+          <input
+            checked={@props.data.selected == answer}
+            type="radio"
+            onChange={@handleChange}
+            value={answer}
+            name={@props.data.id}
+            id={@props.data.id + answer}
+          />
+          <span className="label-body">{answer}</span>
+        </label>
       </li>
     )
 
   renderOther: =>
     if @props.data.other
       <li className="answer" key="other">
-        <div>
+        <label>
           <input checked={"other" == @props.data.selected}
-            type="radio" className="answer__radio"
-            onChange={@handleChange} value="other"
+            type="radio" onChange={@handleChange} value="other"
             name={@props.data.id}
           />
-          <label>Other (please specify)</label>
-        </div>
+          <span className="label-body">Other (please specify)</span>
+        </label>
 
         {@renderOtherField()}
       </li>

@@ -13,22 +13,26 @@ class QuestionnaireStore extends EventEmitter
 
   previousPage: ->
     currentPage -= 1
+    window.scrollTo(0, 0)
     @emit(CHANGE_EVENT)
 
   nextPage: ->
     currentPage += 1
+    window.scrollTo(0, 0)
     @emit(CHANGE_EVENT)
 
   load: (data) ->
     questionnaire = data
 
-  allVisible: ->
+  allPages: ->
     questionnaire.pages.map( (page) ->
-      page.filter( (question_id) ->
+      visibleQuestions = page.questions.filter( (question_id) ->
         questionnaire.questions[question_id].visible
       ).map( (question_id) ->
         questionnaire.questions[question_id]
       )
+
+      {title: page.title, questions: visibleQuestions}
     )
 
   selectAnswer: (key, answer) ->

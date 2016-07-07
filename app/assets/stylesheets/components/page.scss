@@ -1,0 +1,9 @@
+@import "utilities/bem";
+
+@include b(page) {
+  @include e(title) {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+}

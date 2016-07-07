@@ -4,7 +4,7 @@ Question = require("components/question")
 class Form extends Question
   render: ->
     <div>
-      <h1>{@props.data.question}</h1>
+      <h3>{@props.data.question}</h3>
       <form>
         <label for="agency_name">Agency Name:</label>
         <input type="text" name="agency_name" id="agency_name"/><br/>

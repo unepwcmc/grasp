@@ -7,7 +7,7 @@ class MultiAnswerQuestion extends Question
     @props.data.selected ||= []
 
     <div className="question">
-      <h1>{@props.data.question}</h1>
+      <h3>{@props.data.question}</h3>
       <ul>
         {@renderAnswers()}
         {@renderOther()}
@@ -17,15 +17,17 @@ class MultiAnswerQuestion extends Question
   renderAnswers: ->
     @props.data.answers.map( (answer) =>
       <li className="answer" key={answer}>
-        <input
-          checked={answer in @props.data.selected}
-          type="checkbox"
-          className="answer__radio"
-          onChange={@handleChange}
-          value={answer}
-          name={@props.data.id}
-        />
-        <label>{answer}</label>
+        <label htmlFor={@props.data.id + answer}>
+          <input
+            checked={answer in @props.data.selected}
+            type="checkbox"
+            onChange={@handleChange}
+            value={answer}
+            id={@props.data.id + answer}
+            name={@props.data.id}
+          />
+          <span className="label-body">{answer}</span>
+        </label>
       </li>
     )
 
@@ -38,13 +40,13 @@ class MultiAnswerQuestion extends Question
   renderOther: =>
     if @props.data.other
       <li className="answer" key="other">
-        <div>
+        <label>
           <input checked={"other" in @props.data.selected}
-            type="checkbox" className="answer__radio"
-            onChange={@handleChange} value="other"
-            name={@props.data.id}/>
-          <label>Other (please specify)</label>
-        </div>
+            type="checkbox" onChange={@handleChange} value="other"
+            name={@props.data.id}
+          />
+          <span className="label-body">Other (please specify)</span>
+        </label>
 
         {@renderOtherField()}
       </li>

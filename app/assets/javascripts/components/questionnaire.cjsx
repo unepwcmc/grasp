@@ -9,7 +9,7 @@ class Questionnaire extends React.Component
     super(props, context)
     @state = {
       currentPage: QuestionnaireStore.currentPage(),
-      pages: QuestionnaireStore.allVisible()
+      pages: QuestionnaireStore.allPages()
     }
 
   componentDidMount: ->
@@ -23,15 +23,13 @@ class Questionnaire extends React.Component
     </div>
 
   renderCurrentPage: =>
-    if @state.pages[@state.currentPage]
-      <Page questions={@state.pages[@state.currentPage]}/>
-    else
-      null
+    if @state.pages[@state.currentPage]?.questions.length > 0
+      <Page data={@state.pages[@state.currentPage]}/>
 
   onChange: =>
     @setState({
       currentPage: QuestionnaireStore.currentPage(),
-      pages: QuestionnaireStore.allVisible()
+      pages: QuestionnaireStore.allPages()
     })
 
 
