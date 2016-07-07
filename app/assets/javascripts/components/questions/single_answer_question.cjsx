@@ -4,7 +4,7 @@ Question = require("components/question")
 class SingleAnswerQuestion extends Question
   render: ->
     <div className="question">
-      <h1>{@props.data.question}</h1>
+      <h3>{@props.data.question}</h3>
       <ul>
         {@renderAnswers()}
         {@renderOther()}

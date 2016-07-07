@@ -5,7 +5,7 @@ QuestionnaireStore = require("stores/questionnaire_store")
 class NumericQuestion extends Question
   render: ->
     <div className="question">
-      <h1>{@props.data.question}</h1>
+      <h3>{@props.data.question}</h3>
       <button onClick={@decrement}>-</button>
       <input type="number" onChange={@handleChange} value={@props.data.selected}/>
       <button onClick={@increment}>+</button>

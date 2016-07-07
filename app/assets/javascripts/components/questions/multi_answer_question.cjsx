@@ -7,7 +7,7 @@ class MultiAnswerQuestion extends Question
     @props.data.selected ||= []
 
     <div className="question">
-      <h1>{@props.data.question}</h1>
+      <h3>{@props.data.question}</h3>
       <ul>
         {@renderAnswers()}
         {@renderOther()}

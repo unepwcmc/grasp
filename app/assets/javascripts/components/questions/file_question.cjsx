@@ -5,7 +5,7 @@ QuestionnaireStore = require("stores/questionnaire_store")
 module.exports = class FileQuestion extends Question
   render: ->
     <div className="question">
-      <h1>{@props.data.question}</h1>
+      <h3>{@props.data.question}</h3>
 
       <div className="files">
         {@renderFiles()}
