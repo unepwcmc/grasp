@@ -331,6 +331,13 @@
       "children": {}
     },
 
+    "location_coords": {
+      "id": "location_coords",
+      "visible": true,
+      "type": "gps",
+      "question": "Location of discovery: GPS coordinates (optional)",
+      "children": {}
+    },
     "type_of_location": {
       "id": "type_of_location",
       "visible": true,
@@ -520,6 +527,7 @@
       "uganda_regions",
 
       "numeric_example",
+      "location_coords",
       "type_of_location",
       "confiscated"
     ], [
