@@ -4,9 +4,14 @@ require('whatwg-fetch')
 class QuestionnaireStore extends EventEmitter
   CHANGE_EVENT = "change"
   VISIBILITY_EVENT = "visibility"
+  PAGE_CHANGE_EVENT = "page_change"
 
+  reportId      = null
   currentPage   = 0
   questionnaire = {}
+
+  constructor: ->
+    @on(PAGE_CHANGE_EVENT, @saveOrUpdateReport)
 
   currentPage: ->
     currentPage
@@ -14,10 +19,12 @@ class QuestionnaireStore extends EventEmitter
   previousPage: ->
     currentPage -= 1
     @emit(CHANGE_EVENT)
+    @emit(PAGE_CHANGE_EVENT)
 
   nextPage: ->
     currentPage += 1
     @emit(CHANGE_EVENT)
+    @emit(PAGE_CHANGE_EVENT)
 
   load: (data) ->
     questionnaire = data
@@ -67,7 +74,10 @@ class QuestionnaireStore extends EventEmitter
   addVisibilityListener: (callback) =>
     @on(VISIBILITY_EVENT, callback)
 
-  saveAll: =>
+  saveOrUpdateReport: =>
+    if reportId? then @updateReport() else @saveReport()
+
+  saveReport: =>
     token = document.getElementsByName("csrf-token")[0].content
     fetch('/reports', {
       method: 'POST',
@@ -79,7 +89,25 @@ class QuestionnaireStore extends EventEmitter
       credentials: 'include',
       body: JSON.stringify({ report: { data: questionnaire }})
     }).then((response) ->
-      window.location = response.headers.get('Location')
+      response.json().then((json) ->
+        reportId = json.id
+      )
     )
+
+  updateReport: =>
+    token = document.getElementsByName("csrf-token")[0].content
+    fetch("/reports/#{reportId}", {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        'X-CSRF-Token': token
+      },
+      credentials: 'include',
+      body: JSON.stringify({ report: { data: questionnaire }})
+    })
+
+  submitReport: =>
+    alert("Report marked as submitted")
 
 module.exports = new QuestionnaireStore()
