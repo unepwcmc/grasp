@@ -16,6 +16,7 @@
           <td><%= report.data["questions"]["genus"]["selected"] %></td>
           <td><%= report.created_at %></td>
           <td>
+            <a href="<%= report_path(report.id) %>">Show</a>
             <a href="<%= edit_report_path(report.id) %>">Edit</a>
           </td>
         </tr>

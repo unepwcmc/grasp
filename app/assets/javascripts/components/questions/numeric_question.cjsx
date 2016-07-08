@@ -6,9 +6,13 @@ class NumericQuestion extends Question
   render: ->
     <div className="question">
       <h3>{@props.data.question}</h3>
-      <button onClick={@decrement}>-</button>
-      <input type="number" onChange={@handleChange} value={@props.data.selected}/>
-      <button onClick={@increment}>+</button>
+      <p style={@displayStyle()}>{@props.data.selected}</p>
+
+      <div style={@editStyle()}>
+        <button onClick={@decrement}>-</button>
+        <input type="number" onChange={@handleChange} value={@props.data.selected}/>
+        <button onClick={@increment}>+</button>
+      </div>
     </div>
 
   increment: =>

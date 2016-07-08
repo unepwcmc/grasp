@@ -6,20 +6,25 @@ class GpsQuestion extends Question
   render: ->
     <div className="question">
       <h3>{@props.data.question}</h3>
-      <fieldset>
-        <label for="latitude">Latitude</label>
-        <input ref="latitude" id="latitude" type="text"
-          onChange={@handleLatChange} value={@getLat()}
-        />
-      </fieldset>
-      <fieldset>
-        <label for="longitude">Longitude</label>
-        <input ref="longitude" id="longitude" type="text"
-          onChange={@handleLngChange} value={@getLng()}
-        />
-      </fieldset>
+      <p style={@displayStyle()}>Lat: {@props.data.selected.lat}</p>
+      <p style={@displayStyle()}>Lng: {@props.data.selected.lng}</p>
 
-      <button onClick={@fetchCoords}>📡</button> {@renderLoading()}
+      <div style={@editStyle()}>
+        <fieldset>
+          <label for="latitude">Latitude</label>
+          <input ref="latitude" id="latitude" type="text"
+            onChange={@handleLatChange} value={@getLat()}
+          />
+        </fieldset>
+        <fieldset>
+          <label for="longitude">Longitude</label>
+          <input ref="longitude" id="longitude" type="text"
+            onChange={@handleLngChange} value={@getLng()}
+          />
+        </fieldset>
+
+        <button onClick={@fetchCoords}>📡</button> {@renderLoading()}
+      </div>
     </div>
 
   renderLoading: =>

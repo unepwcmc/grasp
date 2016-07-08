@@ -7,6 +7,10 @@ class ReportsController < ApplicationController
     @report = File.read(Rails.root.join("config/questionnaire.json"))
   end
 
+  def show
+    @report = Report.find(params[:id])
+  end
+
   def edit
     @report = Report.find(params[:id])
   end

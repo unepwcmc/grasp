@@ -7,12 +7,15 @@ module.exports = class FileQuestion extends Question
     <div className="question">
       <h3>{@props.data.question}</h3>
 
-      <div className="files">
-        {@renderFiles()}
-      </div>
+      <p style={@displayStyle()}>{@props.data.selected}</p>
+      <div style={@editStyle()}>
+        <div className="files">
+          {@renderFiles()}
+        </div>
 
-      <div><label>Upload file(s)</label></div>
-      <input type="file" onChange={@addFile}/>
+        <div><label>Upload file(s)</label></div>
+        <input type="file" onChange={@addFile}/>
+      </div>
     </div>
 
   renderFiles: =>

@@ -7,6 +7,7 @@ class QuestionnaireStore extends EventEmitter
   PAGE_CHANGE_EVENT = "page_change"
 
   reportId      = null
+  questionnaireMode = null
   currentPage   = 0
   questionnaire = {}
 
@@ -31,6 +32,9 @@ class QuestionnaireStore extends EventEmitter
   load: (data, id) ->
     reportId = id if id?
     questionnaire = data
+
+  setMode: (mode) -> questionnaireMode = mode
+  getMode: (mode) -> questionnaireMode
 
   allPages: ->
     questionnaire.pages.map( (page) ->

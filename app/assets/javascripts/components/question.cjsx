@@ -21,6 +21,9 @@ class Question extends React.Component
   handleOtherChange: (e) =>
     QuestionnaireStore.updateOtherAnswer(@props.data.id, e.target.value)
 
+  displayStyle: => if @props.mode == "edit" then {display: "none"}  else {display: "block"}
+  editStyle:    => if @props.mode == "edit" then {display: "block"} else {display: "none"}
+
   showChildrenFor: (chosen) ->
     for answer, children of @props.data.children
       if chosen == answer
