@@ -8,10 +8,13 @@ class MultiAnswerQuestion extends Question
 
     <div className="question">
       <h3>{@props.data.question}</h3>
-      <ul>
-        {@renderAnswers()}
-        {@renderOther()}
-      </ul>
+      <p style={@displayStyle()}>{@props.data.selected}</p>
+      <div style={@editStyle()}>
+        <ul>
+          {@renderAnswers()}
+          {@renderOther()}
+        </ul>
+      </div>
     </div>
 
   renderAnswers: ->

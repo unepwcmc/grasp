@@ -5,7 +5,11 @@ class DateQuestion extends Question
   render: ->
     <div className="question">
       <h3>{@props.data.question}</h3>
-      <input max={@maxDate()} value={@props.data.selected} onChange={@handleChange} type="date"></input>
+      <p style={@displayStyle()}>{@props.data.selected}</p>
+
+      <div style={@editStyle()}>
+        <input max={@maxDate()} value={@props.data.selected} onChange={@handleChange} type="date"></input>
+      </div>
     </div>
 
   maxDate: ->
