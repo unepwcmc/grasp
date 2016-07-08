@@ -7,8 +7,8 @@ class DecimalNumericQuestion extends React.Component
     <div>
       <button onClick={@decrement}>-</button>
       <input type="number" onChange={@props.onChange}
-        value={parseFloat((@props.data.selected || 0.0).toFixed(1))} step="0.1"
-      />
+        value={parseFloat((@props.data.selected || 0.0).toFixed(1))}
+        step="0.1"/>
       <button onClick={@increment}>+</button>
     </div>
 

@@ -12,29 +12,25 @@ class GpsQuestion extends React.Component
       <fieldset>
         <label for="latitude">Latitude</label>
         <input ref="latitude" id="latitude" type="text"
-          onChange={@handleLatChange} value={@getLat()}
-        />
+          onChange={@handleLatChange} value={@getLat()}/>
       </fieldset>
+
       <fieldset>
         <label for="longitude">Longitude</label>
         <input ref="longitude" id="longitude" type="text"
-          onChange={@handleLngChange} value={@getLng()}
-        />
+          onChange={@handleLngChange} value={@getLng()}/>
       </fieldset>
 
       <button onClick={@fetchCoords}>📡</button> {@renderLoading()}
     </div>
 
-  renderLoading: =>
-    if @state.loading
-      <small>Loading...</small>
+  renderLoading: => <small>Loading...</small> if @state.loading
 
   handleLatChange: (e) => @saveCoords(e.target.value, @getLng())
   handleLngChange: (e) => @saveCoords(@getLat(), e.target.value)
 
   fetchCoords: =>
     @setState({loading: true})
-
     navigator.geolocation?.getCurrentPosition (position) =>
       @setState({loading: false})
       @saveCoords(position.coords.latitude, position.coords.longitude)

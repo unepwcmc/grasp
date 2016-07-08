@@ -29,13 +29,7 @@ class AgencyQuestion extends React.Component
       </li>
     )
 
-  renderForm: =>
-    if @props.data.selected == "form"
-      <Form/>
-    else
-      null
-
-  isSelected: (answer) =>
-    @props.data.selected == answer.id.toString()
+  isSelected: (answer) => @props.data.selected == answer.id.toString()
+  renderForm: => <Form/> if @props.data.selected == "form"
 
 module.exports = AgencyQuestion

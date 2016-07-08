@@ -13,4 +13,5 @@ module.exports = class Page extends React.Component
     </div>
 
   renderQuestions: =>
-    @props.data.questions.map (question) -> <Question key={question.id} data={question}/>
+    @props.data.questions.map (question) =>
+      <Question mode={@props.mode} key={question.id} data={question}/>
