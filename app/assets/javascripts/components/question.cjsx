@@ -61,7 +61,7 @@ class Question extends React.Component
                                     data={@props.data} mode={@props.mode}/>
 
   renderAppropriateAnswer: =>
-    return null if @props.mode != "show"
+    return null if @props.mode != "show" or !@props.data.selected?
     general = <p>{@props.data.selected}</p>
 
     switch @props.data.type
