@@ -2,10 +2,13 @@ React = require("react")
 Question = require("components/question")
 QuestionnaireStore = require("stores/questionnaire_store")
 
-class GpsQuestion extends Question
+class GpsQuestion extends React.Component
+  constructor: (props, context) ->
+    super(props, context)
+    @state = {}
+
   render: ->
-    <div className="question">
-      <h3>{@props.data.question}</h3>
+    <div>
       <fieldset>
         <label for="latitude">Latitude</label>
         <input ref="latitude" id="latitude" type="text"
@@ -44,5 +47,3 @@ class GpsQuestion extends Question
 
 
 module.exports = GpsQuestion
-
-

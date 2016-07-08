@@ -2,12 +2,11 @@ React = require("react")
 Question = require("components/question")
 QuestionnaireStore = require("stores/questionnaire_store")
 
-class NumericQuestion extends Question
+class NumericQuestion extends React.Component
   render: ->
-    <div className="question">
-      <h3>{@props.data.question}</h3>
+    <div>
       <button onClick={@decrement}>-</button>
-      <input type="number" onChange={@handleChange} value={@props.data.selected}/>
+      <input type="number" onChange={@props.onChange} value={@props.data.selected}/>
       <button onClick={@increment}>+</button>
     </div>
 

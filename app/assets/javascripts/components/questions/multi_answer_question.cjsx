@@ -2,17 +2,14 @@ React = require("react")
 Question = require("components/question")
 QuestionnaireStore   = require("stores/questionnaire_store")
 
-class MultiAnswerQuestion extends Question
+class MultiAnswerQuestion extends React.Component
   render: ->
     @props.data.selected ||= []
 
-    <div className="question">
-      <h3>{@props.data.question}</h3>
-      <ul>
-        {@renderAnswers()}
-        {@renderOther()}
-      </ul>
-    </div>
+    <ul>
+      {@renderAnswers()}
+      {@renderOther()}
+    </ul>
 
   renderAnswers: ->
     @props.data.answers.map( (answer) =>
@@ -54,6 +51,6 @@ class MultiAnswerQuestion extends Question
   renderOtherField: =>
     if "other" in @props.data.selected
       <input type="text" value={@props.data.other_answer}
-        onChange={@handleOtherChange}/>
+        onChange={@props.onOtherChange}/>
 
 module.exports = MultiAnswerQuestion
