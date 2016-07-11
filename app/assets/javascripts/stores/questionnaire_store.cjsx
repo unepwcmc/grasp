@@ -47,6 +47,13 @@ class QuestionnaireStore extends EventEmitter
       {title: page.title, questions: visibleQuestions}
     )
 
+  requiredQuestionsAnswered: ->
+    allAnswered = true
+    for key, question of questionnaire.questions
+      if (question.required == true) and (question.selected == "" or 'selected' not of question)
+        allAnswered = false
+    allAnswered
+
   selectAnswer: (key, answer) ->
     questionnaire.questions[key].selected = answer
     @emit(CHANGE_EVENT)

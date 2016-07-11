@@ -4,8 +4,8 @@ React = require("react")
 module.exports = class SubmitButton extends React.Component
   render: =>
     <div className="submit-report">
-      <input type="submit" value="Submit" onClick={@saveReport}/>
+      <input type="submit" value="Submit" onClick={@submitReport}/>
     </div>
 
-  saveReport: =>
+  submitReport: =>
     QuestionnaireStore.submitReport()
