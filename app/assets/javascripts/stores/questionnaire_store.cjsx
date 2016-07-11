@@ -13,7 +13,6 @@ class QuestionnaireStore extends EventEmitter
   autoSaveTimer = null
   autoSaveInterval = 60000
 
-
   constructor: ->
     @on(PAGE_CHANGE_EVENT, @saveOrUpdateReport)
     @startAutoSave()
@@ -100,10 +99,10 @@ class QuestionnaireStore extends EventEmitter
   addVisibilityListener: (callback) =>
     @on(VISIBILITY_EVENT, callback)
 
-  saveOrUpdateReport: =>
-    if reportId? then @updateReport() else @saveReport()
+  saveOrUpdateReport: (callback) =>
+    if reportId? then @updateReport(callback) else @saveReport(callback)
 
-  saveReport: =>
+  saveReport: (callback) =>
     token = document.getElementsByName("csrf-token")[0].content
     fetch('/reports', {
       method: 'POST',
@@ -115,12 +114,14 @@ class QuestionnaireStore extends EventEmitter
       credentials: 'include',
       body: JSON.stringify({ report: { data: questionnaire }})
     }).then((response) ->
+      if callback
+        callback(response.headers.get('Location'))
       response.json().then((json) ->
         reportId = json.id
       )
     )
 
-  updateReport: =>
+  updateReport: (callback) =>
     token = document.getElementsByName("csrf-token")[0].content
     fetch("/reports/#{reportId}", {
       method: 'PUT',
@@ -131,10 +132,17 @@ class QuestionnaireStore extends EventEmitter
       },
       credentials: 'include',
       body: JSON.stringify({ report: { data: questionnaire }})
-    })
+    }).then((response) ->
+      if callback
+        callback(response.headers.get('Location'))
+    )
+
+  setPath: (path) =>
+    window.location = path
 
   submitReport: =>
     @stopAutoSave()
-    alert("Report marked as submitted")
+    questionnaire.state = "submitted"
+    @saveOrUpdateReport(@setPath)
 
 module.exports = new QuestionnaireStore()
