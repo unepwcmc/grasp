@@ -10,7 +10,8 @@ class QuestionnaireStore extends EventEmitter
   questionnaireMode = null
   currentPage   = 0
   questionnaire = {}
-  autoSaveInterval = null
+  autoSaveTimer = null
+  autoSaveInterval = 60000
 
 
   constructor: ->
@@ -18,10 +19,10 @@ class QuestionnaireStore extends EventEmitter
     @startAutoSave()
 
   startAutoSave: ->
-    autoSaveInterval = setInterval(@saveOrUpdateReport, 60000)
+    autoSaveTimer = setInterval(@saveOrUpdateReport, autoSaveInterval)
 
   stopAutoSave: ->
-    clearInterval(autoSaveInterval) if autoSaveInterval
+    clearInterval(autoSaveTimer) if autoSaveTimer
 
   currentPage: ->
     currentPage
