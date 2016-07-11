@@ -10,9 +10,18 @@ class QuestionnaireStore extends EventEmitter
   questionnaireMode = null
   currentPage   = 0
   questionnaire = {}
+  autoSaveInterval = null
+
 
   constructor: ->
     @on(PAGE_CHANGE_EVENT, @saveOrUpdateReport)
+    @startAutoSave()
+
+  startAutoSave: ->
+    autoSaveInterval = setInterval(@saveOrUpdateReport, 60000)
+
+  stopAutoSave: ->
+    clearInterval(autoSaveInterval) if autoSaveInterval
 
   currentPage: ->
     currentPage
@@ -124,6 +133,7 @@ class QuestionnaireStore extends EventEmitter
     })
 
   submitReport: =>
+    @stopAutoSave()
     alert("Report marked as submitted")
 
 module.exports = new QuestionnaireStore()
