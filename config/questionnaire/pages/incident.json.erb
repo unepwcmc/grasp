@@ -1,0 +1,106 @@
+"own_organisation": {
+  "id": "own_organisation",
+  "visible": true,
+  "type": "single",
+  "question": "Are you reporting in collaboration with another Agency?",
+  "answers": ["Yes", "No"],
+  "required": true,
+  "children": {
+    "Yes": ["new_agency_contact"]
+  }
+},
+"new_agency_contact": {
+  "id": "new_agency_contact",
+  "visible": false,
+  "type": "form",
+  "question": "Agency contact details",
+  "children": {}
+},
+"date_of_discovery": {
+  "id": "date_of_discovery",
+  "visible": true,
+  "type": "date",
+  "question": "Date of discovery",
+  "children": {}
+},
+"numeric_example": {
+  "id": "numeric_example",
+  "visible": true,
+  "type": "decimal_numeric",
+  "question": "Test numeric",
+  "children": {}
+},
+"country_of_discovery": {
+  "id": "country_of_discovery",
+  "visible": true,
+  "type": "single",
+  "question": "Country of discovery",
+  "answers": [
+    "Angola", "Burundi", "Cameroon", "Central African Republic", "Democratic Republic of Congo",
+    "Congo", "Ivory Coast", "Equatorial Guinea", "Gabon", "Ghana", "Guinea", "Guinea Bissau",
+    "Indonesia", "Liberia", "Malaysia", "Mali", "Nigeria", "Rwanda", "Senegal", "Sierra Leone",
+    "South Sudan", "Uganda"
+  ],
+  "children": {
+    "Angola":                        ["angola_regions"],
+    "Burundi":                       ["burundi_regions"],
+    "Cameroon":                      ["cameroon_regions"],
+    "Central African Republic":      ["central_african_republic_regions"],
+    "Democratic Republic of Congo":  ["democratic_republic_of_congo_regions"],
+    "Congo":                         ["congo_regions"],
+    "Ivory Coast":                   ["ivory_coast_regions"],
+    "Equatorial Guinea":             ["equatorial_guinea_regions"],
+    "Gabon":                         ["gabon_regions"],
+    "Ghana":                         ["ghana_regions"],
+    "Guinea":                        ["guinea_regions"],
+    "Guinea Bissau":                 ["guinea_bissau_regions"],
+    "Indonesia":                     ["indonesia_regions"],
+    "Liberia":                       ["liberia_regions"],
+    "Malaysia":                      ["malaysia_regions"],
+    "Mali":                          ["mali_regions"],
+    "Nigeria":                       ["nigeria_regions"],
+    "Rwanda":                        ["rwanda_regions"],
+    "Senegal":                       ["senegal_regions"],
+    "Sierra Leone":                  ["sierra_leone_regions"],
+    "South Sudan":                   ["south_sudan_regions"],
+    "Uganda":                        ["uganda_regions"]
+  }
+},
+
+<%= partial("incident/regions") %>,
+
+"location_coords": {
+  "id": "location_coords",
+  "visible": true,
+  "type": "gps",
+  "question": "Location of discovery: GPS coordinates (optional)",
+  "children": {}
+},
+"type_of_location": {
+  "id": "type_of_location",
+  "visible": true,
+  "type": "single",
+  "question": "Type of location",
+  "answers": [
+    "Wild",
+    "Private premises",
+    "Airport",
+    "In transit"
+  ],
+  "other": true,
+  "children": {}
+},
+"confiscated": {
+  "id": "confiscated",
+  "visible": true,
+  "type": "single",
+  "question": "Were findings confiscated by law enforcement?",
+  "answers": [
+    "Yes",
+    "No",
+    "Don't know"
+  ],
+  "children": {
+    "Yes": ["arrests_made"]
+  }
+}

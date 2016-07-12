@@ -1,0 +1,178 @@
+"genus_live": {
+  "id": "genus_live",
+  "visible": true,
+  "type": "single",
+  "question": "Ape (Genus)",
+  "answers": [
+    "Bonobo (pan)",
+    "Chimpanzee (pan)",
+    "Gorilla (gorilla)",
+    "Orang-utan (pongo)",
+    "Unknown"
+  ],
+  "children": {
+    "Chimpanzee (pan)": ["chimpanzee_species_live"],
+    "Gorilla (gorilla)": ["gorilla_species_live"],
+    "Orang-utan (pongo)": ["orangutan_species_live"]
+  }
+},
+"chimpanzee_species_live": {
+  "id": "species_subspecies_live",
+  "visible": false,
+  "type": "single",
+  "question": "Confirmation of Species/subspecies (optional)",
+  "answers": [
+    "Central chimpanzee (P. t. troglodytes)",
+    "Western chimpanzee (P. t. ellioti)",
+    "Nigeria-Cameroon chimpanzee (P. t. ellioti)",
+    "Eastern chimpanzee (P. t. schweinfurthii)"
+  ],
+  "children": {}
+},
+"gorilla_species_live": {
+  "id": "species_subspecies_live",
+  "visible": false,
+  "type": "single",
+  "question": "Confirmation of Species/subspecies (optional)",
+  "answers": [
+    "Western lowland gorilla (G. g. gorilla)",
+    "Cross River gorilla (G. g. diehli)",
+    "Mountain gorilla (G. b. beringei)",
+    "Eastern lowland gorilla (G. b. graueri)"
+  ],
+  "children": {}
+},
+"orangutan_species_live": {
+  "id": "species_subspecies_live",
+  "visible": false,
+  "type": "single",
+  "question": "Confirmation of Species/subspecies (optional)",
+  "answers": [
+    "Bornean orang-utan (Pongo pygmaeus pygmaeus) – northwest populations",
+    "Bornean orang-utan (Pongo pygmaeus morio) – east populations",
+    "Bornean orang-utan (Pongo pygmaeus wurmbii) – southwest populations",
+    "Sumatran orang-utan (Pongo abelii)"
+  ],
+  "children": {}
+},
+"intended_use_live": {
+  "id": "intended_use_live",
+  "visible": true,
+  "type": "single",
+  "question": "Intended use (Optional)",
+  "answers": [
+    "Trophy" ,
+    "Personal",
+    "circus or travelling exhibition",
+    "Zoo",
+    "Bushmeat",
+    "Unknown"
+  ],
+  "children": {}
+},
+"photo_live": {
+  "id": "photo_live",
+  "visible": true,
+  "type": "file",
+  "question": "Do you have a photo?",
+  "children": {}
+},
+"age_live": {
+  "id": "age_live",
+  "visible": true,
+  "type": "single",
+  "question": "Age",
+  "answers": [
+    "Juvenile",
+    "Adult",
+    "Unknown"
+  ],
+  "children": {}
+},
+"gender_live": {
+  "id": "gender_live",
+  "visible": true,
+  "type": "single",
+  "question": "Gender",
+  "answers": [
+    "Male",
+    "Female",
+    "Unknown"
+  ],
+  "children": {}
+},
+"last_known_location_live": {
+  "id": "last_known_location_live",
+  "visible": true,
+  "type": "single",
+  "question": "Last known location of ape",
+  "answers": [
+    "With my organisation",
+    "With other organisation (please specify)",
+    "With law enforcement agency",
+    "At location of incident"
+  ],
+  "other": true,
+  "children": {}
+},
+"alleged_origin_country_live": {
+  "id": "alleged_origin_country_live",
+  "visible": true,
+  "type": "single",
+  "question": "Alleged country of origin (optional)",
+  "answers": [
+    "Angola",
+    "Burundi",
+    "Cameroon",
+    "Central African Republic",
+    "Democratic Republic of the Congo",
+    "Congo",
+    "Ivory Coast",
+    "Equatorial Guinea",
+    "Gabon",
+    "Ghana",
+    "Guinea",
+    "Guinea Bissau",
+    "Indonesia",
+    "Liberia Malaysia",
+    "Mali",
+    "Nigeria",
+    "Rwanda",
+    "Senegal",
+    "Sierra Leone",
+    "South Sudan",
+    "Uganda",
+    "Unknown"
+  ],
+  "other": true,
+  "children": {}
+},
+"condition_live": {
+  "id": "condition_live",
+  "visible": true,
+  "type": "single",
+  "question": "Condition of ape",
+  "answers": [
+    "Good",
+    "Fair",
+    "Serious",
+    "Critical",
+    "Unknown"
+  ],
+  "other": true,
+  "children": {}
+},
+"unique_identifiers_live": {
+  "id": "unique_identifiers_live",
+  "visible": true,
+  "type": "text",
+  "question": "Unique identifiers (optional)",
+  "children": {}
+},
+"individual_name_live": {
+  "id": "individual_name_live",
+  "visible": true,
+  "type": "text",
+  "question": "Individual’s name (optional)",
+  "children": {}
+}
