@@ -6,6 +6,7 @@
       "type": "single",
       "question": "Are you reporting in collaboration with another Agency?",
       "answers": ["Yes", "No"],
+      "required": true,
       "children": {
         "Yes": ["new_agency_contact"]
       }
@@ -527,7 +528,6 @@
         "south_sudan_regions",
         "uganda_regions",
         "numeric_example",
-        "location_coords",
         "type_of_location",
         "confiscated"
     ]}, {
