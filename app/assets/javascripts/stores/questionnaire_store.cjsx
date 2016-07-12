@@ -41,7 +41,9 @@ class QuestionnaireStore extends EventEmitter
       visibleQuestions = page.questions.filter( (question_id) ->
         questionnaire.questions[question_id].visible
       ).map( (question_id) ->
-        questionnaire.questions[question_id]
+        question = questionnaire.questions[question_id]
+        question.id = question_id
+        question
       )
 
       {title: page.title, questions: visibleQuestions}
