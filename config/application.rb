@@ -22,7 +22,7 @@ module Grasp
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.browserify_rails.paths << /vendor\/assets\/javascripts/
-    config.browserify_rails.commandline_options = %q{-t coffee-reactify --extension=".cjsx"}
+    config.browserify_rails.commandline_options = %q{-t envify -t coffee-reactify --extension=".cjsx"}
     config.browserify_rails.source_map_environments << "development"
 
     config.active_record.raise_in_transactional_callbacks = true
