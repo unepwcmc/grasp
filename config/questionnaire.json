@@ -33,7 +33,6 @@
       "question": "Test numeric",
       "children": {}
     },
-
     "country_of_discovery": {
       "id": "country_of_discovery",
       "visible": true,
@@ -331,7 +330,6 @@
       ],
       "children": {}
     },
-
     "location_coords": {
       "id": "location_coords",
       "visible": true,
@@ -353,35 +351,6 @@
       "other": true,
       "children": {}
     },
-    "genus": {
-      "id": "genus",
-      "visible": true,
-      "type": "single",
-      "question": "Ape (Genus)",
-      "answers": [
-        "Bonobo (pan)",
-        "Chimpanzee (pan)",
-        "Gorilla (gorilla)",
-        "Orang-utan (pongo)",
-        "Unknown"
-      ],
-      "children": {}
-    },
-    "intended_use": {
-      "id": "intended_use",
-      "visible": true,
-      "type": "single",
-      "question": "Intended use (Optional)",
-      "answers": [
-        "Trophy" ,
-        "Personal",
-        "circus or travelling exhibition",
-        "Zoo",
-        "Bushmeat",
-        "Unknown"
-      ],
-      "children": {}
-    },
     "confiscated": {
       "id": "confiscated",
       "visible": true,
@@ -396,23 +365,472 @@
         "Yes": ["arrests_made"]
       }
     },
-    "photo": {
-      "id": "photo",
+    "quantities": {
+      "id": "quantities",
+      "visible": true,
+      "type": "quantities",
+      "question": "Status of the ape(s) / Quantity"
+    },
+    "genus_live": {
+      "id": "genus_live",
+      "visible": true,
+      "type": "single",
+      "question": "Ape (Genus)",
+      "answers": [
+        "Bonobo (pan)",
+        "Chimpanzee (pan)",
+        "Gorilla (gorilla)",
+        "Orang-utan (pongo)",
+        "Unknown"
+      ],
+      "children": {
+        "Chimpanzee (pan)": ["chimpanzee_species_live"],
+        "Gorilla (gorilla)": ["gorilla_species_live"],
+        "Orang-utan (pongo)": ["orangutan_species_live"]
+      }
+    },
+    "chimpanzee_species_live": {
+      "id": "species_subspecies_live",
+      "visible": false,
+      "type": "single",
+      "question": "Confirmation of Species/subspecies (optional)",
+      "answers": [
+        "Central chimpanzee (P. t. troglodytes)",
+        "Western chimpanzee (P. t. ellioti)",
+        "Nigeria-Cameroon chimpanzee (P. t. ellioti)",
+        "Eastern chimpanzee (P. t. schweinfurthii)"
+      ],
+      "children": {}
+    },
+    "gorilla_species_live": {
+      "id": "species_subspecies_live",
+      "visible": false,
+      "type": "single",
+      "question": "Confirmation of Species/subspecies (optional)",
+      "answers": [
+        "Western lowland gorilla (G. g. gorilla)",
+        "Cross River gorilla (G. g. diehli)",
+        "Mountain gorilla (G. b. beringei)",
+        "Eastern lowland gorilla (G. b. graueri)"
+      ],
+      "children": {}
+    },
+    "orangutan_species_live": {
+      "id": "species_subspecies_live",
+      "visible": false,
+      "type": "single",
+      "question": "Confirmation of Species/subspecies (optional)",
+      "answers": [
+        "Bornean orang-utan (Pongo pygmaeus pygmaeus) – northwest populations",
+        "Bornean orang-utan (Pongo pygmaeus morio) – east populations",
+        "Bornean orang-utan (Pongo pygmaeus wurmbii) – southwest populations",
+        "Sumatran orang-utan (Pongo abelii)"
+      ],
+      "children": {}
+    },
+    "intended_use_live": {
+      "id": "intended_use_live",
+      "visible": true,
+      "type": "single",
+      "question": "Intended use (Optional)",
+      "answers": [
+        "Trophy" ,
+        "Personal",
+        "circus or travelling exhibition",
+        "Zoo",
+        "Bushmeat",
+        "Unknown"
+      ],
+      "children": {}
+    },
+    "photo_live": {
+      "id": "photo_live",
       "visible": true,
       "type": "file",
       "question": "Do you have a photo?",
       "children": {}
     },
-    "arrests_made": {
-      "id": "arrests_made",
-      "visible": false,
+    "age_live": {
+      "id": "age_live",
+      "visible": true,
       "type": "single",
-      "question": "Were arrests made following confiscation?",
+      "question": "Age",
       "answers": [
-        "Yes" ,
-        "No",
+        "Juvenile",
+        "Adult",
         "Unknown"
       ],
+      "children": {}
+    },
+    "gender_live": {
+      "id": "gender_live",
+      "visible": true,
+      "type": "single",
+      "question": "Gender",
+      "answers": [
+        "Male",
+        "Female",
+        "Unknown"
+      ],
+      "children": {}
+    },
+    "last_known_location_live": {
+      "id": "last_known_location_live",
+      "visible": true,
+      "type": "single",
+      "question": "Last known location of ape",
+      "answers": [
+        "With my organisation",
+        "With other organisation (please specify)",
+        "With law enforcement agency",
+        "At location of incident"
+      ],
+      "other": true,
+      "children": {}
+    },
+    "alleged_origin_country_live": {
+      "id": "alleged_origin_country_live",
+      "visible": true,
+      "type": "single",
+      "question": "Alleged country of origin (optional)",
+      "answers": [
+        "Angola",
+        "Burundi",
+        "Cameroon",
+        "Central African Republic",
+        "Democratic Republic of the Congo",
+        "Congo",
+        "Ivory Coast",
+        "Equatorial Guinea",
+        "Gabon",
+        "Ghana",
+        "Guinea",
+        "Guinea Bissau",
+        "Indonesia",
+        "Liberia Malaysia",
+        "Mali",
+        "Nigeria",
+        "Rwanda",
+        "Senegal",
+        "Sierra Leone",
+        "South Sudan",
+        "Uganda",
+        "Unknown"
+      ],
+      "other": true,
+      "children": {}
+    },
+    "condition_live": {
+      "id": "condition_live",
+      "visible": true,
+      "type": "single",
+      "question": "Condition of ape",
+      "answers": [
+        "Good",
+        "Fair",
+        "Serious",
+        "Critical",
+        "Unknown"
+      ],
+      "other": true,
+      "children": {}
+    },
+    "unique_identifiers_live": {
+      "id": "unique_identifiers_live",
+      "visible": true,
+      "type": "text",
+      "question": "Unique identifiers (optional)",
+      "children": {}
+    },
+    "individual_name_live": {
+      "id": "individual_name_live",
+      "visible": true,
+      "type": "text",
+      "question": "Individual’s name (optional)",
+      "children": {}
+    },
+    "genus_dead": {
+      "id": "genus_dead",
+      "visible": true,
+      "type": "single",
+      "question": "Ape (Genus)",
+      "answers": [
+        "Bonobo (pan)",
+        "Chimpanzee (pan)",
+        "Gorilla (gorilla)",
+        "Orang-utan (pongo)",
+        "Unknown"
+      ],
+      "children": {
+        "Chimpanzee (pan)": ["chimpanzee_species_dead"],
+        "Gorilla (gorilla)": ["gorilla_species_dead"],
+        "Orang-utan (pongo)": ["orangutan_species_dead"]
+      }
+    },
+    "chimpanzee_species_dead": {
+      "id": "species_subspecies_dead",
+      "visible": false,
+      "type": "single",
+      "question": "Confirmation of Species/subspecies (optional)",
+      "answers": [
+        "Central chimpanzee (P. t. troglodytes)",
+        "Western chimpanzee (P. t. ellioti)",
+        "Nigeria-Cameroon chimpanzee (P. t. ellioti)",
+        "Eastern chimpanzee (P. t. schweinfurthii)"
+      ],
+      "children": {}
+    },
+    "gorilla_species_dead": {
+      "id": "species_subspecies_dead",
+      "visible": false,
+      "type": "single",
+      "question": "Confirmation of Species/subspecies (optional)",
+      "answers": [
+        "Western lowland gorilla (G. g. gorilla)",
+        "Cross River gorilla (G. g. diehli)",
+        "Mountain gorilla (G. b. beringei)",
+        "Eastern lowland gorilla (G. b. graueri)"
+      ],
+      "children": {}
+    },
+    "orangutan_species_dead": {
+      "id": "species_subspecies_dead",
+      "visible": false,
+      "type": "single",
+      "question": "Confirmation of Species/subspecies (optional)",
+      "answers": [
+        "Bornean orang-utan (Pongo pygmaeus pygmaeus) – northwest populations",
+        "Bornean orang-utan (Pongo pygmaeus morio) – east populations",
+        "Bornean orang-utan (Pongo pygmaeus wurmbii) – southwest populations",
+        "Sumatran orang-utan (Pongo abelii)"
+      ],
+      "children": {}
+    },
+    "intended_use_dead": {
+      "id": "intended_use_dead",
+      "visible": true,
+      "type": "single",
+      "question": "Intended use (Optional)",
+      "answers": [
+        "Trophy" ,
+        "Personal",
+        "circus or travelling exhibition",
+        "Zoo",
+        "Bushmeat",
+        "Unknown"
+      ],
+      "children": {}
+    },
+    "photo_dead": {
+      "id": "photo_dead",
+      "visible": true,
+      "type": "file",
+      "question": "Do you have a photo?",
+      "children": {}
+    },
+    "age_dead": {
+      "id": "age_dead",
+      "visible": true,
+      "type": "single",
+      "question": "Age",
+      "answers": [
+        "Juvenile",
+        "Adult",
+        "Unknown"
+      ],
+      "children": {}
+    },
+    "gender_dead": {
+      "id": "gender_dead",
+      "visible": true,
+      "type": "single",
+      "question": "Gender",
+      "answers": [
+        "Male",
+        "Female",
+        "Unknown"
+      ],
+      "children": {}
+    },
+    "last_known_location_dead": {
+      "id": "last_known_location_dead",
+      "visible": true,
+      "type": "single",
+      "question": "Last known location of ape",
+      "answers": [
+        "With my organisation",
+        "With other organisation (please specify)",
+        "With law enforcement agency",
+        "At location of incident"
+      ],
+      "other": true,
+      "children": {}
+    },
+    "alleged_origin_country_dead": {
+      "id": "alleged_origin_country_dead",
+      "visible": true,
+      "type": "single",
+      "question": "Alleged country of origin (optional)",
+      "answers": [
+        "Angola",
+        "Burundi",
+        "Cameroon",
+        "Central African Republic",
+        "Democratic Republic of the Congo",
+        "Congo",
+        "Ivory Coast",
+        "Equatorial Guinea",
+        "Gabon",
+        "Ghana",
+        "Guinea",
+        "Guinea Bissau",
+        "Indonesia",
+        "Liberia Malaysia",
+        "Mali",
+        "Nigeria",
+        "Rwanda",
+        "Senegal",
+        "Sierra Leone",
+        "South Sudan",
+        "Uganda",
+        "Unknown"
+      ],
+      "other": true,
+      "children": {}
+    },
+    "condition_dead": {
+      "id": "condition_dead",
+      "visible": true,
+      "type": "single",
+      "question": "Condition of ape",
+      "answers": [
+        "Good",
+        "Fair",
+        "Serious",
+        "Critical",
+        "Unknown"
+      ],
+      "other": true,
+      "children": {}
+    },
+    "unique_identifiers_dead": {
+      "id": "unique_identifiers_dead",
+      "visible": true,
+      "type": "text",
+      "question": "Unique identifiers (optional)",
+      "children": {}
+    },
+    "individual_name_dead": {
+      "id": "individual_name_dead",
+      "visible": true,
+      "type": "text",
+      "question": "Individual’s name (optional)",
+      "children": {}
+    },
+    "genus_parts": {
+      "id": "genus_parts",
+      "visible": true,
+      "type": "multi",
+      "question": "Ape (Genus) (tick all that apply)",
+      "answers": [
+        "Bonobo (pan)",
+        "Chimpanzee (pan)",
+        "Gorilla (gorilla)",
+        "Orang-utan (pongo)",
+        "Unknown"
+      ],
+      "children": {
+        "Bonobo (pan)": ["bone_bonobo", "foot_hand_bonobo", "genitalia_bonobo", "hair_bonobo", "meat_bonobo", "skin_bonobo", "skull_bonobo", "other_bonobo"],
+        "Chimpanzee (pan)": ["bone_chimpanzee", "foot_hand_chimpanzee", "genitalia_chimpanzee", "hair_chimpanzee", "meat_chimpanzee", "skin_chimpanzee", "skull_chimpanzee", "other_chimpanzee"],
+        "Gorilla (gorilla)": ["bone_gorilla", "foot_hand_gorilla", "genitalia_gorilla", "hair_gorilla", "meat_gorilla", "skin_gorilla", "skull_gorilla", "other_gorilla"],
+        "Orang-utan (pongo)": ["bone_orangutan", "foot_hand_orangutan", "genitalia_orangutan", "hair_orangutan", "meat_orangutan", "skin_orangutan", "skull_orangutan", "other_orangutan"],
+        "Unknown": ["bone_unknown", "foot_hand_unknown", "genitalia_unknown", "hair_unknown", "meat_unknown", "skin_unknown", "skull_unknown", "other_unknown"]
+      }
+    },
+    "bone_bonobo": { "id": "bone",                           "visible": false,  "type": "numeric",          "question": "Bone" },
+    "foot_hand_bonobo": { "id": "foot_hand_bonobo",          "visible": false,  "type": "numeric",          "question": "Foot/hand" },
+    "genitalia_bonobo": { "id": "genitalia_bonobo",          "visible": false,  "type": "numeric",          "question": "Genitalia" },
+    "hair_bonobo": { "id": "hair_bonobo",                    "visible": false,  "type": "numeric",          "question": "Hair" },
+    "meat_bonobo": { "id": "meat_bonobo",                    "visible": false,  "type": "decimal_numeric",  "question": "Meat (kg)" },
+    "skin_bonobo": { "id": "skin_bonobo",                    "visible": false,  "type": "numeric",          "question": "Skin" },
+    "skull_bonobo": { "id": "skull_bonobo",                  "visible": false,  "type": "numeric",          "question": "Skull" },
+    "other_bonobo": { "id": "other_bonobo",                  "visible": false,  "type": "numeric",          "question": "Other" },
+    "bone_chimpanzee": { "id": "bone",                       "visible": false,  "type": "numeric",          "question": "Bone" },
+    "foot_hand_chimpanzee": { "id": "foot_hand_chimpanzee",  "visible": false,  "type": "numeric",          "question": "Foot/hand" },
+    "genitalia_chimpanzee": { "id": "genitalia_chimpanzee",  "visible": false,  "type": "numeric",          "question": "Genitalia" },
+    "hair_chimpanzee": { "id": "hair_chimpanzee",            "visible": false,  "type": "numeric",          "question": "Hair" },
+    "meat_chimpanzee": { "id": "meat_chimpanzee",            "visible": false,  "type": "decimal_numeric",  "question": "Meat (kg)" },
+    "skin_chimpanzee": { "id": "skin_chimpanzee",            "visible": false,  "type": "numeric",          "question": "Skin" },
+    "skull_chimpanzee": { "id": "skull_chimpanzee",          "visible": false,  "type": "numeric",          "question": "Skull" },
+    "other_chimpanzee": { "id": "other_chimpanzee",          "visible": false,  "type": "numeric",          "question": "Other" },
+    "bone_gorilla": { "id": "bone",                          "visible": false,  "type": "numeric",          "question": "Bone" },
+    "foot_hand_gorilla": { "id": "foot_hand_gorilla",        "visible": false,  "type": "numeric",          "question": "Foot/hand" },
+    "genitalia_gorilla": { "id": "genitalia_gorilla",        "visible": false,  "type": "numeric",          "question": "Genitalia" },
+    "hair_gorilla": { "id": "hair_gorilla",                  "visible": false,  "type": "numeric",          "question": "Hair" },
+    "meat_gorilla": { "id": "meat_gorilla",                  "visible": false,  "type": "decimal_numeric",  "question": "Meat (kg)" },
+    "skin_gorilla": { "id": "skin_gorilla",                  "visible": false,  "type": "numeric",          "question": "Skin" },
+    "skull_gorilla": { "id": "skull_gorilla",                "visible": false,  "type": "numeric",          "question": "Skull" },
+    "other_gorilla": { "id": "other_gorilla",                "visible": false,  "type": "numeric",          "question": "Other" },
+    "bone_orangutan": { "id": "bone",                        "visible": false,  "type": "numeric",          "question": "Bone" },
+    "foot_hand_orangutan": { "id": "foot_hand_orangutan",    "visible": false,  "type": "numeric",          "question": "Foot/hand" },
+    "genitalia_orangutan": { "id": "genitalia_orangutan",    "visible": false,  "type": "numeric",          "question": "Genitalia" },
+    "hair_orangutan": { "id": "hair_orangutan",              "visible": false,  "type": "numeric",          "question": "Hair" },
+    "meat_orangutan": { "id": "meat_orangutan",              "visible": false,  "type": "decimal_numeric",  "question": "Meat (kg)" },
+    "skin_orangutan": { "id": "skin_orangutan",              "visible": false,  "type": "numeric",          "question": "Skin" },
+    "skull_orangutan": { "id": "skull_orangutan",            "visible": false,  "type": "numeric",          "question": "Skull" },
+    "other_orangutan": { "id": "other_orangutan",            "visible": false,  "type": "numeric",          "question": "Other" },
+    "bone_unknown": { "id": "bone",                          "visible": false,  "type": "numeric",          "question": "Bone" },
+    "foot_hand_unknown": { "id": "foot_hand_unknown",        "visible": false,  "type": "numeric",          "question": "Foot/hand" },
+    "genitalia_unknown": { "id": "genitalia_unknown",        "visible": false,  "type": "numeric",          "question": "Genitalia" },
+    "hair_unknown": { "id": "hair_unknown",                  "visible": false,  "type": "numeric",          "question": "Hair" },
+    "meat_unknown": { "id": "meat_unknown",                  "visible": false,  "type": "decimal_numeric",  "question": "Meat (kg)" },
+    "skin_unknown": { "id": "skin_unknown",                  "visible": false,  "type": "numeric",          "question": "Skin" },
+    "skull_unknown": { "id": "skull_unknown",                "visible": false,  "type": "numeric",          "question": "Skull" },
+    "other_unknown": { "id": "other_unknown",                "visible": false,  "type": "numeric",          "question": "Other" },
+    "last_known_location_parts": {
+      "id": "last_known_location_parts",
+      "visible": true,
+      "type": "single",
+      "question": "Last known location of parts",
+      "answers": [
+        "With my organisation",
+        "With other organisation (please specify)",
+        "With law enforcement agency",
+        "At location of incident"
+      ],
+      "other": true,
+      "children": {}
+    },
+    "alleged_origin_country_parts": {
+      "id": "alleged_origin_country_parts",
+      "visible": true,
+      "type": "single",
+      "question": "Alleged country of origin (optional)",
+      "answers": [
+        "Angola",
+        "Burundi",
+        "Cameroon",
+        "Central African Republic",
+        "Democratic Republic of the Congo",
+        "Congo",
+        "Ivory Coast",
+        "Equatorial Guinea",
+        "Gabon",
+        "Ghana",
+        "Guinea",
+        "Guinea Bissau",
+        "Indonesia",
+        "Liberia Malaysia",
+        "Mali",
+        "Nigeria",
+        "Rwanda",
+        "Senegal",
+        "Sierra Leone",
+        "South Sudan",
+        "Uganda",
+        "Unknown"
+      ],
+      "other": true,
       "children": {}
     },
     "arrests_made": {
@@ -505,37 +923,93 @@
         "new_agency_contact",
         "date_of_discovery",
         "country_of_discovery",
-        "angola_regions",
-        "burundi_regions",
-        "cameroon_regions",
-        "central_african_republic_regions",
-        "democratic_republic_of_congo_regions",
-        "congo_regions",
-        "ivory_coast_regions",
-        "equatorial_guinea_regions",
-        "gabon_regions",
-        "ghana_regions",
-        "guinea_regions",
-        "guinea_bissau_regions",
-        "indonesia_regions",
-        "liberia_regions",
-        "malaysia_regions",
-        "mali_regions",
-        "nigeria_regions",
-        "rwanda_regions",
-        "senegal_regions",
-        "sierra_leone_regions",
-        "south_sudan_regions",
-        "uganda_regions",
-        "numeric_example",
+        "angola_regions", "burundi_regions", "cameroon_regions",
+        "central_african_republic_regions", "democratic_republic_of_congo_regions",
+        "congo_regions", "ivory_coast_regions", "equatorial_guinea_regions",
+        "gabon_regions", "ghana_regions", "guinea_regions", "guinea_bissau_regions",
+        "indonesia_regions", "liberia_regions", "malaysia_regions",
+        "mali_regions", "nigeria_regions", "rwanda_regions", "senegal_regions",
+        "sierra_leone_regions", "south_sudan_regions", "uganda_regions",
+        "location_coords",
         "type_of_location",
         "confiscated"
     ]}, {
-      "title": "About the ape(s)",
+      "title": "Live Ape(s) details",
       "questions": [
-        "genus",
-        "intended_use",
-        "photo"
+        "genus_live",
+        "gorilla_species_live",
+        "chimpanzee_species_live",
+        "orangutan_species_live",
+        "intended_use_live",
+        "photo_live",
+        "age_live",
+        "gender_live",
+        "last_known_location_live",
+        "alleged_origin_country_live",
+        "condition_live",
+        "unique_identifiers_live",
+        "individual_name_live"
+    ]}, {
+      "title": "Dead ape(s) details",
+      "questions": [
+        "genus_dead",
+        "gorilla_species_dead",
+        "chimpanzee_species_dead",
+        "orangutan_species_dead",
+        "intended_use_dead",
+        "photo_dead",
+        "age_dead",
+        "gender_dead",
+        "last_known_location_dead",
+        "alleged_origin_country_dead",
+        "unique_identifiers_dead",
+        "individual_name_dead"
+    ]}, {
+      "title": "Body parts details",
+      "questions": [
+        "genus_parts",
+        "bone_bonobo",
+        "foot_hand_bonobo",
+        "genitalia_bonobo",
+        "hair_bonobo",
+        "meat_bonobo",
+        "skin_bonobo",
+        "skull_bonobo",
+        "other_bonobo",
+        "bone_chimpanzee",
+        "foot_hand_chimpanzee",
+        "genitalia_chimpanzee",
+        "hair_chimpanzee",
+        "meat_chimpanzee",
+        "skin_chimpanzee",
+        "skull_chimpanzee",
+        "other_chimpanzee",
+        "bone_gorilla",
+        "foot_hand_gorilla",
+        "genitalia_gorilla",
+        "hair_gorilla",
+        "meat_gorilla",
+        "skin_gorilla",
+        "skull_gorilla",
+        "other_gorilla",
+        "bone_orangutan",
+        "foot_hand_orangutan",
+        "genitalia_orangutan",
+        "hair_orangutan",
+        "meat_orangutan",
+        "skin_orangutan",
+        "skull_orangutan",
+        "other_orangutan",
+        "bone_unknown",
+        "foot_hand_unknown",
+        "genitalia_unknown",
+        "hair_unknown",
+        "meat_unknown",
+        "skin_unknown",
+        "skull_unknown",
+        "other_unknown",
+        "last_known_location_parts",
+        "alleged_origin_country_parts"
     ]}, {
       "title": "Law enforcement and context",
       "questions": [

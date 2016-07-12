@@ -2,20 +2,15 @@ React = require("react")
 Question = require("components/question")
 QuestionnaireStore = require("stores/questionnaire_store")
 
-module.exports = class FileQuestion extends Question
+module.exports = class FileQuestion extends React.Component
   render: ->
-    <div className="question">
-      <h3>{@props.data.question}</h3>
-
-      <p style={@displayStyle()}>{@props.data.selected}</p>
-      <div style={@editStyle()}>
-        <div className="files">
-          {@renderFiles()}
-        </div>
-
-        <div><label>Upload file(s)</label></div>
-        <input type="file" onChange={@addFile}/>
+    <div>
+      <div className="files">
+        {@renderFiles()}
       </div>
+
+      <div><label>Upload file(s)</label></div>
+      <input type="file" onChange={@addFile}/>
     </div>
 
   renderFiles: =>
