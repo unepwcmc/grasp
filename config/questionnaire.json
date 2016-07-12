@@ -6,6 +6,7 @@
       "type": "single",
       "question": "Are you reporting in collaboration with another Agency?",
       "answers": ["Yes", "No"],
+      "required": true,
       "children": {
         "Yes": ["new_agency_contact"]
       }

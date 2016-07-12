@@ -10,9 +10,18 @@ class QuestionnaireStore extends EventEmitter
   questionnaireMode = null
   currentPage   = 0
   questionnaire = {}
+  autoSaveTimer = null
+  autoSaveInterval = 60000
 
   constructor: ->
     @on(PAGE_CHANGE_EVENT, @saveOrUpdateReport)
+    @startAutoSave()
+
+  startAutoSave: ->
+    autoSaveTimer = setInterval(@saveOrUpdateReport, autoSaveInterval)
+
+  stopAutoSave: ->
+    clearInterval(autoSaveTimer) if autoSaveTimer
 
   currentPage: ->
     currentPage
@@ -48,6 +57,13 @@ class QuestionnaireStore extends EventEmitter
 
       {title: page.title, questions: visibleQuestions}
     )
+
+  requiredQuestionsAnswered: ->
+    allAnswered = true
+    for key, question of questionnaire.questions
+      if (question.required == true) and (question.selected == "" or 'selected' not of question)
+        allAnswered = false
+    allAnswered
 
   selectAnswer: (key, answer) ->
     questionnaire.questions[key].selected = answer
@@ -85,10 +101,10 @@ class QuestionnaireStore extends EventEmitter
   addVisibilityListener: (callback) =>
     @on(VISIBILITY_EVENT, callback)
 
-  saveOrUpdateReport: =>
-    if reportId? then @updateReport() else @saveReport()
+  saveOrUpdateReport: (callback) =>
+    if reportId? then @updateReport(callback) else @saveReport(callback)
 
-  saveReport: =>
+  saveReport: (callback) =>
     token = document.getElementsByName("csrf-token")[0].content
     fetch('/reports', {
       method: 'POST',
@@ -100,12 +116,14 @@ class QuestionnaireStore extends EventEmitter
       credentials: 'include',
       body: JSON.stringify({ report: { data: questionnaire }})
     }).then((response) ->
+      if callback
+        callback(response.headers.get('Location'))
       response.json().then((json) ->
         reportId = json.id
       )
     )
 
-  updateReport: =>
+  updateReport: (callback) =>
     token = document.getElementsByName("csrf-token")[0].content
     fetch("/reports/#{reportId}", {
       method: 'PUT',
@@ -116,9 +134,17 @@ class QuestionnaireStore extends EventEmitter
       },
       credentials: 'include',
       body: JSON.stringify({ report: { data: questionnaire }})
-    })
+    }).then((response) ->
+      if callback
+        callback(response.headers.get('Location'))
+    )
+
+  setPath: (path) =>
+    window.location = path
 
   submitReport: =>
-    alert("Report marked as submitted")
+    @stopAutoSave()
+    questionnaire.state = "submitted"
+    @saveOrUpdateReport(@setPath)
 
 module.exports = new QuestionnaireStore()
