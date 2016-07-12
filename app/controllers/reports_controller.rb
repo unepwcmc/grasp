@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   end
 
   def new
-    @report = File.read(Rails.root.join("config/questionnaire.json"))
+    @report = Questionnaire.load
   end
 
   def show
