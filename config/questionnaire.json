@@ -32,7 +32,6 @@
       "question": "Test numeric",
       "children": {}
     },
-
     "country_of_discovery": {
       "id": "country_of_discovery",
       "visible": true,
@@ -330,7 +329,6 @@
       ],
       "children": {}
     },
-
     "location_coords": {
       "id": "location_coords",
       "visible": true,
@@ -363,6 +361,49 @@
         "Gorilla (gorilla)",
         "Orang-utan (pongo)",
         "Unknown"
+      ],
+      "children": {
+        "Chimpanzee (pan)": ["chimpanzee_species"],
+        "Gorilla (gorilla)": ["gorilla_species"],
+        "Orang-utan (pongo)": ["orangutan_species"]
+      }
+    },
+    "chimpanzee_species": {
+      "id": "species_subspecies",
+      "visible": false,
+      "type": "single",
+      "question": "Confirmation of Species/subspecies (optional)",
+      "answers": [
+        "Central chimpanzee (P. t. troglodytes)",
+        "Western chimpanzee (P. t. ellioti)",
+        "Nigeria-Cameroon chimpanzee (P. t. ellioti)",
+        "Eastern chimpanzee (P. t. schweinfurthii)"
+      ],
+      "children": {}
+    },
+    "gorilla_species": {
+      "id": "species_subspecies",
+      "visible": false,
+      "type": "single",
+      "question": "Confirmation of Species/subspecies (optional)",
+      "answers": [
+        "Western lowland gorilla (G. g. gorilla)",
+        "Cross River gorilla (G. g. diehli)",
+        "Mountain gorilla (G. b. beringei)",
+        "Eastern lowland gorilla (G. b. graueri)"
+      ],
+      "children": {}
+    },
+    "orangutan_species": {
+      "id": "species_subspecies",
+      "visible": false,
+      "type": "single",
+      "question": "Confirmation of Species/subspecies (optional)",
+      "answers": [
+        "Bornean orang-utan (Pongo pygmaeus pygmaeus) – northwest populations",
+        "Bornean orang-utan (Pongo pygmaeus morio) – east populations",
+        "Bornean orang-utan (Pongo pygmaeus wurmbii) – southwest populations",
+        "Sumatran orang-utan (Pongo abelii)"
       ],
       "children": {}
     },
@@ -400,6 +441,106 @@
       "visible": true,
       "type": "file",
       "question": "Do you have a photo?",
+      "children": {}
+    },
+    "age": {
+      "id": "age",
+      "visible": true,
+      "type": "single",
+      "question": "Age",
+      "answers": [
+        "Juvenile",
+        "Adult",
+        "Unknown"
+      ],
+      "children": {}
+    },
+    "gender": {
+      "id": "gender",
+      "visible": true,
+      "type": "single",
+      "question": "Gender",
+      "answers": [
+        "Male",
+        "Female",
+        "Unknown"
+      ],
+      "children": {}
+    },
+    "last_known_location": {
+      "id": "last_known_location",
+      "visible": true,
+      "type": "single",
+      "question": "Last known location of ape",
+      "answers": [
+        "With my organisation",
+        "With other organisation (please specify)",
+        "With law enforcement agency",
+        "At location of incident"
+      ],
+      "other": true,
+      "children": {}
+    },
+    "alleged_origin_country": {
+      "id": "alleged_origin_country",
+      "visible": true,
+      "type": "single",
+      "question": "Alleged country of origin (optional)",
+      "answers": [
+        "Angola",
+        "Burundi",
+        "Cameroon",
+        "Central African Republic",
+        "Democratic Republic of the Congo",
+        "Congo",
+        "Ivory Coast",
+        "Equatorial Guinea",
+        "Gabon",
+        "Ghana",
+        "Guinea",
+        "Guinea Bissau",
+        "Indonesia",
+        "Liberia Malaysia",
+        "Mali",
+        "Nigeria",
+        "Rwanda",
+        "Senegal",
+        "Sierra Leone",
+        "South Sudan",
+        "Rwanda",
+        "Uganda",
+        "Unknown"
+      ],
+      "other": true,
+      "children": {}
+    },
+    "condition": {
+      "id": "condition",
+      "visible": true,
+      "type": "single",
+      "question": "Condition of ape",
+      "answers": [
+        "Good",
+        "Fair",
+        "Serious",
+        "Critical",
+        "Unknown"
+      ],
+      "other": true,
+      "children": {}
+    },
+    "unique_identifiers": {
+      "id": "unique_identifiers",
+      "visible": true,
+      "type": "text",
+      "question": "Unique identifiers (optional)",
+      "children": {}
+    },
+    "individual_name": {
+      "id": "individual_name",
+      "visible": true,
+      "type": "text",
+      "question": "Individual’s name (optional)",
       "children": {}
     },
     "arrests_made": {
@@ -504,38 +645,66 @@
         "new_agency_contact",
         "date_of_discovery",
         "country_of_discovery",
-        "angola_regions",
-        "burundi_regions",
-        "cameroon_regions",
-        "central_african_republic_regions",
-        "democratic_republic_of_congo_regions",
-        "congo_regions",
-        "ivory_coast_regions",
-        "equatorial_guinea_regions",
-        "gabon_regions",
-        "ghana_regions",
-        "guinea_regions",
-        "guinea_bissau_regions",
-        "indonesia_regions",
-        "liberia_regions",
-        "malaysia_regions",
-        "mali_regions",
-        "nigeria_regions",
-        "rwanda_regions",
-        "senegal_regions",
-        "sierra_leone_regions",
-        "south_sudan_regions",
-        "uganda_regions",
-        "numeric_example",
+        "angola_regions", "burundi_regions", "cameroon_regions",
+        "central_african_republic_regions", "democratic_republic_of_congo_regions",
+        "congo_regions", "ivory_coast_regions", "equatorial_guinea_regions",
+        "gabon_regions", "ghana_regions", "guinea_regions", "guinea_bissau_regions",
+        "indonesia_regions", "liberia_regions", "malaysia_regions",
+        "mali_regions", "nigeria_regions", "rwanda_regions", "senegal_regions",
+        "sierra_leone_regions", "south_sudan_regions", "uganda_regions",
         "location_coords",
         "type_of_location",
         "confiscated"
     ]}, {
       "title": "About the ape(s)",
       "questions": [
+        "quantities"
+    ]}, {
+      "title": "Live Ape(s) details",
+      "questions": [
         "genus",
+        "gorilla_species",
+        "chimpanzee_species",
+        "orangutan_species",
         "intended_use",
-        "photo"
+        "photo",
+        "age",
+        "gender",
+        "last_known_location",
+        "alleged_origin_country",
+        "condition",
+        "unique_identifiers",
+        "individual_name"
+    ]}, {
+      "title": "Dead ape(s) details",
+      "questions": [
+        "genus",
+        "gorilla_species",
+        "chimpanzee_species",
+        "orangutan_species",
+        "intended_use",
+        "photo",
+        "age",
+        "gender",
+        "last_known_location",
+        "alleged_origin_country",
+        "unique_identifiers",
+        "individual_name"
+    ]}, {
+      "title": "Body parts details",
+      "questions": [
+        "genus",
+        "gorilla_species",
+        "chimpanzee_species",
+        "orangutan_species",
+        "intended_use",
+        "photo",
+        "age",
+        "gender",
+        "last_known_location",
+        "alleged_origin_country",
+        "unique_identifiers",
+        "individual_name"
     ]}, {
       "title": "Law enforcement and context",
       "questions": [
