@@ -17,6 +17,7 @@ class ReportsController < ApplicationController
 
   def create
     @report = Report.new(report_params)
+
     if @report.save
       render json: @report, location: reports_path
     else
@@ -26,6 +27,7 @@ class ReportsController < ApplicationController
 
   def update
     @report = Report.find(params[:id])
+
     if @report.update(report_params)
       render json: @report, location: reports_path
     else
