@@ -1,4 +1,8 @@
 class ReportsController < ApplicationController
+  # Authenticate user and load CanCanCan permissions
+  before_action :authenticate_user!
+  #load_and_authorize_resource
+
   def index
     @reports = Report.all
   end

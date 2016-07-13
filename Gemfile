@@ -19,6 +19,10 @@ gem 'appsignal', '~> 1.1.9'
 gem 'exception_notification', '~> 4.1.4'
 gem 'slack-notifier', '~> 1.5.1'
 
+# Authentication and Authorization
+gem 'cancancan', '~> 1.10'
+gem 'devise', '~> 4.2.0'
+
 group :development do
   # Docs
   gem 'yard', '~> 0.8.7.6'
