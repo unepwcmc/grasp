@@ -12,7 +12,10 @@
       GRASP
       <%= user_signed_in? ? "Signed in as #{current_user.email}" : "Not signed in" %>
     </header>
-    <div class="container"><%= yield %></div>
+    <div class="container">
+      <%= notice %>
+      <%= yield %>
+    </div>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   </body>

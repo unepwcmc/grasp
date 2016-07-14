@@ -9,7 +9,7 @@ class Ability
     when "admin"
       can :manage, :all
     when "validator"
-      cam :manage, :all
+      can :manage, Report
     when "provider"
       can :read, :all
     else
