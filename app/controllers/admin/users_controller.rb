@@ -1,6 +1,10 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  # Authenticate user and load CanCanCan permissions
+  before_action :authenticate_user!
+  load_and_authorize_resource
+
   # GET /users
   def index
     @users = User.all

@@ -1,0 +1,12 @@
+<header class="header">
+  GRASP
+
+  <div class="u-pull-right">
+    <% if user_signed_in? %>
+      Signed in as <%= current_user.email %>
+      <%= link_to "Sign Out", destroy_user_session_path, class: 'button button-primary' %>
+    <% else %>
+      <%= link_to "Sign In", new_user_session_path, class: 'button button-primary' %>
+    <% end %>
+  </div>
+</header>

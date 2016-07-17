@@ -8,10 +8,8 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <header class="header">
-      GRASP
-      <%= user_signed_in? ? "Signed in as #{current_user.email}" : "Not signed in" %>
-    </header>
+    <%= render "layouts/header" %>
+
     <div class="container">
       <%= notice %>
       <%= yield %>
