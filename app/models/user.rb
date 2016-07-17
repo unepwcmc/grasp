@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :role
+  belongs_to :agency
 
   validates :role_id, presence: true
 end
