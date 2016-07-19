@@ -2,8 +2,9 @@ require 'test_helper'
 
 class AgenciesControllerTest < ActionController::TestCase
   setup do
-    @agency = agencies(:one)
-    @agency = FactoryGirl.build(:agency)
+    #@user = FactoryGirl.create(:admin)
+    #sign_in @user
+    #@agency = FactoryGirl.build(:agency)
   end
 
   test "should get index" do
