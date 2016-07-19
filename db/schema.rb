@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160717210551) do
+ActiveRecord::Schema.define(version: 20160719111334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(version: 20160717210551) do
     t.string   "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "city"
+    t.string   "post_code"
+    t.string   "country"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -53,6 +58,13 @@ ActiveRecord::Schema.define(version: 20160717210551) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.integer  "agency_id"
+    t.string   "second_email"
+    t.string   "skype_username"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "city"
+    t.string   "post_code"
+    t.string   "country"
   end
 
   add_index "users", ["agency_id"], name: "index_users_on_agency_id", using: :btree

@@ -45,6 +45,36 @@
     <%= f.collection_select :agency_id, Agency.all, :id, :name %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :second_email %>
+    <%= f.email_field :second_email %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :skype_username %>
+    <%= f.text_field :skype_username %>
+  </div>
+  <div class="field">
+    <%= f.label :address_1 %><br>
+    <%= f.text_field :address_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :address_2 %><br>
+    <%= f.text_field :address_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :post_code %><br>
+    <%= f.text_field :post_code %>
+  </div>
+  <div class="field">
+    <%= f.label :country %><br>
+    <%= f.text_field :country %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
