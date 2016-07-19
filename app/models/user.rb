@@ -48,6 +48,7 @@ class User < ActiveRecord::Base
 
   belongs_to :role
   belongs_to :agency
+  has_and_belongs_to_many :expertises
 
   validates :role_id, :agency_id, :first_name, :last_name, :email, :country, presence: true
 
