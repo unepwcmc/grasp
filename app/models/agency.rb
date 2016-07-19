@@ -17,4 +17,6 @@
 
 class Agency < ActiveRecord::Base
   has_many :users
+
+  validates :name, :email, :country, presence: true
 end

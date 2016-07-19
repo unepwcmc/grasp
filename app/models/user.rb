@@ -49,5 +49,6 @@ class User < ActiveRecord::Base
   belongs_to :role
   belongs_to :agency
 
-  validates :role_id, presence: true
+  validates :role_id, :agency_id, :first_name, :last_name, :email, :country, presence: true
+
 end
