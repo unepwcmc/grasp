@@ -1,0 +1,11 @@
+@import "utilities/bem";
+
+@include b(label) {
+  font-weight: 300;
+
+  @include m(left) {
+    float: left;
+    min-width: 7rem;
+    margin-right: 4rem;
+  }
+}
