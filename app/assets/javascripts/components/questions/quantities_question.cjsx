@@ -30,29 +30,20 @@ class QuantitiesQuestion extends React.Component
       </fieldset>
     </div>
 
-  handleLive: (e) =>
-    debugger
-    @update("live", e.target.value)
-  handleDead: (e) =>
-    @update("dead", e.target.value)
-  handleBodyParts: (e) =>
-    @update("body_parts", e.target.checked)
+  handleLive: (e) => @update("live", parseInt(e.target.value))
+  handleDead: (e) => @update("dead", parseInt(e.target.value))
+  handleBodyParts: (e) => @update("body_parts", e.target.checked)
 
-  valueFor: (type) =>
-    @props.data.selected?[type] || 0
-
-  increment: (type) =>
-    answer = parseInt(@props.data.selected?[type] || 0) + 1
-    @update(type, answer) if answer < 100
-
-  decrement: (type) =>
-    answer = parseInt(@props.data.selected?[type] || 0) - 1
-    @update(type, answer) if answer >= 0
+  increment: (type) => @update(type, @valueFor(type) + 1)
+  decrement: (type) => @update(type, @valueFor(type) - 1)
 
   update: (type, answer) =>
+    return unless 0 <= answer < 100
+
     @props.data.selected ||= {}
     @props.data.selected[type] = answer
     QuestionnaireStore.selectAnswer(@props.data.id, @props.data.selected)
 
+  valueFor: (type) => parseInt(@props.data.selected?[type] || 0)
 
 module.exports = QuantitiesQuestion
