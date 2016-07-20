@@ -1,7 +1,5 @@
-@import "utilities/bem";
-
 @include b(questionnaire) {
-  width: 80%;
+  width: $main__width;
   margin: auto;
   margin-bottom: 5rem;
 }
