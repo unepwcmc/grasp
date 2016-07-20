@@ -19,6 +19,8 @@ all pretty standard:
   …
 ```
 
+You will need a `.env` file which you can steal from another developer or copy from the `.env.example` provided
+
 Visit `http://localhost:3000` and you should be good to go! 🎉
 
 ## Report structure Example (Draft)
