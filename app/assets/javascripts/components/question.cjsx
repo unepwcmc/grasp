@@ -87,6 +87,12 @@ class Question extends React.Component
           <p>Latitude: {@props.data.selected.lat}</p>
           <p>Longitude: {@props.data.selected.lng}</p>
         </div>
+      when "quantities"
+        <div>
+          <p>Live: {@props.data.selected.live}</p>
+          <p>Dead: {@props.data.selected.dead}</p>
+          <p>Body parts: {"✓" if @props.data.selected.body_parts}</p>
+        </div>
 
   renderOtherField: =>
     if "other" == @props.data.selected
