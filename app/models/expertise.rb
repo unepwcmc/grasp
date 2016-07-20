@@ -1,12 +1,13 @@
 # == Schema Information
 #
-# Table name: reports
+# Table name: expertises
 #
 #  id         :integer          not null, primary key
-#  data       :json
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Report < ActiveRecord::Base
+class Expertise < ActiveRecord::Base
+  has_and_belongs_to_many :users
 end

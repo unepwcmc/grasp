@@ -19,6 +19,14 @@ gem 'appsignal', '~> 1.1.9'
 gem 'exception_notification', '~> 4.1.4'
 gem 'slack-notifier', '~> 1.5.1'
 
+# Authentication and Authorization
+gem 'cancancan', '~> 1.10'
+gem 'devise', '~> 4.2.0'
+
+# Testing
+gem 'factory_girl_rails', '~> 4.7.0'
+gem 'faker', '~> 1.6.5'
+
 group :development do
   # Docs
   gem 'yard', '~> 0.8.7.6'
@@ -36,3 +44,4 @@ end
 # Debugging
 gem 'web-console', '~> 2.0', group: :development
 gem 'byebug', group: [:development, :test]
+gem 'annotate', '~> 2.7.1'

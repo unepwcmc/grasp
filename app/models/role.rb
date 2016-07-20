@@ -1,12 +1,14 @@
 # == Schema Information
 #
-# Table name: reports
+# Table name: roles
 #
 #  id         :integer          not null, primary key
-#  data       :json
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Report < ActiveRecord::Base
+class Role < ActiveRecord::Base
+  validates :name, presence: true
+  has_many :users
 end

@@ -14,6 +14,7 @@ all pretty standard:
   $ bundle install
   $ npm install
   $ bundle exec rake db:create db:migrate
+  $ bundle exec rake db:seed
   $ bundle exec rails server
   …
 ```

@@ -11,10 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705103932) do
+ActiveRecord::Schema.define(version: 20160719162209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "agencies", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "city"
+    t.string   "post_code"
+    t.string   "country"
+  end
+
+  create_table "expertises", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "expertises_users", id: false, force: :cascade do |t|
+    t.integer "expertise_id", null: false
+    t.integer "user_id",      null: false
+  end
 
   create_table "reports", force: :cascade do |t|
     t.json     "data"
@@ -22,4 +46,43 @@ ActiveRecord::Schema.define(version: 20160705103932) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.integer  "role_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.integer  "agency_id"
+    t.string   "second_email"
+    t.string   "skype_username"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "city"
+    t.string   "post_code"
+    t.string   "country"
+  end
+
+  add_index "users", ["agency_id"], name: "index_users_on_agency_id", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
+
+  add_foreign_key "users", "agencies"
+  add_foreign_key "users", "roles"
 end
