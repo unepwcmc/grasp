@@ -1,10 +1,14 @@
-<h1>All Reports</h1>
+<h1>
+  All Reports
+  <small>
+    <a class="u-pull-right" href="<%= new_report_path %>">Create new report</a>
+  </small>
+</h1>
 
 <table class="u-full-width">
   <thead>
     <th>ID</th>
     <th>Country of discovery</th>
-    <th>Genus</th>
     <th>Created at</th>
     <th>Actions</th>
   </thead>
@@ -13,7 +17,6 @@
         <tr>
           <td><%= report.id %></td>
           <td><%= report.data["questions"]["country_of_discovery"]["selected"] %></td>
-          <td><%= report.data["questions"]["genus"]["selected"] %></td>
           <td><%= report.created_at %></td>
           <td>
             <a href="<%= report_path(report.id) %>">Show</a>

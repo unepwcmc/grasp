@@ -1,24 +1,20 @@
 React = require("react")
 Question = require("components/question")
 
-class Form extends Question
+class Form extends React.Component
   render: ->
-    <div>
-      <h3>{@props.data.question}</h3>
-      <p style={@displayStyle()}>{@props.data.selected}</p>
+    <form>
+      <label htmlFor="agency_name">Agency Name:</label>
+      <input type="text" name="agency_name" id="agency_name"/>
 
-      <div style={@editStyle()}>
-        <form>
-          <label for="agency_name">Agency Name:</label>
-          <input type="text" name="agency_name" id="agency_name"/><br/>
-          <label for="contact_name">Contact Name:</label>
-          <input type="text" name="contact_name" id="contact_name"/><br/>
-          <label for="telephone">Telephone:</label>
-          <input type="text" name="telephone" id="telephone"/><br/>
-          <label for="email">Email:</label>
-          <input type="text" name="email" id="email"/><br/>
-        </form>
-      </div>
-    </div>
+      <label htmlFor="contact_name">Contact Name:</label>
+      <input type="text" name="contact_name" id="contact_name"/>
+
+      <label htmlFor="telephone">Telephone:</label>
+      <input type="text" name="telephone" id="telephone"/>
+
+      <label htmlFor="email">Email:</label>
+      <input type="text" name="email" id="email"/><br/>
+    </form>
 
 module.exports = Form

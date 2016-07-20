@@ -8,7 +8,7 @@ class ReportsController < ApplicationController
   end
 
   def new
-    @report = File.read(Rails.root.join("config/questionnaire.json"))
+    @report = Questionnaire.load
   end
 
   def show
@@ -21,9 +21,9 @@ class ReportsController < ApplicationController
 
   def create
     @report = Report.new(report_params)
+
     if @report.save
-      #head :created, location: reports_path
-      render json: @report
+      render json: @report, location: reports_path
     else
       head 422, location: reports_path
     end
@@ -31,8 +31,9 @@ class ReportsController < ApplicationController
 
   def update
     @report = Report.find(params[:id])
+
     if @report.update(report_params)
-      render json: @report
+      render json: @report, location: reports_path
     else
       head 422, location: reports_path
     end

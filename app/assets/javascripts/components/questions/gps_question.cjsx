@@ -2,41 +2,35 @@ React = require("react")
 Question = require("components/question")
 QuestionnaireStore = require("stores/questionnaire_store")
 
-class GpsQuestion extends Question
+class GpsQuestion extends React.Component
+  constructor: (props, context) ->
+    super(props, context)
+    @state = {}
+
   render: ->
-    <div className="question">
-      <h3>{@props.data.question}</h3>
-      <p style={@displayStyle()}>Lat: {@props.data.selected.lat}</p>
-      <p style={@displayStyle()}>Lng: {@props.data.selected.lng}</p>
+    <div>
+      <fieldset>
+        <label htmlFor="latitude">Latitude</label>
+        <input ref="latitude" id="latitude" type="text"
+          onChange={@handleLatChange} value={@getLat()}/>
+      </fieldset>
 
-      <div style={@editStyle()}>
-        <fieldset>
-          <label for="latitude">Latitude</label>
-          <input ref="latitude" id="latitude" type="text"
-            onChange={@handleLatChange} value={@getLat()}
-          />
-        </fieldset>
-        <fieldset>
-          <label for="longitude">Longitude</label>
-          <input ref="longitude" id="longitude" type="text"
-            onChange={@handleLngChange} value={@getLng()}
-          />
-        </fieldset>
+      <fieldset>
+        <label htmlFor="longitude">Longitude</label>
+        <input ref="longitude" id="longitude" type="text"
+          onChange={@handleLngChange} value={@getLng()}/>
+      </fieldset>
 
-        <button onClick={@fetchCoords}>📡</button> {@renderLoading()}
-      </div>
+      <button onClick={@fetchCoords}>📡</button> {@renderLoading()}
     </div>
 
-  renderLoading: =>
-    if @state.loading
-      <small>Loading...</small>
+  renderLoading: => <small>Loading...</small> if @state.loading
 
   handleLatChange: (e) => @saveCoords(e.target.value, @getLng())
   handleLngChange: (e) => @saveCoords(@getLat(), e.target.value)
 
   fetchCoords: =>
     @setState({loading: true})
-
     navigator.geolocation?.getCurrentPosition (position) =>
       @setState({loading: false})
       @saveCoords(position.coords.latitude, position.coords.longitude)
@@ -49,5 +43,3 @@ class GpsQuestion extends Question
 
 
 module.exports = GpsQuestion
-
-

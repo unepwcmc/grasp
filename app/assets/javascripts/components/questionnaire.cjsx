@@ -2,6 +2,7 @@ React = require("react")
 QuestionnaireStore = require("stores/questionnaire_store")
 Page               = require("components/page")
 PageControls       = require("components/page_controls")
+SaveButton         = require("components/save_button")
 SubmitButton       = require("components/submit_button")
 
 class Questionnaire extends React.Component
@@ -20,12 +21,17 @@ class Questionnaire extends React.Component
     <div className="questionnaire">
       {@renderCurrentPage()}
       <PageControls maxPages={@state.pages.length} currentPage={@state.currentPage}/>
-      <SubmitButton/>
+      <SaveButton/>
+      {@renderSubmitButton()}
     </div>
 
   renderCurrentPage: =>
     if @state.pages[@state.currentPage]?.questions.length > 0
       <Page mode={@state.mode} data={@state.pages[@state.currentPage]}/>
+
+  renderSubmitButton: =>
+    if QuestionnaireStore.requiredQuestionsAnswered()
+      <SubmitButton/>
 
   onChange: =>
     @setState({

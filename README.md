@@ -31,6 +31,7 @@ Visit `http://localhost:3000` and you should be good to go! 🎉
       "visible": true,
       "type": "single",
       "question": "Are you reporting on behalf of your own organisation?",
+      "required": true,
       "answers": ["Yes", "No"],
       "children": {
         "No": ["own_organisation_2"]
@@ -41,6 +42,7 @@ Visit `http://localhost:3000` and you should be good to go! 🎉
       "type": "single",
       "visible": false,
       "question": "hwhwhhwhwhwhwh",
+      "required": true,
       "answers": ["Yes", "No"],
       "children": {
         "No": ["select_agency"]

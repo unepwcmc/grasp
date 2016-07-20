@@ -1,19 +1,12 @@
 React = require("react")
 Question = require("components/question")
 
-class SingleAnswerQuestion extends Question
+class SingleAnswerQuestion extends React.Component
   render: ->
-    <div className="question">
-      <h3>{@props.data.question}</h3>
-      <p style={@displayStyle()}>{@props.data.selected}</p>
-
-      <div style={@editStyle()}>
-        <ul>
-          {@renderAnswers()}
-          {@renderOther()}
-        </ul>
-      </div>
-    </div>
+    <ul>
+      {@renderAnswers()}
+      {@renderOther()}
+    </ul>
 
   renderAnswers: ->
     @props.data.answers.map( (answer) =>
@@ -22,7 +15,7 @@ class SingleAnswerQuestion extends Question
           <input
             checked={@props.data.selected == answer}
             type="radio"
-            onChange={@handleChange}
+            onChange={@props.onChange}
             value={answer}
             name={@props.data.id}
             id={@props.data.id + answer}
@@ -37,7 +30,7 @@ class SingleAnswerQuestion extends Question
       <li className="answer" key="other">
         <label>
           <input checked={"other" == @props.data.selected}
-            type="radio" onChange={@handleChange} value="other"
+            type="radio" onChange={@props.onChange} value="other"
             name={@props.data.id}
           />
           <span className="label-body">Other (please specify)</span>
@@ -45,5 +38,11 @@ class SingleAnswerQuestion extends Question
 
         {@renderOtherField()}
       </li>
+
+
+  renderOtherField: =>
+    if "other" == @props.data.selected
+      <input type="text" value={@props.data.other_answer}
+        onChange={@handleOtherChange}/>
 
 module.exports = SingleAnswerQuestion
