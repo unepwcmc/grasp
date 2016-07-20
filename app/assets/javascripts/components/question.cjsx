@@ -10,6 +10,7 @@ TextQuestion           = require("components/questions/text_question")
 FileQuestion           = require("components/questions/file_question")
 Form                   = require("components/questions/form")
 NumericQuestion        = require("components/questions/numeric_question")
+QuantitiesQuestion     = require("components/questions/quantities_question")
 DecimalNumericQuestion = require("components/questions/decimal_numeric_question")
 GpsQuestion            = require("components/questions/gps_question")
 
@@ -42,6 +43,9 @@ class Question extends React.Component
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
                                     data={@props.data} mode={@props.mode}/>
       when "file"             then <FileQuestion
+                                    onChange={@handleChange} onOtherChange={@handleOtherChange}
+                                    data={@props.data} mode={@props.mode}/>
+      when "quantities"       then <QuantitiesQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
                                     data={@props.data} mode={@props.mode}/>
       when "numeric"          then <NumericQuestion
