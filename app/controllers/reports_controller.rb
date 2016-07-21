@@ -4,7 +4,11 @@ class ReportsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @reports = Report.all
+    if search_params.any?
+      @reports = Report.search(search_params)
+    else
+      @reports = Report.all
+    end
   end
 
   def new
@@ -39,8 +43,19 @@ class ReportsController < ApplicationController
     end
   end
 
+  def search
+    puts "Made it"
+  end
+
+
   private
     def report_params
       {data: params.require(:report)[:data]}
+    end
+
+    def search_params
+      # Strips rails default params and empty keys leaving only the populated search parameters
+      p = params.except(:controller, :action, :utf8)
+      p.delete_if { |k, v| v.empty? }
     end
 end

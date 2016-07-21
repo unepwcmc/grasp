@@ -1,0 +1,16 @@
+<h1>Search Reports</h1>
+
+<%= form_tag reports_path, method: :get do %>
+  <div>
+    <%= label_tag :report_id, 'Report ID' %>
+    <%= text_field_tag :report_id, params[:report_id] %>
+  </div>
+
+  <div>
+    <%= label_tag :country_of_discovery %>
+    <%= text_field_tag :country_of_discovery, params[:country_of_discovery] %>
+  </div>
+
+
+  <%= submit_tag "Search", name: nil %>
+<% end %>
