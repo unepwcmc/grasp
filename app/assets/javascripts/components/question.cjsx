@@ -10,6 +10,7 @@ TextQuestion           = require("components/questions/text_question")
 FileQuestion           = require("components/questions/file_question")
 Form                   = require("components/questions/form")
 NumericQuestion        = require("components/questions/numeric_question")
+QuantitiesQuestion     = require("components/questions/quantities_question")
 DecimalNumericQuestion = require("components/questions/decimal_numeric_question")
 GpsQuestion            = require("components/questions/gps_question")
 
@@ -42,6 +43,9 @@ class Question extends React.Component
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
                                     data={@props.data} mode={@props.mode}/>
       when "file"             then <FileQuestion
+                                    onChange={@handleChange} onOtherChange={@handleOtherChange}
+                                    data={@props.data} mode={@props.mode}/>
+      when "quantities"       then <QuantitiesQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
                                     data={@props.data} mode={@props.mode}/>
       when "numeric"          then <NumericQuestion
@@ -83,6 +87,12 @@ class Question extends React.Component
           <p>Latitude: {@props.data.selected.lat}</p>
           <p>Longitude: {@props.data.selected.lng}</p>
         </div>
+      when "quantities"
+        <div>
+          <p>Live: {@props.data.selected.live}</p>
+          <p>Dead: {@props.data.selected.dead}</p>
+          <p>Body parts: {"✓" if @props.data.selected.body_parts}</p>
+        </div>
 
   renderOtherField: =>
     if "other" == @props.data.selected
@@ -97,9 +107,6 @@ class Question extends React.Component
 
   handleOtherChange: (e) =>
     QuestionnaireStore.updateOtherAnswer(@props.data.id, e.target.value)
-
-  displayStyle: => if @props.mode == "edit" then {display: "none"}  else {display: "block"}
-  editStyle:    => if @props.mode == "edit" then {display: "block"} else {display: "none"}
 
   showChildrenFor: (chosen) ->
     for answer, children of @props.data.children
