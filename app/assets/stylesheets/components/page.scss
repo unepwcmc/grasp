@@ -1,5 +1,3 @@
-@import "utilities/bem";
-
 @include b(page) {
   @include e(title) {
     width: 100%;

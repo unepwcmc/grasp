@@ -1,13 +1,54 @@
-@import "utilities/bem";
+$header__height: 7rem;
 
 @include b(header) {
-  background-color: #1C2E36;
-  margin-bottom: 4rem;
   width: 100%;
-  height: 5rem;
-  padding: 0 2rem;
-  line-height: 5rem;
-  font-size: 1.5rem;
-  color: #eee;
+  height: $header__height;
+  margin-bottom: 4rem;
   box-sizing: border-box;
+
+  background-color: $blue;
+
+  @include e(inner) {
+    width: $main__width;
+    margin: auto;
+
+    color: $white;
+    line-height: $header__height;
+  }
+
+  @include e(right-side) {
+    float: right;
+    line-height: $header__height;
+  }
+
+  @include e(main-logo) {
+    display: inline-block;
+    padding: 0 1rem;
+
+    background-color: $white;
+    color: $blue;
+    line-height: 3.6rem;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  @include e(menu-button) {
+    height: 3rem;
+    box-sizing: border-box;
+    padding: 0 1rem;
+    border: solid 2px $white;
+    border-radius: 12px;
+    margin-top: 1px;
+
+    color: inherit;
+    font-size: 1.3rem;
+    line-height: 2.6rem;
+    text-transform: none;
+
+    &:hover {
+      color: $blue;
+      background-color: $white;
+      border: solid 2px $white;
+    }
+  }
 }
