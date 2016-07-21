@@ -11,11 +11,15 @@
 class Report < ActiveRecord::Base
   def self.search(params)
     if params
-      self.find_by_sql([
-        "SELECT * FROM reports r where r.id = ? OR
-        r.data->'questions'->'country_of_discovery'->>'selected' = ?",
-        params[:report_id], params[:country_of_discovery]
-      ])
+      query = self
+
+      if params[:report_id].present?
+        query = query.where(id: params[:report_id])
+      end
+
+      if params[:country_of_discovery].present?
+        query = query.where("""data->'questions'->'country_of_discovery'->>'selected' = ?""", params[:country_of_discovery])
+      end
     else
       self.all
     end
