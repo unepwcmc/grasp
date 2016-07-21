@@ -6,6 +6,24 @@
     <%= text_field_tag :report_id, params[:report_id] %>
   </div>
 
+  <%#<div>%>
+    <%#<%= label_tag :user_name, 'User Name' %>%>
+    <%#<%= text_field_tag :user_name, params[:user_name] %>%>
+  <%#</div>%>
+
+  <%#<div>%>
+    <%#<%= label_tag :agencies %>%>
+    <%#<%= select_tag "agencies", options_from_collection_for_select(Agency.all, "id", "name"), multiple: true, class: 'select2' %>%>
+  <%#</div>%>
+
+  <div>
+    <%= label_tag :from_date, 'From' %>
+    <%= date_select :from_date, params[:from_date] %>
+
+    <%= label_tag :to_date, 'To' %>
+    <%= date_select :to_date, params[:to_date] %>
+  </div>
+
   <div>
     <%= label_tag :country_of_discovery %>
     <%= text_field_tag :country_of_discovery, params[:country_of_discovery] %>
