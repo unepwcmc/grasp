@@ -1,0 +1,5 @@
+@include b(table) {
+  @include e(head) {
+    border-bottom: solid 3px $grey--dark;
+  }
+}
