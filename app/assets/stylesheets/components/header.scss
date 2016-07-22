@@ -3,7 +3,6 @@ $header__height: 7rem;
 @include b(header) {
   width: 100%;
   height: $header__height;
-  margin-bottom: 4rem;
   box-sizing: border-box;
 
   background-color: $blue;
