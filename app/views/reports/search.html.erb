@@ -11,14 +11,14 @@
     <%#<%= text_field_tag :user_name, params[:user_name] %>%>
   <%#</div>%>
 
-  <%#<div>%>
-    <%#<%= label_tag :agencies %>%>
-    <%#<%= select_tag "agencies", options_from_collection_for_select(Agency.all, "id", "name"), multiple: true, class: 'select2' %>%>
-  <%#</div>%>
+  <div>
+    <%= label_tag :agencies %>
+    <%= select_tag "agencies", options_from_collection_for_select(Agency.all, "id", "name"), multiple: true, class: 'select2' %>
+  </div>
 
   <div>
     <%= label_tag :from_date, 'From' %>
-    <%= date_select :from_date, params[:from_date] %>
+    <%= date_select :from_date, params[:from_date], default: Date.new(2016,1,1) %>
 
     <%= label_tag :to_date, 'To' %>
     <%= date_select :to_date, params[:to_date] %>

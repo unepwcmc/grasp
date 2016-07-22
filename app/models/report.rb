@@ -6,9 +6,20 @@
 #  data       :json
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer
+#
+# Indexes
+#
+#  index_reports_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_c7699d537d  (user_id => users.id)
 #
 
 class Report < ActiveRecord::Base
+  belongs_to :user
+
   def self.search(params)
     if params
       query = self
@@ -30,6 +41,12 @@ class Report < ActiveRecord::Base
 
         query = query.where(created_at: from_date..to_date)
       end
+
+      if params[:agencies].present?
+        agencies = params[:agencies].map(&:to_i)
+        #query = query.where('user.agency.id' IS ANY OF agencies)
+      end
+
     else
       self.all
     end
