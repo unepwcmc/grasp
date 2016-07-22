@@ -1,0 +1,17 @@
+@include b(breadcrumbs) {
+  margin-bottom: 2rem;
+
+  @include e(divider) {
+    width: 0;
+    height: 0;
+
+    &:after {
+      content: " ";
+
+      border-top: solid .5rem transparent;
+      border-right: solid .5rem transparent;
+      border-bottom: solid .5rem transparent;
+      border-left: solid .5rem $main__color;
+    }
+  }
+}
