@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @reports = Report.all.order(created_at: :desc)
+    @reports = Report.all.order(created_at: :desc).page(params[:page])
   end
 
   def new
