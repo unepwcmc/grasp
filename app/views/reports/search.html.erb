@@ -20,8 +20,19 @@
   </div>
 
   <div>
+    <%= label_tag :status_live %>
+    <%= check_box_tag :status_live %>
+
+    <%= label_tag :status_dead %>
+    <%= check_box_tag :status_dead %>
+
+    <%= label_tag :status_body_parts %>
+    <%= check_box_tag :status_body_parts %>
+  </div>
+
+  <div>
     <%= label_tag :genus, 'Ape (Genus)' %>
-    <%= select_tag "genus", options_for_select(["Bonobo", "Chimpanzee", "Gorilla", "Orangutan"]), multiple: true, class: 'select2' %>
+    <%= select_tag "genus", options_for_select(["Bonobo (pan)", "Chimpanzee (pan)", "Gorilla (gorilla)", "Orang-utan (pongo)", "Unknown"]), multiple: true, class: 'select2' %>
   </div>
 
   <div>
