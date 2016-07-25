@@ -6,11 +6,6 @@
     <%= text_field_tag :report_id, params[:report_id] %>
   </div>
 
-  <%#<div>%>
-    <%#<%= label_tag :user_name, 'User Name' %>%>
-    <%#<%= text_field_tag :user_name, params[:user_name] %>%>
-  <%#</div>%>
-
   <div>
     <%= label_tag :agencies %>
     <%= select_tag "agencies", options_from_collection_for_select(Agency.all, "id", "name"), multiple: true, class: 'select2' %>
@@ -22,6 +17,11 @@
 
     <%= label_tag :to_date, 'To' %>
     <%= date_select :to_date, params[:to_date], include_blank: true, default: nil %>
+  </div>
+
+  <div>
+    <%= label_tag :genus, 'Ape (Genus)' %>
+    <%= select_tag "genus", options_for_select(["Bonobo", "Chimpanzee", "Gorilla", "Orangutan"]), multiple: true, class: 'select2' %>
   </div>
 
   <div>
