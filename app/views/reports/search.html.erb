@@ -18,10 +18,10 @@
 
   <div>
     <%= label_tag :from_date, 'From' %>
-    <%= date_select :from_date, params[:from_date], default: Date.new(2016,1,1) %>
+    <%= date_select :from_date, params[:from_date], include_blank: true, default: nil %>
 
     <%= label_tag :to_date, 'To' %>
-    <%= date_select :to_date, params[:to_date] %>
+    <%= date_select :to_date, params[:to_date], include_blank: true, default: nil %>
   </div>
 
   <div>

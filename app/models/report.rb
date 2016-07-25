@@ -18,6 +18,8 @@
 #
 
 class Report < ActiveRecord::Base
+  include ParamsUtils
+
   belongs_to :user
 
   def self.search(params)
@@ -32,7 +34,7 @@ class Report < ActiveRecord::Base
         query = query.where("""data->'questions'->'country_of_discovery'->>'selected' = ?""", params[:country_of_discovery])
       end
 
-      if params[:from_date].present? && params[:to_date].present?
+      if params[:to_date].present? && params[:from_date].present?
         # Format the date_select tag to a date object
         f = params[:from_date]
         t = params[:to_date]
@@ -44,9 +46,10 @@ class Report < ActiveRecord::Base
 
       if params[:agencies].present?
         agencies = params[:agencies].map(&:to_i)
-        #query = query.where('user.agency.id' IS ANY OF agencies)
+        query = query.joins(:user).where(users: { agency_id: agencies })
       end
 
+      query
     else
       self.all
     end

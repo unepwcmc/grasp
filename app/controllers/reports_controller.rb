@@ -45,9 +45,7 @@ class ReportsController < ApplicationController
   end
 
   def search
-    puts "Made it"
   end
-
 
   private
     def report_params
@@ -55,8 +53,7 @@ class ReportsController < ApplicationController
     end
 
     def search_params
-      # Strips rails default params and empty keys leaving only the populated search parameters
-      p = params.except(:controller, :action, :utf8)
-      p.delete_if { |k, v| v.empty? }
+      p = ParamsUtils.strip_rails_defaults(params)
+      ParamsUtils.strip_empty(p)
     end
 end
