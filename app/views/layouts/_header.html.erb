@@ -1,6 +1,7 @@
 <header class="header">
   <div class="header__inner">
     <a class="header__main-logo" href="<%= reports_path %>">GRASP</a>
+    <%= render 'layouts/nav' %>
 
     <div class="header__right-side">
       <% if user_signed_in? %>
