@@ -1,6 +1,8 @@
 module SearchBuilder
   def self.by_report_id(query, params)
-    query.where(id: params[:report_id]) if params[:report_id].present?
+    if params[:report_id].present?
+      query.where(id: params[:report_id])
+    end
     query
   end
 
