@@ -27,10 +27,10 @@ class Report < ActiveRecord::Base
     if params
       query = self
       query = SearchBuilder.by_report_id(query, params)
-      #qeury = SearchBuilder.by_country_of_discovery(query, params)
-      #query = SearchBuilder.by_date_created_range(query, params)
-      #query = SearchBuilder.by_agencies(query, params)
-      #query = SearchBuilder.by_genus(query, params)
+      qeury = SearchBuilder.by_country_of_discovery(query, params)
+      query = SearchBuilder.by_date_created_range(query, params)
+      query = SearchBuilder.by_agencies(query, params)
+      query = SearchBuilder.by_genus(query, params)
       query
     else
       self.all
