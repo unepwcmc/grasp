@@ -41,6 +41,11 @@
   </div>
 
   <div>
+    <%= label_tag :last_known_location %>
+    <%= select_tag :last_known_location, options_for_select(["With my organisation", "With other organisation (please specify)", "With law enforcement agency", "At location of incident"]), multiple: true, class: 'select2' %>
+  </div>
+
+  <div>
     <%= label_tag :ape_name %>
     <%= text_field_tag :ape_name, params[:ape_name] %>
   </div>

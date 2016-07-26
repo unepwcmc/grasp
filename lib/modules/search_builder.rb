@@ -76,11 +76,20 @@ module SearchBuilder
   def self.by_ape_name(query, params)
     if params[:ape_name].present?
       query = query.where(
-                """data->'questions'->'individual_name_live'->>'selected' = :params or
-                data->'questions'->'individual_name_dead'->>'selected' = :params""", params: params[:ape_name]
-              )
+        """data->'questions'->'individual_name_live'->>'selected' = :params or
+        data->'questions'->'individual_name_dead'->>'selected' = :params""", params: params[:ape_name]
+      )
     end
     query
+  end
+
+  def self.by_last_known_location(query, params)
+    if params[:last_known_location].present?
+      query = query.where(
+        """data->'questions'->'last_known_location_live'->>'selected' in (:params) or
+        data->'questions'->'last_known_location_dead'->>'selected' in (:params) or
+        data->'questions'->'last_known_location_parts'->>'selected' in (:params)""", params: params[:last_known_location]
+      )
   end
 
   # Helper methods

@@ -33,6 +33,7 @@ class Report < ActiveRecord::Base
       query = SearchBuilder.by_genus(query, params)
       query = SearchBuilder.by_users(query, params)
       query = SearchBuilder.by_ape_name(query, params)
+      query = SearchBuilder.by_last_known_location(query, params)
       query
     else
       self.all
