@@ -31,6 +31,7 @@ class Report < ActiveRecord::Base
       query = SearchBuilder.by_date_created_range(query, params)
       query = SearchBuilder.by_agencies(query, params)
       query = SearchBuilder.by_genus(query, params)
+      query = SearchBuilder.by_users(query, params)
       query
     else
       self.all

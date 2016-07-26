@@ -8,7 +8,12 @@
 
   <div>
     <%= label_tag :agencies %>
-    <%= select_tag "agencies", options_from_collection_for_select(Agency.all, "id", "name"), multiple: true, class: 'select2' %>
+    <%= select_tag :agencies, options_from_collection_for_select(Agency.all, "id", "name"), multiple: true, class: 'select2' %>
+  </div>
+
+  <div>
+    <%= label_tag :users %>
+    <%= select_tag :users, options_from_collection_for_select(User.all, "id", "full_name"), multiple: true, class: 'select2' %>
   </div>
 
   <div>
@@ -32,7 +37,7 @@
 
   <div>
     <%= label_tag :genus, 'Ape (Genus)' %>
-    <%= select_tag "genus", options_for_select(["Bonobo (pan)", "Chimpanzee (pan)", "Gorilla (gorilla)", "Orang-utan (pongo)", "Unknown"]), multiple: true, class: 'select2' %>
+    <%= select_tag :genus, options_for_select(["Bonobo (pan)", "Chimpanzee (pan)", "Gorilla (gorilla)", "Orang-utan (pongo)", "Unknown"]), multiple: true, class: 'select2' %>
   </div>
 
   <div>

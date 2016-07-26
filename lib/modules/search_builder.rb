@@ -65,6 +65,14 @@ module SearchBuilder
     query
   end
 
+  def self.by_users(query, params)
+    if params[:users].present?
+      users  = params[:users].map(&:to_i)
+      query     = query.joins(:user).where(users: { id: users })
+    end
+    query
+  end
+
   # Helper methods
   def self.to_datetime(date_params)
     # Turns a date_select tag to a date object
