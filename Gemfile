@@ -7,9 +7,11 @@ gem 'rails', '4.2.6'
 gem 'pg', '~> 0.18.4'
 
 # Frontend
+gem 'kaminari', '~> 0.17.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'browserify-rails', '~> 3.1.0'
+gem 'font-awesome-sass', '~> 4.6.2'
 
 # Configuration
 gem 'dotenv-rails', '~> 2.1.1'

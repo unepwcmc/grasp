@@ -1,0 +1,9 @@
+@include b(breadcrumbs) {
+  margin-bottom: 2rem;
+
+  @include e(divider) {
+    vertical-align: sub;
+    font-size: 2em;
+    margin: 0 1rem;
+  }
+}

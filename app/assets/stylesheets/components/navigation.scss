@@ -1,0 +1,12 @@
+@include b(navigation) {
+  width: 100%;
+  border-bottom: solid 2px $grey;
+  margin-bottom: 3rem;
+
+  @include e(inner) {
+    width: $main__width;
+
+    margin: auto;
+    padding: 3rem;
+  }
+}

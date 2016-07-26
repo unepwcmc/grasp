@@ -1,0 +1,8 @@
+<div class="navigation">
+  <div class="navigation__inner">
+    <div class="breadcrumbs">
+      Home <%= icon("angle-right", class: "breadcrumbs__divider") %> <%= yield :breadcrumbs %>
+    </div>
+    <h1 class="page__title"><%= yield :page_title %></h1>
+  </div>
+</div>

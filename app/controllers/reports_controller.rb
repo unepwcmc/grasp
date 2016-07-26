@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @reports = Report.all
+    @reports = Report.all.order(created_at: :desc).page(params[:page])
   end
 
   def new
@@ -21,6 +21,7 @@ class ReportsController < ApplicationController
 
   def create
     @report = Report.new(report_params)
+    @report.user = current_user
 
     if @report.save
       render json: @report, location: reports_path

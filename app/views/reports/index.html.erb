@@ -1,23 +1,28 @@
-<h1>
-  All Reports
-  <small>
-    <a class="u-pull-right" href="<%= new_report_path %>">Create new report</a>
-  </small>
-</h1>
+<%= content_for :page_title, "Reports Dashboard" %>
+<%= content_for :breadcrumbs, "Reports Dashboard" %>
 
-<table class="u-full-width">
-  <thead>
+<table class="table u-full-width">
+  <thead class="table__head">
     <th>ID</th>
-    <th>Country of discovery</th>
-    <th>Created at</th>
-    <th>Actions</th>
+    <th>User Name</th>
+    <th>Agency</th>
+    <th>Timestamp</th>
+    <th>Date of discovery</th>
+    <th>Status of ape(s)</th>
+    <th>Confiscation</th>
+    <th>Status</th>
   </thead>
   <tbody>
     <% @reports.each do |report| %>
         <tr>
           <td><%= report.id %></td>
-          <td><%= report.data["questions"].try(:[], "country_of_discovery").try(:[], "selected") %></td>
-          <td><%= report.created_at %></td>
+          <td><%= report.user_name %></td>
+          <td><%= report.user&.agency&.name %></td>
+          <td><%= report.timestamp %></td>
+          <td><%= report.answer_to("date_of_discovery") %></td>
+          <td><%= status_of_apes(report) %></td>
+          <td><%= report.answer_to("confiscated") %></td>
+          <td><%= report.state %></td>
           <td>
             <a href="<%= report_path(report.id) %>">Show</a>
             <a href="<%= edit_report_path(report.id) %>">Edit</a>
@@ -26,3 +31,7 @@
     <% end %>
   </tbody>
 </table>
+
+<div class="pagination u-pull-right">
+  <%= paginate @reports %>
+</div>

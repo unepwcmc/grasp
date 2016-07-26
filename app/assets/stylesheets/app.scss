@@ -1,5 +1,10 @@
+// fontawesome
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 // utilities
 @import "utilities/bem";
+@import "utilities/u-classes";
 
 // variables
 @import "variables/colors";
@@ -7,8 +12,14 @@
 
 // components
 @import "components/answer";
+@import "components/breadcrumbs";
 @import "components/header";
+@import "components/navigation";
 @import "components/page-controls";
 @import "components/page";
 @import "components/question";
 @import "components/questionnaire";
+@import "components/table";
+
+// objects
+@import "objects/main-container";
