@@ -91,6 +91,7 @@ module SearchBuilder
         data->'questions'->'last_known_location_parts'->>'selected' in (:params)""", params: params[:last_known_location]
       )
     end
+    query
   end
 
   # Helper methods
