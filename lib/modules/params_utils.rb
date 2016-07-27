@@ -4,8 +4,8 @@ module ParamsUtils
   end
 
   def self.strip_empty(params)
-    params.delete_if { |k, v| v.empty? }
-    params.delete_if { |k, v| v == {"(1i)"=>"", "(2i)"=>"", "(3i)"=>""} }
+    params.delete_if { |_, v| v.empty? }
+    params.delete_if { |_, v| v == {"(1i)"=>"", "(2i)"=>"", "(3i)"=>""} }
   end
 
   def self.is_set_date?(date)
