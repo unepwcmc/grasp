@@ -68,7 +68,7 @@ module SearchBuilder
   def self.by_users(query, params)
     if params[:users].present?
       users  = params[:users].map(&:to_i)
-      query     = query.joins(:user).where(users: { id: users })
+      query  = query.joins(:user).where(users: { id: users })
     end
     query
   end
@@ -76,8 +76,8 @@ module SearchBuilder
   def self.by_ape_name(query, params)
     if params[:ape_name].present?
       query = query.where(
-        """data->'questions'->'individual_name_live'->>'selected' = :params or
-        data->'questions'->'individual_name_dead'->>'selected' = :params""", params: params[:ape_name]
+        """lower(data->'questions'->'individual_name_live'->>'selected') like lower(:params) or
+        lower(data->'questions'->'individual_name_dead'->>'selected') like lower(:params)""", params: "%#{params[:ape_name]}%"
       )
     end
     query

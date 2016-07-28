@@ -3,7 +3,7 @@
 # Table name: reports
 #
 #  id         :integer          not null, primary key
-#  data       :json
+#  data       :jsonb
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :integer
