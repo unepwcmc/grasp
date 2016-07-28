@@ -9,6 +9,17 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
+//
+//= require jquery
+//= require jquery_ujs
+//= require select2
 
 var app = require("app")
 app.start()
+
+$(document).ready(function(){
+  $(".select2").select2({
+      tags: true
+  })
+})
+

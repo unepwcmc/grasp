@@ -12,6 +12,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'browserify-rails', '~> 3.1.0'
 gem 'font-awesome-sass', '~> 4.6.2'
+gem 'jquery-rails', '~> 4.1.1'
+gem "select2-rails", git: 'https://github.com/argerim/select2-rails'
 
 # Configuration
 gem 'dotenv-rails', '~> 2.1.1'
@@ -41,6 +43,10 @@ group :development do
   gem 'capistrano-rvm',   '~> 0.1', require: false
   gem 'capistrano-passenger', '~> 0.2.0', require: false
   gem 'capistrano-npm', '~> 1.0.2'
+
+  # ERD
+  gem 'ruby-graphviz', '~> 1.2.2'
+  gem 'rails-erd', '~> 1.4.7'
 end
 
 group :test do

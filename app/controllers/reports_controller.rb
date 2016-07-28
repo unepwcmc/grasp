@@ -4,7 +4,12 @@ class ReportsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @reports = Report.all.order(created_at: :desc).page(params[:page])
+    if search_params.any?
+      @reports = Report.search(search_params)
+    else
+      @reports = Report.all
+    end
+    @reports = @reports.order(created_at: :desc).page(params[:page])
   end
 
   def new
@@ -40,8 +45,16 @@ class ReportsController < ApplicationController
     end
   end
 
+  def search
+  end
+
   private
     def report_params
       {data: params.require(:report)[:data]}
+    end
+
+    def search_params
+      p = ParamsUtils.strip_rails_defaults(params)
+      ParamsUtils.strip_empty(p)
     end
 end

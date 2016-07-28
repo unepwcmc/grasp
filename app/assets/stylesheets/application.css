@@ -12,5 +12,6 @@
  *
  *= require normalize
  *= require skeleton
+ *= require select2
  *= require app
  */
