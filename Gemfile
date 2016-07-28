@@ -43,6 +43,10 @@ group :development do
   gem 'capistrano-npm', '~> 1.0.2'
 end
 
+group :test do
+  gem 'simplecov', require: false
+end
+
 # Debugging
 gem 'web-console', '~> 2.0', group: :development
 gem 'byebug', group: [:development, :test]
