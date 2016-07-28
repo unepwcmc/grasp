@@ -3,6 +3,9 @@ bundler_args: --without development production
 
 addons:
   postgresql: 9.4
+  code_climate:
+    repo_token:
+      secure: "cWcQ9JzctOXZRgTSXo07PR80yWqS+mBEk86edKSqJPY/BwiaxdTNgRf2WkFtOJEHYoi+MIxojqFJm5jyfNMGRgkVWq0nyVg4WqPBbJgD9PeFT7pZt0sDG7FiIIA1HpOYlVwslEQtp/myP07z4jndQyH0CWUVwvz65ubhuN3r8//hzAXc7xCE4wT7PAtTHHSiujfOW40AsfT6sv3E4u+QHQvD2AU1qbjOq+STi2nd5cu24KCba6Sv1b88uU1tGdc1rFWjxl9YdIz17pWSQ9xX/RufeNMw6+zKKqa/IRaftZXJgmePp4GAiGQSEhAE4quBgGu+XAVdDLn2VukL2fFSeubRvxuqjnv1dQ/k3AgUG5IwhIvwQGDOGB9Awa9+xlmLZuTptk8pZnDlB3RBqz2fkwtoVPFqxrWioCPQbkNk3LNLJfoJzgkYEjyBTAsco/7TSvUZfrhv9xuKVSSKR0860IfYWQJ2sh0OZb/ycXyfnZvHdZ/WWtyf773LRcAGHeXl50vDYr5+NiSm9ZGm48YJ8JUPqSw2yJnGORGSLZyORGjU137HpV6AOA7HIU1pAVX+ellUv2U+QTg0QmO4rTRU7B5YILzum/HMdNMkfmljJ2Td5E1k3ACGN51xw5A1IziRZUjlKdz4eASjt1zDcJdD2smQRQx0Tis8BhG47g+NdlE="
 
 env:
   - RAILS_ENV=test PG_HOST=localhost PG_USERNAME=postgres SECRET_KEY_BASE=1a2b3cd4

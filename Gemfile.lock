@@ -74,6 +74,8 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    codeclimate-test-reporter (0.6.0)
+      simplecov (>= 0.7.1, < 1.0.0)
     concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
     devise (4.2.0)
@@ -211,6 +213,7 @@ DEPENDENCIES
   capistrano-passenger (~> 0.2.0)
   capistrano-rails
   capistrano-rvm (~> 0.1)
+  codeclimate-test-reporter
   devise (~> 4.2.0)
   dotenv-rails (~> 2.1.1)
   exception_notification (~> 4.1.4)
