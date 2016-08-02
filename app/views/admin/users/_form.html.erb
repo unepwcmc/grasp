@@ -2,7 +2,6 @@
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
       <ul>
       <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,6 +9,8 @@
       </ul>
     </div>
   <% end %>
+
+  <h3>General information</h3>
 
   <div class="form__group">
     <%= f.label :first_name %>
@@ -26,43 +27,16 @@
   </div>
 
   <div class="form__group">
-    <%= f.label :email %>
+    <%= f.label :agency_id %>
     <div class="form__field">
-      <%= f.email_field :email %>
+      <%= f.collection_select :agency_id, Agency.all, :id, :name %>
     </div>
   </div>
-
-  <% if !@user.persisted? %>
-    <div class="form__group">
-      <%= f.label :password %><br />
-      <div class="form__field">
-        <%= f.password_field :password, autocomplete: "off" %>
-        <% if @minimum_password_length %>
-          <br />
-          <em><%= @minimum_password_length %> characters minimum</em>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="form__group">
-      <%= f.label :password_confirmation %><br />
-      <div class="form__field">
-        <%= f.password_field :password_confirmation, autocomplete: "off" %>
-      </div>
-    </div>
-  <% end %>
 
   <div class="form__group">
     <%= f.label :role_id %>
     <div class="form__field">
       <%= f.collection_select :role_id, Role.all, :id, :name %>
-    </div>
-  </div>
-
-  <div class="form__group">
-    <%= f.label :agency_id %>
-    <div class="form__field">
-      <%= f.collection_select :agency_id, Agency.all, :id, :name %>
     </div>
   </div>
 
@@ -75,12 +49,50 @@
     </div>
   <% end %>
 
+  <hr>
+
+  <h3>Contact information</h3>
+
   <div class="form__group">
-    <%= f.label :second_email %>
+    <%= f.label :mobile_number %>
+    <div class="form__field">
+      <%= f.text_field :mobile_number %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <%= f.label :email %>
+    <div class="form__field">
+      <%= f.email_field :email %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <%= f.label :second_email, 'Additional email address' %>
     <div class="form__field">
       <%= f.email_field :second_email %>
     </div>
   </div>
+
+  <% if !@user.persisted? %>
+    <div class="form__group">
+      <%= f.label :password %>
+      <div class="form__field">
+        <%= f.password_field :password, autocomplete: "off" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form__group">
+      <%= f.label :password_confirmation %>
+      <div class="form__field">
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+    </div>
+  <% end %>
 
   <div class="form__group">
     <%= f.label :skype_username %>
@@ -124,14 +136,5 @@
     </div>
   </div>
 
-  <div class="form__group">
-    <%= f.label :mobile_number %>
-    <div class="form__field">
-      <%= f.text_field :mobile_number %>
-    </div>
-  </div>
-
-  <div class="actions">
-    <%= f.submit class: 'button' %>
-  </div>
+  <%= f.submit class: 'form__submit' %>
 <% end %>
