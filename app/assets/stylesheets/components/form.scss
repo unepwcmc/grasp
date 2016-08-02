@@ -29,7 +29,11 @@
 }
 
 .form__submit {
-  @media screen and (max-width: $break__phone) {
+  position: relative;
+  left: 25%;
+  @media screen and (max-width: $break__tablet) {
+    position: relative;
+    left: 0;
     width: 100%;
   }
 }
