@@ -21,7 +21,7 @@ class GpsQuestion extends React.Component
           onChange={@handleLngChange} value={@getLng()}/>
       </fieldset>
 
-      <button onClick={@fetchCoords}>📡</button> {@renderLoading()}
+      <button onClick={@fetchCoords}>Use current location</button> {@renderLoading()}
     </div>
 
   renderLoading: => <small>Loading...</small> if @state.loading

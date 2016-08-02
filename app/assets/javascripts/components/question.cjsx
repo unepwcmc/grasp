@@ -22,7 +22,7 @@ class Question extends React.Component
 
   render: =>
     <div className="question">
-      <h3>{@props.data.question}</h3>
+      <h5><strong>{@props.data.question}</strong></h5>
       {@renderAppropriateAnswer()}
       {@renderAppropriateQuestion()}
     </div>

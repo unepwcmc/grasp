@@ -15,7 +15,7 @@ class QuestionnaireStore extends EventEmitter
 
   constructor: ->
     @on(PAGE_CHANGE_EVENT, @saveOrUpdateReport)
-    @startAutoSave()
+    #@startAutoSave()
 
   startAutoSave: ->
     autoSaveTimer = setInterval(@saveOrUpdateReport, autoSaveInterval)
@@ -106,6 +106,7 @@ class QuestionnaireStore extends EventEmitter
 
   saveReport: (callback) =>
     token = document.getElementsByName("csrf-token")[0].content
+    store = @
     fetch('/reports', {
       method: 'POST',
       headers: {
@@ -116,6 +117,7 @@ class QuestionnaireStore extends EventEmitter
       credentials: 'include',
       body: JSON.stringify({ report: { data: questionnaire }})
     }).then((response) ->
+      store.setNotification("Report Saved")
       if callback
         callback(response.headers.get('Location'))
       response.json().then((json) ->
@@ -125,6 +127,7 @@ class QuestionnaireStore extends EventEmitter
 
   updateReport: (callback) =>
     token = document.getElementsByName("csrf-token")[0].content
+    store = @
     fetch("/reports/#{reportId}", {
       method: 'PUT',
       headers: {
@@ -135,12 +138,19 @@ class QuestionnaireStore extends EventEmitter
       credentials: 'include',
       body: JSON.stringify({ report: { data: questionnaire }})
     }).then((response) ->
+      store.setNotification("Report Updated")
       if callback
         callback(response.headers.get('Location'))
     )
 
   setPath: (path) =>
     window.location = path
+
+  setNotification: (msg) =>
+    nav               = document.getElementsByClassName("navigation__inner")[0]
+    notice            = document.createElement("p")
+    notice.innerHTML  = msg
+    nav.appendChild(notice)
 
   submitReport: =>
     @stopAutoSave()
