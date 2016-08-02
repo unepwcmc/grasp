@@ -1,7 +1,8 @@
-<h1>Listing Users</h1>
+<%= content_for :page_title, "Listing Users" %>
+<%= content_for :breadcrumbs, "Listing Users" %>
 
-<table>
-  <thead>
+<table class="table u-full-width">
+  <thead class="table__head">
     <tr>
       <th>First Name</th>
       <th>Last Name</th>
@@ -27,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New User', new_admin_user_path %>
+<%= link_to 'New User', new_admin_user_path, class: 'button' %>
