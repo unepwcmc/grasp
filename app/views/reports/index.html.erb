@@ -1,7 +1,10 @@
 <%= content_for :page_title, "Reports Dashboard" %>
 <%= content_for :breadcrumbs, "Reports Dashboard" %>
+<%= content_for :page_buttons do %>
+  <%= link_to 'Search Reports', search_reports_path, class: 'button' %>
+<% end %>
 
-<%= link_to 'Search Reports', search_reports_path %>
+<%= render "search_results_title" %>
 
 <table class="table u-full-width">
   <thead class="table__head">
@@ -37,3 +40,5 @@
 <div class="pagination u-pull-right">
   <%= paginate @reports %>
 </div>
+
+<%= link_to "New Report", new_report_path, class: 'button' %>
