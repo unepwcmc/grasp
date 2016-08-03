@@ -40,6 +40,10 @@
     </div>
   </div>
 
+  <hr>
+
+  <h3>Validation expertise</h3>
+
   <%= f.collection_check_boxes(:expertise_ids, Expertise.all, :id, :name) do |b| %>
     <div class="form__group">
       <%= b.label %>
