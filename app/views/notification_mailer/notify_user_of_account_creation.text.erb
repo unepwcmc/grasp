@@ -7,7 +7,7 @@ Your log in details are as follows:
 Email address: <%= @user.email %>
 Password: <%= @generated_password %>
 
-We recommend that you change your password by visiting database.un-grasp.org/users/edit
+We recommend that you change your password by visiting <%= link_to edit_user_registration_path %>
 
 Many thanks,
 GRASP
