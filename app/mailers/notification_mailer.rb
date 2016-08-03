@@ -6,12 +6,13 @@ class NotificationMailer < ApplicationMailer
     @admins = User.where(role_id: 1)
 
     @admins.each do |admin|
-      mail(to: admin.email, subject: 'A new report has been submitted')
+      mail(to: admin.email, subject: 'GRASP Database: New Report Submitted')
     end
   end
 
-  def notify_user_of_account_creation(user)
+  def notify_user_of_account_creation(user, generated_password)
     @user = user
-    mail(to: @user.email, subject: 'Your account is ready')
+    @generated_password = generated_password
+    mail(to: @user.email, subject: 'GRASP Database: ')
   end
 end

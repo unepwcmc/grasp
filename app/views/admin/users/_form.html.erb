@@ -26,22 +26,6 @@
     <%= f.email_field :email %>
   </div>
 
-  <% if !@user.persisted? %>
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "off" %>
-      <% if @minimum_password_length %>
-        <br />
-        <em><%= @minimum_password_length %> characters minimum</em>
-      <% end %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
-    </div>
-  <% end %>
-
   <div class="form-group">
     <%= f.label :role_id %>
     <%= f.collection_select :role_id, Role.all, :id, :name %>

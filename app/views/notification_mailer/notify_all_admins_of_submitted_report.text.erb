@@ -1,0 +1,10 @@
+Hello <%= admin.full_name %>,
+
+A new report has been submitted by <%= @report.user.full_name %> from <%= @report.user.agency.name %>.
+
+You can view the report here: <%= link_to report_path(@report) %>
+
+Many thanks,
+
+GRASP
+

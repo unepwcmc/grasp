@@ -25,10 +25,14 @@ class Admin::UsersController < ApplicationController
 
   # POST /users
   def create
+    generated_password = Devise.friendly_token.first(8)
+
     @user = User.new(user_params)
+    @user.password = generated_password
+    @user.password_confirmation = generated_password
 
     if @user.save
-      NotificationMailer.notify_user_of_account_creation(@user).deliver_later
+      NotificationMailer.notify_user_of_account_creation(@user, generated_password).deliver_later
       redirect_to admin_user_path(@user), notice: 'User was successfully created.'
     else
       render :new

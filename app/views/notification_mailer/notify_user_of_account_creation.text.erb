@@ -1,0 +1,13 @@
+Hello <%= @user.full_name %>,
+
+You have been registered as a new user with the role of <%= @user.role.name %> in the GRASP database (database.un-grasp.org).
+
+Your log in details are as follows:
+
+Email address: <%= @user.email %>
+Password: <%= @generated_password %>
+
+We recommend that you change your password by visiting database.un-grasp.org/users/edit
+
+Many thanks,
+GRASP
