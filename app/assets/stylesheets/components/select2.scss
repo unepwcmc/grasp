@@ -1,0 +1,10 @@
+// Select 2 Stylings to match Skeleton
+
+.select2-container--default .select2-selection--multiple {
+  border: 1px solid #D1D1D1;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  border: 1px solid #33C3F0;
+}
+

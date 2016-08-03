@@ -1,6 +1,58 @@
-<h1> Show user </h1>
+<%= content_for :page_title, @user.full_name %>
+<%= content_for :breadcrumbs, "Show User" %>
 
-<%= @user.inspect %>
+<h3>General Information</h3>
+
+<p>
+  <strong>Agency</strong><br>
+  <%= @user.agency.name %>
+</p>
+
+<p>
+  <strong>Type of User</strong><br>
+  <i class="fa fa-check"></i> <%= @user.role.name.titleize %>
+</p>
+
+<strong>Validation Expertise</strong>
+<% @user.expertises.each do |expertise| %>
+  <i class="fa fa-check"></i> <%= expertise.name %>
+<% end %>
+
+<hr>
+
+<h3>Contact Information</h3>
+
+<p>
+  <strong>Mobile Number</strong><br>
+  <%= @user.mobile_number %>
+</p>
+
+<p>
+  <strong>Email Address</strong><br>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Skype Username</strong><br>
+  <%= @user.skype_username %>
+</p>
+
+<p>
+  <strong>Address</strong><br>
+  <%= @user.address_1 %><br>
+  <%= @user.address_2 %><br>
+  <%= @user.city %>
+</p>
+
+<p>
+  <strong>Post Code</strong><br>
+  <%= @user.post_code %>
+</p>
+
+<p>
+  <strong>Country</strong><br>
+  <%= @user.country %>
+</p>
 
 <%= link_to 'Edit', edit_admin_user_path(@user) %> |
 <%= link_to 'Back', admin_users_path %>

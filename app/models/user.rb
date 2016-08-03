@@ -26,6 +26,7 @@
 #  city                   :string
 #  post_code              :string
 #  country                :string
+#  mobile_number          :string
 #
 # Indexes
 #

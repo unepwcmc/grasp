@@ -1,0 +1,3 @@
+<% if ParamsUtils.strip_rails_defaults(params).any? %>
+  <h3><%= pluralize(@reports.count, "Search Result") %></h3>
+<% end %>

@@ -1,0 +1,39 @@
+.form__group {
+  clear: both;
+  overflow: hidden;
+  padding: 1px;
+
+  label {
+    width: 25%;
+    float: left;
+    @media screen and (max-width: $break__tablet) {
+      width: 100%;
+      float: none;
+    }
+  }
+
+  .form__field {
+    width: 75%;
+    float: right;
+    padding: 0.5em 0;
+    @media screen and (max-width: $break__tablet) {
+      width: 100%;
+      float: none;
+    }
+  }
+
+  input[type=text], input[type=email], input[type=url], input[type=password],
+  textarea, .select2 {
+    width: 100%;
+  }
+}
+
+.form__submit {
+  position: relative;
+  left: 25%;
+  @media screen and (max-width: $break__tablet) {
+    position: relative;
+    left: 0;
+    width: 100%;
+  }
+}

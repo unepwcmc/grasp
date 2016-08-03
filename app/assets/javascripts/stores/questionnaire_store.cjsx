@@ -15,7 +15,7 @@ class QuestionnaireStore extends EventEmitter
 
   constructor: ->
     @on(PAGE_CHANGE_EVENT, @saveOrUpdateReport)
-    @startAutoSave()
+    #@startAutoSave()
 
   startAutoSave: ->
     autoSaveTimer = setInterval(@saveOrUpdateReport, autoSaveInterval)
@@ -101,11 +101,12 @@ class QuestionnaireStore extends EventEmitter
   addVisibilityListener: (callback) =>
     @on(VISIBILITY_EVENT, callback)
 
-  saveOrUpdateReport: (callback) =>
-    if reportId? then @updateReport(callback) else @saveReport(callback)
+  saveOrUpdateReport: (msg, callback) =>
+    if reportId? then @updateReport("Report updated", callback) else @saveReport("Report saved", callback)
 
-  saveReport: (callback) =>
+  saveReport: (msg, callback) =>
     token = document.getElementsByName("csrf-token")[0].content
+    store = @
     fetch('/reports', {
       method: 'POST',
       headers: {
@@ -116,6 +117,8 @@ class QuestionnaireStore extends EventEmitter
       credentials: 'include',
       body: JSON.stringify({ report: { data: questionnaire }})
     }).then((response) ->
+      if msg
+        store.setNotification(msg)
       if callback
         callback(response.headers.get('Location'))
       response.json().then((json) ->
@@ -123,8 +126,9 @@ class QuestionnaireStore extends EventEmitter
       )
     )
 
-  updateReport: (callback) =>
+  updateReport: (msg, callback) =>
     token = document.getElementsByName("csrf-token")[0].content
+    store = @
     fetch("/reports/#{reportId}", {
       method: 'PUT',
       headers: {
@@ -135,6 +139,8 @@ class QuestionnaireStore extends EventEmitter
       credentials: 'include',
       body: JSON.stringify({ report: { data: questionnaire }})
     }).then((response) ->
+      if msg
+        store.setNotification(msg)
       if callback
         callback(response.headers.get('Location'))
     )
@@ -142,9 +148,20 @@ class QuestionnaireStore extends EventEmitter
   setPath: (path) =>
     window.location = path
 
+  setNotification: (msg) =>
+    notifications     = document.getElementsByClassName("questionnaire__notification")
+    for notification in notifications
+      notification.style.display = 'none'
+
+    nav               = document.getElementsByClassName("navigation__inner")[0]
+    notice            = document.createElement("h5")
+    notice.className  = 'questionnaire__notification'
+    notice.innerHTML  = msg
+    nav.appendChild(notice)
+
   submitReport: =>
     @stopAutoSave()
     questionnaire.state = "submitted"
-    @saveOrUpdateReport(@setPath)
+    @saveOrUpdateReport("Report Submitted!", @setPath)
 
 module.exports = new QuestionnaireStore()
