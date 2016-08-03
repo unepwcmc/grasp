@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :agencies
   devise_for :users, controllers: { registrations: "registrations" }
-  root 'home#index'
+  root 'reports#index'
 
   resources :reports
 

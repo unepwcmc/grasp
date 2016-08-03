@@ -1,5 +1,8 @@
 <%= content_for :page_title, "Listing Users" %>
 <%= content_for :breadcrumbs, "Listing Users" %>
+<%= content_for :page_buttons do %>
+  <%= link_to 'New User', new_admin_user_path, class: 'button' %>
+<% end %>
 
 <table class="table u-full-width">
   <thead class="table__head">
@@ -26,6 +29,4 @@
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New User', new_admin_user_path, class: 'button' %>

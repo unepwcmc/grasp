@@ -1,5 +1,8 @@
 <%= content_for :page_title, "Listing Agencies" %>
 <%= content_for :breadcrumbs, "Listing Agencies" %>
+<%= content_for :page_buttons do %>
+  <%= link_to 'New Agency', new_agency_path, class: 'button' %>
+<% end %>
 
 <table class="table u-full-width">
   <thead class="table__head">
@@ -25,6 +28,4 @@
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Agency', new_agency_path %>
