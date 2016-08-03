@@ -28,5 +28,8 @@ module Grasp
     config.autoload_paths += %W(#{config.root}/lib/modules)
 
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Use sidekiq for active job
+    config.active_job.queue_adapter = :sidekiq
   end
 end

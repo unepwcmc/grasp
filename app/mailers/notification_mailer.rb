@@ -6,10 +6,12 @@ class NotificationMailer < ApplicationMailer
     @admins = User.where(role_id: 1)
 
     @admins.each do |admin|
-      mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+      mail(to: admin.email, subject: 'A new report has been submitted')
     end
   end
 
-  def notify_user_of_account_creation
+  def notify_user_of_account_creation(user)
+    @user = user
+    mail(to: @user.email, subject: 'Your account is ready')
   end
 end

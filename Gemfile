@@ -27,6 +27,9 @@ gem 'slack-notifier', '~> 1.5.1'
 gem 'cancancan', '~> 1.10'
 gem 'devise', '~> 4.2.0'
 
+# Background jobs
+gem 'sidekiq', '~> 4.1.4'
+
 # Testing
 gem 'factory_girl_rails', '~> 4.7.0'
 gem 'faker', '~> 1.6.5'
