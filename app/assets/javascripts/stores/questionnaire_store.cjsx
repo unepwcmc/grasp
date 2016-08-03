@@ -149,13 +149,13 @@ class QuestionnaireStore extends EventEmitter
     window.location = path
 
   setNotification: (msg) =>
-    notifications     = document.getElementsByClassName("submit-notification")
+    notifications     = document.getElementsByClassName("questionnaire__notification")
     for notification in notifications
       notification.style.display = 'none'
 
     nav               = document.getElementsByClassName("navigation__inner")[0]
     notice            = document.createElement("h5")
-    notice.className  = 'submit-notification'
+    notice.className  = 'questionnaire__notification'
     notice.innerHTML  = msg
     nav.appendChild(notice)
 
