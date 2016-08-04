@@ -1,3 +1,6 @@
+<%= content_for :page_title, "Edit Report" %>
+<%= content_for :breadcrumbs, "Edit Report" %>
+
 <div id="report-container" data-report-mode="edit" data-report-id=<%= @report.id %>></div>
 <script>var questionnaireJson = <%= raw(@report.data.to_json) %></script>
 

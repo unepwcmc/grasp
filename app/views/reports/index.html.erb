@@ -1,6 +1,7 @@
 <%= content_for :page_title, "Reports Dashboard" %>
 <%= content_for :breadcrumbs, "Reports Dashboard" %>
 <%= content_for :page_buttons do %>
+  <%= link_to "New Report", new_report_path, class: 'button' %>
   <%= link_to 'Search Reports', search_reports_path, class: 'button' %>
 <% end %>
 
@@ -41,4 +42,3 @@
   <%= paginate @reports %>
 </div>
 
-<%= link_to "New Report", new_report_path, class: 'button' %>

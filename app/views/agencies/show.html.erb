@@ -1,5 +1,8 @@
 <%= content_for :page_title, @agency.name %>
 <%= content_for :breadcrumbs, "Show Agency" %>
+<%= content_for :page_buttons do %>
+  <%= link_to 'Edit Agency', edit_agency_path(@agency), class: 'button' %>
+<% end %>
 
 <p>
   <strong>Name</strong><br>
@@ -16,5 +19,3 @@
   <%= @agency.url %>
 </p>
 
-<%= link_to 'Edit', edit_agency_path(@agency) %> |
-<%= link_to 'Back', agencies_path %>
