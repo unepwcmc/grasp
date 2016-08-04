@@ -1,17 +1,18 @@
-<p id="notice"><%= notice %></p>
+<%= content_for :page_title, @agency.name %>
+<%= content_for :breadcrumbs, "Show Agency" %>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Name</strong><br>
   <%= @agency.name %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong>Email</strong><br>
   <%= @agency.email %>
 </p>
 
 <p>
-  <strong>Url:</strong>
+  <strong>Url</strong><br>
   <%= @agency.url %>
 </p>
 

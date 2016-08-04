@@ -5,8 +5,13 @@
 
   @include e(inner) {
     width: $main__width;
-
     margin: auto;
     padding: 3rem;
+  }
+
+  @include e(buttons) {
+    @media screen and (max-width: $break__tablet) {
+      display: none;
+    }
   }
 }

@@ -1,5 +1,10 @@
 @include b(questionnaire) {
-  width: $main__width;
-  margin: auto;
-  margin-bottom: 5rem;
+  @include e(notification) {
+    position: fixed;
+    bottom: 1em;
+    width: 80%;
+    margin: 0 auto;
+    background: red;
+    text-align: center;
+  }
 }

@@ -11,40 +11,61 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
+  <div class="form__group">
+    <%= f.label :name %>
+    <div class="form__field">
+      <%= f.text_field :name %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :address_1 %><br>
-    <%= f.text_field :address_1 %>
+  <div class="form__group">
+    <%= f.label :email %>
+    <div class="form__field">
+      <%= f.text_field :email %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :address_2 %><br>
-    <%= f.text_field :address_2 %>
+
+  <div class="form__group">
+    <%= f.label :url %>
+    <div class="form__field">
+      <%= f.text_field :url %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
+
+  <div class="form__group">
+    <%= f.label :address_1 %>
+    <div class="form__field">
+      <%= f.text_field :address_1 %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :post_code %><br>
-    <%= f.text_field :post_code %>
+
+  <div class="form__group">
+    <%= f.label :address_2 %>
+    <div class="form__field">
+      <%= f.text_field :address_2 %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :country %><br>
-    <%= f.text_field :country %>
+
+  <div class="form__group">
+    <%= f.label :city %>
+    <div class="form__field">
+      <%= f.text_field :city %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form__group">
+    <%= f.label :post_code %>
+    <div class="form__field">
+      <%= f.text_field :post_code %>
+    </div>
   </div>
+
+  <div class="form__group">
+    <%= f.label :country %>
+    <div class="form__field">
+      <%= f.text_field :country %>
+    </div>
+  </div>
+
+  <%= f.submit 'Submit', class: 'form__submit' %>
 <% end %>

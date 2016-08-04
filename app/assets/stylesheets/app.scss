@@ -5,6 +5,7 @@
 // utilities
 @import "utilities/bem";
 @import "utilities/u-classes";
+@import "utilities/utilities";
 
 // variables
 @import "variables/colors";
@@ -20,6 +21,8 @@
 @import "components/question";
 @import "components/questionnaire";
 @import "components/table";
+@import "components/form";
+@import "components/select2";
 
 // objects
 @import "objects/main-container";
