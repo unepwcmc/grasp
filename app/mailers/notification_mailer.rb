@@ -3,7 +3,7 @@ class NotificationMailer < ApplicationMailer
 
   def notify_all_admins_of_submitted_report(report)
     @report = report
-    @admins = User.where(role_id: 1)
+    @admins = User.joins(:role).where(roles: {name: "admin"})
 
     @admins.each do |admin|
       @admin = admin
