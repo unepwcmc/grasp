@@ -39,6 +39,9 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:id])
 
     if @report.update(report_params)
+      if @report.state == "Submitted"
+        ::NotificationMailer.notify_all_admins_of_submitted_report(@report).deliver_later
+      end
       render json: @report, location: reports_path
     else
       head 422, location: reports_path
