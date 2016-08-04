@@ -1,8 +1,8 @@
-Hello <%= admin.full_name %>,
+Hello <%= @admin.full_name %>,
 
-A new report has been submitted by <%= @report.user.full_name %> from <%= @report.user.agency.name %>.
+A new report has been submitted by <%= @report.user.try(:full_name) %> from <%= @report.user.try(:agency).try(:name) %>.
 
-You can view the report here: <%= link_to report_path(@report) %>
+You can view the report here: <%= link_to report_url(@report), report_url(@report) %>
 
 Many thanks,
 

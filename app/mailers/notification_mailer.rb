@@ -6,7 +6,8 @@ class NotificationMailer < ApplicationMailer
     @admins = User.where(role_id: 1)
 
     @admins.each do |admin|
-      mail(to: admin.email, subject: 'GRASP Database: New Report Submitted')
+      @admin = admin
+      mail(to: @admin.email, subject: 'GRASP Database: New Report Submitted')
     end
   end
 
