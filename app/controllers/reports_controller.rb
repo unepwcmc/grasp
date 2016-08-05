@@ -51,6 +51,12 @@ class ReportsController < ApplicationController
   def search
   end
 
+  def export
+    reports = @reports.pluck(:id)
+    CsvExportJob.perform_later(reports)
+    redirect_to reports_path, notice: "Thank you, we have started preparing your CSV and will email you a link to it when it is ready"
+  end
+
   private
     def report_params
       {data: params.require(:report)[:data]}
