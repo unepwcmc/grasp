@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  require 'sidekiq/web'
-  mount Sidekiq::Web, at: '/sidekiq'
-
   resources :agencies
   devise_for :users, controllers: { registrations: "registrations" }
   root 'reports#index'
