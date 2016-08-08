@@ -20,6 +20,6 @@ class NotificationMailer < ApplicationMailer
   def notify_user_of_csv_export_ready(user, file)
     @user = user
     @file = file
-    mail(to: @user.email, subject: 'GRASP Database: Your CSV export is ready to download')
+    mail(to: @user.email, subject: 'GRASP Database: Your CSV file is ready')
   end
 end

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # Frameworks
 gem 'rails', '4.2.6'
+gem 'sinatra', require: false
 
 # DB
 gem 'pg', '~> 0.18.4'
@@ -46,6 +47,9 @@ group :development do
   gem 'capistrano-rvm',   '~> 0.1', require: false
   gem 'capistrano-passenger', '~> 0.2.0', require: false
   gem 'capistrano-npm', '~> 1.0.2'
+
+  # Emails
+  gem 'letter_opener'
 
   # ERD
   gem 'ruby-graphviz', '~> 1.2.2'
