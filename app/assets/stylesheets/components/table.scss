@@ -2,4 +2,14 @@
   @include e(head) {
     border-bottom: solid 3px $grey--dark;
   }
+
+  @include e(header) {
+    &.is-asc {
+      &:after { content: "˅"; }
+    }
+
+    &.is-desc {
+      &:after { content: "˄"; }
+    }
+  }
 }
