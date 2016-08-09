@@ -58,4 +58,8 @@ class User < ActiveRecord::Base
   def full_name
     [first_name, last_name].join(" ")
   end
+
+  def is_role? role_symbol
+    self.role.name.downcase.to_sym == role_symbol
+  end
 end

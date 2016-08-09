@@ -4,10 +4,16 @@ class ReportsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @reports = Report.search(search_params)
+    if current_user.is_role?(:validator)
+      @reports = Report.where("""data->>'state' = ?""", "submitted")
+    else
+      @reports = Report.search(search_params)
+    end
+
     @reports = Sorter.sort(
       @reports, params[:sort], params[:dir]
     ).page(params[:page])
+
   end
 
   def new
