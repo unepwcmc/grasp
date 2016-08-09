@@ -14,6 +14,12 @@ class NotificationMailer < ApplicationMailer
   def notify_user_of_account_creation(user, generated_password)
     @user = user
     @generated_password = generated_password
-    mail(to: @user.email, subject: 'GRASP Database: ')
+    mail(to: @user.email, subject: 'GRASP Database: Your account is ready')
+  end
+
+  def notify_user_of_csv_export_ready(user, file)
+    @user = user
+    @file = file
+    mail(to: @user.email, subject: 'GRASP Database: Your CSV file is ready')
   end
 end

@@ -3,6 +3,8 @@
 <%= content_for :page_buttons do %>
   <%= link_to "New Report", new_report_path, class: 'button' %>
   <%= link_to 'Search Reports', search_reports_path, class: 'button' %>
+  <!-- Need to figure out how to pass array of report IDs -->
+  <%= link_to 'Export to CSV', export_reports_path, class: 'button' %>
 <% end %>
 
 <%= render "search_results_title" %>

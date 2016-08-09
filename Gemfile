@@ -47,6 +47,9 @@ group :development do
   gem 'capistrano-passenger', '~> 0.2.0', require: false
   gem 'capistrano-npm', '~> 1.0.2'
 
+  # Emails
+  gem 'letter_opener'
+
   # ERD
   gem 'ruby-graphviz', '~> 1.2.2'
   gem 'rails-erd', '~> 1.4.7'

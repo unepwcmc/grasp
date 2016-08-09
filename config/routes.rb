@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   get '/search', to: 'reports#search', as: 'search_reports'
+  get '/export', to: 'reports#export', as: 'export_reports'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
