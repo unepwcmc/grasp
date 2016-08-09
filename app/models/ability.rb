@@ -9,7 +9,8 @@ class Ability
     when "admin"
       can :manage, :all
     when "validator"
-      # Can't do anything yet
+      can :read, Report
+      can :validate, Report
     when "provider"
       can :create, Report
       can :read, Report

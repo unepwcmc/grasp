@@ -23,6 +23,7 @@ class Report < ActiveRecord::Base
   include SearchBuilder
 
   belongs_to :user
+  has_many :validations
 
   def user_name
     "#{user&.first_name} #{user&.last_name}".strip

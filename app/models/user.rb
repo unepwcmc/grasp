@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
   belongs_to :agency
   has_and_belongs_to_many :expertises
   has_many :reports
+  has_many :validations
 
   validates :role_id, :agency_id, :first_name, :last_name, :email, :country, presence: true
 

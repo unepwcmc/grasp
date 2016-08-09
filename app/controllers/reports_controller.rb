@@ -55,6 +55,10 @@ class ReportsController < ApplicationController
     redirect_to reports_path, notice: "Your csv file is being generated. We will email you with a link to download it as soon as it is ready. Thank you"
   end
 
+  def validate
+    @validation = Validation.new
+  end
+
   private
     def report_params
       {data: params.require(:report)[:data]}

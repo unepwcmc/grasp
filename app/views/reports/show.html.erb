@@ -1,7 +1,9 @@
 <%= content_for :page_title, "View Report" %>
 <%= content_for :breadcrumbs, "View Report" %>
 <%= content_for :page_buttons do %>
-  <%= link_to 'Edit Report', edit_report_path(@report), class: 'button' %>
+  <% if can? :update, @report %>
+    <%= link_to 'Edit Report', edit_report_path(@report), class: 'button' %>
+  <% end %>
 <% end %>
 
 <div id="report-container" data-report-mode="show" data-report-id=<%= @report.id %>></div>

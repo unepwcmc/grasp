@@ -1,10 +1,15 @@
 <%= content_for :page_title, "Reports Dashboard" %>
 <%= content_for :breadcrumbs, "Reports Dashboard" %>
 <%= content_for :page_buttons do %>
-  <%= link_to "New Report", new_report_path, class: 'button' %>
-  <%= link_to 'Search Reports', search_reports_path, class: 'button' %>
-  <!-- Need to figure out how to pass array of report IDs -->
-  <%= link_to 'Export to CSV', export_reports_path, class: 'button' %>
+  <% if can? :create, @reports %>
+    <%= link_to "New Report", new_report_path, class: 'button' %>
+  <% end %>
+  <% if can? :search, @reports %>
+    <%= link_to 'Search Reports', search_reports_path, class: 'button' %>
+  <% end %>
+  <% if can? :export, @reports %>
+    <%= link_to 'Export to CSV', export_reports_path, class: 'button' %>
+  <% end %>
 <% end %>
 
 <%= render "search_results_title" %>
@@ -32,8 +37,15 @@
           <td><%= report.answer_to("confiscated") %></td>
           <td><%= report.state %></td>
           <td>
-            <a href="<%= report_path(report.id) %>">Show</a>
-            <a href="<%= edit_report_path(report.id) %>">Edit</a>
+            <% if can? :read, report %>
+              <a href="<%= report_path(report.id) %>">Show</a>
+            <% end %>
+            <% if can? :update, report %>
+              <a href="<%= edit_report_path(report.id) %>">Edit</a>
+            <% end %>
+            <% if can? :validate, report %>
+              <a href="<%= validate_report_path(report.id) %>">Validate</a>
+            <% end %>
           </td>
         </tr>
     <% end %>
