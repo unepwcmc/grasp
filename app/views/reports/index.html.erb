@@ -9,14 +9,14 @@
 
 <table class="table u-full-width">
   <thead class="table__head">
-    <th>ID</th>
-    <th>User Name</th>
-    <th>Agency</th>
-    <th>Timestamp</th>
-    <th>Date of discovery</th>
+    <th><%= sortable "id", "ID" %></th>
+    <th><%= sortable "username", "User Name" %></th>
+    <th><%= sortable "agency" %></th>
+    <th><%= sortable "timestamp" %></th>
+    <th><%= sortable "date_of_discovery" %></th>
     <th>Status of ape(s)</th>
-    <th>Confiscation</th>
-    <th>Status</th>
+    <th><%= sortable "confiscated" %></th>
+    <th><%= sortable "state", "Status" %></th>
   </thead>
   <tbody>
     <% @reports.each do |report| %>
