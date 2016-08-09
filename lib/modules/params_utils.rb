@@ -3,6 +3,11 @@ module ParamsUtils
     params.except(:controller, :action, :utf8)
   end
 
+  def self.strip_ordering_params(params)
+    params = strip_rails_defaults(params)
+    params.except(:sort, :dir)
+  end
+
   def self.strip_empty(params)
     params.delete_if { |_, v| v.empty? }
     params.delete_if { |_, v| v == {"(1i)"=>"", "(2i)"=>"", "(3i)"=>""} }
