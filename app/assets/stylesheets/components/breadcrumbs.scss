@@ -6,4 +6,8 @@
     font-size: 2em;
     margin: 0 1rem;
   }
+
+  @media screen and (max-width: $break__tablet) {
+    display: none;
+  }
 }

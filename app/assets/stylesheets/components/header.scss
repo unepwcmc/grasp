@@ -20,6 +20,27 @@ $header__height: 7rem;
     line-height: $header__height;
   }
 
+  @include e(left-side) {
+    float: left;
+
+    @media screen and (max-width: $break__tablet) {
+      a {
+        margin-top: 50px;
+        display: block;
+        width: 100%;
+        background:red;
+        border: 1px solid blue;
+      }
+
+    }
+  }
+
+  @include e(login) {
+    @media screen and (max-width: $break__tablet) {
+      display: none;
+    }
+  }
+
   @include e(main-logo) {
     display: inline-block;
     padding: 0 1rem;
