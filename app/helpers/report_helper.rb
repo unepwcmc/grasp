@@ -17,4 +17,14 @@ module ReportHelper
       end
     }
   end
+
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    direction = (column == params[:sort] && params[:dir] == "asc") ? "desc" : "asc"
+    css_class = "table__header".tap { |cl|
+      cl << " is-#{direction}" if column == params[:sort]
+    }
+
+    link_to title, {sort: column, dir: direction}, class: css_class
+  end
 end
