@@ -4,12 +4,10 @@ class ReportsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if search_params.any?
-      @reports = Report.search(search_params)
-    else
-      @reports = Report.all
-    end
-    @reports = @reports.order(created_at: :desc).page(params[:page])
+    @reports = Report.search(search_params)
+    @reports = Sorter.sort(
+      @reports, params[:sort], params[:dir]
+    ).page(params[:page])
   end
 
   def new
