@@ -61,7 +61,9 @@ class QuestionnaireStore extends EventEmitter
   requiredQuestionsAnswered: ->
     allAnswered = true
     for key, question of questionnaire.questions
-      if (question.required == true) and (question.selected == "" or 'selected' not of question)
+      required = question.visible and question.required
+
+      if required and (question.selected == "" or 'selected' not of question)
         allAnswered = false
     allAnswered
 
