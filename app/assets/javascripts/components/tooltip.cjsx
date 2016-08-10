@@ -8,14 +8,14 @@ module.exports = class Tooltip extends React.Component
     }
 
   render: =>
-    <p>
+    <div>
       <p>
         <em onClick={@toggleTooltip}>
           <i className="fa fa-question-circle"></i> Show help text
         </em>
       </p>
       {@renderTooltip()}
-    </p>
+    </div>
 
   renderTooltip: =>
     if @state.show then <p>{@props.text}</p> else null
