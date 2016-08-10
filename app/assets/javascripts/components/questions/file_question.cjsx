@@ -42,7 +42,10 @@ module.exports = class FileQuestion extends React.Component
     reader = new FileReader()
 
     reader.onload = ((event) => @refs[imageRef].src = event.target.result)
-    reader.readAsDataURL(file)
+    try
+      reader.readAsDataURL(file)
+    catch
+      null
 
   addFile: (e) =>
     QuestionnaireStore.addAnswer(@props.data.id, e.target.files[0])
