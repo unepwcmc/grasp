@@ -14,6 +14,8 @@ QuantitiesQuestion     = require("components/questions/quantities_question")
 DecimalNumericQuestion = require("components/questions/decimal_numeric_question")
 GpsQuestion            = require("components/questions/gps_question")
 
+Tooltip = require("components/tooltip")
+
 class Question extends React.Component
   constructor: (props, context) ->
     super(props, context)
@@ -23,9 +25,14 @@ class Question extends React.Component
   render: =>
     <div className="question">
       <h5><strong>{@props.data.question}</strong></h5>
+      {@renderTooltip()}
       {@renderAppropriateAnswer()}
       {@renderAppropriateQuestion()}
     </div>
+
+  renderTooltip: =>
+    return null unless @props.data.tooltip
+    <Tooltip text={@props.data.tooltip}/>
 
   renderAppropriateQuestion: =>
     return null if @props.mode != "edit"
