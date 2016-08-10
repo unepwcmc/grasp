@@ -22,4 +22,40 @@ class NotificationMailer < ApplicationMailer
     @file = file
     mail(to: @user.email, subject: 'GRASP Database: Your CSV file is ready')
   end
+
+  def notify_user_of_report_validated(validation)
+    @validation = validation
+    @user       = validation.user
+    @report     = validation.report
+    mail(to: @user.email, subject: 'GRASP Database: Your report has been Accepted')
+  end
+
+  def notify_user_of_report_returned(validation)
+    @validation = validation
+    @user       = validation.user
+    @report     = validation.report
+    mail(to: @user.email, subject: 'GRASP Database: Your report has been Accepted')
+  end
+
+  def notify_all_admins_of_report_validated(validation)
+    @admins     = User.joins(:role).where(roles: {name: "admin"})
+    @validation = validation
+    @report     = validation.report
+
+    @admins.each do |admin|
+      @admin = admin
+      mail(to: @admin.email, subject: 'GRASP Database: A report has been Validated')
+    end
+  end
+
+  def notify_all_admins_of_report_returned(validation)
+    @admins     = User.joins(:role).where(roles: {name: "admin"})
+    @validation = validation
+    @report     = validation.report
+
+    @admins.each do |admin|
+      @admin = admin
+      mail(to: @admin.email, subject: 'GRASP Database: A report has been Returned')
+    end
+  end
 end

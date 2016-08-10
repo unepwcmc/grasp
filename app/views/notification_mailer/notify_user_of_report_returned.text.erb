@@ -1,0 +1,14 @@
+Hello <%= @user.full_name %>,
+
+Your report <%= report_url(@report) %> has been returned.
+
+<% if @validation.comments_for_provider.present? %>
+  Remarks from Validator:
+
+  <%= @validation.comments_for_provider %>
+<% end %>
+
+Please review your report to update it as necessary. You will need to re-submit your report after making changes.
+
+Many thanks,
+GRASP

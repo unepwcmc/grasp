@@ -28,9 +28,13 @@ class ValidationsController < ApplicationController
     if params[:accept]
       @validation.state = "Validated"
       @report.state     = "Validated"
+      NotificationMailer.notify_user_of_report_validated(@validation).deliver_later
+      NotificationMailer.notify_all_admins_of_report_validated(@validation).deliver_later
     elsif params[:return]
       @validation.state = "Returned"
       @report.state     = "Returned"
+      NotificationMailer.notify_user_of_report_returned(@validation).deliver_later
+      NotificationMailer.notify_all_admins_of_report_returned(@validation).deliver_later
     end
 
     if @validation.save

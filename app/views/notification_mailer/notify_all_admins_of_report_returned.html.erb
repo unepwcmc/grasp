@@ -1,0 +1,20 @@
+Hello <%= @admin.full_name %>,
+
+A report <%= link_to report_url(@report), report_url(@report) %> from <%= @report.user.try(:full_name) %> has been returned.
+
+<% if @validation.comments_for_provider.present? %>
+  Remarks to Provider:
+
+  <%= @validation.comments_for_provider %>
+<% end %>
+
+<% if @validation.comments_for_admin.present? %>
+  Remarks to Admin:
+
+  <%= @validation.comments_for_admin %>
+<% end %>
+
+You may wish to review the report and contact the provider to assist them with any changes that need to be made.
+
+Many thanks,
+GRASP

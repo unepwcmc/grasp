@@ -2,7 +2,7 @@ Hello <%= @admin.full_name %>,
 
 A new report has been submitted by <%= @report.user.try(:full_name) %> from <%= @report.user.try(:agency).try(:name) %>.
 
-You can view the report here: <%= report_url(@report) %>
+You can view the report here: <%= link_to report_url(@report), report_url(@report) %>
 
 Many thanks,
 
