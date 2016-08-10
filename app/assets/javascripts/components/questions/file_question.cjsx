@@ -11,6 +11,17 @@ module.exports = class FileQuestion extends React.Component
 
       <div><label>Upload file(s)</label></div>
       <input type="file" onChange={@addFile}/>
+
+      <label htmlFor={@props.data.id + "-no-photo"}>
+        <input
+          checked={@props.data.selected?.length == 0}
+          type="radio"
+          onChange={@resetFiles}
+          value={[]}
+          id={@props.data.id + "-no-photo"}
+        />
+        <span className="label-body">No photo</span>
+      </label>
     </div>
 
   renderFiles: =>
@@ -41,3 +52,6 @@ module.exports = class FileQuestion extends React.Component
 
   deleteFile: (file) =>
     QuestionnaireStore.removeAnswer(@props.data.id, file)
+
+  resetFiles: =>
+    QuestionnaireStore.selectAnswer(@props.data.id, [])
