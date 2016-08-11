@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :agencies
   resources :reports
-  resources :validations
+  resources :validations, only: [:new, :create]
 
   namespace :admin do
     resources :users, controller: 'users'
