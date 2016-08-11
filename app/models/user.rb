@@ -62,4 +62,8 @@ class User < ActiveRecord::Base
   def is_role? role_symbol
     self.role.name.downcase.to_sym == role_symbol
   end
+
+  def validated_reports
+    Report.find(self.validations.pluck(:report_id))
+  end
 end

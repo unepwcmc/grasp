@@ -38,7 +38,9 @@
           <td><%= report.state %></td>
           <td>
             <% if can? :read, report %>
-              <a href="<%= report_path(report.id) %>">Show</a>
+              <% unless current_user.is_role? :validator %>
+                <a href="<%= report_path(report.id) %>">Show</a>
+              <% end %>
             <% end %>
             <% if can? :update, report %>
               <a href="<%= edit_report_path(report.id) %>">Edit</a>

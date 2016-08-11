@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
 
   def index
     if current_user.is_role?(:validator)
-      @reports = Report.where("""data->>'state' = ?""", "submitted")
+      @reports = Report.where("""data->>'state' = ? or id in (?)""", "submitted", current_user.validations.pluck(:report_id))
     else
       @reports = Report.search(search_params)
     end

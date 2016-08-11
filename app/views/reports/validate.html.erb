@@ -1,7 +1,12 @@
-<h1>Validate this report son</h1>
-<%= @report.inspect %>
-<hr>
+<%= content_for :page_title, "Validate Report" %>
+<%= content_for :breadcrumbs, "Validate Report" %>
+<%= content_for :page_buttons do %>
+  <% if can? :validate, @report %>
+    <%= link_to 'View Full Report', report_path(@report), class: 'button' %>
+  <% end %>
+<% end %>
 
+<%= @report.inspect %>
 
 <%= form_for(@validation) do |f| %>
   <% if @validation.errors.any? %>
