@@ -27,9 +27,10 @@ class ValidationsControllerTest < ActionController::TestCase
         state: @validation.state,
         comments_for_provider: @validation.comments_for_provider,
         comments_for_admin: @validation.comments_for_admin
-      }, report_id: @validation.report_id, accept: nil
+      }, report_id: @validation.report_id, accept: "Accept"
     end
 
+    assert_equal "Validated", Validation.last.report.state
     assert_redirected_to validation_path(assigns(:validation))
   end
 

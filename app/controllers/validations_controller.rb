@@ -23,21 +23,28 @@ class ValidationsController < ApplicationController
   def create
     @validation = Validation.new(validation_params)
     @validation.user = current_user
-    @report = Report.find(params[:report_id])
+    @report = Report.find(params[:validation][:report_id].to_i)
 
     if params[:accept]
-      @validation.state = "Validated"
-      @report.state     = "Validated"
-      NotificationMailer.notify_user_of_report_validated(@validation).deliver_later
-      NotificationMailer.notify_all_admins_of_report_validated(@validation).deliver_later
+      @validation.state     = "Validated"
+      @report.data['state'] = "Validated"
     elsif params[:return]
-      @validation.state = "Returned"
-      @report.state     = "Returned"
-      NotificationMailer.notify_user_of_report_returned(@validation).deliver_later
-      NotificationMailer.notify_all_admins_of_report_returned(@validation).deliver_later
+      @validation.state     = "Returned"
+      @report.data['state'] = "Returned"
+    else
+      raise "Validation did not receive either :accept or :return params"
     end
 
-    if @validation.save
+    if @validation.save && @report.save
+      # Wait until validation has been committed to DB before we can send related emails
+      if params[:accept].present?
+        NotificationMailer.notify_user_of_report_validated(@validation).deliver_later
+        NotificationMailer.notify_all_admins_of_report_validated(@validation).deliver_later
+      elsif params[:return]
+        NotificationMailer.notify_user_of_report_returned(@validation).deliver_later
+        NotificationMailer.notify_all_admins_of_report_returned(@validation).deliver_later
+      end
+
       redirect_to @validation, notice: 'Validation was successfully created.'
     else
       render :new
