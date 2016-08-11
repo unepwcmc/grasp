@@ -21,6 +21,12 @@ $(document).ready(function(){
   $(".select2").select2({
       tags: true,
       width: '100%'
+  });
+
+  $(".validation__info").click(function(){
+    $(this).parent().find('.validation__comments').slideToggle();
+    $(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
+
   })
 })
 

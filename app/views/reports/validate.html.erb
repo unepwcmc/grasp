@@ -6,37 +6,102 @@
   <% end %>
 <% end %>
 
-<%= @report.inspect %>
 
-<%= form_for(@validation) do |f| %>
-  <% if @validation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@validation.errors.count, "error") %> prohibited this validation from being saved:</h2>
+<h3>Report provider</h3>
 
-      <ul>
-      <% @validation.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<h5>
+<strong><%= @report.user.full_name %></strong><br>
+  <%= @report.user.agency.name %>
+</h5>
+
+<div class="form__group">
+  <strong> Email (primary) </strong>
+  <div class="form__field">
+    <%= @report.user.email %>
+  </div>
+</div>
+
+<div class="form__group">
+  <strong> Email (secondary) </strong>
+  <div class="form__field">
+    <%= @report.user.second_email %>
+  </div>
+</div>
+
+<div class="form__group">
+  <strong> Mobile phone </strong>
+  <div class="form__field">
+    <%= @report.user.mobile_number %>
+  </div>
+</div>
+
+<div class="form__group">
+  <strong> Skype username </strong>
+  <div class="form__field">
+    <%= @report.user.skype_username %>
+  </div>
+</div>
+
+<hr>
+
+<h3>Report details</h3>
+
+<div class="form__group">
+  <strong> Country of discovery </strong>
+  <div class="form__field">
+    <%= @report.data['questions']['country_of_discovery']['selected'] %>
+  </div>
+</div>
+
+<div class="form__group">
+  <strong> Law enforcement confiscation? </strong>
+  <div class="form__field">
+    <%= @report.data['questions']['confiscated']['selected'] %>
+  </div>
+</div>
+
+<div class="form__group">
+  <strong> Date of incident </strong>
+  <div class="form__field">
+    <%= @report.data['questions']['date_of_discovery']['selected'] %>
+  </div>
+</div>
+
+<hr>
+
+<h3>Ape details</h3>
+
+<hr>
+
+<h3>Validation history</h3>
+  <p>Report first started by <%= @report.user.full_name %>, <%= @report.user.agency.name %> on <%= @report.created_at.strftime('%l:%M%P %-d/%-m/%Y') %></p>
+
+<% @report.validations.order(created_at: :asc).each do |validation| %>
+  <div class="validation">
+    <div class="validation__info">
+      <p>Marked as <strong><%= validation.state %></strong> by <%= validation.user.full_name %>, <%= validation.user.agency.name %> on <%= validation.created_at.strftime('%l:%M%P %-d/%-m/%Y') %> <i class="fa fa-chevron-up"></i></p>
     </div>
-  <% end %>
 
-  <div class="form__group">
-    <%= f.label :comments_for_provider %>
-    <div class="form__field">
-      <%= f.text_area :comments_for_provider %>
+    <div class="validation__comments" style="display:none;">
+      <div class="form__group">
+        <strong> Comments for provider </strong>
+        <div class="form__field">
+          <%= validation.comments_for_provider %>
+        </div>
+      </div>
+
+      <div class="form__group">
+        <strong> Comments for admin</strong>
+        <div class="form__field">
+          <%= validation.comments_for_admin %>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="form__group">
-    <%= f.label :comments_for_admin %>
-    <div class="form__field">
-      <%= f.text_area :comments_for_admin %>
-    </div>
-  </div>
-
-  <%= f.hidden_field :report_id, value: @report.id %>
-
-  <%= f.submit 'Accept', name: 'accept', class: 'form__submit' %>
-  <%= f.submit 'Return', name: 'return', class: 'form__submit' %>
 <% end %>
+
+<hr>
+
+<h3>Validate this report</h3>
+
+<%= render "reports/validation_form" %>
