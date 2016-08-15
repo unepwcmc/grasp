@@ -11,6 +11,16 @@ class NotificationMailer < ApplicationMailer
     end
   end
 
+  def notify_all_validators_of_submitted_report(validators, report)
+    @report = report
+    @validators = validators
+
+    @validators.each do |validator|
+      @validator = validator
+      mail(to: @validator.email, subject: 'GRASP Database: New Report Submitted')
+    end
+  end
+
   def notify_user_of_account_creation(user, generated_password)
     @user = user
     @generated_password = generated_password

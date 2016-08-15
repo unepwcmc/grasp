@@ -1,0 +1,8 @@
+Hello <%= @validator.full_name %>,
+
+A new report <%= link_to report_url(@report), report_url(@report) %> matching your expertise has been submitted for validation.
+
+You can view all reports awaiting validation here: <%= link_to validate_report_url(@report), validate_report_url(@report) %>
+
+Many thanks,
+GRASP
