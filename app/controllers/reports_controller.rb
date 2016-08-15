@@ -4,10 +4,16 @@ class ReportsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @reports = Report.search(search_params)
+    if current_user.is_role?(:validator)
+      @reports = Report.where("""data->>'state' = ? or id in (?)""", "submitted", current_user.validations.pluck(:report_id))
+    else
+      @reports = Report.search(search_params)
+    end
+
     @reports = Sorter.sort(
       @reports, params[:sort], params[:dir]
     ).page(params[:page])
+
   end
 
   def new
@@ -38,7 +44,9 @@ class ReportsController < ApplicationController
 
     if @report.update(report_params)
       if @report.state == "Submitted"
-        ::NotificationMailer.notify_all_admins_of_submitted_report(@report).deliver_later
+        validators = ExpertiseMatcher.find_experts(@report)
+        NotificationMailer.notify_validators_of_submitted_report(validators, @report).deliver_later if validators.any?
+        NotificationMailer.notify_all_admins_of_submitted_report(@report).deliver_later
       end
       render json: @report, location: reports_path
     else
@@ -53,6 +61,10 @@ class ReportsController < ApplicationController
     reports = @reports.pluck(:id)
     CsvExportJob.perform_later(reports, current_user)
     redirect_to reports_path, notice: "Your csv file is being generated. We will email you with a link to download it as soon as it is ready. Thank you"
+  end
+
+  def validate
+    @validation = Validation.new
   end
 
   private

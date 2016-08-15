@@ -1,0 +1,32 @@
+<%= form_for(@validation) do |f| %>
+  <% if @validation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@validation.errors.count, "error") %> prohibited this validation from being saved:</h2>
+
+      <ul>
+      <% @validation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form__group">
+    <%= f.label :comments_for_provider %>
+    <div class="form__field">
+      <%= f.text_area :comments_for_provider %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <%= f.label :comments_for_admin %>
+    <div class="form__field">
+      <%= f.text_area :comments_for_admin %>
+    </div>
+  </div>
+
+  <%= f.hidden_field :report_id, value: @report.id %>
+
+  <%= f.submit 'Accept', name: 'accept', class: 'form__submit' %>
+  <%= f.submit 'Return', name: 'return', class: 'form__submit' %>
+<% end %>

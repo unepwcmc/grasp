@@ -1,0 +1,12 @@
+Hello <%= @user.full_name %>,
+
+Your report <%= report_url(@report) %> has been accepted.
+
+<% if @validation.comments_for_provider.present? %>
+  Remarks from Validator:
+
+  <%= @validation.comments_for_provider %>
+<% end %>
+
+Many thanks,
+GRASP
