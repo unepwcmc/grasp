@@ -25,6 +25,6 @@ class ValidationsControllerTest < ActionController::TestCase
     end
 
     assert_equal "Validated", Validation.last.report.state
-    assert_redirected_to validation_path(assigns(:validation))
+    assert_redirected_to reports_path
   end
 end
