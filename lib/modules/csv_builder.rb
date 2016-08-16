@@ -18,20 +18,19 @@ module CsvBuilder
     CSV.open(filepath, "wb") do |csv|
       csv << column_names
       reports.each do |report|
-        region = report.data['questions']['country_of_discovery']['selected'].downcase.gsub(" ", "_")
         # For each ape, make a row
         report_data = [
           report.id,
           report.state,
           report&.user&.full_name,
           report&.user&.agency&.name,
-          report.data['questions']['own_organisation']['selected'],
+          report.data['answers']['own_organisation']['selected'],
           report.created_at,
-          report.data['questions']['country_of_discovery']['selected'],
-          report.data['questions']["#{region}_regions"]['selected'],
-          report.data['questions']['date_of_discovery']['selected'],
-          report.data['questions']['location_coords']['selected'],
-          report.data['questions']['type_of_location']['selected'],
+          report.data['answers']['country_of_discovery']['selected'],
+          report.data['answers']['region_of_discovery']['selected'],
+          report.data['answers']['date_of_discovery']['selected'],
+          report.data['answers']['location_coords']['selected'],
+          report.data['answers']['type_of_location']['selected'],
           "Ape Status TBC",
           "Ape Genus TBC",
           "Species/Subsoecies TBC",
@@ -51,13 +50,13 @@ module CsvBuilder
           "Meat Kg",
           "Skin Qty",
           "Skull Qty",
-          report.data['questions']['confiscated']['selected'],
-          report.data['questions']['arrests_made']['selected'],
-          report.data['questions']['prosecution']['selected'],
-          report.data['questions']['prosecution_successful']['selected'],
-          report.data['questions']['punishment']['selected'],
-          report.data['questions']['illegal_activities']['selected'],
-          report.data['questions']['proximity']['selected']
+          report.data['answers']['confiscated']['selected'],
+          report.data['answers']['arrests_made']['selected'],
+          report.data['answers']['prosecution']['selected'],
+          report.data['answers']['prosecution_successful']['selected'],
+          report.data['answers']['punishment']['selected'],
+          report.data['answers']['illegal_activities']['selected'],
+          report.data['answers']['proximity']['selected']
         ]
 
         csv << report_data

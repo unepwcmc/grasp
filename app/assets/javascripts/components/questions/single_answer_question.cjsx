@@ -13,7 +13,7 @@ class SingleAnswerQuestion extends React.Component
       <li className="answer" key={answer}>
         <label htmlFor={@props.data.id + answer}>
           <input
-            checked={@props.data.selected == answer}
+            checked={@props.answer?.selected == answer}
             type="radio"
             onChange={@props.onChange}
             value={answer}
@@ -29,7 +29,7 @@ class SingleAnswerQuestion extends React.Component
     if @props.data.other
       <li className="answer" key="other">
         <label>
-          <input checked={"other" == @props.data.selected}
+          <input checked={"other" == @props.answer?.selected}
             type="radio" onChange={@props.onChange} value="other"
             name={@props.data.id}
           />
@@ -41,7 +41,7 @@ class SingleAnswerQuestion extends React.Component
 
 
   renderOtherField: =>
-    if "other" == @props.data.selected
+    if "other" == @props.answer?.selected
       <input type="text" value={@props.data.other_answer}
         onChange={@handleOtherChange}/>
 

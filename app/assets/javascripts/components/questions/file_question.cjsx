@@ -14,7 +14,7 @@ module.exports = class FileQuestion extends React.Component
 
       <label htmlFor={@props.data.id + "-no-photo"}>
         <input
-          checked={@props.data.selected?.length == 0}
+          checked={@props.answer?.selected?.length == 0}
           type="radio"
           onChange={@resetFiles}
           value={[]}
@@ -25,7 +25,7 @@ module.exports = class FileQuestion extends React.Component
     </div>
 
   renderFiles: =>
-    @props.data.selected?.map (file) =>
+    @props.answer?.selected?.map (file) =>
       <p key={file.name + file.lastModifiedDate} className="file">
         {@renderImage(file)} {file.name}
         <small style={{color: "red"}} onClick={@deleteFile.bind(@, file)}>x</small>

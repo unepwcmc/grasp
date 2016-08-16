@@ -24,7 +24,7 @@ class QuantitiesQuestion extends React.Component
       <fieldset>
         <label className="label label--left">Body parts</label>
 
-        <input checked={@props.data.selected?.body_parts}
+        <input checked={@props.answer?.selected?.body_parts}
           type="checkbox" onChange={@handleBodyParts} value="body_parts"
           id="body_parts" name={@props.data.id}/>
       </fieldset>
@@ -40,10 +40,10 @@ class QuantitiesQuestion extends React.Component
   update: (type, answer) =>
     return unless 0 <= answer < 100
 
-    @props.data.selected ||= {}
-    @props.data.selected[type] = answer
-    QuestionnaireStore.selectAnswer(@props.data.id, @props.data.selected)
+    @props.answer?.selected ||= {}
+    @props.answer?.selected[type] = answer
+    QuestionnaireStore.selectAnswer(@props.data.id, @props.answer?.selected)
 
-  valueFor: (type) => parseInt(@props.data.selected?[type] || 0)
+  valueFor: (type) => parseInt(@props.answer?.selected?[type] || 0)
 
 module.exports = QuantitiesQuestion

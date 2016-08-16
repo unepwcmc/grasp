@@ -11,7 +11,8 @@ class Questionnaire extends React.Component
     @state = {
       currentPage: QuestionnaireStore.currentPage(),
       mode: QuestionnaireStore.getMode(),
-      pages: QuestionnaireStore.allPages()
+      pages: QuestionnaireStore.allPages(),
+      answers: QuestionnaireStore.getAnswers()
     }
 
   componentDidMount: ->
@@ -27,7 +28,7 @@ class Questionnaire extends React.Component
 
   renderCurrentPage: =>
     if @state.pages[@state.currentPage]?.questions.length > 0
-      <Page mode={@state.mode} data={@state.pages[@state.currentPage]}/>
+      <Page mode={@state.mode} answers={@state.answers} data={@state.pages[@state.currentPage]}/>
 
   renderSubmitButton: =>
     if QuestionnaireStore.requiredQuestionsAnswered()

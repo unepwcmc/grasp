@@ -9,13 +9,16 @@ class QuestionnaireStore extends EventEmitter
   reportId      = null
   questionnaireMode = null
   currentPage   = 0
-  questionnaire = {}
   autoSaveTimer = null
   autoSaveInterval = 60000
 
+  questionnaire = {}
+  answers = {}
+  state = null
+
   constructor: ->
+    state = "in_progress"
     @on(PAGE_CHANGE_EVENT, @saveOrUpdateReport)
-    #@startAutoSave()
 
   startAutoSave: ->
     autoSaveTimer = setInterval(@saveOrUpdateReport, autoSaveInterval)
@@ -43,16 +46,16 @@ class QuestionnaireStore extends EventEmitter
     questionnaire = data
 
   setMode: (mode) -> questionnaireMode = mode
-  getMode: (mode) -> questionnaireMode
+  getMode: -> questionnaireMode
+
+  getAnswers: -> answers
 
   allPages: ->
     questionnaire.pages.map( (page) ->
       visibleQuestions = page.questions.filter( (question_id) ->
         questionnaire.questions[question_id].visible
       ).map( (question_id) ->
-        question = questionnaire.questions[question_id]
-        question.id = question_id
-        question
+        questionnaire.questions[question_id]
       )
 
       {title: page.title, questions: visibleQuestions}
@@ -60,31 +63,32 @@ class QuestionnaireStore extends EventEmitter
 
   requiredQuestionsAnswered: ->
     allAnswered = true
-    for key, question of questionnaire.questions
+    for _key, question of questionnaire.questions
       required = question.visible and question.required
 
-      if required and (question.selected == "" or 'selected' not of question)
+      if required and answers[question.id]?.selected == ""
         allAnswered = false
     allAnswered
 
   selectAnswer: (key, answer) ->
-    questionnaire.questions[key].selected = answer
+    answers[key] ||= {}
+    answers[key].selected = answer
     @emit(CHANGE_EVENT)
 
   updateOtherAnswer: (key, text) ->
-    questionnaire.questions[key].other_answer = text
+    answers[key] ||= {}
+    answers[key].other_answer = text
     @emit(CHANGE_EVENT)
 
   addAnswer: (key, answer) ->
-    questionnaire.questions[key].selected ||= []
-    questionnaire.questions[key].selected.push(answer)
+    answers[key] ||= {}
+    answers[key].selected ||= []
+    answers[key].selected.push(answer)
     @emit(CHANGE_EVENT)
 
   removeAnswer: (key, answer) ->
-    questionnaire.questions[key].selected = (
-      questionnaire.questions[key].selected || []
-    ).filter (word) -> word isnt answer
-
+    answers[key] ||= {}
+    answers[key].selected = (answers[key].selected || []).filter(word -> word isnt answer)
     @emit(CHANGE_EVENT)
 
   show: (key) =>
@@ -108,7 +112,6 @@ class QuestionnaireStore extends EventEmitter
 
   saveReport: (msg, callback) =>
     token = document.getElementsByName("csrf-token")[0].content
-    store = @
     fetch('/reports', {
       method: 'POST',
       headers: {
@@ -117,20 +120,18 @@ class QuestionnaireStore extends EventEmitter
         'X-CSRF-Token': token
       },
       credentials: 'include',
-      body: JSON.stringify({ report: { data: questionnaire }})
-    }).then((response) ->
-      if msg
-        store.setNotification(msg)
-      if callback
-        callback(response.headers.get('Location'))
-      response.json().then((json) ->
-        reportId = json.id
-      )
+      body: JSON.stringify({
+        report: {data: {answers: answers, state: state}}
+      })
+    }).then((response) =>
+      @setNotification(msg) if msg
+      response.json().then((json) -> reportId = json.id)
+
+      callback(response.headers.get('Location')) if callback
     )
 
   updateReport: (msg, callback) =>
     token = document.getElementsByName("csrf-token")[0].content
-    store = @
     fetch("/reports/#{reportId}", {
       method: 'PUT',
       headers: {
@@ -139,18 +140,18 @@ class QuestionnaireStore extends EventEmitter
         'X-CSRF-Token': token
       },
       credentials: 'include',
-      body: JSON.stringify({ report: { data: questionnaire }})
-    }).then((response) ->
-      if msg
-        store.setNotification(msg)
-      if callback
-        callback(response.headers.get('Location'))
+      body: JSON.stringify({
+        report: {data: {answers: answers, state: state}}
+      })
+    }).then((response) =>
+      @setNotification(msg) if msg
+      callback(response.headers.get('Location')) if callback
     )
 
-  setPath: (path) =>
+  setPath: (path) ->
     window.location = path
 
-  setNotification: (msg) =>
+  setNotification: (msg) ->
     notifications     = document.getElementsByClassName("questionnaire__notification")
     for notification in notifications
       notification.style.display = 'none'
