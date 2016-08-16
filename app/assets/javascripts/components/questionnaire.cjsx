@@ -37,7 +37,8 @@ class Questionnaire extends React.Component
   onChange: =>
     @setState({
       currentPage: QuestionnaireStore.currentPage(),
-      pages: QuestionnaireStore.allPages()
+      pages: QuestionnaireStore.allPages(),
+      answers: QuestionnaireStore.getAnswers()
     })
 
 

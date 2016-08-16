@@ -6,19 +6,34 @@ class QuestionnaireStore extends EventEmitter
   VISIBILITY_EVENT = "visibility"
   PAGE_CHANGE_EVENT = "page_change"
 
-  reportId      = null
   questionnaireMode = null
   currentPage   = 0
   autoSaveTimer = null
   autoSaveInterval = 60000
 
   questionnaire = {}
-  answers = {}
-  state = null
+
+  # Report's default values, get overwritten by loadReportData,
+  # if data-report-id attr is found in the report-container HTML element
+  report = {
+    id: null,
+    answers: {},
+    state: "in_progress"
+  }
 
   constructor: ->
-    state = "in_progress"
     @on(PAGE_CHANGE_EVENT, @saveOrUpdateReport)
+
+  initializeQuestionnaire: (questionnaireTemplate) ->
+    questionnaire = questionnaireTemplate
+
+  loadReportData: (id, data) =>
+    report.id = id
+    report.answers = data.answers
+    report.state = data.state
+
+    @emit(CHANGE_EVENT)
+    @show(key) for key, _answer of report.answers
 
   startAutoSave: ->
     autoSaveTimer = setInterval(@saveOrUpdateReport, autoSaveInterval)
@@ -41,14 +56,11 @@ class QuestionnaireStore extends EventEmitter
     @emit(CHANGE_EVENT)
     @emit(PAGE_CHANGE_EVENT)
 
-  load: (data, id) ->
-    reportId = id if id?
-    questionnaire = data
 
   setMode: (mode) -> questionnaireMode = mode
   getMode: -> questionnaireMode
 
-  getAnswers: -> answers
+  getAnswers: -> report.answers
 
   allPages: ->
     questionnaire.pages.map( (page) ->
@@ -66,33 +78,33 @@ class QuestionnaireStore extends EventEmitter
     for _key, question of questionnaire.questions
       required = question.visible and question.required
 
-      if required and answers[question.id]?.selected == ""
+      if required and report.answers[question.id]?.selected == ""
         allAnswered = false
     allAnswered
 
   selectAnswer: (key, answer) ->
-    answers[key] ||= {}
-    answers[key].selected = answer
+    report.answers[key] ||= {}
+    report.answers[key].selected = answer
     @emit(CHANGE_EVENT)
 
   updateOtherAnswer: (key, text) ->
-    answers[key] ||= {}
-    answers[key].other_answer = text
+    report.answers[key] ||= {}
+    report.answers[key].other_answer = text
     @emit(CHANGE_EVENT)
 
   addAnswer: (key, answer) ->
-    answers[key] ||= {}
-    answers[key].selected ||= []
-    answers[key].selected.push(answer)
+    report.answers[key] ||= {}
+    report.answers[key].selected ||= []
+    report.answers[key].selected.push(answer)
     @emit(CHANGE_EVENT)
 
   removeAnswer: (key, answer) ->
-    answers[key] ||= {}
-    answers[key].selected = (answers[key].selected || []).filter(word -> word isnt answer)
+    report.answers[key] ||= {}
+    report.answers[key].selected = (report.answers[key].selected || []).filter(word -> word isnt answer)
     @emit(CHANGE_EVENT)
 
   show: (key) =>
-    questionnaire.questions[key].visible = true
+    questionnaire.questions[key]?.visible = true
     @emit(CHANGE_EVENT)
     @emit(VISIBILITY_EVENT, key, "show")
 
@@ -108,7 +120,7 @@ class QuestionnaireStore extends EventEmitter
     @on(VISIBILITY_EVENT, callback)
 
   saveOrUpdateReport: (msg, callback) =>
-    if reportId? then @updateReport("Report updated", callback) else @saveReport("Report saved", callback)
+    if report.id? then @updateReport("Report updated", callback) else @saveReport("Report saved", callback)
 
   saveReport: (msg, callback) =>
     token = document.getElementsByName("csrf-token")[0].content
@@ -121,18 +133,18 @@ class QuestionnaireStore extends EventEmitter
       },
       credentials: 'include',
       body: JSON.stringify({
-        report: {data: {answers: answers, state: state}}
+        report: {data: {answers: report.answers, state: report.state}}
       })
     }).then((response) =>
       @setNotification(msg) if msg
-      response.json().then((json) -> reportId = json.id)
+      response.json().then((json) -> report.id = json.id)
 
       callback(response.headers.get('Location')) if callback
     )
 
   updateReport: (msg, callback) =>
     token = document.getElementsByName("csrf-token")[0].content
-    fetch("/reports/#{reportId}", {
+    fetch("/reports/#{report.id}", {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -141,7 +153,7 @@ class QuestionnaireStore extends EventEmitter
       },
       credentials: 'include',
       body: JSON.stringify({
-        report: {data: {answers: answers, state: state}}
+        report: {data: {answers: report.answers, state: report.state}}
       })
     }).then((response) =>
       @setNotification(msg) if msg
@@ -163,8 +175,9 @@ class QuestionnaireStore extends EventEmitter
     nav.appendChild(notice)
 
   submitReport: =>
+    report.state = "submitted"
+
     @stopAutoSave()
-    questionnaire.state = "submitted"
     @saveOrUpdateReport("Report Submitted!", @setPath)
 
 module.exports = new QuestionnaireStore()

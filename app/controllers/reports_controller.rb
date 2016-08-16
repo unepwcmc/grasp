@@ -3,9 +3,11 @@ class ReportsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
+  before_action :load_questionnaire_template, only: [:show, :edit, :new]
+
   def index
     if current_user.is_role?(:validator)
-      @reports = Report.where("""data->>'state' = ? or id in (?)""", "submitted", current_user.validations.pluck(:report_id))
+      @reports = Report.where("data->>'state' = ? or id in (?)", "submitted", current_user.validations.pluck(:report_id))
     else
       @reports = Report.search(search_params)
     end
@@ -17,7 +19,6 @@ class ReportsController < ApplicationController
   end
 
   def new
-    @report = Questionnaire.load
   end
 
   def show
@@ -75,5 +76,9 @@ class ReportsController < ApplicationController
     def search_params
       p = ParamsUtils.strip_rails_defaults(params)
       ParamsUtils.strip_empty(p)
+    end
+
+    def load_questionnaire_template
+      @questionnaire_template = Questionnaire.load
     end
 end
