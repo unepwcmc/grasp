@@ -1,10 +1,12 @@
 @include b(questionnaire) {
   @include e(notification) {
     position: fixed;
-    bottom: 1em;
+    top: 1rem;
     width: 80%;
     margin: 0 auto;
     background: red;
     text-align: center;
+
+    font-size: 2rem;
   }
 }

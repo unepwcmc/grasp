@@ -102,13 +102,24 @@ class QuestionnaireStore extends EventEmitter
   addVisibilityListener: (callback) =>
     @on(VISIBILITY_EVENT, callback)
 
-  saveOrUpdateReport: (msg, callback) =>
-    if report.id? then @updateReport("Report updated", callback) else @saveReport("Report saved", callback)
+  saveOrUpdateReport: (callback) =>
+    if report.id?
+      @reportRequest("/reports/#{report.id}", "PUT", (response) =>
+        @setNotification("Report updated")
+        callback?(response.headers.get('Location'))
+      )
+    else
+      @reportRequest("/reports", "POST", (response) =>
+        @setNotification("Report saved")
+        response.json().then((json) -> report.id = json.id)
 
-  saveReport: (msg, callback) =>
+        callback?(response.headers.get('Location'))
+      )
+
+  reportRequest: (path, method, callback) ->
     token = document.getElementsByName("csrf-token")[0].content
-    fetch('/reports', {
-      method: 'POST',
+    fetch(path, {
+      method: method,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -118,44 +129,17 @@ class QuestionnaireStore extends EventEmitter
       body: JSON.stringify({
         report: {data: {answers: report.answers, state: report.state}}
       })
-    }).then((response) =>
-      @setNotification(msg) if msg
-      response.json().then((json) -> report.id = json.id)
+    }).then(callback)
 
-      callback(response.headers.get('Location')) if callback
-    )
-
-  updateReport: (msg, callback) =>
-    token = document.getElementsByName("csrf-token")[0].content
-    fetch("/reports/#{report.id}", {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-        'X-CSRF-Token': token
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        report: {data: {answers: report.answers, state: report.state}}
-      })
-    }).then((response) =>
-      @setNotification(msg) if msg
-      callback(response.headers.get('Location')) if callback
-    )
 
   setPath: (path) ->
     window.location = path
 
   setNotification: (msg) ->
-    notifications     = document.getElementsByClassName("questionnaire__notification")
-    for notification in notifications
-      notification.style.display = 'none'
+    $notificationEl = $('.js-questionnaire-notification')
+    $notificationEl.html(msg).fadeIn()
 
-    nav               = document.getElementsByClassName("navigation__inner")[0]
-    notice            = document.createElement("h5")
-    notice.className  = 'questionnaire__notification'
-    notice.innerHTML  = msg
-    nav.appendChild(notice)
+    setTimeout((-> $notificationEl.fadeOut()), 3000)
 
   submitReport: =>
     report.state = "submitted"
