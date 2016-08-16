@@ -1,13 +1,12 @@
 {EventEmitter} = require("events")
-require('whatwg-fetch')
+NavigationStore = require("stores/navigation_store")
+require("whatwg-fetch")
 
 class QuestionnaireStore extends EventEmitter
   CHANGE_EVENT = "change"
   VISIBILITY_EVENT = "visibility"
-  PAGE_CHANGE_EVENT = "page_change"
 
   questionnaireMode = null
-  currentPage   = 0
   autoSaveTimer = null
   autoSaveInterval = 60000
 
@@ -22,7 +21,7 @@ class QuestionnaireStore extends EventEmitter
   }
 
   constructor: ->
-    @on(PAGE_CHANGE_EVENT, @saveOrUpdateReport)
+    NavigationStore.addPageChangeListener(@saveOrUpdateReport)
 
   initializeQuestionnaire: (questionnaireTemplate) ->
     questionnaire = questionnaireTemplate
@@ -40,22 +39,6 @@ class QuestionnaireStore extends EventEmitter
 
   stopAutoSave: ->
     clearInterval(autoSaveTimer) if autoSaveTimer
-
-  currentPage: ->
-    currentPage
-
-  previousPage: ->
-    currentPage -= 1
-    window.scrollTo(0, 0)
-    @emit(CHANGE_EVENT)
-    @emit(PAGE_CHANGE_EVENT)
-
-  nextPage: ->
-    currentPage += 1
-    window.scrollTo(0, 0)
-    @emit(CHANGE_EVENT)
-    @emit(PAGE_CHANGE_EVENT)
-
 
   setMode: (mode) -> questionnaireMode = mode
   getMode: -> questionnaireMode

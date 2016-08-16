@@ -1,4 +1,4 @@
-QuestionnaireStore = require("stores/questionnaire_store")
+NavigationStore = require("stores/navigation_store")
 React = require("react")
 Page = require("components/page")
 
@@ -21,5 +21,5 @@ module.exports = class PageControls extends React.Component
         Previous step
       </button>
 
-  previousPage: -> QuestionnaireStore.previousPage()
-  nextPage:     -> QuestionnaireStore.nextPage()
+  previousPage: -> NavigationStore.previousPage()
+  nextPage:     -> NavigationStore.nextPage()

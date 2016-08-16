@@ -1,5 +1,6 @@
 React = require("react")
 QuestionnaireStore = require("stores/questionnaire_store")
+NavigationStore    = require("stores/navigation_store")
 Page               = require("components/page")
 PageControls       = require("components/page_controls")
 SaveButton         = require("components/save_button")
@@ -9,13 +10,14 @@ class Questionnaire extends React.Component
   constructor: (props, context) ->
     super(props, context)
     @state = {
-      currentPage: QuestionnaireStore.currentPage(),
+      currentPage: NavigationStore.currentPage(),
       mode: QuestionnaireStore.getMode(),
       pages: QuestionnaireStore.allPages(),
       answers: QuestionnaireStore.getAnswers()
     }
 
   componentDidMount: ->
+    NavigationStore.addPageChangeListener(@onChange)
     QuestionnaireStore.addChangeListener(@onChange)
 
   render: ->
@@ -36,7 +38,7 @@ class Questionnaire extends React.Component
 
   onChange: =>
     @setState({
-      currentPage: QuestionnaireStore.currentPage(),
+      currentPage: NavigationStore.currentPage(),
       pages: QuestionnaireStore.allPages(),
       answers: QuestionnaireStore.getAnswers()
     })
