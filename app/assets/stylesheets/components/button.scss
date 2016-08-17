@@ -20,11 +20,11 @@
     @include button {
       border: 2px solid $button__border-color--secondary;
       background-color: $button__bg-color--secondary;
-      color: $button__color--secondary
+      color: $button__color--secondary;
     }
 
     &:hover {
-      border: 2px solid $button__border-color--secondary--hover
+      border: 2px solid $button__border-color--secondary--hover;
       background-color: $button__bg-color--secondary--hover;
       color: $button__color--secondary--hover;
     }

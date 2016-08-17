@@ -25,6 +25,7 @@
   textarea, .select2 {
     width: 100%;
     border: 1px solid $input__border-color;
+    border-radius: none;
 
     &:focus {
       border-width: 2px;
