@@ -8,24 +8,20 @@ module ExpertiseMatcher
   def self.is_expert?(report, user)
     # Returns true if the user is an expert in any area of that report
     region = self.get_region_expertise(report)
-    if region.nil?
-      false
-    else
-      user.expertises.include?(region)
-    end
+    region and user.expertises.include?(region)
   end
 
   def self.filter_by_users_expertise(reports, user)
     reports = reports.select { |r| self.is_expert?(r, user) }
     # Must return an active record relation for use with sorter
     report_ids = reports.collect { |r| r.id }
-    reports = Report.where(id: report_ids)
+    Report.where(id: report_ids)
   end
 
   def self.get_region_expertise(report)
     # Returns the matching region expertise object for a given report
     country = report.data.dig('questions', 'country_of_discovery', 'selected')
     region = CountryUtilities.country_to_region(country) if country
-    region = Expertise.find_by(name: region) if region
+    Expertise.find_by(name: region) if region
   end
 end
