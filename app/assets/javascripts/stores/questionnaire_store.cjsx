@@ -24,7 +24,8 @@ class QuestionnaireStore extends EventEmitter
     NavigationStore.addPageChangeListener(@saveOrUpdateReport)
 
   initializeQuestionnaire: (questionnaireTemplate) ->
-    questionnaire = questionnaireTemplate
+    questionnaire = questionnaireTemplate.questions
+    NavigationStore.loadPages(questionnaireTemplate.pages)
 
   loadReportData: (id, data) =>
     report.id = id
@@ -43,18 +44,8 @@ class QuestionnaireStore extends EventEmitter
   setMode: (mode) -> questionnaireMode = mode
   getMode: -> questionnaireMode
 
-  getAnswers: -> report.answers
-
-  allPages: ->
-    questionnaire.pages.map( (page) ->
-      visibleQuestions = page.questions.filter( (question_id) ->
-        questionnaire.questions[question_id].visible
-      ).map( (question_id) ->
-        questionnaire.questions[question_id]
-      )
-
-      {title: page.title, questions: visibleQuestions}
-    )
+  getAnswers:   -> report.answers
+  getQuestions: -> questionnaire
 
   requiredQuestionsAnswered: ->
     allAnswered = true
@@ -130,7 +121,6 @@ class QuestionnaireStore extends EventEmitter
         report: {data: {answers: report.answers, state: report.state}}
       })
     }).then(callback)
-
 
   setPath: (path) ->
     window.location = path

@@ -12,7 +12,7 @@ class Questionnaire extends React.Component
     @state = {
       currentPage: NavigationStore.currentPage(),
       mode: QuestionnaireStore.getMode(),
-      pages: QuestionnaireStore.allPages(),
+      pages: NavigationStore.allPages(),
       answers: QuestionnaireStore.getAnswers()
     }
 
@@ -39,9 +39,8 @@ class Questionnaire extends React.Component
   onChange: =>
     @setState({
       currentPage: NavigationStore.currentPage(),
-      pages: QuestionnaireStore.allPages(),
+      pages: NavigationStore.allPages(),
       answers: QuestionnaireStore.getAnswers()
     })
-
 
 module.exports = Questionnaire

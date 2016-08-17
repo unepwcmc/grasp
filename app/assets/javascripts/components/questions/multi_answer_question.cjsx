@@ -3,10 +3,11 @@ Question = require("components/question")
 QuestionnaireStore   = require("stores/questionnaire_store")
 
 class MultiAnswerQuestion extends React.Component
-  render: ->
-    @props.answer ||= {}
-    @props.answer.selected ||= []
+  constructor: (props, context) ->
+    super(props, context)
+    @state = {}
 
+  render: ->
     <ul>
       {@renderAnswers()}
       {@renderOther()}
@@ -17,7 +18,7 @@ class MultiAnswerQuestion extends React.Component
       <li className="answer" key={answer}>
         <label htmlFor={@props.data.id + answer}>
           <input
-            checked={answer in @props.answer?.selected}
+            checked={answer in (@props.answer?.selected || [])}
             type="checkbox"
             onChange={@handleChange}
             value={answer}
@@ -53,7 +54,7 @@ class MultiAnswerQuestion extends React.Component
     if @props.data.other
       <li className="answer" key="other">
         <label>
-          <input checked={"other" in @props.answer?.selected}
+          <input checked={"other" in (@props.answer?.selected || [])}
             type="checkbox" onChange={@handleChange} value="other"
             name={@props.data.id}
           />
@@ -64,7 +65,7 @@ class MultiAnswerQuestion extends React.Component
       </li>
 
   renderOtherField: =>
-    if "other" in @props.answer?.selected
+    if "other" in (@props.answer?.selected || [])
       <input type="text" value={@props.data.other_answer}
         onChange={@props.onOtherChange}/>
 

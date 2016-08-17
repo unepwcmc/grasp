@@ -2,6 +2,10 @@ React = require("react")
 Question = require("components/question")
 
 class SingleAnswerQuestion extends React.Component
+  constructor: (props, context) ->
+    super(props, context)
+    @state = {}
+
   render: ->
     <ul>
       {@renderAnswers()}
