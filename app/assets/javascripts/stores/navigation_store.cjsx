@@ -2,8 +2,10 @@
 
 class NavigationStore extends EventEmitter
   PAGE_CHANGE_EVENT = "page_change"
+  TAB_CHANGE_EVENT  = "tab_change"
 
   currentPage = 0
+  tabsIndexesPerPage = []
   pages = {}
 
   loadPages: (sourcePages) ->
@@ -28,20 +30,24 @@ class NavigationStore extends EventEmitter
       }
     )
 
-  currentPage: ->
-    currentPage
+  currentPage:       -> currentPage
+  tabForCurrentPage: -> tabsIndexesPerPage[currentPage] || 0
+
+  selectTab: (i) ->
+    tabsIndexesPerPage[currentPage] = i
+    @emit(TAB_CHANGE_EVENT)
 
   previousPage: =>
     currentPage -= 1
-    until @isVisible(pages[currentPage])
-      currentPage -= 1
+    currentPage -= 1 until @isVisible(pages[currentPage])
+
     window.scrollTo(0, 0)
     @emit(PAGE_CHANGE_EVENT)
 
   nextPage: =>
     currentPage += 1
-    until @isVisible(pages[currentPage])
-      currentPage += 1
+    currentPage += 1 until @isVisible(pages[currentPage])
+
     window.scrollTo(0, 0)
     @emit(PAGE_CHANGE_EVENT)
 
@@ -51,8 +57,7 @@ class NavigationStore extends EventEmitter
     answers   = QuestionnaireStore.getAnswers()
     answers[page.show_if]?.selected?[page.id]
 
-  addPageChangeListener: (callback) =>
-    @on(PAGE_CHANGE_EVENT, callback)
-
+  addPageChangeListener: (callback) => @on(PAGE_CHANGE_EVENT, callback)
+  addTabChangeListener:  (callback) => @on(TAB_CHANGE_EVENT,  callback)
 
 module.exports = new NavigationStore()

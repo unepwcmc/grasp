@@ -42,7 +42,6 @@ class MultiAnswerQuestion extends React.Component
 
     @showChildren()
 
-
   showChildren: =>
     for answer, children of @props.data.children
       if answer in @props.answer?.selected

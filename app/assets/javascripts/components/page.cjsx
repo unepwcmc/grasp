@@ -1,5 +1,6 @@
 React = require("react")
 Question = require("components/question")
+TabControls = require("components/tab_controls")
 
 module.exports = class Page extends React.Component
   constructor: (props, context) ->
@@ -9,7 +10,11 @@ module.exports = class Page extends React.Component
   render: ->
     <div>
       <h1 className="page__title">{@props.data.title}</h1>
-      {@tabsDividers()}
+      <TabControls
+        answers={@props.answers}
+        pageId={@props.data.id}
+        show={@props.data.multiple}
+      />
       <div>{@renderQuestions()}</div>
     </div>
 
@@ -21,11 +26,3 @@ module.exports = class Page extends React.Component
         answer={@props.answers[question.id] || null}
         data={question}
       />
-
-  tabsDividers: =>
-    return null unless @props.data.multiple
-
-    numOfTabs = (@props.answers["quantities"]?["selected"]?[@props.data.id] || 1)
-    for i in [0..numOfTabs-1]
-      <span>Ape #{i+1}</span>
-

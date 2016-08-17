@@ -18,6 +18,7 @@ class Questionnaire extends React.Component
 
   componentDidMount: ->
     NavigationStore.addPageChangeListener(@onChange)
+    NavigationStore.addTabChangeListener(@onChange)
     QuestionnaireStore.addChangeListener(@onChange)
 
   render: ->
