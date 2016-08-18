@@ -82,6 +82,9 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano-sidekiq (0.5.4)
+      capistrano
+      sidekiq (>= 3.4)
     choice (0.2.0)
     codeclimate-test-reporter (0.6.0)
       simplecov (>= 0.7.1, < 1.0.0)
@@ -249,6 +252,7 @@ DEPENDENCIES
   capistrano-passenger (~> 0.2.0)
   capistrano-rails
   capistrano-rvm (~> 0.1)
+  capistrano-sidekiq
   codeclimate-test-reporter
   devise (~> 4.2.0)
   dotenv-rails (~> 2.1.1)
