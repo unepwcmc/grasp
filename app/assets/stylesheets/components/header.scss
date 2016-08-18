@@ -2,22 +2,34 @@ $header__height: 7rem;
 
 @include b(header) {
   width: 100%;
-  height: $header__height;
   box-sizing: border-box;
-
   background-color: $blue;
 
   @include e(inner) {
     width: $main__width;
     margin: auto;
-
     color: $white;
     line-height: $header__height;
+    overflow: hidden;
+    ul {
+      margin-bottom: 0;
+      li {
+        display: inline-block;
+        margin-bottom: 0;
+      }
+    }
   }
 
   @include e(right-side) {
     float: right;
     line-height: $header__height;
+    @media screen and (max-width: $break__phone) {
+      ul {
+        li {
+          display: block;
+        }
+      }
+    }
   }
 
   @include e(main-logo) {
@@ -29,6 +41,17 @@ $header__height: 7rem;
     line-height: 3.6rem;
     text-decoration: none;
     font-weight: 700;
+  }
+
+  @include e(lower) {
+    background-color: $chambray;
+    .header__inner {
+      .header__right-side {
+        @media screen and (max-width: $break__phone) {
+          float:none;
+        }
+      }
+    }
   }
 
   @include e(menu-button) {

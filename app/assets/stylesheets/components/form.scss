@@ -21,6 +21,11 @@
     }
   }
 
+  select {
+    border: 1px solid $input__border-color;
+    border-radius: 0;
+  }
+
   input[type=text], input[type=email], input[type=url], input[type=password],
   textarea, .select2 {
     width: 100%;
