@@ -14,6 +14,8 @@ class Ability
     when "provider"
       can :create, Report
       can :read, Report, user: {agency_id: user.agency.id}
+      can :update, Report, user: user
+      can :destroy, Report, user: user
     else
     end
 
