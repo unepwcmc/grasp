@@ -16,13 +16,13 @@ class ReportsController < ApplicationController
       @user_reports = Sorter.sort(user_reports, params[:sort], params[:dir]).page(user_page)
 
       agency_page     = params[:table] == "agency" ? params[:page] : 0
-      agency_reports  = current_user.agency&.reports || Report.none
+      agency_reports  = Report.accessible_by(current_ability)
       @agency_reports = Sorter.sort(agency_reports, params[:sort], params[:dir]).page(agency_page)
     else
       @reports = Report.search(search_params)
     end
 
-    if defined?(@reports)
+    if @reports
       @reports = Sorter.sort(@reports, params[:sort], params[:dir]).page(params[:page])
     end
   end

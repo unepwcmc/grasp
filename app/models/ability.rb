@@ -13,7 +13,7 @@ class Ability
       can :validate, Report
     when "provider"
       can :create, Report
-      can :read, Report
+      can :read, Report, user: {agency_id: user.agency.id}
     else
     end
 
