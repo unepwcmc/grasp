@@ -1,20 +1,19 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
 
-  root 'reports#index'
-
+  root "reports#index"
 
   resources :agencies
   resources :reports
   resources :validations, only: [:new, :create]
 
   namespace :admin do
-    resources :users, controller: 'users'
+    resources :users, controller: "users"
   end
 
-  get '/search', to: 'reports#search', as: 'search_reports'
-  get '/export', to: 'reports#export', as: 'export_reports'
-  get "/reports/:id/validate", to: "reports#validate", as: 'validate_report'
+  get "/search", to: "reports#search", as: "search_reports"
+  get "/export", to: "reports#export", as: "export_reports"
+  get "/reports/:id/validate", to: "reports#validate", as: "validate_report"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
