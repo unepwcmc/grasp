@@ -49,25 +49,29 @@ class QuestionnaireStore extends EventEmitter
 
   requiredQuestionsAnswered: ->
     allAnswered = true
-    for page, pageIndex in NavigationStore.getPages()
-      if NavigationStore.isPageVisible(page)
-        for questionId in page.questions
-          question = questionnaire[questionId]
 
-          if question.required
-            if page.multiple
-              answersForPage = report.answers[page.id]
+    for page, pageIndex in NavigationStore.getPages() when NavigationStore.isPageVisible(page)
+      for questionId in page.questions
+        question = questionnaire[questionId]
 
-              if answersForPage
-                for answersInTab in answersForPage
-                  unless answersInTab[question.id]?.selected != ""
-                    allAnswered = false
-              else
-                allAnswered = false
+        if page.multiple
+          answersForPage = report.answers[page.id]
 
-            else
-              unless report.answers[question.id]?.selected != ""
-                allAnswered = false
+          if answersForPage
+            for answersInTab, tabIndex in answersForPage
+              if question.required and NavigationStore.isQuestionVisible(question, page, tabIndex)
+                if answersInTab[question.id] is undefined or answersInTab[question.id]?.selected == ""
+                  console.log("question #{question.id} not answered")
+                  allAnswered = false
+          else
+            allAnswered = false if question.required
+
+        else
+          if question.required and NavigationStore.isQuestionVisible(question, page)
+            if report.answers[question.id] is undefined or report.answers[question.id]?.selected == ""
+              console.log("question #{question.id} not answered")
+              console.log(report.answers)
+              allAnswered = false
 
     allAnswered
 

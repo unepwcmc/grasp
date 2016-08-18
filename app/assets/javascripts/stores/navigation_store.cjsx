@@ -56,16 +56,15 @@ class NavigationStore extends EventEmitter
     window.scrollTo(0, 0)
     @emit(PAGE_CHANGE_EVENT)
 
-  isQuestionVisible: (question) =>
+  isQuestionVisible: (question, page=pages[currentPageIndex], tabIndex=@tabIndexForCurrentPage()) =>
     return true unless question.show_if
 
     QuestionnaireStore = require("stores/questionnaire_store")
     answers   = QuestionnaireStore.getAnswers()
     questions = QuestionnaireStore.getQuestions()
 
-    currentPage = pages[currentPageIndex]
-    if currentPage.multiple
-      answers[currentPage.id]?[@tabIndexForCurrentPage()]?[question.show_if.question]?.selected == question.show_if.answer
+    if page.multiple
+      answers[page.id]?[tabIndex]?[question.show_if.question]?.selected == question.show_if.answer
     else
       answers[question.show_if.question]?.selected == question.show_if.answer
 
