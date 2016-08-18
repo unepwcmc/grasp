@@ -1,3 +1,4 @@
+_ = require("underscore")
 {EventEmitter} = require("events")
 
 class NavigationStore extends EventEmitter
@@ -16,19 +17,20 @@ class NavigationStore extends EventEmitter
     questions = QuestionnaireStore.getQuestions()
     page = pages[currentPageIndex]
 
-    visibleQuestions = page.questions.filter( (questionId) =>
-      @isQuestionVisible(questions[questionId])
-    ).map( (questionId) ->
+    allQuestions = page.questions.map( (questionId) ->
       question = questions[questionId]
       question.uniqueId = questionId
       question
     )
 
+    visibleQuestions = allQuestions.filter( (question) => @isQuestionVisible(question))
+
     {
       id: page.id,
       title: page.title,
       multiple: page.multiple,
-      questions: visibleQuestions
+      questions: visibleQuestions,
+      allQuestions: allQuestions
     }
 
   getPages:    -> pages
@@ -75,6 +77,39 @@ class NavigationStore extends EventEmitter
     QuestionnaireStore = require("stores/questionnaire_store")
     answers   = QuestionnaireStore.getAnswers()
     answers[page.show_if]?.selected?[page.id]
+
+  updateAnswers: =>
+    QuestionnaireStore = require("stores/questionnaire_store")
+    answers = QuestionnaireStore.getAnswers()
+    questions = QuestionnaireStore.getQuestions()
+
+    tabIndex = @tabIndexForCurrentPage()
+    page = pages[currentPageIndex]
+
+    allQuestions = page.questions.map( (questionId) ->
+      question = questions[questionId]
+      question.uniqueId = questionId
+      question
+    )
+
+    for key, question of allQuestions
+      unless question.type == "multi"
+        if page.multiple
+          selected = answers[page.id]?[tabIndex]?[question.id]?.selected
+          if question.answers? and selected not in @allAnswersForQuestion(allQuestions, question.id)
+            QuestionnaireStore.nullAnswer(question.id, false)
+        else
+          if question.answers? and answers[question.id]?.selected not in @allAnswersForQuestion(allQuestions, question.id)
+            QuestionnaireStore.nullAnswer(question.id, false)
+
+  allAnswersForQuestion: (allQuestions, questionId) =>
+    _.chain(allQuestions)
+      .filter((question, _key) -> question.id == questionId)
+      .filter((question, _key) => @isQuestionVisible(question))
+      .map((question, _key) -> question.answers)
+      .flatten()
+      .compact()
+      .value()
 
   addPageChangeListener: (callback) => @on(PAGE_CHANGE_EVENT, callback)
   addTabChangeListener:  (callback) => @on(TAB_CHANGE_EVENT,  callback)
