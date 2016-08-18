@@ -27,8 +27,10 @@
     </div>
   <% end -%>
 
-  <%= f.submit "Log in", class: 'form__submit button button-secondary' %>
+  <div class="form__submit">
+    <%= f.submit "Log in", class: 'button button-secondary' %>
+    <%= link_to 'Forgot your password?', new_user_password_path, class: 'button button-secondary' %>
+  </div>
 <% end %>
 
-<%= link_to 'Forgot your password?', new_user_password_path, class: 'button button-secondary' %>
 

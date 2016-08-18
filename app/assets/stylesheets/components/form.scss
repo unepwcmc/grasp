@@ -39,6 +39,8 @@
   @media screen and (max-width: $break__tablet) {
     position: relative;
     left: 0;
-    width: 100%;
+    .button {
+      width: 100%;
+    }
   }
 }
