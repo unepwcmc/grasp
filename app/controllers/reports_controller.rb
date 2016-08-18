@@ -7,15 +7,16 @@ class ReportsController < ApplicationController
 
   def index
     if current_user.is_role?(:validator)
-      @reports = Report.where("data->>'state' = ? or id in (?)", "submitted", current_user.validations.pluck(:report_id))
+      reports = Report.where("data->>'state' = :state or id in (:validated_report_ids)",
+                  state: "submitted",
+                  validated_report_ids: current_user.validations.pluck(:report_id)
+                )
+      @reports  = ExpertiseMatcher.filter_by_users_expertise(reports, current_user)
     else
       @reports = Report.search(search_params)
     end
 
-    @reports = Sorter.sort(
-      @reports, params[:sort], params[:dir]
-    ).page(params[:page])
-
+    @reports = Sorter.sort(@reports, params[:sort], params[:dir]).page(params[:page])
   end
 
   def new
