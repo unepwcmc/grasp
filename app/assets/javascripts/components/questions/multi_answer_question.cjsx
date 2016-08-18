@@ -33,21 +33,8 @@ class MultiAnswerQuestion extends React.Component
   handleChange: (e) =>
     if e.target.checked
       QuestionnaireStore.addAnswer(@props.data.id, e.target.value)
-      @props.answer?.selected ||= []
-      @props.answer?.selected.push(e.target.value)
     else
       QuestionnaireStore.removeAnswer(@props.data.id, e.target.value)
-      @props.answer?.selected ||= []
-      @props.answer?.selected = @props.answer?.selected.filter (word) -> word isnt e.target.value
-
-    @showChildren()
-
-  showChildren: =>
-    for answer, children of @props.data.children
-      if answer in @props.answer?.selected
-        QuestionnaireStore.show(child) for child in children
-      else
-        QuestionnaireStore.hide(child) for child in children
 
   renderOther: =>
     if @props.data.other

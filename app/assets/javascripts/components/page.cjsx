@@ -1,6 +1,7 @@
 React = require("react")
 Question = require("components/question")
 TabControls = require("components/tab_controls")
+NavigationStore = require("stores/navigation_store")
 
 module.exports = class Page extends React.Component
   constructor: (props, context) ->
@@ -23,6 +24,13 @@ module.exports = class Page extends React.Component
       <Question
         mode={@props.mode}
         key={question.id}
-        answer={@props.answers[question.id] || null}
+        answer={@getAnswers(question.id)}
         data={question}
       />
+
+  getAnswers: (questionId) =>
+    if @props.data.multiple
+      activeTab = NavigationStore.tabIndexForCurrentPage()
+      @props.answers[@props.data.id]?[activeTab]?[questionId] || null
+    else
+      @props.answers[questionId] || null

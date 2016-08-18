@@ -21,6 +21,6 @@ module.exports = class TabControls extends React.Component
 
   buildClassName: (i) ->
     name = "page-controls__control"
-    name += " is-selected" if NavigationStore.tabForCurrentPage() == i
+    name += " is-selected" if NavigationStore.tabIndexForCurrentPage() == i
 
     name

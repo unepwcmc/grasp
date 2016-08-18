@@ -12,7 +12,6 @@ class Questionnaire extends React.Component
     @state = {
       currentPage: NavigationStore.currentPage(),
       mode: QuestionnaireStore.getMode(),
-      pages: NavigationStore.allPages(),
       answers: QuestionnaireStore.getAnswers()
     }
 
@@ -24,24 +23,36 @@ class Questionnaire extends React.Component
   render: ->
     <div className="questionnaire">
       {@renderCurrentPage()}
-      <PageControls maxPages={@state.pages.length} currentPage={@state.currentPage}/>
+      <PageControls/>
       <SaveButton/>
       {@renderSubmitButton()}
     </div>
 
   renderCurrentPage: =>
-    if @state.pages[@state.currentPage]?.questions.length > 0
-      <Page mode={@state.mode} answers={@state.answers} data={@state.pages[@state.currentPage]}/>
+    if @state.currentPage?.questions.length > 0
+      <Page mode={@state.mode} answers={@state.answers} data={@state.currentPage}/>
 
-  renderSubmitButton: =>
-    if QuestionnaireStore.requiredQuestionsAnswered()
-      <SubmitButton/>
+  renderSubmitButton: ->
+    <SubmitButton/> if QuestionnaireStore.requiredQuestionsAnswered()
 
   onChange: =>
     @setState({
       currentPage: NavigationStore.currentPage(),
-      pages: NavigationStore.allPages(),
+      mode: QuestionnaireStore.getMode(),
       answers: QuestionnaireStore.getAnswers()
     })
+
+  componentDidUpdate: (prev, now) =>
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+    for key, question of @state.currentPage.questions
+      if @state.currentPage.multiple
+        unless question.type == "multi"
+          if question.answers? and @state.answers[@state.currentPage.id]?[tabIndex]?[question.id]?.selected not in question.answers
+            QuestionnaireStore.nullAnswer(question.id, false)
+      else
+        unless question.type == "multi"
+          if question.answers? and @state.answers[question.id]?.selected not in question.answers
+            QuestionnaireStore.nullAnswer(question.id, false)
+
 
 module.exports = Questionnaire

@@ -10,13 +10,13 @@ module.exports = class PageControls extends React.Component
     </div>
 
   renderNextPage: =>
-    if @props.currentPage < @props.maxPages - 1
+    unless NavigationStore.isLastPage()
       <button onClick={@nextPage} className="page-controls__control">
         Next step
       </button>
 
   renderPreviousPage: =>
-    if @props.currentPage > 0
+    unless NavigationStore.isFirstPage()
       <button onClick={@previousPage} className="page-controls__control">
         Previous step
       </button>

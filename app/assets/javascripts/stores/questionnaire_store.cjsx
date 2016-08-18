@@ -31,15 +31,15 @@ class QuestionnaireStore extends EventEmitter
     report.id = id
     report.answers = data.answers
     report.state = data.state
-
     @emit(CHANGE_EVENT)
-    @show(key) for key, _answer of report.answers
 
   startAutoSave: ->
     autoSaveTimer = setInterval(@saveOrUpdateReport, autoSaveInterval)
 
   stopAutoSave: ->
     clearInterval(autoSaveTimer) if autoSaveTimer
+
+  allQuestionIds: -> questionnaire.map( (el) -> el.id )
 
   setMode: (mode) -> questionnaireMode = mode
   getMode: -> questionnaireMode
@@ -49,17 +49,52 @@ class QuestionnaireStore extends EventEmitter
 
   requiredQuestionsAnswered: ->
     allAnswered = true
-    for _key, question of questionnaire.questions
-      required = question.visible and question.required
+    for page, pageIndex in NavigationStore.getPages()
+      if NavigationStore.isPageVisible(page)
+        for questionId in page.questions
+          question = questionnaire[questionId]
 
-      if required and report.answers[question.id]?.selected == ""
-        allAnswered = false
+          if question.required
+            if page.multiple
+              answersForPage = report.answers[page.id]
+
+              if answersForPage
+                for answersInTab in answersForPage
+                  unless answersInTab[question.id]?.selected != ""
+                    allAnswered = false
+              else
+                allAnswered = false
+
+            else
+              unless report.answers[question.id]?.selected != ""
+                allAnswered = false
+
     allAnswered
 
   selectAnswer: (key, answer) ->
-    report.answers[key] ||= {}
-    report.answers[key].selected = answer
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+
+    if currentPage.multiple
+      report.answers[currentPage.id] ||= []
+      report.answers[currentPage.id][tabIndex] ||= {}
+      report.answers[currentPage.id][tabIndex][key] ||= {}
+      report.answers[currentPage.id][tabIndex][key].selected = answer
+    else
+      report.answers[key] ||= {}
+      report.answers[key].selected = answer
     @emit(CHANGE_EVENT)
+
+  nullAnswer: (key, fireChange=true) ->
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+
+    if currentPage.multiple
+      delete report.answers[currentPage.id]?[tabIndex]?[key]
+    else
+      delete report.answers[key]
+
+    @emit(CHANGE_EVENT) if fireChange
 
   updateOtherAnswer: (key, text) ->
     report.answers[key] ||= {}
@@ -67,31 +102,37 @@ class QuestionnaireStore extends EventEmitter
     @emit(CHANGE_EVENT)
 
   addAnswer: (key, answer) ->
-    report.answers[key] ||= {}
-    report.answers[key].selected ||= []
-    report.answers[key].selected.push(answer)
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+
+    if currentPage.multiple
+      report.answers[currentPage.id] ||= []
+      report.answers[currentPage.id][tabIndex] ||= {}
+      report.answers[currentPage.id][tabIndex][key] ||= {}
+      report.answers[currentPage.id][tabIndex][key].selected ||= []
+      report.answers[currentPage.id][tabIndex][key].selected.push(answer)
+    else
+      report.answers[key] ||= {}
+      report.answers[key].selected ||= []
+      report.answers[key].selected.push(answer)
     @emit(CHANGE_EVENT)
 
   removeAnswer: (key, answer) ->
-    report.answers[key] ||= {}
-    report.answers[key].selected = (report.answers[key].selected || []).filter(word -> word isnt answer)
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+
+    if currentPage.multiple
+      report.answers[currentPage.id] ||= []
+      report.answers[currentPage.id][tabIndex] ||= {}
+      report.answers[currentPage.id][tabIndex][key] ||= {}
+      report.answers[currentPage.id][tabIndex][key].selected = (report.answers[currentPage.id][tabIndex][key].selected || []).filter(word -> word isnt answer)
+    else
+      report.answers[key] ||= {}
+      report.answers[key].selected = (report.answers[key].selected || []).filter(word -> word isnt answer)
     @emit(CHANGE_EVENT)
 
-  show: (key) =>
-    questionnaire.questions[key]?.visible = true
-    @emit(CHANGE_EVENT)
-    @emit(VISIBILITY_EVENT, key, "show")
-
-  hide: (key) =>
-    questionnaire.questions[key].visible = false
-    @emit(CHANGE_EVENT)
-    @emit(VISIBILITY_EVENT, key, "hide")
-
-  addChangeListener: (callback) =>
-    @on(CHANGE_EVENT, callback)
-
-  addVisibilityListener: (callback) =>
-    @on(VISIBILITY_EVENT, callback)
+  addChangeListener:     (callback) => @on(CHANGE_EVENT,     callback)
+  addVisibilityListener: (callback) => @on(VISIBILITY_EVENT, callback)
 
   saveOrUpdateReport: (callback) =>
     if report.id?
