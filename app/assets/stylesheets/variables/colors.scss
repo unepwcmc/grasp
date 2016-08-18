@@ -37,6 +37,7 @@ $blue:        $steel-blue;
 
 $font__color: $timber-green;
 $font__color--headline: $nevada;
+$link__color: $steel-blue;
 
 // Buttons
 
@@ -58,3 +59,9 @@ $button__border-color--secondary--hover:  $danube;
 // Forms
 
 $input__border-color: $silver-sand;
+
+// Tables
+
+$table-head__bottom-border: $silver-sand;
+$table-row__bg-color: lighten($periwinkle-grey, 5%);
+$table-row__border-color: $silver-sand;

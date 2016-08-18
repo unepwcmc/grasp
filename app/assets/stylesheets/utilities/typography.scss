@@ -12,6 +12,10 @@ h1 {
   font-size: 4.5em;
 }
 
+a {
+  color: $link__color;
+}
+
 .headline {
   font-size: 1.063em;
   color: $font__color--headline;

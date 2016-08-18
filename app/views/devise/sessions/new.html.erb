@@ -2,6 +2,8 @@
 <%= content_for :breadcrumbs, "Sign In" %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
   <div class="form__group">
     <%= f.label :email %>
     <div class="form__field">
@@ -25,6 +27,8 @@
     </div>
   <% end -%>
 
-  <%= f.submit "Log in", class: 'form__submit' %>
+  <%= f.submit "Log in", class: 'form__submit button button-secondary' %>
 <% end %>
+
+<%= link_to 'Forgot your password?', new_user_password_path, class: 'button button-secondary' %>
 
