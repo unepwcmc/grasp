@@ -61,7 +61,6 @@ class QuestionnaireStore extends EventEmitter
             for answersInTab, tabIndex in answersForPage
               if question.required and NavigationStore.isQuestionVisible(question, page, tabIndex)
                 if answersInTab[question.id] is undefined or answersInTab[question.id]?.selected == ""
-                  console.log("question #{question.id} not answered")
                   allAnswered = false
           else
             allAnswered = false if question.required
@@ -69,8 +68,6 @@ class QuestionnaireStore extends EventEmitter
         else
           if question.required and NavigationStore.isQuestionVisible(question, page)
             if report.answers[question.id] is undefined or report.answers[question.id]?.selected == ""
-              console.log("question #{question.id} not answered")
-              console.log(report.answers)
               allAnswered = false
 
     allAnswered
