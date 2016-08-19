@@ -1,0 +1,69 @@
+@import 'variables/colors';
+@import 'https://fonts.googleapis.com/css?family=Merriweather+Sans:300,400,700|Source+Sans+Pro:700';
+
+
+body {
+  font-family: 'Merriweather Sans', sans-serif;
+  color: $font__color;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1 {
+  font-size: 4.5em;
+}
+
+h2 {
+  font-size: 3.375em;
+}
+
+h3 {
+  font-size: 2.5em;
+}
+
+h4 {
+  font-size: 1.875em;
+}
+
+h5 {
+  font-size: 1.375em
+}
+
+a {
+  color: $link__color;
+
+  &:hover {}
+}
+
+.headline {
+  font-size: 1.063em;
+  color: $font__color--headline;
+}
+
+.medium {
+  font-size: 1.375em;
+}
+
+.large {
+  font-size: 1.875em;
+}
+
+.x-large {
+  font-size: 2.5em;
+}
+
+.xx-large {
+  font-size: 3.375em;
+}
+
+.xxx-large {
+  font-size: 4.5em;
+}
+
+.xxxx-large {
+  font-size: 6em;
+}
+
+

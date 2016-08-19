@@ -2,22 +2,55 @@ $header__height: 7rem;
 
 @include b(header) {
   width: 100%;
-  height: $header__height;
   box-sizing: border-box;
-
   background-color: $blue;
 
   @include e(inner) {
     width: $main__width;
     margin: auto;
-
     color: $white;
     line-height: $header__height;
+    overflow: hidden;
+    ul {
+      margin-bottom: 0;
+      li {
+        display: inline-block;
+        margin-bottom: 0;
+        margin-left: 1rem;
+        a {
+          color: $white;
+        }
+      }
+    }
   }
 
   @include e(right-side) {
     float: right;
     line-height: $header__height;
+
+    @media screen and (max-width: $break__phone) {
+      ul {
+        li {
+          display: block;
+          line-height: 5rem;
+        }
+      }
+    }
+  }
+
+  @include e(left-side) {
+    float:left;
+    line-height: $header__height;
+
+    @media screen and (max-width: $break__phone) {
+      /*display: none;*/
+      ul {
+        li {
+          display: block;
+          line-height: 5rem;
+        }
+      }
+    }
   }
 
   @include e(main-logo) {
@@ -29,6 +62,23 @@ $header__height: 7rem;
     line-height: 3.6rem;
     text-decoration: none;
     font-weight: 700;
+  }
+
+  @include e(lower) {
+    background-color: $chambray;
+    .header__inner {
+      .header__right-side {
+        @media screen and (max-width: $break__phone) {
+          float:none;
+        }
+      }
+    }
+    @media screen and (max-width: $break__phone) {
+      /*display: none;*/
+    }
+    @media screen and (min-width: $break__phone) {
+      display: visible;
+    }
   }
 
   @include e(menu-button) {
@@ -48,6 +98,10 @@ $header__height: 7rem;
       color: $blue;
       background-color: $white;
       border: solid 2px $white;
+    }
+
+    @media screen and (min-width: $break__phone) {
+      display: none;
     }
   }
 }

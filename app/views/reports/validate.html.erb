@@ -2,7 +2,7 @@
 <%= content_for :breadcrumbs, "Validate Report" %>
 <%= content_for :page_buttons do %>
   <% if can? :validate, @report %>
-    <%= link_to 'View Full Report', report_path(@report), class: 'button' %>
+    <%= link_to 'View Full Report', report_path(@report), class: 'button button-primary' %>
   <% end %>
 <% end %>
 

@@ -1,5 +1,8 @@
 @include b(breadcrumbs) {
   margin-bottom: 2rem;
+  @media screen and (max-width: $break__phone) {
+    display: none;
+  }
 
   @include e(divider) {
     vertical-align: sub;

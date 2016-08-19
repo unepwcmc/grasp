@@ -1,16 +1,33 @@
 <header class="header">
   <div class="header__inner">
     <a class="header__main-logo" href="<%= reports_path %>">GRASP</a>
-    <%= render 'layouts/nav' %>
 
     <div class="header__right-side">
-      <% if user_signed_in? %>
-        Signed in as <%= current_user.email %>
-        <%= link_to "Sign Out", destroy_user_session_path, class: 'button button-primary' %>
-      <% else %>
-        <%= link_to "Sign In", new_user_session_path, class: 'button button-primary' %>
-      <% end %>
-      <button class="header__menu-button">Menu</button>
+      <button class="header__menu-button header__menu-button">Menu</button>
+    </div>
+
+    <div class="header__left-side">
+      <ul>
+        <li><%= link_to 'Reports', reports_path %></li>
+        <li><%= link_to 'Users', admin_users_path %></li>
+        <li><%= link_to 'Agencies', agencies_path %></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="header__lower">
+    <div class="header__inner">
+      <div class="header__right-side">
+        <ul>
+          <li>Hi <%= current_user.first_name.titleize %></li>
+          <li><%= link_to 'My Profile', edit_user_registration_path %></li>
+          <li>
+            <%= link_to destroy_user_session_path do %>
+              Log out <i class="fa fa-sign-out"></i>
+            <% end %>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </header>

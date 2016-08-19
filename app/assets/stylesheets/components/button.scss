@@ -1,0 +1,33 @@
+@import 'variables/colors';
+
+@mixin button {
+  border-radius: 1.8em;
+  background-color: $button__bg-color;
+  border: 2px solid $button__border-color;
+  text-transform: none;
+  @content
+}
+
+.button, .button.button-primary, button.button-primary, input.button-primary[type="submit"], input.button-primary[type="reset"], input.button-primary[type="button"] {
+  @include button;
+
+  &:hover {
+    background-color: $button__bg-color--hover;
+    border: 2px solid $button__bg-color--hover;
+  }
+
+  &.button-secondary, .button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, .button:focus, button:focus, input[type="submit"]:focus, input[type="reset"]:focus, input[type="button"]:focus {
+    @include button {
+      border: 2px solid $button__border-color--secondary;
+      background-color: $button__bg-color--secondary;
+      color: $button__color--secondary;
+    }
+
+    &:hover {
+      border: 2px solid $button__border-color--secondary--hover;
+      background-color: $button__bg-color--secondary--hover;
+      color: $button__color--secondary--hover;
+    }
+  }
+}
+

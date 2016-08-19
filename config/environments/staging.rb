@@ -99,4 +99,5 @@ Rails.application.configure do
     user_name: Rails.application.secrets.mailer['username'],
     password: Rails.application.secrets.mailer['password']
   }
+  config.action_mailer.default_url_options = { host: Rails.application.secrets.mailer['host'] }
 end

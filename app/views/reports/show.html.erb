@@ -2,7 +2,7 @@
 <%= content_for :breadcrumbs, "View Report" %>
 <%= content_for :page_buttons do %>
   <% if can? :update, @report %>
-    <%= link_to 'Edit Report', edit_report_path(@report), class: 'button' %>
+    <%= link_to 'Edit Report', edit_report_path(@report), class: 'button button-primary' %>
   <% end %>
 <% end %>
 

@@ -1,8 +1,70 @@
-// color palette
-$white: #fff;
-$grey: #e8eaeb;
-$grey--dark: #a5acaf;
-$blue: #1d2e36;
+// Use name that color to come up with unique, memorable color names
+//http://chir.ag/projects/name-that-color
 
-// color variables
-$main__color: #333;
+// Use BEM for naming convention
+// B - Block (button, page-header etc)
+// E - Element/the CSS property (bg-color, border-color, etc)
+// M - Modifiers (state or variation like secondary or hover, multiple can be chained)
+
+// Color Palette
+
+$timber-green:    #1c2e36;
+$limed-spruce:    #3e4e54;
+$nevada:          #606d72;
+$oslo-grey:       #838d91;
+$grey-chateau:    #a5acaf;
+$silver-sand:     #c7cbcd;
+$porcelain:       #e8eaeb;
+
+$steel-blue:      #4578bc;
+$polo-blue:       #99b5da;
+$periwinkle-grey: #d0ddee;
+$chambray:        #376096;
+$danube:          #6193c9;
+
+$guardsman-red:   #bf0404;
+$green-leaf:      #417505;
+$white:           #ffffff;
+
+// Config
+
+$main__color: $timber-green;
+$grey:        $silver-sand;
+$grey--dark:  $limed-spruce;
+$blue:        $steel-blue;
+
+// Fonts
+
+$font__color: $timber-green;
+$font__color--headline: $nevada;
+$link__color: $steel-blue;
+
+// Buttons
+
+// - Primary
+$button__bg-color:                        $chambray;
+$button__border-color:                    $button__bg-color;
+
+$button__bg-color--hover:                 $danube;
+
+// - Secondary
+$button__bg-color--secondary:             $white;
+$button__border-color--secondary:         $danube;
+$button__color--secondary:                $danube;
+
+$button__bg-color--secondary--hover:      $danube;
+$button__color--secondary--hover:         $white;
+$button__border-color--secondary--hover:  $danube;
+
+// Forms
+
+$input__border-color: $silver-sand;
+$select-2-tag__bg-color: $periwinkle-grey;
+$select-2-tag__border-color: $periwinkle-grey;
+$select-2-tag__color: $steel-blue;
+
+// Tables
+
+$table-head__bottom-border: $silver-sand;
+$table-row__bg-color: lighten($periwinkle-grey, 5%);
+$table-row__border-color: $silver-sand;
