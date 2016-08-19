@@ -15,19 +15,21 @@
     </div>
   </div>
 
-  <div class="header__lower">
-    <div class="header__inner">
-      <div class="header__right-side">
-        <ul>
-          <li>Hi <%= current_user.first_name.titleize %></li>
-          <li><%= link_to 'My Profile', edit_user_registration_path %></li>
-          <li>
-            <%= link_to destroy_user_session_path do %>
-              Log out <i class="fa fa-sign-out"></i>
-            <% end %>
-          </li>
-        </ul>
+  <% if user_signed_in? %>
+    <div class="header__lower">
+      <div class="header__inner">
+        <div class="header__right-side">
+          <ul>
+            <li>Hi <%= current_user.first_name.titleize %></li>
+            <li><%= link_to 'My Profile', edit_user_registration_path %></li>
+            <li>
+              <%= link_to destroy_user_session_path do %>
+                Log out <i class="fa fa-sign-out"></i>
+              <% end %>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </header>
