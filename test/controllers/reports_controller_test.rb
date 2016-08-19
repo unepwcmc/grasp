@@ -24,7 +24,7 @@ class ReportsControllerTest < ActionController::TestCase
 
   test "should search for reports by country of discovery" do
     @report = FactoryGirl.create(:report, data: {
-      'questions': {
+      'answers': {
         'country_of_discovery': {
           'selected': 'Mali'
         }
@@ -63,7 +63,7 @@ class ReportsControllerTest < ActionController::TestCase
 
   test "should search for reports by genus" do
     FactoryGirl.create(:report, data: {
-      'questions': {
+      'answers': {
         'genus_dead': {
           'selected': 'Gorilla (gorilla)'
         }
@@ -71,7 +71,7 @@ class ReportsControllerTest < ActionController::TestCase
     })
 
     @report = FactoryGirl.create(:report, data: {
-      'questions': {
+      'answers': {
         'genus_live': {
           'selected': 'Gorilla (gorilla)'
         }
@@ -95,7 +95,7 @@ class ReportsControllerTest < ActionController::TestCase
 
   test "should search for reports by last known location" do
     @report = FactoryGirl.create(:report, data: {
-      'questions': {
+      'answers': {
         'last_known_location_parts': {
           'selected': 'At location of incident'
         }
@@ -110,7 +110,7 @@ class ReportsControllerTest < ActionController::TestCase
 
   test "should search for reports by ape name" do
     @report = FactoryGirl.create(:report, data: {
-      'questions': {
+      'answers': {
         'individual_name_dead': {
           'selected': 'Fred'
         }
@@ -125,7 +125,7 @@ class ReportsControllerTest < ActionController::TestCase
 
   test "should search for reports by ape name (case insensitive and partial completion)" do
     @report = FactoryGirl.create(:report, data: {
-      'questions': {
+      'answers': {
         'individual_name_dead': {
           'selected': 'Fred'
         }

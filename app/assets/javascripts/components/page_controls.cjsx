@@ -1,4 +1,4 @@
-QuestionnaireStore = require("stores/questionnaire_store")
+NavigationStore = require("stores/navigation_store")
 React = require("react")
 Page = require("components/page")
 
@@ -10,16 +10,16 @@ module.exports = class PageControls extends React.Component
     </div>
 
   renderNextPage: =>
-    if @props.currentPage < @props.maxPages - 1
+    unless NavigationStore.isLastPage()
       <button onClick={@nextPage} className="page-controls__control">
         Next step
       </button>
 
   renderPreviousPage: =>
-    if @props.currentPage > 0
+    unless NavigationStore.isFirstPage()
       <button onClick={@previousPage} className="page-controls__control">
         Previous step
       </button>
 
-  previousPage: -> QuestionnaireStore.previousPage()
-  nextPage:     -> QuestionnaireStore.nextPage()
+  previousPage: -> NavigationStore.previousPage()
+  nextPage:     -> NavigationStore.nextPage()

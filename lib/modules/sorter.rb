@@ -4,8 +4,8 @@ module Sorter
     "username" => "users.first_name",
     "agency" => "agencies.name",
     "timestamp" => "reports.created_at",
-    "date_of_discovery" => "reports.data->'questions'->'date_of_discovery'->>'selected'",
-    "confiscated" => "reports.data->'questions'->'confiscated'->>'selected'",
+    "date_of_discovery" => "reports.data->'answers'->'date_of_discovery'->>'selected'",
+    "confiscated" => "reports.data->'answers'->'confiscated'->>'selected'",
     "state" => "reports.data->>'state'",
   }
 

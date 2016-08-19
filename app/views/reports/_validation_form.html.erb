@@ -27,6 +27,8 @@
 
   <%= f.hidden_field :report_id, value: @report.id %>
 
-  <%= f.submit 'Accept', name: 'accept', class: 'form__submit' %>
-  <%= f.submit 'Return', name: 'return', class: 'form__submit' %>
+  <div class="form__submit">
+    <%= f.submit 'Accept', name: 'accept', class: 'button button-primary' %>
+    <%= f.submit 'Return', name: 'return', class: 'button button-secondary' %>
+  </div>
 <% end %>

@@ -2,7 +2,7 @@
 <%= content_for :breadcrumbs, "Validate Report" %>
 <%= content_for :page_buttons do %>
   <% if can? :validate, @report %>
-    <%= link_to 'View Full Report', report_path(@report), class: 'button' %>
+    <%= link_to 'View Full Report', report_path(@report), class: 'button button-primary' %>
   <% end %>
 <% end %>
 
@@ -49,21 +49,21 @@
 <div class="form__group">
   <strong> Country of discovery </strong>
   <div class="form__field">
-    <%= @report.data['questions']['country_of_discovery']['selected'] %>
+    <%= @report.data['answers']['country_of_discovery']['selected'] %>
   </div>
 </div>
 
 <div class="form__group">
   <strong> Law enforcement confiscation? </strong>
   <div class="form__field">
-    <%= @report.data['questions']['confiscated']['selected'] %>
+    <%= @report.data['answers']['confiscated']['selected'] %>
   </div>
 </div>
 
 <div class="form__group">
   <strong> Date of incident </strong>
   <div class="form__field">
-    <%= @report.data['questions']['date_of_discovery']['selected'] %>
+    <%= @report.data['answers']['date_of_discovery']['selected'] %>
   </div>
 </div>
 

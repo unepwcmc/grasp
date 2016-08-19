@@ -2,10 +2,11 @@
 <%= content_for :breadcrumbs, "View Report" %>
 <%= content_for :page_buttons do %>
   <% if can? :update, @report %>
-    <%= link_to 'Edit Report', edit_report_path(@report), class: 'button' %>
+    <%= link_to 'Edit Report', edit_report_path(@report), class: 'button button-primary' %>
   <% end %>
 <% end %>
 
 <div id="report-container" data-report-mode="show" data-report-id=<%= @report.id %>></div>
-<script>var questionnaireJson = <%= raw(@report.data.to_json) %></script>
 
+<script>var questionnaireTemplate = <%= raw(@questionnaire_template) %></script>
+<script>var reportData = <%= raw(@report.data.to_json) %></script>

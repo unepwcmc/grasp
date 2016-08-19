@@ -2,13 +2,13 @@
 <%= content_for :breadcrumbs, "Reports Dashboard" %>
 <%= content_for :page_buttons do %>
   <% if can? :create, Report %>
-    <%= link_to "New Report", new_report_path, class: 'button' %>
+    <%= link_to "New Report", new_report_path, class: 'button button-primary' %>
   <% end %>
   <% if can? :search, @reports %>
-    <%= link_to 'Search Reports', search_reports_path, class: 'button' %>
+    <%= link_to 'Search Reports', search_reports_path, class: 'button button-primary' %>
   <% end %>
   <% if can? :export, @reports %>
-    <%= link_to 'Export to CSV', export_reports_path, class: 'button' %>
+    <%= link_to 'Export to CSV', export_reports_path, class: 'button button-primary' %>
   <% end %>
 <% end %>
 

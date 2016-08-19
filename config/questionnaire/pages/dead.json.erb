@@ -1,6 +1,5 @@
 "genus_dead": {
   "id": "genus_dead",
-  "visible": true,
   "required": true,
   "type": "single",
   "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -11,55 +10,46 @@
     "Gorilla (gorilla)",
     "Orang-utan (pongo)",
     "Unknown"
-  ],
-  "children": {
-    "Chimpanzee (pan)": ["chimpanzee_species_dead"],
-    "Gorilla (gorilla)": ["gorilla_species_dead"],
-    "Orang-utan (pongo)": ["orangutan_species_dead"]
-  }
+  ]
 },
 "chimpanzee_species_dead": {
   "id": "species_subspecies_dead",
-  "visible": false,
-  "type": "single",
+  "type": "subspecies",
+  "show_if": {"question": "genus_dead", "answer": "Chimpanzee (pan)"},
   "question": "Confirmation of Species/subspecies (optional)",
   "answers": [
     "Central chimpanzee (P. t. troglodytes)",
     "Western chimpanzee (P. t. ellioti)",
     "Nigeria-Cameroon chimpanzee (P. t. ellioti)",
     "Eastern chimpanzee (P. t. schweinfurthii)"
-  ],
-  "children": {}
+  ]
 },
 "gorilla_species_dead": {
   "id": "species_subspecies_dead",
-  "visible": false,
-  "type": "single",
+  "type": "subspecies",
+  "show_if": {"question": "genus_dead", "answer": "Gorilla (gorilla)"},
   "question": "Confirmation of Species/subspecies (optional)",
   "answers": [
     "Western lowland gorilla (G. g. gorilla)",
     "Cross River gorilla (G. g. diehli)",
     "Mountain gorilla (G. b. beringei)",
     "Eastern lowland gorilla (G. b. graueri)"
-  ],
-  "children": {}
+  ]
 },
 "orangutan_species_dead": {
   "id": "species_subspecies_dead",
-  "visible": false,
-  "type": "single",
+  "type": "subspecies",
+  "show_if": {"question": "genus_dead", "answer": "Orang-utan (pongo)"},
   "question": "Confirmation of Species/subspecies (optional)",
   "answers": [
     "Bornean orang-utan (Pongo pygmaeus pygmaeus) – northwest populations",
     "Bornean orang-utan (Pongo pygmaeus morio) – east populations",
     "Bornean orang-utan (Pongo pygmaeus wurmbii) – southwest populations",
     "Sumatran orang-utan (Pongo abelii)"
-  ],
-  "children": {}
+  ]
 },
 "intended_use_dead": {
   "id": "intended_use_dead",
-  "visible": true,
   "required": true,
   "type": "single",
   "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -71,20 +61,16 @@
     "Zoo",
     "Bushmeat",
     "Unknown"
-  ],
-  "children": {}
+  ]
 },
 "photo_dead": {
   "id": "photo_dead",
-  "visible": true,
   "type": "file",
   "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  "question": "Do you have a photo?",
-  "children": {}
+  "question": "Do you have a photo?"
 },
 "age_dead": {
   "id": "age_dead",
-  "visible": true,
   "required": true,
   "type": "single",
   "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -93,12 +79,10 @@
     "Juvenile",
     "Adult",
     "Unknown"
-  ],
-  "children": {}
+  ]
 },
 "gender_dead": {
   "id": "gender_dead",
-  "visible": true,
   "required": true,
   "type": "single",
   "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -107,12 +91,10 @@
     "Male",
     "Female",
     "Unknown"
-  ],
-  "children": {}
+  ]
 },
 "last_known_location_dead": {
   "id": "last_known_location_dead",
-  "visible": true,
   "required": true,
   "type": "single",
   "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -123,12 +105,10 @@
     "With law enforcement agency",
     "At location of incident"
   ],
-  "other": true,
-  "children": {}
+  "other": true
 },
 "alleged_origin_country_dead": {
   "id": "alleged_origin_country_dead",
-  "visible": true,
   "type": "single",
   "question": "Alleged country of origin (optional)",
   "answers": [
@@ -156,20 +136,15 @@
     "Uganda",
     "Unknown"
   ],
-  "other": true,
-  "children": {}
+  "other": true
 },
 "unique_identifiers_dead": {
   "id": "unique_identifiers_dead",
-  "visible": true,
   "type": "text",
-  "question": "Unique identifiers (optional)",
-  "children": {}
+  "question": "Unique identifiers (optional)"
 },
 "individual_name_dead": {
   "id": "individual_name_dead",
-  "visible": true,
   "type": "text",
-  "question": "Individual’s name (optional)",
-  "children": {}
+  "question": "Individual’s name (optional)"
 }

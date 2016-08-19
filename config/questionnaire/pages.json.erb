@@ -1,6 +1,7 @@
 [
   {
     "title": "Incident",
+    "id": "incident",
     "questions": [
       "own_organisation",
       "new_agency_contact",
@@ -19,6 +20,9 @@
       "quantities"
     ]}, {
     "title": "Live Ape(s) details",
+    "id": "live",
+    "show_if": "quantities",
+    "multiple": true,
     "questions": [
       "genus_live",
       "gorilla_species_live",
@@ -35,6 +39,9 @@
       "individual_name_live"
     ]}, {
     "title": "Dead ape(s) details",
+    "id": "dead",
+    "show_if": "quantities",
+    "multiple": true,
     "questions": [
       "genus_dead",
       "gorilla_species_dead",
@@ -50,6 +57,8 @@
       "individual_name_dead"
     ]}, {
     "title": "Body parts details",
+    "id": "body_parts",
+    "show_if": "quantities",
     "questions": [
       "genus_parts",
       "bone_bonobo",
@@ -96,6 +105,7 @@
       "alleged_origin_country_parts"
     ]}, {
     "title": "Law enforcement and context",
+    "id": "law_and_context",
     "questions": [
       "arrests_made",
       "prosecution",

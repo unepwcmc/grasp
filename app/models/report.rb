@@ -38,7 +38,7 @@ class Report < ActiveRecord::Base
   end
 
   def answer_to question
-    data["questions"][question]["selected"]
+    data["answers"][question]["selected"]
   rescue NoMethodError
     nil
   end
