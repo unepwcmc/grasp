@@ -11,10 +11,10 @@ class NotificationMailer < ApplicationMailer
     end
   end
 
-  def notify_validators_of_submitted_report(validators, report)
+  def notify_validators_of_submitted_report(report)
     @report = report
 
-    validators.each do |validator|
+    ExpertiseMatcher.find_experts(@report).each do |validator|
       @validator = validator
       mail(to: @validator.email, subject: 'GRASP Database: New Report Submitted')
     end
