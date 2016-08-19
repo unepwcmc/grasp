@@ -10,11 +10,21 @@ class ReportsController < ApplicationController
                   validated_report_ids: current_user.validations.pluck(:report_id)
                 )
       @reports  = ExpertiseMatcher.filter_by_users_expertise(reports, current_user)
+    elsif current_user.is_role?(:provider)
+      user_page     = params[:table] == "user" ? params[:page] : 0
+      user_reports  = current_user.reports
+      @user_reports = Sorter.sort(user_reports, params[:sort], params[:dir]).page(user_page)
+
+      agency_page     = params[:table] == "agency" ? params[:page] : 0
+      agency_reports  = current_user.agency&.reports || Report.none
+      @agency_reports = Sorter.sort(agency_reports, params[:sort], params[:dir]).page(agency_page)
     else
       @reports = Report.search(search_params)
     end
 
-    @reports = Sorter.sort(@reports, params[:sort], params[:dir]).page(params[:page])
+    if defined?(@reports)
+      @reports = Sorter.sort(@reports, params[:sort], params[:dir]).page(params[:page])
+    end
   end
 
   def new

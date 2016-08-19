@@ -1,7 +1,7 @@
 <%= content_for :page_title, "Reports Dashboard" %>
 <%= content_for :breadcrumbs, "Reports Dashboard" %>
 <%= content_for :page_buttons do %>
-  <% if can? :create, @reports %>
+  <% if can? :create, Report %>
     <%= link_to "New Report", new_report_path, class: 'button' %>
   <% end %>
   <% if can? :search, @reports %>
@@ -14,47 +14,13 @@
 
 <%= render "search_results_title" %>
 
-<table class="table u-full-width">
-  <thead class="table__head">
-    <th><%= sortable "id", "ID" %></th>
-    <th><%= sortable "username", "User Name" %></th>
-    <th><%= sortable "agency" %></th>
-    <th><%= sortable "timestamp" %></th>
-    <th><%= sortable "date_of_discovery" %></th>
-    <th>Status of ape(s)</th>
-    <th><%= sortable "confiscated" %></th>
-    <th><%= sortable "state", "Status" %></th>
-  </thead>
-  <tbody>
-    <% @reports.each do |report| %>
-        <tr>
-          <td><%= report.id %></td>
-          <td><%= report.user_name %></td>
-          <td><%= report.user&.agency&.name %></td>
-          <td><%= report.timestamp %></td>
-          <td><%= report.answer_to("date_of_discovery") %></td>
-          <td><%= status_of_apes(report) %></td>
-          <td><%= report.answer_to("confiscated") %></td>
-          <td><%= report.state %></td>
-          <td>
-            <% if can? :read, report %>
-              <% unless current_user.is_role? :validator %>
-                <a href="<%= report_path(report.id) %>">Show</a>
-              <% end %>
-            <% end %>
-            <% if can? :update, report %>
-              <a href="<%= edit_report_path(report.id) %>">Edit</a>
-            <% end %>
-            <% if can? :validate, report %>
-              <a href="<%= validate_report_path(report.id) %>">Validate</a>
-            <% end %>
-          </td>
-        </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if current_user.is_role?(:provider) %>
+  <h2>My reports</h2>
+  <%= render partial: "table", locals: {reports: @user_reports, table: "user"}  %>
 
-<div class="pagination u-pull-right">
-  <%= paginate @reports %>
-</div>
+  <h2>Agency reports</h2>
+  <%= render partial: "table", locals: {reports: @agency_reports, table: "agency"}  %>
+<% else %>
+  <%= render partial: "table", locals: {reports: @reports}  %>
+<% end %>
 

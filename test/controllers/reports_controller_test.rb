@@ -137,4 +137,33 @@ class ReportsControllerTest < ActionController::TestCase
     assert_equal 1, assigns(:reports).count
     assert_equal @report.id, assigns(:reports).first.id
   end
+
+  test "should assign user_reports for provider" do
+    provider = FactoryGirl.create(:provider)
+    sign_in provider
+
+    user_report = FactoryGirl.create(:report, user: provider)
+    _other_user_report = FactoryGirl.create(:report)
+
+    get :index
+    assert_response :success
+    assert_equal 1, assigns(:user_reports).count
+    assert_equal user_report.id, assigns(:user_reports).first.id
+  end
+
+  test "should assign agency_reports for provider" do
+    agency = FactoryGirl.create(:agency)
+    provider = FactoryGirl.create(:provider, agency: agency)
+    agency_report = FactoryGirl.create(:report, user: provider)
+
+    other_agency = FactoryGirl.create(:agency)
+    other_provider = FactoryGirl.create(:provider, agency: other_agency)
+    _other_agency_report = FactoryGirl.create(:report, user: other_provider)
+
+    sign_in provider
+    get :index
+    assert_response :success
+    assert_equal 1, assigns(:agency_reports).count
+    assert_equal agency_report.id, assigns(:agency_reports).first.id
+  end
 end
