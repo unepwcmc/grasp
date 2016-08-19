@@ -126,10 +126,10 @@ class QuestionnaireStore extends EventEmitter
       report.answers[currentPage.id] ||= []
       report.answers[currentPage.id][tabIndex] ||= {}
       report.answers[currentPage.id][tabIndex][key] ||= {}
-      report.answers[currentPage.id][tabIndex][key].selected = (report.answers[currentPage.id][tabIndex][key].selected || []).filter(word -> word isnt answer)
+      report.answers[currentPage.id][tabIndex][key].selected = (report.answers[currentPage.id][tabIndex][key].selected || []).filter((word) -> word isnt answer)
     else
       report.answers[key] ||= {}
-      report.answers[key].selected = (report.answers[key].selected || []).filter(word -> word isnt answer)
+      report.answers[key].selected = (report.answers[key].selected || []).filter((word) -> word isnt answer)
     @emit(CHANGE_EVENT)
 
   confirmDna: (key) ->

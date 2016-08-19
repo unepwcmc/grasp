@@ -66,9 +66,19 @@ class NavigationStore extends EventEmitter
     questions = QuestionnaireStore.getQuestions()
 
     if page.multiple
-      answers[page.id]?[tabIndex]?[question.show_if.question]?.selected == question.show_if.answer
+      parentQuestion = questions[question.show_if.question]
+
+      if parentQuestion.type == "multi" and answers[page.id]?[tabIndex]?[question.show_if.question]?.selected
+        question.show_if.answer in answers[page.id]?[tabIndex]?[question.show_if.question]?.selected
+      else
+        question.show_if.answer == answers[page.id]?[tabIndex]?[question.show_if.question]?.selected
     else
-      answers[question.show_if.question]?.selected == question.show_if.answer
+      parentQuestion = questions[question.show_if.question]
+
+      if parentQuestion.type == "multi" and answers[question.show_if.question]?.selected
+        question.show_if.answer in answers[question.show_if.question]?.selected
+      else
+        question.show_if.answer == answers[question.show_if.question]?.selected
 
 
   isPageVisible: (page) ->
