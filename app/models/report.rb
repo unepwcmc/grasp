@@ -44,20 +44,18 @@ class Report < ActiveRecord::Base
   end
 
   def apes_by_type
-    {
-      live: Array.wrap(data.dig("answers", "live")).each_with_object({}) { |ape, obj|
-        next unless ape.dig("genus_live", "selected")
+    {live: apes_for("live"), dead: apes_for("dead")}
+  end
 
-        obj[ape["genus_live"]["selected"]] ||= 0
-        obj[ape["genus_live"]["selected"]]  += 1
-      },
-      dead: Array.wrap(data.dig("answers", "dead")).each_with_object({}) { |ape, obj|
-        next unless ape.dig("genus_dead", "selected")
+  def apes_for(type)
+    answers_for_type = Array.wrap(data.dig("answers", type))
 
-        obj[ape["genus_dead"]["selected"]] ||= 0
-        obj[ape["genus_dead"]["selected"]]  += 1
-      },
-    }
+    answers_for_type.each_with_object({}) do |ape, obj|
+      next unless ape.dig("genus_#{type}", "selected")
+
+      obj[ape["genus_#{type}"]["selected"]] ||= 0
+      obj[ape["genus_#{type}"]["selected"]]  += 1
+    end
   end
 
   def self.search(params)
