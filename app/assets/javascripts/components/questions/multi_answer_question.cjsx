@@ -3,9 +3,11 @@ Question = require("components/question")
 QuestionnaireStore   = require("stores/questionnaire_store")
 
 class MultiAnswerQuestion extends React.Component
-  render: ->
-    @props.data.selected ||= []
+  constructor: (props, context) ->
+    super(props, context)
+    @state = {}
 
+  render: ->
     <ul>
       {@renderAnswers()}
       {@renderOther()}
@@ -16,7 +18,7 @@ class MultiAnswerQuestion extends React.Component
       <li className="answer" key={answer}>
         <label htmlFor={@props.data.id + answer}>
           <input
-            checked={answer in @props.data.selected}
+            checked={answer in (@props.answer?.selected || [])}
             type="checkbox"
             onChange={@handleChange}
             value={answer}
@@ -31,28 +33,14 @@ class MultiAnswerQuestion extends React.Component
   handleChange: (e) =>
     if e.target.checked
       QuestionnaireStore.addAnswer(@props.data.id, e.target.value)
-      @props.data.selected ||= []
-      @props.data.selected.push(e.target.value)
     else
       QuestionnaireStore.removeAnswer(@props.data.id, e.target.value)
-      @props.data.selected ||= []
-      @props.data.selected = @props.data.selected.filter (word) -> word isnt e.target.value
-
-    @showChildren()
-
-
-  showChildren: =>
-    for answer, children of @props.data.children
-      if answer in @props.data.selected
-        QuestionnaireStore.show(child) for child in children
-      else
-        QuestionnaireStore.hide(child) for child in children
 
   renderOther: =>
     if @props.data.other
       <li className="answer" key="other">
         <label>
-          <input checked={"other" in @props.data.selected}
+          <input checked={"other" in (@props.answer?.selected || [])}
             type="checkbox" onChange={@handleChange} value="other"
             name={@props.data.id}
           />
@@ -63,7 +51,7 @@ class MultiAnswerQuestion extends React.Component
       </li>
 
   renderOtherField: =>
-    if "other" in @props.data.selected
+    if "other" in (@props.answer?.selected || [])
       <input type="text" value={@props.data.other_answer}
         onChange={@props.onOtherChange}/>
 

@@ -4,5 +4,7 @@
   @include e(control) {
     margin-right: 2rem;
     float: right;
+
+    &.is-selected { background-color: green; }
   }
 }

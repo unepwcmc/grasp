@@ -2,4 +2,5 @@
 <%= content_for :breadcrumbs, "New Report" %>
 
 <div id="report-container" data-report-mode="edit"></div>
-<script>var questionnaireJson = <%= raw(@report) %></script>
+
+<script>var questionnaireTemplate = <%= raw(@questionnaire_template) %></script>

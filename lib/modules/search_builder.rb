@@ -8,7 +8,7 @@ module SearchBuilder
 
   def self.by_country_of_discovery(query, params)
     if params[:country_of_discovery].present?
-      query = query.where("""data->'questions'->'country_of_discovery'->>'selected' = ?""", params[:country_of_discovery])
+      query = query.where("""data->'answers'->'country_of_discovery'->>'selected' = ?""", params[:country_of_discovery])
     end
     query
   end
@@ -36,26 +36,26 @@ module SearchBuilder
     if params[:status_live].present?
       if params[:genus].present?
         # If you check the box for live, add a query to check for any genus type in that genus_live field
-        fragments << "data->'questions'->'genus_live'->>'selected' in (:params)"
+        fragments << "data->'answers'->'genus_live'->>'selected' in (:params)"
       else
         # If no specific genus selected, then return all reports where genus_live has a selected field that isnt empty (return all genus types)
-        fragments << "(data->'questions'->'genus_live'->>'selected') is not null"
+        fragments << "(data->'answers'->'genus_live'->>'selected') is not null"
       end
     end
 
     if params[:status_dead].present?
       if params[:genus].present?
-        fragments << "data->'questions'->'genus_dead'->>'selected' in (:params)"
+        fragments << "data->'answers'->'genus_dead'->>'selected' in (:params)"
       else
-        fragments << "(data->'questions'->'genus_dead'->>'selected') is not null"
+        fragments << "(data->'answers'->'genus_dead'->>'selected') is not null"
       end
     end
 
     if params[:status_body_parts].present?
       if params[:genus].present?
-        fragments << "data->'questions'->'genus_body_parts'->>'selected' in (:params)"
+        fragments << "data->'answers'->'genus_body_parts'->>'selected' in (:params)"
       else
-        fragments << "(data->'questions'->'genus_body_parts'->>'selected') is not null"
+        fragments << "(data->'answers'->'genus_body_parts'->>'selected') is not null"
       end
     end
 
@@ -76,8 +76,8 @@ module SearchBuilder
   def self.by_ape_name(query, params)
     if params[:ape_name].present?
       query = query.where(
-        """lower(data->'questions'->'individual_name_live'->>'selected') like lower(:params) or
-        lower(data->'questions'->'individual_name_dead'->>'selected') like lower(:params)""", params: "%#{params[:ape_name]}%"
+        """lower(data->'answers'->'individual_name_live'->>'selected') like lower(:params) or
+        lower(data->'answers'->'individual_name_dead'->>'selected') like lower(:params)""", params: "%#{params[:ape_name]}%"
       )
     end
     query
@@ -86,9 +86,9 @@ module SearchBuilder
   def self.by_last_known_location(query, params)
     if params[:last_known_location].present?
       query = query.where(
-        """data->'questions'->'last_known_location_live'->>'selected' in (:params) or
-        data->'questions'->'last_known_location_dead'->>'selected' in (:params) or
-        data->'questions'->'last_known_location_parts'->>'selected' in (:params)""", params: params[:last_known_location]
+        """data->'answers'->'last_known_location_live'->>'selected' in (:params) or
+        data->'answers'->'last_known_location_dead'->>'selected' in (:params) or
+        data->'answers'->'last_known_location_parts'->>'selected' in (:params)""", params: params[:last_known_location]
       )
     end
     query

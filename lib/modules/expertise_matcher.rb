@@ -20,7 +20,7 @@ module ExpertiseMatcher
 
   def self.get_region_expertise(report)
     # Returns the matching region expertise object for a given report
-    country = report.data.dig('questions', 'country_of_discovery', 'selected')
+    country = report.data.dig('answers', 'country_of_discovery', 'selected')
     region = CountryUtilities.country_to_region(country) if country
     Expertise.find_by(name: region) if region
   end
