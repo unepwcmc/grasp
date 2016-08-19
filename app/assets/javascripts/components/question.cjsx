@@ -3,6 +3,7 @@ QuestionnaireStore = require("stores/questionnaire_store")
 
 # Question types
 SingleAnswerQuestion   = require("components/questions/single_answer_question")
+SubspeciesQuestion     = require("components/questions/subspecies_question")
 MultiAnswerQuestion    = require("components/questions/multi_answer_question")
 AgencyQuestion         = require("components/questions/agency_question")
 DateQuestion           = require("components/questions/date_question")
@@ -69,6 +70,9 @@ class Question extends React.Component
       when "gps"              then <GpsQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
                                     data={@props.data} answer={@props.answer} mode={@props.mode}/>
+      when "subspecies"       then <SubspeciesQuestion
+                                    onChange={@handleChange} onOtherChange={@handleOtherChange}
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
 
   renderAppropriateAnswer: =>
     return null if @props.mode != "show" or !@props.answer?.selected?
@@ -98,6 +102,11 @@ class Question extends React.Component
           <p>Live: {@props.answer?.selected.live}</p>
           <p>Dead: {@props.answer?.selected.dead}</p>
           <p>Body parts: {"✓" if @props.answer?.selected.body_parts}</p>
+        </div>
+      when "subspecies"
+        <div>
+          {general}
+          <p>DNA Confirmation: {"✓" if @props.answer?.dna_confirmation}</p>
         </div>
 
   renderOtherField: =>

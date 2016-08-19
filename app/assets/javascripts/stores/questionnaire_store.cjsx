@@ -132,6 +132,34 @@ class QuestionnaireStore extends EventEmitter
       report.answers[key].selected = (report.answers[key].selected || []).filter(word -> word isnt answer)
     @emit(CHANGE_EVENT)
 
+  confirmDna: (key) ->
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+
+    if currentPage.multiple
+      report.answers[currentPage.id] ||= []
+      report.answers[currentPage.id][tabIndex] ||= {}
+      report.answers[currentPage.id][tabIndex][key] ||= {}
+      report.answers[currentPage.id][tabIndex][key].dna_confirmation = true
+    else
+      report.answers[key] ||= {}
+      report.answers[key].dna_confirmation = true
+    @emit(CHANGE_EVENT)
+
+  removeDnaConfirmation: (key) ->
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+
+    if currentPage.multiple
+      report.answers[currentPage.id] ||= []
+      report.answers[currentPage.id][tabIndex] ||= {}
+      report.answers[currentPage.id][tabIndex][key] ||= {}
+      report.answers[currentPage.id][tabIndex][key].dna_confirmation = false
+    else
+      report.answers[key] ||= {}
+      report.answers[key].dna_confirmation = false
+    @emit(CHANGE_EVENT)
+
   addChangeListener:     (callback) => @on(CHANGE_EVENT,     callback)
   addVisibilityListener: (callback) => @on(VISIBILITY_EVENT, callback)
 

@@ -1,3 +1,4 @@
+_ = require("underscore")
 React = require("react")
 QuestionnaireStore = require("stores/questionnaire_store")
 NavigationStore    = require("stores/navigation_store")
@@ -36,23 +37,12 @@ class Questionnaire extends React.Component
     <SubmitButton/> if QuestionnaireStore.requiredQuestionsAnswered()
 
   onChange: =>
+    NavigationStore.updateAnswers()
+
     @setState({
       currentPage: NavigationStore.currentPage(),
       mode: QuestionnaireStore.getMode(),
       answers: QuestionnaireStore.getAnswers()
     })
-
-  componentDidUpdate: (prev, now) =>
-    tabIndex = NavigationStore.tabIndexForCurrentPage()
-    for key, question of @state.currentPage.questions
-      if @state.currentPage.multiple
-        unless question.type == "multi"
-          if question.answers? and @state.answers[@state.currentPage.id]?[tabIndex]?[question.id]?.selected not in question.answers
-            QuestionnaireStore.nullAnswer(question.id, false)
-      else
-        unless question.type == "multi"
-          if question.answers? and @state.answers[question.id]?.selected not in question.answers
-            QuestionnaireStore.nullAnswer(question.id, false)
-
 
 module.exports = Questionnaire
