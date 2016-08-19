@@ -26,7 +26,12 @@ $(document).ready(function(){
   $(".validation__info").click(function(){
     $(this).parent().find('.validation__comments').slideToggle();
     $(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
+  });
 
-  })
+  $(".header__menu-button").click(function(){
+    console.log("clicked")
+    $('.header__left-side').slideToggle();
+    $('.header__lower').slideToggle();
+  });
 })
 

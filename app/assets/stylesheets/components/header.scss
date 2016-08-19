@@ -16,6 +16,10 @@ $header__height: 7rem;
       li {
         display: inline-block;
         margin-bottom: 0;
+        margin-left: 1rem;
+        a {
+          color: $white;
+        }
       }
     }
   }
@@ -23,10 +27,27 @@ $header__height: 7rem;
   @include e(right-side) {
     float: right;
     line-height: $header__height;
+
     @media screen and (max-width: $break__phone) {
       ul {
         li {
           display: block;
+          line-height: 5rem;
+        }
+      }
+    }
+  }
+
+  @include e(left-side) {
+    float:left;
+    line-height: $header__height;
+
+    @media screen and (max-width: $break__phone) {
+      display: none;
+      ul {
+        li {
+          display: block;
+          line-height: 5rem;
         }
       }
     }
@@ -52,6 +73,12 @@ $header__height: 7rem;
         }
       }
     }
+    @media screen and (max-width: $break__phone) {
+      display: none;
+    }
+    @media screen and (min-width: $break__phone) {
+      display: visible;
+    }
   }
 
   @include e(menu-button) {
@@ -71,6 +98,10 @@ $header__height: 7rem;
       color: $blue;
       background-color: $white;
       border: solid 2px $white;
+    }
+
+    @media screen and (min-width: $break__phone) {
+      display: none;
     }
   }
 }

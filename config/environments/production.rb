@@ -55,7 +55,7 @@ Rails.application.configure do
     user_name: Rails.application.secrets.mailer['username'],
     password: Rails.application.secrets.mailer['password']
   }
-  config.action_mailer.default_url_options = { host: Rails.applications.secret.mailer['host'] }
+  config.action_mailer.default_url_options = { host: Rails.application.secrets.mailer['host'] }
 
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
