@@ -50,11 +50,12 @@ class Report < ActiveRecord::Base
   def apes_for(type)
     answers_for_type = Array.wrap(data.dig("answers", type))
 
-    answers_for_type.each_with_object({}) do |ape, obj|
-      next unless ape.dig("genus_#{type}", "selected")
+    answers_for_type.each_with_object({}) do |ape, all_apes|
+      genus = ape.dig("genus_#{type}", "selected")
+      next unless genus
 
-      obj[ape["genus_#{type}"]["selected"]] ||= 0
-      obj[ape["genus_#{type}"]["selected"]]  += 1
+      all_apes[genus] ||= 0
+      all_apes[genus] += 1
     end
   end
 
