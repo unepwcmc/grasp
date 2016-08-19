@@ -19,7 +19,7 @@
     <div class="header__inner">
       <div class="header__right-side">
         <ul>
-          <li>Hi <%= current_user.first_name.titleize %> 🐵 </li>
+          <li>Hi <%= current_user.first_name.titleize %></li>
           <li><%= link_to 'My Profile', edit_user_registration_path %></li>
           <li>
             <%= link_to destroy_user_session_path do %>

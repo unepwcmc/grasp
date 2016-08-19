@@ -43,7 +43,7 @@ $header__height: 7rem;
     line-height: $header__height;
 
     @media screen and (max-width: $break__phone) {
-      display: none;
+      /*display: none;*/
       ul {
         li {
           display: block;
@@ -74,7 +74,7 @@ $header__height: 7rem;
       }
     }
     @media screen and (max-width: $break__phone) {
-      display: none;
+      /*display: none;*/
     }
     @media screen and (min-width: $break__phone) {
       display: visible;

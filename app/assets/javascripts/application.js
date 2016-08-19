@@ -29,9 +29,8 @@ $(document).ready(function(){
   });
 
   $(".header__menu-button").click(function(){
-    console.log("clicked")
-    $('.header__left-side').slideToggle();
-    $('.header__lower').slideToggle();
+    //$('.header__left-side').slideToggle();
+    //$('.header__lower').slideToggle();
   });
 })
 
