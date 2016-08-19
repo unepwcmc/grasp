@@ -23,59 +23,11 @@ You will need a `.env` file which you can steal from another developer or copy f
 
 Visit `http://localhost:3000` and you should be good to go! 🎉
 
-## Report structure Example (Draft)
+# Questionnaires and reports
 
-```json
-{
-  "questions": {
-    "own_organisation": {
-      "id": "own_organisation",
-      "visible": true,
-      "type": "single",
-      "question": "Are you reporting on behalf of your own organisation?",
-      "required": true,
-      "answers": ["Yes", "No"],
-      "children": {
-        "No": ["own_organisation_2"]
-      }
-    },
-    "own_organisation_2": {
-      "id": "own_organisation_2",
-      "type": "single",
-      "visible": false,
-      "question": "hwhwhhwhwhwhwh",
-      "required": true,
-      "answers": ["Yes", "No"],
-      "children": {
-        "No": ["select_agency"]
-      }
-    },
-    "select_agency": {
-      "id": "select_agency",
-      "visible": false,
-      "type": "agency",
-      "question": "Select agency",
-      "answers": [{"id": 1, "name": "Agency One"}, {"id": 2, "name": "Agency Two"}],
-      "children": {}
-    },
-    "date_of_discovery": {
-      "id": "date_of_discovery",
-      "visible": true,
-      "type": "date",
-      "question": "Date of discovery",
-      "answers": [],
-      "selected": "25/12/2016",
-      "children": {}
-    }
-  },
-  "pages": [
-    ["own_organisation", "own_organisation_2"],
-    ["date_of_discovery", "select_agency"]
-  ],
-  "state": "accepted",
-  "validation_comment": "All good! :)"
-}
-```
+A bit of glossary: `provider` users submit `reports` by answering `questions` in `questionnaires`. The questionnaire
+template resides in the `config` folder. [Give it a look](config/questionnaire) to understand how questionnaires
+are structured.
 
 # License
 

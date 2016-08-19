@@ -3,6 +3,7 @@ QuestionnaireStore = require("stores/questionnaire_store")
 
 # Question types
 SingleAnswerQuestion   = require("components/questions/single_answer_question")
+SubspeciesQuestion     = require("components/questions/subspecies_question")
 MultiAnswerQuestion    = require("components/questions/multi_answer_question")
 AgencyQuestion         = require("components/questions/agency_question")
 DateQuestion           = require("components/questions/date_question")
@@ -19,7 +20,6 @@ Tooltip = require("components/tooltip")
 class Question extends React.Component
   constructor: (props, context) ->
     super(props, context)
-    QuestionnaireStore.addVisibilityListener(@onVisibilityChange)
     @state = {}
 
   render: =>
@@ -39,41 +39,44 @@ class Question extends React.Component
     switch @props.data.type
       when "single"           then <SingleAnswerQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
-                                    data={@props.data} mode={@props.mode}/>
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
       when "agency"           then <AgencyQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
-                                    data={@props.data} mode={@props.mode}/>
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
       when "date"             then <DateQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
-                                    data={@props.data} mode={@props.mode}/>
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
       when "text"             then <TextQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
-                                    data={@props.data} mode={@props.mode}/>
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
       when "file"             then <FileQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
-                                    data={@props.data} mode={@props.mode}/>
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
       when "quantities"       then <QuantitiesQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
-                                    data={@props.data} mode={@props.mode}/>
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
       when "numeric"          then <NumericQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
-                                    data={@props.data} mode={@props.mode}/>
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
       when "decimal_numeric"  then <DecimalNumericQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
-                                    data={@props.data} mode={@props.mode}/>
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
       when "form"             then <Form
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
-                                    data={@props.data} mode={@props.mode}/>
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
       when "multi"            then <MultiAnswerQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
-                                    data={@props.data} mode={@props.mode}/>
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
       when "gps"              then <GpsQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
-                                    data={@props.data} mode={@props.mode}/>
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
+      when "subspecies"       then <SubspeciesQuestion
+                                    onChange={@handleChange} onOtherChange={@handleOtherChange}
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
 
   renderAppropriateAnswer: =>
-    return null if @props.mode != "show" or !@props.data.selected?
-    general = <p>{@props.data.selected}</p>
+    return null if @props.mode != "show" or !@props.answer?.selected?
+    general = <p>{@props.answer?.selected}</p>
 
     switch @props.data.type
       when "single"           then general
@@ -85,24 +88,29 @@ class Question extends React.Component
       when "decimal_numeric"  then general
       when "form"             then general
       when "multi"
-        if @props.data.selected?.length > 0
+        if @props.answer?.selected?.length > 0
           <ul>
-            {<li key={select}>{select}</li> for select in @props.data.selected}
+            {<li key={select}>{select}</li> for select in @props.answer?.selected}
           </ul>
       when "gps"
         <div>
-          <p>Latitude: {@props.data.selected.lat}</p>
-          <p>Longitude: {@props.data.selected.lng}</p>
+          <p>Latitude: {@props.answer?.selected.lat}</p>
+          <p>Longitude: {@props.answer?.selected.lng}</p>
         </div>
       when "quantities"
         <div>
-          <p>Live: {@props.data.selected.live}</p>
-          <p>Dead: {@props.data.selected.dead}</p>
-          <p>Body parts: {"✓" if @props.data.selected.body_parts}</p>
+          <p>Live: {@props.answer?.selected.live}</p>
+          <p>Dead: {@props.answer?.selected.dead}</p>
+          <p>Body parts: {"✓" if @props.answer?.selected.body_parts}</p>
+        </div>
+      when "subspecies"
+        <div>
+          {general}
+          <p>DNA Confirmation: {"✓" if @props.answer?.dna_confirmation}</p>
         </div>
 
   renderOtherField: =>
-    if "other" == @props.data.selected
+    if "other" == @props.answer?.selected
       <input type="text" value={@props.data.other_answer}
         onChange={@handleOtherChange}/>
 
@@ -110,24 +118,7 @@ class Question extends React.Component
     answer = e.target.value
     QuestionnaireStore.selectAnswer(@props.data.id, answer)
 
-    @showChildrenFor(answer)
-
   handleOtherChange: (e) =>
     QuestionnaireStore.updateOtherAnswer(@props.data.id, e.target.value)
-
-  showChildrenFor: (chosen) ->
-    for answer, children of @props.data.children
-      if chosen == answer
-        QuestionnaireStore.show(child) for child in children
-      else
-        QuestionnaireStore.hide(child) for child in children
-
-  onVisibilityChange: (key, change) =>
-    return if key != @props.data.id
-
-    if(change == "hide")
-      @showChildrenFor(null)
-    else
-      @showChildrenFor(@props.data.selected)
 
 module.exports = Question

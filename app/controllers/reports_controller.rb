@@ -3,22 +3,33 @@ class ReportsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
+  before_action :load_questionnaire_template, only: [:show, :edit, :new]
+
   def index
     if current_user.is_role?(:validator)
-      reports = Report.where("""data->>'state' = :state or id in (:validated_report_ids)""",
+      reports = Report.where("data->>'state' = :state or id in (:validated_report_ids)",
                   state: "submitted",
                   validated_report_ids: current_user.validations.pluck(:report_id)
                 )
       @reports  = ExpertiseMatcher.filter_by_users_expertise(reports, current_user)
+    elsif current_user.is_role?(:provider)
+      user_page     = params[:table] == "user" ? params[:page] : 0
+      user_reports  = current_user.reports
+      @user_reports = Sorter.sort(user_reports, params[:sort], params[:dir]).page(user_page)
+
+      agency_page     = params[:table] == "agency" ? params[:page] : 0
+      agency_reports  = current_user.agency&.reports || Report.none
+      @agency_reports = Sorter.sort(agency_reports, params[:sort], params[:dir]).page(agency_page)
     else
       @reports = Report.search(search_params)
     end
 
-    @reports = Sorter.sort(@reports, params[:sort], params[:dir]).page(params[:page])
+    if defined?(@reports)
+      @reports = Sorter.sort(@reports, params[:sort], params[:dir]).page(params[:page])
+    end
   end
 
   def new
-    @report = Questionnaire.load
   end
 
   def show
@@ -76,5 +87,9 @@ class ReportsController < ApplicationController
     def search_params
       p = ParamsUtils.strip_rails_defaults(params)
       ParamsUtils.strip_empty(p)
+    end
+
+    def load_questionnaire_template
+      @questionnaire_template = Questionnaire.load
     end
 end

@@ -38,8 +38,8 @@ class GpsQuestion extends React.Component
   saveCoords: (lat, lng) =>
     QuestionnaireStore.selectAnswer(@props.data.id, {lat: lat, lng: lng})
 
-  getLat: => (@props.data.selected?.lat || "")
-  getLng: => (@props.data.selected?.lng || "")
+  getLat: => (@props.answer?.selected?.lat || "")
+  getLng: => (@props.answer?.selected?.lng || "")
 
 
 module.exports = GpsQuestion

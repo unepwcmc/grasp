@@ -1,59 +1,48 @@
 "arrests_made": {
   "id": "arrests_made",
-  "visible": false,
   "required": true,
   "type": "single",
+  "show_if": {"question": "confiscated", "answer": "Yes"},
   "question": "Were arrests made following confiscation?",
   "answers": [
-    "Yes" ,
+    "Yes",
     "No",
     "Unknown"
-      ],
-      "children": {
-        "Yes": ["prosecution"]
-      }
+  ]
 },
 "prosecution": {
   "id": "prosecution",
-  "visible": false,
   "required": true,
   "type": "single",
+  "show_if": {"question": "arrests_made", "answer": "Yes"},
   "question": "Did arrests lead to a prosecution?",
   "answers": [
-    "Yes" ,
+    "Yes",
     "No",
     "Unknown"
-  ],
-  "children": {
-    "Yes": ["prosecution_successful"]
-  }
+  ]
 },
 "prosecution_successful": {
   "id": "prosecution_successful",
-  "visible": false,
   "required": true,
   "type": "single",
+  "show_if": {"question": "prosecution", "answer": "Yes"},
   "question": "Was the prosecution successful?",
   "answers": [
     "Yes" ,
     "No",
     "Unknown"
-  ],
-  "children": {
-    "Yes": ["punishment"]
-  }
+  ]
 },
 "punishment": {
   "id": "punishment",
-  "visible": false,
   "required": true,
   "type": "text",
-  "question": "What punishment or sentence was given?",
-  "children": {}
+  "show_if": {"question": "prosecution_successful", "answer": "Yes"},
+  "question": "What punishment or sentence was given?"
 },
 "illegal_activities": {
   "id": "illegal_activities",
-  "visible": true,
   "required": true,
   "type": "multi",
   "answers": [
@@ -65,12 +54,10 @@
     "Poaching"
   ],
   "other": true,
-  "question": "Were there other illegal activities happening in tandem to this discovery?",
-  "children": {}
+  "question": "Were there other illegal activities happening in tandem to this discovery?"
 },
 "proximity": {
   "id": "proximity",
-  "visible": true,
   "required": true,
   "type": "multi",
   "answers": [
@@ -82,6 +69,5 @@
     "Construction",
     "War / civil unrest"
   ],
-  "question": "Was this discovery found in close proximity to any of these man-made disturbances?",
-  "children": {}
+  "question": "Was this discovery found in close proximity to any of these man-made disturbances?"
 }

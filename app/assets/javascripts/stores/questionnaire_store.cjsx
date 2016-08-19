@@ -1,21 +1,37 @@
 {EventEmitter} = require("events")
-require('whatwg-fetch')
+NavigationStore = require("stores/navigation_store")
+require("whatwg-fetch")
 
 class QuestionnaireStore extends EventEmitter
   CHANGE_EVENT = "change"
   VISIBILITY_EVENT = "visibility"
-  PAGE_CHANGE_EVENT = "page_change"
 
-  reportId      = null
   questionnaireMode = null
-  currentPage   = 0
-  questionnaire = {}
   autoSaveTimer = null
   autoSaveInterval = 60000
 
+  questionnaire = {}
+
+  # Report's default values, get overwritten by loadReportData,
+  # if data-report-id attr is found in the report-container HTML element
+  report = {
+    id: null,
+    answers: {},
+    state: "in_progress"
+  }
+
   constructor: ->
-    @on(PAGE_CHANGE_EVENT, @saveOrUpdateReport)
-    #@startAutoSave()
+    NavigationStore.addPageChangeListener(@saveOrUpdateReport)
+
+  initializeQuestionnaire: (questionnaireTemplate) ->
+    questionnaire = questionnaireTemplate.questions
+    NavigationStore.loadPages(questionnaireTemplate.pages)
+
+  loadReportData: (id, data) =>
+    report.id = id
+    report.answers = data.answers
+    report.state = data.state
+    @emit(CHANGE_EVENT)
 
   startAutoSave: ->
     autoSaveTimer = setInterval(@saveOrUpdateReport, autoSaveInterval)
@@ -23,147 +39,172 @@ class QuestionnaireStore extends EventEmitter
   stopAutoSave: ->
     clearInterval(autoSaveTimer) if autoSaveTimer
 
-  currentPage: ->
-    currentPage
-
-  previousPage: ->
-    currentPage -= 1
-    window.scrollTo(0, 0)
-    @emit(CHANGE_EVENT)
-    @emit(PAGE_CHANGE_EVENT)
-
-  nextPage: ->
-    currentPage += 1
-    window.scrollTo(0, 0)
-    @emit(CHANGE_EVENT)
-    @emit(PAGE_CHANGE_EVENT)
-
-  load: (data, id) ->
-    reportId = id if id?
-    questionnaire = data
+  allQuestionIds: -> questionnaire.map( (el) -> el.id )
 
   setMode: (mode) -> questionnaireMode = mode
-  getMode: (mode) -> questionnaireMode
+  getMode: -> questionnaireMode
 
-  allPages: ->
-    questionnaire.pages.map( (page) ->
-      visibleQuestions = page.questions.filter( (question_id) ->
-        questionnaire.questions[question_id].visible
-      ).map( (question_id) ->
-        question = questionnaire.questions[question_id]
-        question.id = question_id
-        question
-      )
-
-      {title: page.title, questions: visibleQuestions}
-    )
+  getAnswers:   -> report.answers
+  getQuestions: -> questionnaire
 
   requiredQuestionsAnswered: ->
     allAnswered = true
-    for key, question of questionnaire.questions
-      required = question.visible and question.required
 
-      if required and (question.selected == "" or 'selected' not of question)
-        allAnswered = false
+    for page, pageIndex in NavigationStore.getPages() when NavigationStore.isPageVisible(page)
+      for questionId in page.questions
+        question = questionnaire[questionId]
+
+        if page.multiple
+          answersForPage = report.answers[page.id]
+
+          if answersForPage
+            for answersInTab, tabIndex in answersForPage
+              if question.required and NavigationStore.isQuestionVisible(question, page, tabIndex)
+                if answersInTab[question.id] is undefined or answersInTab[question.id]?.selected == ""
+                  allAnswered = false
+          else
+            allAnswered = false if question.required
+
+        else
+          if question.required and NavigationStore.isQuestionVisible(question, page)
+            if report.answers[question.id] is undefined or report.answers[question.id]?.selected == ""
+              allAnswered = false
+
     allAnswered
 
   selectAnswer: (key, answer) ->
-    questionnaire.questions[key].selected = answer
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+
+    if currentPage.multiple
+      report.answers[currentPage.id] ||= []
+      report.answers[currentPage.id][tabIndex] ||= {}
+      report.answers[currentPage.id][tabIndex][key] ||= {}
+      report.answers[currentPage.id][tabIndex][key].selected = answer
+    else
+      report.answers[key] ||= {}
+      report.answers[key].selected = answer
     @emit(CHANGE_EVENT)
 
+  nullAnswer: (key, fireChange=true) ->
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+
+    if currentPage.multiple
+      delete report.answers[currentPage.id]?[tabIndex]?[key]
+    else
+      delete report.answers[key]
+
+    @emit(CHANGE_EVENT) if fireChange
+
   updateOtherAnswer: (key, text) ->
-    questionnaire.questions[key].other_answer = text
+    report.answers[key] ||= {}
+    report.answers[key].other_answer = text
     @emit(CHANGE_EVENT)
 
   addAnswer: (key, answer) ->
-    questionnaire.questions[key].selected ||= []
-    questionnaire.questions[key].selected.push(answer)
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+
+    if currentPage.multiple
+      report.answers[currentPage.id] ||= []
+      report.answers[currentPage.id][tabIndex] ||= {}
+      report.answers[currentPage.id][tabIndex][key] ||= {}
+      report.answers[currentPage.id][tabIndex][key].selected ||= []
+      report.answers[currentPage.id][tabIndex][key].selected.push(answer)
+    else
+      report.answers[key] ||= {}
+      report.answers[key].selected ||= []
+      report.answers[key].selected.push(answer)
     @emit(CHANGE_EVENT)
 
   removeAnswer: (key, answer) ->
-    questionnaire.questions[key].selected = (
-      questionnaire.questions[key].selected || []
-    ).filter (word) -> word isnt answer
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
 
+    if currentPage.multiple
+      report.answers[currentPage.id] ||= []
+      report.answers[currentPage.id][tabIndex] ||= {}
+      report.answers[currentPage.id][tabIndex][key] ||= {}
+      report.answers[currentPage.id][tabIndex][key].selected = (report.answers[currentPage.id][tabIndex][key].selected || []).filter(word -> word isnt answer)
+    else
+      report.answers[key] ||= {}
+      report.answers[key].selected = (report.answers[key].selected || []).filter(word -> word isnt answer)
     @emit(CHANGE_EVENT)
 
-  show: (key) =>
-    questionnaire.questions[key].visible = true
+  confirmDna: (key) ->
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+
+    if currentPage.multiple
+      report.answers[currentPage.id] ||= []
+      report.answers[currentPage.id][tabIndex] ||= {}
+      report.answers[currentPage.id][tabIndex][key] ||= {}
+      report.answers[currentPage.id][tabIndex][key].dna_confirmation = true
+    else
+      report.answers[key] ||= {}
+      report.answers[key].dna_confirmation = true
     @emit(CHANGE_EVENT)
-    @emit(VISIBILITY_EVENT, key, "show")
 
-  hide: (key) =>
-    questionnaire.questions[key].visible = false
+  removeDnaConfirmation: (key) ->
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+
+    if currentPage.multiple
+      report.answers[currentPage.id] ||= []
+      report.answers[currentPage.id][tabIndex] ||= {}
+      report.answers[currentPage.id][tabIndex][key] ||= {}
+      report.answers[currentPage.id][tabIndex][key].dna_confirmation = false
+    else
+      report.answers[key] ||= {}
+      report.answers[key].dna_confirmation = false
     @emit(CHANGE_EVENT)
-    @emit(VISIBILITY_EVENT, key, "hide")
 
-  addChangeListener: (callback) =>
-    @on(CHANGE_EVENT, callback)
+  addChangeListener:     (callback) => @on(CHANGE_EVENT,     callback)
+  addVisibilityListener: (callback) => @on(VISIBILITY_EVENT, callback)
 
-  addVisibilityListener: (callback) =>
-    @on(VISIBILITY_EVENT, callback)
-
-  saveOrUpdateReport: (msg, callback) =>
-    if reportId? then @updateReport("Report updated", callback) else @saveReport("Report saved", callback)
-
-  saveReport: (msg, callback) =>
-    token = document.getElementsByName("csrf-token")[0].content
-    store = @
-    fetch('/reports', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-        'X-CSRF-Token': token
-      },
-      credentials: 'include',
-      body: JSON.stringify({ report: { data: questionnaire }})
-    }).then((response) ->
-      if msg
-        store.setNotification(msg)
-      if callback
-        callback(response.headers.get('Location'))
-      response.json().then((json) ->
-        reportId = json.id
+  saveOrUpdateReport: (callback) =>
+    if report.id?
+      @reportRequest("/reports/#{report.id}", "PUT", (response) =>
+        @setNotification("Report updated")
+        callback?(response.headers.get('Location'))
       )
-    )
+    else
+      @reportRequest("/reports", "POST", (response) =>
+        @setNotification("Report saved")
+        response.json().then((json) -> report.id = json.id)
 
-  updateReport: (msg, callback) =>
+        callback?(response.headers.get('Location'))
+      )
+
+  reportRequest: (path, method, callback) ->
     token = document.getElementsByName("csrf-token")[0].content
-    store = @
-    fetch("/reports/#{reportId}", {
-      method: 'PUT',
+    fetch(path, {
+      method: method,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
         'X-CSRF-Token': token
       },
       credentials: 'include',
-      body: JSON.stringify({ report: { data: questionnaire }})
-    }).then((response) ->
-      if msg
-        store.setNotification(msg)
-      if callback
-        callback(response.headers.get('Location'))
-    )
+      body: JSON.stringify({
+        report: {data: {answers: report.answers, state: report.state}}
+      })
+    }).then(callback)
 
-  setPath: (path) =>
+  setPath: (path) ->
     window.location = path
 
-  setNotification: (msg) =>
-    notifications     = document.getElementsByClassName("questionnaire__notification")
-    for notification in notifications
-      notification.style.display = 'none'
+  setNotification: (msg) ->
+    $notificationEl = $('.js-questionnaire-notification')
+    $notificationEl.html(msg).fadeIn()
 
-    nav               = document.getElementsByClassName("navigation__inner")[0]
-    notice            = document.createElement("h5")
-    notice.className  = 'questionnaire__notification'
-    notice.innerHTML  = msg
-    nav.appendChild(notice)
+    setTimeout((-> $notificationEl.fadeOut()), 3000)
 
   submitReport: =>
+    report.state = "submitted"
+
     @stopAutoSave()
-    questionnaire.state = "submitted"
     @saveOrUpdateReport("Report Submitted!", @setPath)
 
 module.exports = new QuestionnaireStore()
