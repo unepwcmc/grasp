@@ -43,6 +43,23 @@ class Report < ActiveRecord::Base
     nil
   end
 
+  def apes_by_type
+    {
+      live: Array.wrap(data["answers"]["live"]).each_with_object({}) { |ape, obj|
+        next unless ape.dig("genus_live", "selected")
+
+        obj[ape["genus_live"]["selected"]] ||= 0
+        obj[ape["genus_live"]["selected"]]  += 1
+      },
+      dead: Array.wrap(data["answers"]["dead"]).each_with_object({}) { |ape, obj|
+        next unless ape.dig("genus_dead", "selected")
+
+        obj[ape["genus_dead"]["selected"]] ||= 0
+        obj[ape["genus_dead"]["selected"]]  += 1
+      },
+    }
+  end
+
   def self.search(params)
     if params
       query = self
