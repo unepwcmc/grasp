@@ -1,18 +1,23 @@
 module ReportHelper
   def status_of_apes report
+    apes_by_type = report.apes_by_type
     capture {
-      if report.answer_to("genus_live")
+      if apes_by_type[:live].any?
         concat content_tag(:p, class: "u-no-margin") {
           concat content_tag(:strong, "Live ape(s)")
-          concat tag("br")
-          concat report.answer_to("genus_live")
+          apes_by_type[:live].each do |(type, quantity)|
+            concat tag("br")
+            concat "#{quantity} #{type}"
+          end
         }
       end
-      if report.answer_to("genus_dead")
+      if apes_by_type[:dead].any?
         concat content_tag(:p, class: "u-no-margin") {
           concat content_tag(:strong, "Dead ape(s)")
-          concat tag("br")
-          concat report.answer_to("genus_dead")
+          apes_by_type[:dead].each do |(type, quantity)|
+            concat tag("br")
+            concat "#{quantity} #{type}"
+          end
         }
       end
     }
