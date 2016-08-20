@@ -1,12 +1,12 @@
 module Sorter
   COLUMNS = {
-    "id" => "id",
+    "id" => "reports.id",
     "username" => "users.first_name",
     "agency" => "agencies.name",
-    "timestamp" => "created_at",
-    "date_of_discovery" => "data->'answers'->'date_of_discovery'->>'selected'",
-    "confiscated" => "data->'answers'->'confiscated'->>'selected'",
-    "state" => "data->>'state'",
+    "timestamp" => "reports.created_at",
+    "date_of_discovery" => "reports.data->'answers'->'date_of_discovery'->>'selected'",
+    "confiscated" => "reports.data->'answers'->'confiscated'->>'selected'",
+    "state" => "reports.data->>'state'",
   }
 
   def self.sort collection, column, direction
@@ -17,7 +17,7 @@ module Sorter
   end
 
   def self.build_column column
-    COLUMNS[column] || "created_at"
+    COLUMNS[column] || "reports.created_at"
   end
 
   def self.build_direction direction
