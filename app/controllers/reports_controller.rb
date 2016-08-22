@@ -66,6 +66,12 @@ class ReportsController < ApplicationController
     end
   end
 
+  def lock
+    $redis.set("reports:#{params[:id]}:being_validated_by", current_user.id)
+    $redis.expire("reports:#{params[:id]}:being_validated_by", 10)
+    head 200
+  end
+
   def search
   end
 
