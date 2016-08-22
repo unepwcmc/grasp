@@ -13,3 +13,10 @@ module.exports =
         if reportData?
           QuestionnaireStore.loadReportData(containerEl.getAttribute("data-report-id"), reportData)
       )
+
+      $(".select2").select2(tags: true, width: "100%")
+
+      $(".validation__info").click( ->
+        $(@).parent().find(".validation__comments").slideToggle()
+        $(@).find('i').toggleClass("fa-chevron-up fa-chevron-down")
+      )
