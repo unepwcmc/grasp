@@ -24,6 +24,19 @@ $header__height: 7rem;
     }
   }
 
+  @include e(mobile) {
+    @media screen and (min-width: $break__phone) {
+      display: none;
+    }
+  }
+
+
+  @include e(desktop) {
+    @media screen and (max-width: $break__phone) {
+      display: none;
+    }
+  }
+
   @include e(right-side) {
     float: right;
     line-height: $header__height;
@@ -33,13 +46,17 @@ $header__height: 7rem;
         li {
           display: block;
           line-height: 5rem;
+          &.divider {
+            width: 100%;
+            border-bottom: 2px solid $blue;
+            margin: 1em 0em;
+          }
         }
       }
     }
   }
 
   @include e(left-side) {
-    float:left;
     line-height: $header__height;
 
     @media screen and (max-width: $break__phone) {
@@ -48,23 +65,33 @@ $header__height: 7rem;
         li {
           display: block;
           line-height: 5rem;
+          &.divider {
+            width: 100%;
+            border-bottom: 2px solid $white;
+            margin: 1em 0em;
+          }
         }
       }
     }
   }
 
   @include e(main-logo) {
+    float: left;
     img {
       width: 100px;
       vertical-align: middle;
-      @media screen and (max-width: $break__phone) {
-        padding-top: 1em;
-        vertical-align: none;
-      }
     }
   }
 
+  @include e(main-nav) {
+    clear: both;
+  }
+
   @include e(lower) {
+    @media screen and (max-width: $break__phone) {
+      //display:none;
+    }
+
     background-color: $chambray;
     .header__inner {
       .header__right-side {
@@ -72,12 +99,6 @@ $header__height: 7rem;
           float:none;
         }
       }
-    }
-    @media screen and (max-width: $break__phone) {
-      /*display: none;*/
-    }
-    @media screen and (min-width: $break__phone) {
-      display: visible;
     }
   }
 
