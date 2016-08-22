@@ -31,4 +31,19 @@ class ReportTest < ActiveSupport::TestCase
       }
     }
   end
+
+  test "#is_being_validated? checks if a report is locked for validation" do
+    report = FactoryGirl.create(:report)
+    $redis.expects(:exists).with("reports:#{report.id}:being_validated_by").returns(true)
+
+    assert report.is_being_validated?
+  end
+
+  test "#being_validated_by returns the user validating the report" do
+    report = FactoryGirl.create(:report)
+    validator = FactoryGirl.create(:validator)
+    $redis.expects(:get).with("reports:#{report.id}:being_validated_by").returns(validator.id)
+
+    assert_equal validator, report.being_validated_by
+  end
 end
