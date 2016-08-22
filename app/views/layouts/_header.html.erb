@@ -1,13 +1,12 @@
 <header class="header">
   <div class="header__inner">
-    <a class="header__main-logo" href="<%= reports_path %>">GRASP</a>
-
     <div class="header__right-side">
       <button class="header__menu-button header__menu-button">Menu</button>
     </div>
 
     <div class="header__left-side">
       <ul>
+        <li><a class="header__main-logo" href="<%= reports_path %>"><%= image_tag 'grasp_logo.png' %></a></li>
         <li><%= link_to 'Reports', reports_path %></li>
         <li><%= link_to 'Users', admin_users_path %></li>
         <li><%= link_to 'Agencies', agencies_path %></li>

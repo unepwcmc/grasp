@@ -54,14 +54,14 @@ $header__height: 7rem;
   }
 
   @include e(main-logo) {
-    display: inline-block;
-    padding: 0 1rem;
-
-    background-color: $white;
-    color: $blue;
-    line-height: 3.6rem;
-    text-decoration: none;
-    font-weight: 700;
+    img {
+      width: 100px;
+      vertical-align: middle;
+      @media screen and (max-width: $break__phone) {
+        padding-top: 1em;
+        vertical-align: none;
+      }
+    }
   }
 
   @include e(lower) {
