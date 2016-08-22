@@ -28,6 +28,11 @@ $header__height: 7rem;
     @media screen and (min-width: $break__phone) {
       display: none;
     }
+    .header__inner {
+      .header__main-nav {
+        display: none;
+      }
+    }
   }
 
 
@@ -89,7 +94,7 @@ $header__height: 7rem;
 
   @include e(lower) {
     @media screen and (max-width: $break__phone) {
-      //display:none;
+      display:none;
     }
 
     background-color: $chambray;
