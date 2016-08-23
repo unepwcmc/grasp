@@ -21,6 +21,11 @@ module.exports =
       $(@).find('i').toggleClass("fa-chevron-up fa-chevron-down")
     )
 
+    $(".header__menu-button").click( ->
+      $('.header__main-nav').slideToggle()
+      $('.header__lower').slideToggle()
+    )
+
     if ($validationEl = $(".js-validating")).length > 0
       reportId = $validationEl.data("report")
 
