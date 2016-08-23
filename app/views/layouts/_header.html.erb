@@ -12,19 +12,20 @@
           </div>
         <% end %>
       </div>
+
       <% if user_signed_in? %>
         <div class="header__main-nav">
           <div class="header__left-side">
             <ul>
               <li class="divider"></li>
               <% if can? :read, Report %>
-              <li><%= link_to 'Reports', reports_path %></li>
+                <li><%= link_to 'Reports', reports_path %></li>
               <% end %>
               <% if can? :manage, User %>
-              <li><%= link_to 'Users', admin_users_path %></li>
+                <li><%= link_to 'Users', admin_users_path %></li>
               <% end %>
               <% if can? :read, Agency %>
-              <li><%= link_to 'Agencies', agencies_path %></li>
+                <li><%= link_to 'Agencies', agencies_path %></li>
               <% end %>
             </ul>
           </div>
