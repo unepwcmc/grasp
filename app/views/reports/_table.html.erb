@@ -16,7 +16,7 @@
           <td><%= report.user_name %></td>
           <td><%= report.user&.agency&.name %></td>
           <td><%= report.timestamp %></td>
-          <td><%= report.answer_to("date_of_discovery") %></td>
+          <td><%= report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y") %></td>
           <td><%= status_of_apes(report) %></td>
           <td><%= report.answer_to("confiscated") %></td>
           <td><%= report.state %></td>
