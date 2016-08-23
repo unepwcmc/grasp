@@ -1,0 +1,19 @@
+<% if current_user.is_role?(:provider) %>
+  <p>
+    Below is a list of your existing reports, and a list of all reports by people
+    from your agency. <br>
+    If you're ready to tell us about a great ape incident
+    you can <%= link_to "start a new report now", new_report_path %>.
+  </p>
+
+  <p>Thank you for your vital help in protecting great apes.</p>
+<% end %>
+
+<% if current_user.is_role?(:validator) %>
+  <p>
+    Below is a list of reports matching your expertise that you're able to validate.<br>
+    <strong>Warning</strong>: if another validator is currently reviewing a report you won't be able to access it until they've finished.
+  </p>
+
+  <p>Thank you for your vital help in protecting great apes.</p>
+<% end %>
