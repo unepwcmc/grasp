@@ -23,7 +23,7 @@
           <td>
             <% if can? :read, report %>
               <% unless current_user.is_role? :validator %>
-                <a href="<%= report_path(report.id) %>">Show</a>
+                <a href="<%= report_summary_path(report.id) %>">View</a>
               <% end %>
             <% end %>
             <% if can? :update, report %>
