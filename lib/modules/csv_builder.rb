@@ -28,7 +28,7 @@ module CsvBuilder
           report.created_at,
           report.data['answers']['country_of_discovery']['selected'],
           report.data['answers']['region_of_discovery']['selected'],
-          report.data['answers']['date_of_discovery']['selected'],
+          report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y"),
           report.data['answers']['location_coords']['selected'],
           report.data['answers']['type_of_location']['selected'],
           "Ape Status TBC",
