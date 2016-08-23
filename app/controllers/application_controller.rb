@@ -16,6 +16,13 @@ class ApplicationController < ActionController::Base
     #end
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    respond_to do |format|
+      format.json { head :forbidden }
+      format.html { redirect_to :back, alert: exception.message }
+    end
+  end
+
   protected
     def configure_permitted_parameters
       registration_keys = [:first_name, :last_name, :email, :password, :password_confirmation, :role_id]
