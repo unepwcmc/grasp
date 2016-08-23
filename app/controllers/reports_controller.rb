@@ -70,6 +70,12 @@ class ReportsController < ApplicationController
     end
   end
 
+  def lock
+    $redis.set("reports:#{params[:id]}:being_validated_by", current_user.id)
+    $redis.expire("reports:#{params[:id]}:being_validated_by", 10)
+    head 200
+  end
+
   def search
   end
 
@@ -80,7 +86,15 @@ class ReportsController < ApplicationController
   end
 
   def validate
-    @validation = Validation.new
+    if @report.is_being_validated? && @report.being_validated_by != current_user
+      begin
+        redirect_to :back, notice: "This report is currently being validated by another user."
+      rescue ActionController::RedirectBackError
+        redirect_to reports_path, notice: "This report is currently being validated by another user."
+      end
+    else
+      @validation = Validation.new
+    end
   end
 
   private

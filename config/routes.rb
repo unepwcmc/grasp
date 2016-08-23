@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "/export", to: "reports#export", as: "export_reports"
   get "/reports/:id/validate", to: "reports#validate", as: "validate_report"
   get "/reports/:id/summary", to: "reports#summary", as: "report_summary"
+  get "/reports/:id/lock", to: "reports#lock", as: "lock_report"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -11,6 +11,7 @@ class Ability
     when "validator"
       can :read, Report
       can :validate, Report
+      can :lock, Report
     when "provider"
       can :create, Report
       can :read, Report, user: {agency_id: user.agency.id}

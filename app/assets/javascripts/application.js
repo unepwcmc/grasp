@@ -14,23 +14,7 @@
 //= require jquery_ujs
 //= require select2
 
-var app = require("app")
-app.start()
-
 $(document).ready(function(){
-  $(".select2").select2({
-      tags: true,
-      width: '100%'
-  });
-
-  $(".validation__info").click(function(){
-    $(this).parent().find('.validation__comments').slideToggle();
-    $(this).find('i').toggleClass('fa-chevron-up fa-chevron-down');
-  });
-
-  $(".header__menu-button").click(function(){
-    //$('.header__left-side').slideToggle();
-    //$('.header__lower').slideToggle();
-  });
-})
-
+  var app = require("app");
+  app.start();
+});

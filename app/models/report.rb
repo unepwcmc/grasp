@@ -34,7 +34,7 @@ class Report < ActiveRecord::Base
   end
 
   def state
-    data["state"]&.humanize
+    is_being_validated? ? "Being validated" : data["state"]&.humanize
   end
 
   def answer_to question
@@ -59,6 +59,15 @@ class Report < ActiveRecord::Base
     end
   end
 
+  def is_being_validated?
+    $redis.exists("reports:#{id}:being_validated_by")
+  end
+
+  def being_validated_by
+    return unless user_id = $redis.get("reports:#{id}:being_validated_by")
+    User.find(user_id)
+  end
+
   def self.search(params)
     if params
       query = self
@@ -75,5 +84,4 @@ class Report < ActiveRecord::Base
       self.all
     end
   end
-
 end
