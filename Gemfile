@@ -28,6 +28,7 @@ gem 'cancancan', '~> 1.10'
 gem 'devise', '~> 4.2.0'
 
 # Background jobs
+gem 'redis', '~> 3.3.1'
 gem 'sidekiq', '~> 4.1.4'
 
 # Testing
@@ -58,6 +59,7 @@ end
 
 group :test do
   gem 'simplecov', require: false
+  gem 'mocha', '~> 1.1.0'
   gem 'codeclimate-test-reporter', require: false
 end
 

@@ -49,21 +49,21 @@
 <div class="form__group">
   <strong> Country of discovery </strong>
   <div class="form__field">
-    <%= @report.data['answers']['country_of_discovery']['selected'] %>
+    <%= @report.answer_to("country_of_discovery") %>
   </div>
 </div>
 
 <div class="form__group">
   <strong> Law enforcement confiscation? </strong>
   <div class="form__field">
-    <%= @report.data['answers']['confiscated']['selected'] %>
+    <%= @report.answer_to("confiscated") %>
   </div>
 </div>
 
 <div class="form__group">
   <strong> Date of incident </strong>
   <div class="form__field">
-    <%= @report.data['answers']['date_of_discovery']['selected'] %>
+    <%= @report.answer_to("date_of_discovery") %>
   </div>
 </div>
 
