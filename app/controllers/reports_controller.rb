@@ -32,6 +32,10 @@ class ReportsController < ApplicationController
   def new
   end
 
+  def summary
+    @report = Report.find(params[:id])
+  end
+
   def show
     @report = Report.find(params[:id])
   end
