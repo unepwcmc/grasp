@@ -22,6 +22,11 @@
 # English
 en:
   hello: "Hello world"
+  csv_export:
+    being_generated: |
+      Success!<br>
+
+      Your csv file is now being generated.  We'll email you a link to download the file as soon as it's ready. Thank you.
 
 # French
 fr:

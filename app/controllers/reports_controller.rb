@@ -82,7 +82,7 @@ class ReportsController < ApplicationController
   def export
     reports = @reports.pluck(:id)
     CsvExportJob.perform_later(reports, current_user)
-    redirect_to reports_path, notice: "Your csv file is being generated. We will email you with a link to download it as soon as it is ready. Thank you"
+    redirect_to reports_path, notice: t("csv_export.being_generated")
   end
 
   def validate
