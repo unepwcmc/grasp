@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "noreply@un-grasp.org"
+  default from: "no-reply@unep-wcmc.org"
   layout 'mailer'
 end

@@ -6,21 +6,30 @@
           <a href="<%= reports_path %>"><%= image_tag 'grasp_logo.png' %></a>
         </div>
 
-        <div class="header__right-side">
-          <button class="header__menu-button header__menu-button">Menu</button>
-        </div>
+        <% if user_signed_in? %>
+          <div class="header__right-side">
+            <button class="header__menu-button header__menu-button">Menu</button>
+          </div>
+        <% end %>
       </div>
-
-      <div class="header__main-nav">
-        <div class="header__left-side">
-          <ul>
-            <li class="divider"></li>
-            <li><%= link_to 'Reports', reports_path %></li>
-            <li><%= link_to 'Users', admin_users_path %></li>
-            <li><%= link_to 'Agencies', agencies_path %></li>
-          </ul>
+      <% if user_signed_in? %>
+        <div class="header__main-nav">
+          <div class="header__left-side">
+            <ul>
+              <li class="divider"></li>
+              <% if can? :read, Report %>
+              <li><%= link_to 'Reports', reports_path %></li>
+              <% end %>
+              <% if can? :manage, User %>
+              <li><%= link_to 'Users', admin_users_path %></li>
+              <% end %>
+              <% if can? :read, Agency %>
+              <li><%= link_to 'Agencies', agencies_path %></li>
+              <% end %>
+            </ul>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
 
@@ -31,14 +40,21 @@
       <div class="header__main-logo">
         <a href="<%= reports_path %>"><%= image_tag 'grasp_logo.png' %></a>
       </div>
-      <div class="header__left-side">
-        <ul>
-          <li class="divider"></li>
-          <li><%= link_to 'Reports', reports_path %></li>
-          <li><%= link_to 'Users', admin_users_path %></li>
-          <li><%= link_to 'Agencies', agencies_path %></li>
-        </ul>
-      </div>
+      <% if user_signed_in? %>
+        <div class="header__left-side">
+          <ul>
+            <% if can? :read, Report %>
+              <li><%= link_to 'Reports', reports_path %></li>
+            <% end %>
+            <% if can? :manage, User %>
+              <li><%= link_to 'Users', admin_users_path %></li>
+            <% end %>
+            <% if can? :read, Agency %>
+              <li><%= link_to 'Agencies', agencies_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     </div>
   </div>
 

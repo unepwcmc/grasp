@@ -44,19 +44,20 @@ Rails.application.configure do
       }
   }
 
-  #Mailer config
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    domain: Rails.application.secrets.mailer['domain'],
-    address: Rails.application.secrets.mailer['address'],
-    port: 587,
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: Rails.application.secrets.mailer['username'],
-    password: Rails.application.secrets.mailer['password']
-  }
-  config.action_mailer.default_url_options = { host: Rails.application.secrets.mailer['host'] }
+  # Mailer config
+  secrets = Rails.application.secrets.mailer
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = {:host => secrets['host']}
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => secrets['address'],
+    :port => secrets['port'],
+    :domain => secrets['domain'],
+    :authentication => :login,
+    :user_name => secrets['username'],
+    :password => secrets['password']
+  }
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
