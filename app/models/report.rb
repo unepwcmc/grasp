@@ -34,7 +34,7 @@ class Report < ActiveRecord::Base
   end
 
   def state
-    data["state"]&.humanize
+    is_being_validated? ? "Being validated" : data["state"]&.humanize
   end
 
   def answer_to question
