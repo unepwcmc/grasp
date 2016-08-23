@@ -1,4 +1,4 @@
-<%= form_for(@validation) do |f| %>
+<%= form_for(@validation, html: {class: "js-validating", data: {report: @report.id}}) do |f| %>
   <% if @validation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@validation.errors.count, "error") %> prohibited this validation from being saved:</h2>
