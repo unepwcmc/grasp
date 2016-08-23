@@ -3,6 +3,7 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
+  <h3>General information</h3>
 
   <div class="form__group">
     <%= f.label :email %>
@@ -11,35 +12,119 @@
     </div>
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+  <div class="form__group">
+    <%= f.label :first_name %>
+    <div class="form__field">
+      <%= f.text_field :first_name %>
+    </div>
+  </div>
 
   <div class="form__group">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
+    <%= f.label :last_name %>
     <div class="form__field">
-      <%= f.password_field :password, autocomplete: "off" %>
-      <% if @minimum_password_length %>
-        <br />
-        <em><%= @minimum_password_length %> characters minimum</em>
-      <% end %>
+      <%= f.text_field :last_name %>
+    </div>
+  </div>
+
+  <%= f.submit "Update general information", class: 'form__submit button button-secondary' %>
+<% end %>
+
+<hr>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <h3>Contact information</h3>
+
+  <div class="form__group">
+    <%= f.label :mobile_number %>
+    <div class="form__field">
+      <%= f.text_field :mobile_number %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <%= f.label :email %>
+    <div class="form__field">
+      <%= f.email_field :email %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <%= f.label :second_email, 'Additional email address' %>
+    <div class="form__field">
+      <%= f.email_field :second_email %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <%= f.label :skype_username %>
+    <div class="form__field">
+      <%= f.text_field :skype_username %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <%= f.label :address_1 %>
+    <div class="form__field">
+      <%= f.text_field :address_1 %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <%= f.label :address_2 %>
+    <div class="form__field">
+      <%= f.text_field :address_2 %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <%= f.label :city %>
+    <div class="form__field">
+      <%= f.text_field :city %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <%= f.label :post_code %>
+    <div class="form__field">
+      <%= f.text_field :post_code %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <%= f.label :country %>
+    <div class="form__field">
+      <%= f.text_field :country %>
+    </div>
+  </div>
+
+  <%= f.submit "Update contact information", class: 'form__submit button button-secondary' %>
+<% end %>
+
+<hr>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <h3>Change password</h3>
+
+  <div class="form__group">
+    <%= f.label :password %>
+    <div class="form__field">
+      <%= f.password_field :password, autocomplete: "off", minlength: 6 %>
     </div>
   </div>
 
   <div class="form__group">
     <%= f.label :password_confirmation %>
     <div class="form__field">
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", minlength: 6 %>
     </div>
   </div>
 
   <div class="form__group">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+    <%= f.label :current_password %>
     <div class="form__field">
       <%= f.password_field :current_password, autocomplete: "off" %>
     </div>
   </div>
 
-  <%= f.submit "Update", class: 'form__submit button button-secondary' %>
+  <%= f.submit "Change password", class: 'form__submit button button-secondary' %>
 <% end %>
-
