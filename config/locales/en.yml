@@ -22,6 +22,11 @@
 # English
 en:
   hello: "Hello world"
+  admin:
+    agencies:
+      associated_users: |
+        Sorry, you can't delete this agency as there are users currently associated with it.<br>
+        You'll need to change the agency that these users belong to first.
 
 # French
 fr:
