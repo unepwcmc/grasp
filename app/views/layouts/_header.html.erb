@@ -6,7 +6,6 @@
           <a href="<%= reports_path %>"><%= image_tag 'grasp_logo.png' %></a>
         </div>
 
-<<<<<<< HEAD
         <div class="header__right-side">
           <% if user_signed_in? %>
             <button class="header__menu-button header__menu-button">Menu</button>
@@ -16,17 +15,6 @@
 
       <div class="header__main-nav">
         <% if user_signed_in? %>
-=======
-        <% if user_signed_in? %>
-          <div class="header__right-side">
-            <button class="header__menu-button header__menu-button">Menu</button>
-          </div>
-        <% end %>
-      </div>
-
-      <% if user_signed_in? %>
-        <div class="header__main-nav">
->>>>>>> 6aa39b1e2ef111ee45ad550879c3aa8732d2d583
           <div class="header__left-side">
             <ul>
               <li class="divider"></li>
@@ -41,13 +29,8 @@
               <% end %>
             </ul>
           </div>
-<<<<<<< HEAD
         <% end %>
       </div>
-=======
-        </div>
-      <% end %>
->>>>>>> 6aa39b1e2ef111ee45ad550879c3aa8732d2d583
     </div>
   </div>
 
@@ -59,10 +42,7 @@
       <% if user_signed_in? %>
         <div class="header__left-side">
           <ul>
-<<<<<<< HEAD
             <li class="divider"></li>
-=======
->>>>>>> 6aa39b1e2ef111ee45ad550879c3aa8732d2d583
             <% if can? :read, Report %>
               <li><%= link_to 'Reports', reports_path %></li>
             <% end %>
