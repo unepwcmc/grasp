@@ -45,4 +45,33 @@ module ReportHelper
       content_tag(:p, content_tag(:strong, "Returned: ") + "This report has been returned by a validator and requires updating before it can be submitted again")
     end
   end
+
+  def format_search_value_for_display(key, value)
+    case key
+    when "agencies"
+      value = value.map {|v| Agency.find(v).name }
+      value = value.join(", ")
+    when "users"
+      value = value.map {|u| User.find(u).full_name }
+      value = value.join(", ")
+    when "status_live"
+      value = "Yes"
+    when "status_dead"
+      value = "Yes"
+    when "status_body_parts"
+      value = "Yes"
+    when "genus"
+      value = value.join(", ")
+    when "last_known_location"
+      value = value.join(", ")
+    when "from_date"
+      value = ParamsUtils.to_formatted_date(value)
+    when "_date"
+      value = ParamsUtils.to_formatted_date(value)
+    else
+      value
+    end
+
+    content_tag(:span, content_tag(:strong, "#{key.titleize}: ") + value + ", ")
+  end
 end

@@ -12,14 +12,14 @@
   <div class="form__group">
     <%= label_tag :agencies %>
     <div class="form__field">
-      <%= select_tag :agencies, options_from_collection_for_select(Agency.all, "id", "name"), multiple: true, class: 'select2' %>
+      <%= select_tag :agencies, options_from_collection_for_select(Agency.all, "id", "name", params[:agencies]&.map(&:to_i)), multiple: true, class: 'select2' %>
     </div>
   </div>
 
   <div class="form__group">
     <%= label_tag :users %>
     <div class="form__field">
-      <%= select_tag :users, options_from_collection_for_select(User.all, "id", "full_name"), multiple: true, class: 'select2' %>
+      <%= select_tag :users, options_from_collection_for_select(User.all, "id", "full_name", params[:users]&.map(&:to_i)), multiple: true, class: 'select2' %>
     </div>
   </div>
 

@@ -20,4 +20,20 @@ module ParamsUtils
       false
     end
   end
+
+  def self.strip_to_search_params(params)
+    params = strip_rails_defaults(params)
+    params = strip_ordering_params(params)
+    strip_empty(params)
+  end
+
+  def self.to_formatted_date(date_params)
+    # Turns a date_select tag to a date object
+    d = Date.new(
+      date_params['(1i)'].to_i,
+      date_params['(2i)'].to_i,
+      date_params['(3i)'].to_i
+    )
+    d.strftime("%d %b %Y")
+  end
 end
