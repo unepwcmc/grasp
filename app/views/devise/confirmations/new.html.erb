@@ -1,5 +1,7 @@
 <%= content_for :page_title, "Resend confirmation instructions" %>
-<%= content_for :breadcrumbs, "Resend confirmation instructions" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Resend confirmation instructions" %>
+<% end %>
 
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>

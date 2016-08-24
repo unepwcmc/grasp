@@ -1,5 +1,7 @@
 <%= content_for :page_title, "Change your Password" %>
-<%= content_for :breadcrumbs, "Change your Password" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Change your Password" %>
+<% end %>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>

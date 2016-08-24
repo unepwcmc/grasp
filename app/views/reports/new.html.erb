@@ -1,5 +1,8 @@
 <%= content_for :page_title, "New Report" %>
-<%= content_for :breadcrumbs, "New Report" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Reports Dashboard", reports_path %>
+  <%= breadcrumb "New Report", new_report_path %>
+<% end %>
 
 <div id="report-container" data-report-mode="edit"></div>
 
