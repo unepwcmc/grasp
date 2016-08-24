@@ -6,7 +6,7 @@
     <th><%= sortable "timestamp" %></th>
     <th><%= sortable "date_of_discovery" %></th>
     <th>Status of ape(s)</th>
-    <th><%= sortable "confiscated" %></th>
+    <th><%= sortable "confiscated", "Confiscation" %></th>
     <th><%= sortable "state", "Status" %></th>
   </thead>
   <tbody>
@@ -16,7 +16,7 @@
           <td><%= report.user_name %></td>
           <td><%= report.user&.agency&.name %></td>
           <td><%= report.timestamp %></td>
-          <td><%= report.answer_to("date_of_discovery") %></td>
+          <td><%= report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y") %></td>
           <td><%= status_of_apes(report) %></td>
           <td><%= report.answer_to("confiscated") %></td>
           <td><%= report.state %></td>

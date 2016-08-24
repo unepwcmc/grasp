@@ -63,7 +63,7 @@
 <div class="form__group">
   <strong> Date of incident </strong>
   <div class="form__field">
-    <%= @report.answer_to("date_of_discovery") %>
+    <%= @report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y") %>
   </div>
 </div>
 

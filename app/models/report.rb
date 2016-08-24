@@ -37,8 +37,13 @@ class Report < ActiveRecord::Base
     is_being_validated? ? "Being validated" : data["state"]&.humanize
   end
 
+  CONVERSIONS = {
+    "date_of_discovery" => lambda { |value| Date.strptime(value, "%Y-%m-%d") }
+  }
+
   def answer_to question
-    data["answers"][question]["selected"]
+    answer = data["answers"][question]["selected"]
+    CONVERSIONS.has_key?(question) ? CONVERSIONS[question][answer] : answer
   rescue NoMethodError
     nil
   end
