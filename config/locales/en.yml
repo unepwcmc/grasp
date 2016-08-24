@@ -33,6 +33,9 @@ en:
       created: "Great, this new agency has been successfully created."
       destroyed: "That agency has been successfully deleted from the system. Thank you!"
       updated: "Great, this agency has been successfully updated."
+      associated_users: |
+        Sorry, you can't delete this agency as there are users currently associated with it.<br>
+        You'll need to change the agency that these users belong to first.
   csv_export:
     being_generated: |
       Success!<br>

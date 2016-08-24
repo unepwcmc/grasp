@@ -43,8 +43,12 @@ class AgenciesController < ApplicationController
 
   # DELETE /agencies/1
   def destroy
-    @agency.destroy
-    redirect_to agencies_url, notice: t("admin.agencies.destroyed")
+    if @agency.users.any?
+      redirect_to :back, notice: t("admin.agencies.associated_users")
+    else
+      @agency.destroy
+      redirect_to agencies_url, notice: t("admin.agencies.destroyed")
+    end
   end
 
   private
