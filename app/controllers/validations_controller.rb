@@ -30,7 +30,7 @@ class ValidationsController < ApplicationController
         NotificationMailer.notify_all_admins_of_report_returned(@validation).deliver_later
       end
 
-      redirect_to reports_path, notice: 'Validation was successfully created.'
+      redirect_to reports_path, notice: t("validations.successful")
     else
       render :new
     end

@@ -9,16 +9,38 @@
 
 <p>
   <strong>Name</strong><br>
-  <%= @agency.name %>
+  <%= @agency.name || "N/A" %>
 </p>
 
 <p>
   <strong>Email</strong><br>
-  <%= @agency.email %>
+  <%= @agency.email || "N/A" %>
 </p>
 
 <p>
-  <strong>Url</strong><br>
-  <%= @agency.url %>
+  <strong>Website URL</strong><br>
+  <%= @agency.url || "N/A" %>
 </p>
 
+<p>
+  <strong>Address</strong><br>
+  <% if @agency.address_1.blank? && @agency.address_2.blank? %>
+    N/A
+  <% else %>
+    <%= @agency.address_1 %><br>
+    <%= @agency.address_2 %><br>
+  <% end %>
+</p>
+<p>
+  <strong>City</strong><br>
+  <%= @agency.city || "N/A" %>
+</p>
+<p>
+  <strong>Post Code</strong><br>
+  <%= @agency.post_code || "N/A" %>
+</p>
+
+<p>
+  <strong>Country</strong><br>
+  <%= @agency.country || "N/A" %>
+</p>

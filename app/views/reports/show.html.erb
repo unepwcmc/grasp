@@ -1,4 +1,4 @@
-<%= content_for :page_title, "View Report" %>
+<%= content_for :page_title, "View Report ##{@report.id}" %>
 <%= content_for :breadcrumbs do %>
   <%= breadcrumb "Reports Dashboard", reports_path %>
   <%= breadcrumb "Report ##{@report.id}", report_summary_path(@report.id) %>

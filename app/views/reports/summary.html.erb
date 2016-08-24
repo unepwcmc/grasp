@@ -1,4 +1,4 @@
-<%= content_for :page_title, "Report Summary" %>
+<%= content_for :page_title, "Report Summary ##{@report.id}" %>
 <%= content_for :breadcrumbs do %>
   <%= breadcrumb "Reports Dashboard", reports_path %>
   <%= breadcrumb "Report ##{@report.id}", report_summary_path(@report.id) %>
@@ -69,7 +69,7 @@
 <div class="form__group">
   <strong> Date of incident </strong>
   <div class="form__field">
-    <%= @report.answer_to('date_of_discovery') %>
+    <%= @report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y") %>
   </div>
 </div>
 
