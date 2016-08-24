@@ -33,6 +33,11 @@ en:
       created: "Great, this new agency has been successfully created."
       destroyed: "That agency has been successfully deleted from the system. Thank you!"
       updated: "Great, this agency has been successfully updated."
+  csv_export:
+    being_generated: |
+      Success!<br>
+
+      Your csv file is now being generated.  We'll email you a link to download the file as soon as it's ready. Thank you.
 
 # French
 fr:
