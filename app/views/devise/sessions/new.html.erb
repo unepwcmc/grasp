@@ -1,5 +1,7 @@
 <%= content_for :page_title, "Sign In" %>
-<%= content_for :breadcrumbs, "Sign In" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Sign In" %>
+<% end %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>

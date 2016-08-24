@@ -1,5 +1,7 @@
 <%= content_for :page_title, "Search Reports" %>
-<%= content_for :breadcrumbs, "Search Reports" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Search Reports", search_reports_path  %>
+<% end %>
 
 <%= form_tag reports_path, method: :get do %>
   <div class="form__group">

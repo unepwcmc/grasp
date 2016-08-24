@@ -1,5 +1,8 @@
 <%= content_for :page_title, "Editing User" %>
-<%= content_for :breadcrumbs, "Editing User" %>
-
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Users", admin_users_path %>
+  <%= breadcrumb @user.full_name, admin_user_path(@user.id) %>
+  <%= breadcrumb "Editing User", edit_admin_user_path(@user.id) %>
+<% end %>
 <%= render 'form' %>
 

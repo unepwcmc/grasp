@@ -1,5 +1,7 @@
 <%= content_for :page_title, "Reports Dashboard" %>
-<%= content_for :breadcrumbs, "Reports Dashboard" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Reports Dashboard", reports_path %>
+<% end %>
 <%= content_for :page_buttons do %>
   <% if can? :create, Report %>
     <%= link_to "New Report", new_report_path, class: 'button button-primary' %>
