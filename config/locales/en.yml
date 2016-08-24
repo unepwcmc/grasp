@@ -22,11 +22,21 @@
 # English
 en:
   hello: "Hello world"
+  validations:
+    successful: "Thank you! Your validation decision has been successfully saved in the system"
   admin:
+    users:
+      created: "Great, this new user was successfully created. An email has been sent to them containing all the details they need to sign in."
+      updated: "Great, this user has been successfully updated."
+      destroyed: "That user has been successfully deleted from the system. Thank you!"
     agencies:
+      created: "Great, this new agency has been successfully created."
+      destroyed: "That agency has been successfully deleted from the system. Thank you!"
+      updated: "Great, this agency has been successfully updated."
       associated_users: |
         Sorry, you can't delete this agency as there are users currently associated with it.<br>
         You'll need to change the agency that these users belong to first.
+
 
 # French
 fr:

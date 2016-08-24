@@ -26,7 +26,7 @@ class AgenciesController < ApplicationController
     @agency = Agency.new(agency_params)
 
     if @agency.save
-      redirect_to @agency, notice: 'Agency was successfully created.'
+      redirect_to @agency, notice: t("admin.agencies.created")
     else
       render :new
     end
@@ -35,7 +35,7 @@ class AgenciesController < ApplicationController
   # PATCH/PUT /agencies/1
   def update
     if @agency.update(agency_params)
-      redirect_to @agency, notice: 'Agency was successfully updated.'
+      redirect_to @agency, notice: t("admin.agencies.updated")
     else
       render :edit
     end
@@ -47,7 +47,7 @@ class AgenciesController < ApplicationController
       redirect_to :back, notice: t("admin.agencies.associated_users")
     else
       @agency.destroy
-      redirect_to agencies_url, notice: 'Agency was successfully destroyed.'
+      redirect_to agencies_url, notice: t("admin.agencies.destroyed")
     end
   end
 

@@ -33,7 +33,7 @@ class Admin::UsersController < ApplicationController
 
     if @user.save
       NotificationMailer.notify_user_of_account_creation(@user, generated_password).deliver_later
-      redirect_to admin_user_path(@user), notice: 'User was successfully created.'
+      redirect_to admin_user_path(@user), notice: t("admin.users.created")
     else
       render :new
     end
@@ -42,7 +42,7 @@ class Admin::UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      redirect_to admin_user_path(@user), notice: 'User was successfully updated.'
+      redirect_to admin_user_path(@user), notice: t("admin.users.updated")
     else
       render :edit
     end
@@ -51,17 +51,26 @@ class Admin::UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user.destroy
-    redirect_to admin_users_url, notice: 'User was successfully destroyed.'
+    redirect_to admin_users_url, notice: t("admin.users.destroyed")
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :role_id, :password, :password_confirmation, :agency_id, :second_email, :skype_username, :address_1, :address_2, :city, :post_code, :country, :mobile_number, {expertise_ids: []})
+      params.require(:user).permit(
+        :first_name, :last_name,
+        :email, :second_email,
+        :role_id,
+        :password, :password_confirmation,
+        :agency_id,
+        :skype_username,
+        :address_1, :address_2,
+        :city, :post_code, :country,
+        :mobile_number,
+        {expertise_ids: []}
+      )
     end
 end
