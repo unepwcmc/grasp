@@ -78,25 +78,6 @@
     </div>
   </div>
 
-  <% if !@user.persisted? %>
-    <div class="form__group">
-      <%= f.label :password %>
-      <div class="form__field">
-        <%= f.password_field :password, autocomplete: "off" %>
-        <% if @minimum_password_length %>
-          <br />
-          <em><%= @minimum_password_length %> characters minimum</em>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="form__group">
-      <%= f.label :password_confirmation %>
-      <div class="form__field">
-        <%= f.password_field :password_confirmation, autocomplete: "off" %>
-      </div>
-    </div>
-  <% end %>
 
   <div class="form__group">
     <%= f.label :skype_username %>
@@ -141,4 +122,30 @@
   </div>
 
   <%= f.submit class: 'form__submit button button-secondary' %>
+<% end %>
+
+<hr>
+
+<h3>Change password</h3>
+
+<%= form_for [:admin, @user] do |f| %>
+  <div class="form__group">
+    <%= f.label :password %>
+    <div class="form__field">
+      <%= f.password_field :password, autocomplete: "off" %>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <%= f.label :password_confirmation %>
+    <div class="form__field">
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+  </div>
+
+  <%= f.submit "Change password", class: 'form__submit button button-secondary' %>
 <% end %>

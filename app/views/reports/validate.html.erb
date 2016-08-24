@@ -1,5 +1,5 @@
-<%= content_for :page_title, "Validate Report" %>
-<%= content_for :breadcrumbs, "Validate Report" %>
+<%= content_for :page_title, "Validate Report ##{@report.id}" %>
+<%= content_for :breadcrumbs, "Validate Report ##{@report.id}" %>
 <%= content_for :page_buttons do %>
   <% if can? :validate, @report %>
     <%= link_to 'View Full Report', report_path(@report), class: 'button button-primary' %>
