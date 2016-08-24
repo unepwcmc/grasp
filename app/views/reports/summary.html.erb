@@ -1,5 +1,5 @@
-<%= content_for :page_title, "Report Summary" %>
-<%= content_for :breadcrumbs, "Report Summary" %>
+<%= content_for :page_title, "Summary of Report ##{@report.id}" %>
+<%= content_for :breadcrumbs, "Summary of Report ##{@report.id}" %>
 <%= content_for :page_buttons do %>
   <% if can? :read, @report %>
     <%= link_to 'View Full Report', report_path(@report), class: 'button button-primary' %>
