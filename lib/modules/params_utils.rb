@@ -34,6 +34,6 @@ module ParamsUtils
       date_params['(2i)'].to_i,
       date_params['(3i)'].to_i
     )
-    d.strftime("%d %b %Y")
+    d.strftime("%d/%m/%Y")
   end
 end
