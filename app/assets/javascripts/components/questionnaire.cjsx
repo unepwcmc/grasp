@@ -3,6 +3,7 @@ React = require("react")
 QuestionnaireStore = require("stores/questionnaire_store")
 NavigationStore    = require("stores/navigation_store")
 Page               = require("components/page")
+NavigationControls = require("components/navigation_controls")
 PageControls       = require("components/page_controls")
 SaveButton         = require("components/save_button")
 SubmitButton       = require("components/submit_button")
@@ -23,6 +24,7 @@ class Questionnaire extends React.Component
 
   render: ->
     <div className="questionnaire">
+      <NavigationControls/>
       {@renderCurrentPage()}
       <PageControls/>
       <SaveButton/>
