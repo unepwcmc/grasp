@@ -1,5 +1,9 @@
 <%= content_for :page_title, "Editing Agency" %>
-<%= content_for :breadcrumbs, "Editing Agency" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Agencies", agencies_path %>
+  <%= breadcrumb @agency.name, agency_path(@agency.id) %>
+  <%= breadcrumb "Editing Agency", edit_agency_path(@agency.id) %>
+<% end %>
 
 <%= render 'form' %>
 

@@ -1,5 +1,8 @@
 <%= content_for :page_title, "Create new user" %>
-<%= content_for :breadcrumbs, "Create new user" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Users", admin_users_path %>
+  <%= breadcrumb "Create new user", new_admin_user_path %>
+<% end %>
 
 <%= render 'form' %>
 

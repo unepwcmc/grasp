@@ -1,7 +1,7 @@
 <div class="navigation">
   <div class="navigation__inner">
     <div class="breadcrumbs">
-      Home <%= icon("angle-right", class: "breadcrumbs__divider") %> <%= yield :breadcrumbs %>
+      <%= link_to "Home", reports_path %> <%= yield :breadcrumbs %>
     </div>
     <div class="row">
       <h1 class="page__title pull-left"><%= yield :page_title %></h1>

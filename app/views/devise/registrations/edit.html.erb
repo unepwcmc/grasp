@@ -1,5 +1,7 @@
 <%= content_for :page_title, "Edit My Profile" %>
-<%= content_for :breadcrumbs, "Edit My Profile" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Edit My Profile", edit_registration_path(current_user) %>
+<% end %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>

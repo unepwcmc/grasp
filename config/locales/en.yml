@@ -36,7 +36,11 @@ en:
       associated_users: |
         Sorry, you can't delete this agency as there are users currently associated with it.<br>
         You'll need to change the agency that these users belong to first.
+  csv_export:
+    being_generated: |
+      Success!<br>
 
+      Your csv file is now being generated.  We'll email you a link to download the file as soon as it's ready. Thank you.
 
 # French
 fr:

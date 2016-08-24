@@ -1,5 +1,7 @@
 <%= content_for :page_title, "Listing Agencies" %>
-<%= content_for :breadcrumbs, "Listing Agencies" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Agencies", agencies_path %>
+<% end %>
 <%= content_for :page_buttons do %>
   <%= link_to 'New Agency', new_agency_path, class: 'button button-primary' %>
 <% end %>
