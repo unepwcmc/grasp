@@ -1,3 +1,12 @@
 <% if ParamsUtils.strip_ordering_params(params).any? %>
   <h3><%= pluralize(@reports.count, "Search Result") %></h3>
+
+  <h5>Search parameters</h5>
+  <p>
+  <% ParamsUtils.strip_to_search_params(params).each do |k,v| %>
+    <%= format_search_value_for_display(k, v) %>
+  <% end %>
+  </p>
+
+  <%= link_to 'Edit Search', search_reports_path, class: 'button button-primary' %>
 <% end %>

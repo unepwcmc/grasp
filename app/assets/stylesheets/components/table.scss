@@ -65,7 +65,7 @@
   }
 
   @include m(users) {
-    @include responsive-table("First name", "Last name", "Email", "Role", "Actions")
+    @include responsive-table("First name", "Last name", "Agency", "Email", "Role", "Actions")
   }
 
   @include m(agencies) {
