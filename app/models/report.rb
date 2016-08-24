@@ -38,7 +38,7 @@ class Report < ActiveRecord::Base
   end
 
   CONVERSIONS = {
-    "date_of_discovery" => lambda { |value| Date.strptime(value, "%Y-%m-%d") }
+    "date_of_discovery" => lambda { |value| Date.strptime(value, "%d/%m/%Y") }
   }
 
   def answer_to question
