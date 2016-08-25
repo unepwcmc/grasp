@@ -1,11 +1,20 @@
 React = require("react")
+moment = require("moment")
+DatePicker = require('react-datepicker')
+QuestionnaireStore = require("stores/questionnaire_store")
 Question = require("components/question")
 
 class DateQuestion extends React.Component
   render: ->
-    <input max={@maxDate()} value={@props.answer?.selected}
-      onChange={@props.onChange} type="date"></input>
+    <DatePicker dateFormat="DD/MM/YYYY" maxDate={moment()}
+      selected={@selectedDate()} onChange={@handleChange}/>
 
-  maxDate: -> new Date().toJSON().slice(0,10)
+  handleChange: (date) =>
+    QuestionnaireStore.selectAnswer(@props.data.id, date.format("DD/MM/YYYY"))
+
+  selectedDate: =>
+    parsedDate = moment(@props.answer?.selected, "DD/MM/YYYY")
+    if parsedDate.isValid() then parsedDate else moment()
+
 
 module.exports = DateQuestion
