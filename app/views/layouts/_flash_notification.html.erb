@@ -2,7 +2,7 @@
   <div class="alert alert-<%= key %>">
     <p class="alert__close"><i class="fa fa-close"></i> Close</p>
     <h4 class="alert__title">
-      <i class="fa fa-<%= key == "notice" ? "info-circle" : "times-circle" %>"></i> <%= key.titleize %>!
+      <i class="fa fa-<%= alert_key_to_fa_icon(key) %>"></i> <%= key.titleize %>!
     </h4>
     <p class="alert__body">
       <%= raw(value) %>
