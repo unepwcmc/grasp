@@ -203,6 +203,7 @@ class QuestionnaireStore extends EventEmitter
     title = key.charAt(0).toUpperCase() + key.slice(1)
 
     $notificationEl = $('.js-questionnaire-notification')
+    $notificationEl.empty()
     $notificationEl.append(
       $('<div class="alert alert-' + key + '"></div>').append(
         $('<p class="alert__close"><i class="fa fa-close"></i> Close</p>')
