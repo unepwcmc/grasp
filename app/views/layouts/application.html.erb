@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width">
-    <title>Grasp</title>
+    <title><%= content_for?(:page_title) ? "#{yield(:page_title)} | GRASP Database" : "GRASP Database" %></title>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= render "layouts/favicons" %>
     <%= csrf_meta_tags %>
