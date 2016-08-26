@@ -30,10 +30,13 @@ class ValidationsController < ApplicationController
         NotificationMailer.notify_all_admins_of_report_returned(@validation).deliver_later
       end
 
-      redirect_to reports_path, notice: t("validations.successful")
+      redirect_to validation_thank_you_path
     else
       render :new
     end
+  end
+
+  def thank_you
   end
 
   private

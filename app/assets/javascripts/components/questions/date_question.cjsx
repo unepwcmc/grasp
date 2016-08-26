@@ -7,7 +7,7 @@ Question = require("components/question")
 class DateQuestion extends React.Component
   render: ->
     <DatePicker dateFormat="DD/MM/YYYY" maxDate={moment()}
-      selected={@selectedDate()} onChange={@handleChange}/>
+      readOnly={true} selected={@selectedDate()} onChange={@handleChange}/>
 
   handleChange: (date) =>
     QuestionnaireStore.selectAnswer(@props.data.id, date.format("DD/MM/YYYY"))
