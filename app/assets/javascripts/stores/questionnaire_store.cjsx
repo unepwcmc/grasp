@@ -224,6 +224,6 @@ class QuestionnaireStore extends EventEmitter
     report.state = "submitted"
 
     @stopAutoSave()
-    @saveOrUpdateReport("Report Submitted!", @setPath)
+    @saveOrUpdateReport(@setPath)
 
 module.exports = new QuestionnaireStore()
