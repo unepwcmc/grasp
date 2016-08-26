@@ -10,8 +10,18 @@
   }
 
   @include e(buttons) {
+    @media screen and (max-width: $break__phone) {
+      float: none;
+      margin-top: 1em;
+      width: 100%;
+      a {
+        width: 100%;
+      }
+    }
+
     @media screen and (max-width: $break__tablet) {
-      display: none;
+      float: left;
+      margin-top: 1em;
     }
   }
 }

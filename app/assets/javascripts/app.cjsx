@@ -26,6 +26,15 @@ module.exports =
       $('.header__lower').slideToggle()
     )
 
+    setTimeout (->
+      $('.alert').slideUp()
+      return
+    ), 10000
+
+    $('.alert').click(->
+      $(this).slideUp()
+    )
+
     if ($validationEl = $(".js-validating")).length > 0
       reportId = $validationEl.data("report")
 

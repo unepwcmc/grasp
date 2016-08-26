@@ -68,3 +68,20 @@ $select-2-tag__color: $steel-blue;
 $table-head__bottom-border: $silver-sand;
 $table-row__bg-color: lighten($periwinkle-grey, 5%);
 $table-row__border-color: $silver-sand;
+
+// Alerts
+
+$alert-default__bg-color:   $silver-sand;
+$alert-default__border-color: $oslo-grey;
+
+$alert-notice__bg-color:    lighten($periwinkle-grey, 5%);
+$alert-notice__border-color: $danube;
+$alert-notice-title__color: $danube;
+
+$alert-error__bg-color: lighten($guardsman-red, 58%);
+$alert-error__border-color: $guardsman-red;
+$alert-error-title__color: $guardsman-red;
+
+$alert-success__bg-color: lighten($green-leaf, 68%);
+$alert-success__border-color: $green-leaf;
+$alert-success-title__color: $green-leaf;

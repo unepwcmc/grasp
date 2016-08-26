@@ -166,12 +166,12 @@ class QuestionnaireStore extends EventEmitter
   saveOrUpdateReport: (callback) =>
     if report.id?
       @reportRequest("/reports/#{report.id}", "PUT", (response) =>
-        @setNotification("Report updated")
+        @setNotification("success", "Report updated")
         callback?(response.headers.get('Location'))
       )
     else
       @reportRequest("/reports", "POST", (response) =>
-        @setNotification("Report saved")
+        @setNotification("success", "Report saved")
         response.json().then((json) -> report.id = json.id)
 
         callback?(response.headers.get('Location'))
@@ -195,11 +195,30 @@ class QuestionnaireStore extends EventEmitter
   setPath: (path) ->
     window.location = path
 
-  setNotification: (msg) ->
-    $notificationEl = $('.js-questionnaire-notification')
-    $notificationEl.html(msg).fadeIn()
+  setNotification: (key, msg) ->
+    title_icon = switch key
+                    when "success" then "check"
+                    when "error" then "times-circle"
+                    else "info-circle"
+    title = key.charAt(0).toUpperCase() + key.slice(1)
 
-    setTimeout((-> $notificationEl.fadeOut()), 3000)
+    $notificationEl = $('.js-questionnaire-notification')
+    $notificationEl.empty()
+    $notificationEl.append(
+      $('<div class="alert alert-' + key + '"></div>').append(
+        $('<p class="alert__close"><i class="fa fa-close"></i> Close</p>')
+      ).append(
+        $('<h4 class="alert__title"><i class="fa fa-' + title_icon + '"></i> ' + title + '</h4>')
+      ).append(
+        $('<p class="alert__body">' + msg + '</p>')
+        )
+      )
+
+    $notificationEl.fadeIn()
+    setTimeout((-> $notificationEl.fadeOut()), 10000)
+    $notificationEl.click(->
+      $(this).hide()
+    )
 
   submitReport: =>
     report.state = "submitted"

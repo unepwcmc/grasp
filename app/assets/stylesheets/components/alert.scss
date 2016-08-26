@@ -1,0 +1,54 @@
+@include b(alert) {
+  padding: 1.5em;
+  background-color: $alert-default__bg-color;
+  border-left: 4px solid $alert-default__border-color;
+  margin: 1em 0 2em 0;
+
+  &.alert-notice {
+    background-color: $alert-notice__bg-color;
+    border-left: 4px solid $alert-notice__border-color;
+
+    .alert__title {
+      color: $alert-notice-title__color;
+    }
+
+    .alert__close {
+      color: $alert-notice-title__color;
+    }
+  }
+
+  &.alert-error {
+    background-color: $alert-error__bg-color;
+    border-left: 4px solid $alert-error__border-color;
+
+    .alert__title {
+      color: $alert-error-title__color;
+    }
+
+    .alert__close {
+      color: $alert-error-title__color;
+    }
+  }
+
+  &.alert-success{
+    background-color: $alert-success__bg-color;
+    border-left: 4px solid $alert-success__border-color;
+
+    .alert__title {
+      color: $alert-success-title__color;
+    }
+
+    .alert__close {
+      color: $alert-success-title__color;
+    }
+  }
+
+  @include e(body) {
+    font-size: 1.063em;
+    margin: 0;
+  }
+
+  @include e(close) {
+    float: right;
+  }
+}
