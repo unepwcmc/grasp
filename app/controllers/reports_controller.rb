@@ -64,7 +64,7 @@ class ReportsController < ApplicationController
         NotificationMailer.notify_all_admins_of_submitted_report(@report).deliver_later
       end
 
-      render json: @report, location: reports_path
+      render json: @report, location: report_thank_you_path
     else
       head 422, location: reports_path
     end
@@ -95,6 +95,9 @@ class ReportsController < ApplicationController
     else
       @validation = Validation.new
     end
+  end
+
+  def thank_you
   end
 
   private
