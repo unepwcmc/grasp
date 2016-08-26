@@ -62,9 +62,11 @@ class ReportsController < ApplicationController
       if @report.state == "Submitted"
         NotificationMailer.notify_validators_of_submitted_report(@report).deliver_later
         NotificationMailer.notify_all_admins_of_submitted_report(@report).deliver_later
+        render json: @report, location: report_thank_you_path
+      else
+        render json: @report, location: reports_path
       end
 
-      render json: @report, location: report_thank_you_path
     else
       head 422, location: reports_path
     end
