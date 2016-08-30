@@ -108,14 +108,14 @@
   <h3>Change password</h3>
 
   <div class="form__group">
-    <%= f.label :password %>
+    <%= f.label :password, "New password" %>
     <div class="form__field">
       <%= f.password_field :password, autocomplete: "off", minlength: 6 %>
     </div>
   </div>
 
   <div class="form__group">
-    <%= f.label :password_confirmation %>
+    <%= f.label :password_confirmation, "New password confirmation" %>
     <div class="form__field">
       <%= f.password_field :password_confirmation, autocomplete: "off", minlength: 6 %>
     </div>
