@@ -75,7 +75,7 @@ class Question extends React.Component
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
                                     data={@props.data} answer={@props.answer} mode={@props.mode}/>
       when "select"           then <SelectQuestion
-                                    onChange={@handleChange} onOtherChange={@handleOtherChange}
+                                    onChange={@handleChange} emptyOption={@props.data.question}
                                     data={@props.data} answer={@props.answer} mode={@props.mode}/>
 
   renderAppropriateAnswer: =>
