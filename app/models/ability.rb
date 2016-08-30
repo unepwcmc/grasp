@@ -5,6 +5,8 @@ class Ability
     # Define abilities for the passed in user here. For example:
     user ||= User.new # guest user (not logged in)
 
+    can :thank_you, Report
+
     case user.role.name
     when "admin"
       can :manage, :all
@@ -12,6 +14,7 @@ class Ability
       can :read, Report
       can :validate, Report
       can :lock, Report
+      can :thank_you, Validation
     when "provider"
       can :create, Report
       can :read, Report, user: {agency_id: user.agency.id}
