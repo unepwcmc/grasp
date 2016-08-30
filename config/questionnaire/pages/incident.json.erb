@@ -26,13 +26,10 @@
 "country_of_discovery": {
   "id": "country_of_discovery",
   "required": true,
-  "type": "single",
+  "type": "select",
   "question": "Country of discovery",
-  "answers": [
-    "Angola", "Burundi", "Cameroon", "Central African Republic", "Democratic Republic of Congo",
-    "Congo", "Ivory Coast", "Equatorial Guinea", "Gabon", "Ghana", "Guinea", "Guinea Bissau",
-    "Indonesia", "Liberia", "Malaysia", "Mali", "Nigeria", "Rwanda", "Senegal", "Sierra Leone",
-    "South Sudan", "Uganda"
+  "options": [
+    <%= partial("incident/countries") %>
   ]
 },
 
