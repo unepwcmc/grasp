@@ -14,6 +14,8 @@ NumericQuestion        = require("components/questions/numeric_question")
 QuantitiesQuestion     = require("components/questions/quantities_question")
 DecimalNumericQuestion = require("components/questions/decimal_numeric_question")
 GpsQuestion            = require("components/questions/gps_question")
+SelectQuestion         = require("components/questions/select_question")
+BodyPartsQuestion      = require("components/questions/body_parts_question")
 
 Tooltip = require("components/tooltip")
 
@@ -73,10 +75,16 @@ class Question extends React.Component
       when "subspecies"       then <SubspeciesQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
                                     data={@props.data} answer={@props.answer} mode={@props.mode}/>
+      when "select"           then <SelectQuestion
+                                    onChange={@handleChange} emptyOption={@props.data.question}
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
+      when "body_parts"       then <BodyPartsQuestion
+                                    onChange={@handleChange}
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
 
   renderAppropriateAnswer: =>
     return null if @props.mode != "show" or !@props.answer?.selected?
-    general = <p>{@props.answer?.selected}</p>
+    general = @renderAnswerLabel(@props.answer?.selected)
 
     switch @props.data.type
       when "single"           then general
@@ -109,13 +117,19 @@ class Question extends React.Component
           <p>DNA Confirmation: {"✓" if @props.answer?.dna_confirmation}</p>
         </div>
 
+  renderAnswerLabel: (answer) ->
+    if matches = answer.match(/(.*) \((.*)\)/)
+      <p>{matches[1]} (<em>{matches[2]}</em>)</p>
+    else
+      <p>{answer}</p>
+
   renderOtherField: =>
     if "other" == @props.answer?.selected
       <input type="text" value={@props.data.other_answer}
         onChange={@handleOtherChange}/>
 
   handleChange: (e) =>
-    answer = e.target.value
+    answer = if e?.target then e.target.value else e
     QuestionnaireStore.selectAnswer(@props.data.id, answer)
 
   handleOtherChange: (e) =>

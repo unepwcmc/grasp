@@ -12,13 +12,13 @@ class NumericQuestion extends React.Component
 
   increment: =>
     answer = parseInt(@props.answer?.selected || 0) + 1
-    if answer > 99 then answer = 99 else answer
-    QuestionnaireStore.selectAnswer(@props.data.id, answer)
+    answer = if answer > 99 then 99 else answer
+    @props.onChange(answer)
 
   decrement: =>
     answer = parseInt(@props.answer?.selected || 0) - 1
-    if answer < 0 then answer = 0 else answer
-    QuestionnaireStore.selectAnswer(@props.data.id, answer)
+    answer = if answer < 0 then 0 else answer
+    @props.onChange(answer)
 
 
 module.exports = NumericQuestion

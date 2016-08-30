@@ -24,10 +24,16 @@ class SingleAnswerQuestion extends React.Component
             name={@props.data.id}
             id={@props.data.id + answer}
           />
-          <span className="label-body">{answer}</span>
+          {@renderAnswerLabel(answer)}
         </label>
       </li>
     )
+
+  renderAnswerLabel: (answer) ->
+    if matches = answer.match(/(.*) \((.*)\)/)
+      <span className="label-body">{matches[1]} (<em>{matches[2]}</em>)</span>
+    else
+      <span className="label-body">{answer}</span>
 
   renderOther: =>
     if @props.data.other

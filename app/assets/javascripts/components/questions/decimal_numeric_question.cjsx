@@ -15,16 +15,16 @@ class DecimalNumericQuestion extends React.Component
   increment: =>
     answer = (@props.answer?.selected || 0.0) + 0.1
     answer = parseFloat((answer).toFixed(1))
+    answer = if answer > 99 then 99.0 else answer
 
-    if answer > 99 then answer = 99.0 else answer
-    QuestionnaireStore.selectAnswer(@props.data.id, answer)
+    @props.onChange(answer)
 
   decrement: =>
     answer = (@props.answer?.selected || 0.0) - 0.1
     answer = parseFloat((answer).toFixed(1))
+    answer = if answer < 0 then 0.0 else answer
 
-    if answer < 0 then answer = 0.0 else answer
-    QuestionnaireStore.selectAnswer(@props.data.id, answer)
+    @props.onChange(answer)
 
 module.exports = DecimalNumericQuestion
 

@@ -25,10 +25,17 @@ class MultiAnswerQuestion extends React.Component
             id={@props.data.id + answer}
             name={@props.data.id}
           />
-          <span className="label-body">{answer}</span>
+          {@renderAnswerLabel(answer)}
         </label>
       </li>
     )
+
+  renderAnswerLabel: (answer) ->
+    if matches = answer.match(/(.*) \((.*)\)$/)
+      <span className="label-body">{matches[1]} (<em>{matches[2]}</em>)</span>
+    else
+      <span className="label-body">{answer}</span>
+
 
   handleChange: (e) =>
     if e.target.checked

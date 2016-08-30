@@ -122,13 +122,16 @@ class NavigationStore extends EventEmitter
             QuestionnaireStore.nullAnswer(question.id, false)
 
   allAnswersForQuestion: (allQuestions, questionId) =>
-    _.chain(allQuestions)
+    allAnswers = _.chain(allQuestions)
       .filter((question, _key) -> question.id == questionId)
       .filter((question, _key) => @isQuestionVisible(question))
       .map((question, _key) -> question.answers)
       .flatten()
       .compact()
       .value()
+
+    allAnswers.push("other")
+    allAnswers
 
   addPageChangeListener: (callback) => @on(PAGE_CHANGE_EVENT, callback)
   addTabChangeListener:  (callback) => @on(TAB_CHANGE_EVENT,  callback)

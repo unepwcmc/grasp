@@ -86,6 +86,13 @@ class QuestionnaireStore extends EventEmitter
       report.answers[key].selected = answer
     @emit(CHANGE_EVENT)
 
+  selectPart: (key, part, answer) ->
+    report.answers[key] ||= {}
+    report.answers[key].parts ||= {}
+    report.answers[key].parts[part] ||= {}
+    report.answers[key].parts[part].selected = answer
+    @emit(CHANGE_EVENT)
+
   nullAnswer: (key, fireChange=true) ->
     currentPage = NavigationStore.currentPage()
     tabIndex = NavigationStore.tabIndexForCurrentPage()
