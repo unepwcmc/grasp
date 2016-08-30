@@ -15,6 +15,7 @@ QuantitiesQuestion     = require("components/questions/quantities_question")
 DecimalNumericQuestion = require("components/questions/decimal_numeric_question")
 GpsQuestion            = require("components/questions/gps_question")
 SelectQuestion         = require("components/questions/select_question")
+BodyPartsQuestion      = require("components/questions/body_parts_question")
 
 Tooltip = require("components/tooltip")
 
@@ -77,6 +78,9 @@ class Question extends React.Component
       when "select"           then <SelectQuestion
                                     onChange={@handleChange} emptyOption={@props.data.question}
                                     data={@props.data} answer={@props.answer} mode={@props.mode}/>
+      when "body_parts"       then <BodyPartsQuestion
+                                    onChange={@handleChange}
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
 
   renderAppropriateAnswer: =>
     return null if @props.mode != "show" or !@props.answer?.selected?
@@ -125,7 +129,7 @@ class Question extends React.Component
         onChange={@handleOtherChange}/>
 
   handleChange: (e) =>
-    answer = e.target.value
+    answer = if e?.target then e.target.value else e
     QuestionnaireStore.selectAnswer(@props.data.id, answer)
 
   handleOtherChange: (e) =>
