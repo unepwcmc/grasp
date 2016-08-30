@@ -3,6 +3,7 @@
 @import "font-awesome";
 
 // utilities
+@import "flex";
 @import "utilities/bem";
 @import "utilities/u-classes";
 @import "utilities/typography";
@@ -16,6 +17,7 @@
 @import "components/breadcrumbs";
 @import "components/header";
 @import "components/navigation";
+@import "components/navigation-controls";
 @import "components/page-controls";
 @import "components/page";
 @import "components/question";

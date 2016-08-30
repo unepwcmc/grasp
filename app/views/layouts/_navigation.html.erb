@@ -1,13 +1,19 @@
-<div class="navigation">
-  <div class="navigation__inner">
-    <div class="breadcrumbs">
-      <%= link_to "Home", reports_path %> <%= yield :breadcrumbs %>
-    </div>
-    <div class="row">
-      <h1 class="page__title pull-left"><%= yield :page_title %></h1>
-      <div class="navigation__buttons pull-right"><%= yield :page_buttons %></div>
-    </div>
+<div id="navigation" class="navigation">
+  <% if content_for?(:breadcrumbs) || content_for?(:page_title) %>
+    <div class="navigation__inner">
+      <% if content_for?(:breadcrumbs) %>
+        <div class="breadcrumbs">
+          <%= link_to "Home", reports_path %> <%= yield :breadcrumbs %>
+        </div>
+      <% end %>
+      <% if content_for?(:page_title) %>
+        <div class="row">
+          <h1 class="page__title pull-left"><%= yield :page_title %></h1>
+          <div class="navigation__buttons pull-right"><%= yield :page_buttons %></div>
+        </div>
+      <% end %>
 
-  </div>
+      <span class="u-hide js-questionnaire-notification questionnaire__notification"></span>
+    </div>
+  <% end %>
 </div>
-
