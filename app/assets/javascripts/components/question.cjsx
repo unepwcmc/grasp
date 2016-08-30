@@ -80,7 +80,7 @@ class Question extends React.Component
 
   renderAppropriateAnswer: =>
     return null if @props.mode != "show" or !@props.answer?.selected?
-    general = <p>{@props.answer?.selected}</p>
+    general = @renderAnswerLabel(@props.answer?.selected)
 
     switch @props.data.type
       when "single"           then general
@@ -112,6 +112,12 @@ class Question extends React.Component
           {general}
           <p>DNA Confirmation: {"✓" if @props.answer?.dna_confirmation}</p>
         </div>
+
+  renderAnswerLabel: (answer) ->
+    if matches = answer.match(/(.*) \((.*)\)/)
+      <p>{matches[1]} (<em>{matches[2]}</em>)</p>
+    else
+      <p>{answer}</p>
 
   renderOtherField: =>
     if "other" == @props.answer?.selected
