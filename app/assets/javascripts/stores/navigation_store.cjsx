@@ -33,9 +33,11 @@ class NavigationStore extends EventEmitter
       allQuestions: allQuestions
     }
 
-  getPages:    -> pages
-  isFirstPage: -> currentPageIndex == 0
-  isLastPage:  -> currentPageIndex == pages.length - 1
+  getPages:            -> pages
+  getCurrentPageIndex: -> currentPageIndex
+  isFirstPage:         -> currentPageIndex == 0
+  isLastPage:          -> currentPageIndex == pages.length - 1
+
 
   tabIndexForPage: (pageIndex) -> tabsIndexesPerPage[pageIndex] || 0
   tabIndexForCurrentPage:      -> tabsIndexesPerPage[currentPageIndex] || 0
@@ -43,6 +45,13 @@ class NavigationStore extends EventEmitter
   selectTab: (i) ->
     tabsIndexesPerPage[currentPageIndex] = i
     @emit(TAB_CHANGE_EVENT)
+
+  setPage: (i) =>
+    return unless @isPageVisible(pages[i])
+    currentPageIndex = i
+
+    window.scrollTo(0, 0)
+    @emit(PAGE_CHANGE_EVENT)
 
   previousPage: =>
     currentPageIndex -= 1

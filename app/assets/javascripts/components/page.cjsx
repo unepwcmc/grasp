@@ -10,7 +10,6 @@ module.exports = class Page extends React.Component
 
   render: ->
     <div>
-      <h1 className="page__title">{@props.data.title}</h1>
       <TabControls
         answers={@props.answers}
         pageId={@props.data.id}

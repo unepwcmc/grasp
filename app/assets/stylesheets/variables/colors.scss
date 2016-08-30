@@ -85,3 +85,8 @@ $alert-error-title__color: $guardsman-red;
 $alert-success__bg-color: lighten($green-leaf, 68%);
 $alert-success__border-color: $green-leaf;
 $alert-success-title__color: $green-leaf;
+
+// Navigation controls
+
+$navigation-controls__bg-color: lighten($periwinkle-grey, 10%);
+$navigation-controls-element__bg-color: $periwinkle-grey;

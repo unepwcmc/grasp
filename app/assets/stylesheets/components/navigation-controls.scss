@@ -1,0 +1,62 @@
+@include b(navigation-controls) {
+  background-color: $navigation-controls__bg-color;
+
+  @include e(inner) {
+    max-width: 1280px;
+    width: $main__width;
+
+    margin: auto;
+    overflow: hidden;
+
+    @include flexbox;
+    @include align-items(center);
+    @include justify-content(flex-start);
+  }
+
+  @include e(sup) { min-height: 6rem; height: 60%; }
+  @include e(inf) { min-height: 4rem; height: 40%; }
+
+  @include e(element) {
+    z-index: 1;
+    cursor: pointer;
+    font-family: 'Source Sans Pro', sans-serif;
+    line-height: 3.5rem;
+    font-size: 2rem;
+    color: $steel-blue;
+    width: 3.5rem;
+    text-align: center;
+    border-radius: 100%;
+    background-color: $navigation-controls-element__bg-color;
+
+    &.is-current {
+      background-color: $nevada;
+      color: $porcelain;
+    }
+
+    &.is-minor {
+      line-height: 3rem;
+      width: 3rem;
+      border-radius: 25%;
+      transform: rotate(45deg);
+
+      & span {
+        display: block;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  @include e(divider) {
+    z-index: 0;
+    height: 1.2rem;
+    max-width: 10%;
+    flex: 1;
+    margin-left: -1px;
+    margin-right: -1px;
+    background-color: $navigation-controls-element__bg-color;
+
+    &.is-current {
+      background-color: $nevada;
+    }
+  }
+}

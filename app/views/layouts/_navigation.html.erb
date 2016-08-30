@@ -1,5 +1,5 @@
-<% if content_for?(:breadcrumbs) || content_for?(:page_title) %>
-  <div class="navigation">
+<div id="navigation" class="navigation">
+  <% if content_for?(:breadcrumbs) || content_for?(:page_title) %>
     <div class="navigation__inner">
       <% if content_for?(:breadcrumbs) %>
         <div class="breadcrumbs">
@@ -15,5 +15,5 @@
 
       <span class="u-hide js-questionnaire-notification questionnaire__notification"></span>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

@@ -24,7 +24,6 @@ class Questionnaire extends React.Component
 
   render: ->
     <div className="questionnaire">
-      <NavigationControls/>
       {@renderCurrentPage()}
       <PageControls/>
       <SaveButton/>

@@ -1,18 +1,21 @@
 React    = require("react")
 {render} = require("react-dom")
 Questionnaire = require("components/questionnaire")
+NavigationControls = require("components/navigation_controls")
 QuestionnaireStore = require("stores/questionnaire_store")
 
 module.exports =
   start: ->
-    if containerEl = document.getElementById("report-container")
-      QuestionnaireStore.setMode(containerEl.getAttribute("data-report-mode"))
+    if questionnaireEl = document.getElementById("report-container")
+      QuestionnaireStore.setMode(questionnaireEl.getAttribute("data-report-mode"))
       QuestionnaireStore.initializeQuestionnaire(questionnaireTemplate)
 
-      render(<Questionnaire/>, containerEl, ->
+      render(<Questionnaire/>, questionnaireEl, ->
         if reportData?
-          QuestionnaireStore.loadReportData(containerEl.getAttribute("data-report-id"), reportData)
+          QuestionnaireStore.loadReportData(questionnaireEl.getAttribute("data-report-id"), reportData)
       )
+
+      render(<NavigationControls/>, document.getElementById("navigation"))
 
     $(".select2").select2(tags: true, width: "100%")
 
