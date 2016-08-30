@@ -14,6 +14,7 @@ NumericQuestion        = require("components/questions/numeric_question")
 QuantitiesQuestion     = require("components/questions/quantities_question")
 DecimalNumericQuestion = require("components/questions/decimal_numeric_question")
 GpsQuestion            = require("components/questions/gps_question")
+SelectQuestion         = require("components/questions/select_question")
 
 Tooltip = require("components/tooltip")
 
@@ -71,6 +72,9 @@ class Question extends React.Component
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
                                     data={@props.data} answer={@props.answer} mode={@props.mode}/>
       when "subspecies"       then <SubspeciesQuestion
+                                    onChange={@handleChange} onOtherChange={@handleOtherChange}
+                                    data={@props.data} answer={@props.answer} mode={@props.mode}/>
+      when "select"           then <SelectQuestion
                                     onChange={@handleChange} onOtherChange={@handleOtherChange}
                                     data={@props.data} answer={@props.answer} mode={@props.mode}/>
 
