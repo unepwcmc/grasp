@@ -80,6 +80,65 @@
 
 <h3>Ape details</h3>
 
+<div class="form__group">
+  <strong> Total live apes</strong>
+  <div class="form__field">
+    <%= @report.data.dig('answers', 'quantities', 'selected', 'live') %>
+  </div>
+</div>
+
+<div class="form__group">
+  <strong> Total dead apes</strong>
+  <div class="form__field">
+    <%= @report.data.dig('answers', 'quantities', 'selected', 'dead') %>
+  </div>
+</div>
+
+<div class="form__group">
+  <strong> Body parts?</strong>
+  <div class="form__field">
+    <%= @report.data.dig('answers', 'quantities', 'selected', 'body_parts') %>
+  </div>
+</div>
+
+<% if @report.data.dig('answers', 'live').any? %>
+  <% @report.data['answers']['live'].each_with_index do |ape, index| %>
+    <div class="form__group">
+      <strong> Live ape <%= index + 1 %></strong>
+      <p>Individual's name: <br>
+      Age: </p>
+      <div class="form__field">
+        Images
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @report.data.dig('answers', 'dead').any? %>
+  <% @report.data['answers']['dead'].each_with_index do |ape, index| %>
+    <div class="form__group">
+      <strong> Dead ape <%= index + 1 %></strong>
+      <p>Individual's name: <br>
+      Age: </p>
+      <div class="form__field">
+        Images
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @report.data.dig('answers', 'genus_parts', 'selected').any? %>
+  <p> <strong>Body parts</strong> </p>
+  <% @report.data['answers']['genus_parts']['selected'].each do |genus| %>
+    <div class="form__group">
+      <%= genus %>
+      <div class="form__field">
+        Images
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
 <hr>
 
 <h3>Validation history</h3>
