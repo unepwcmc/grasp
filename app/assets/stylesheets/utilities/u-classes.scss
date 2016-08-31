@@ -3,3 +3,13 @@
 
 .pull-right { float: right; }
 .pull-left { float: left; }
+
+.only-mobile {
+  display: none;
+  @media screen and (max-width: $break__phone) { display: inline; }
+}
+
+.hide-mobile {
+  display: inline;
+  @media screen and (max-width: $break__phone) { display: none; }
+}
