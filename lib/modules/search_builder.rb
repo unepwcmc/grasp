@@ -36,26 +36,26 @@ module SearchBuilder
     if params[:status_live].present?
       if params[:genus].present?
         # If you check the box for live, add a query to check for any genus type in that genus_live field
-        fragments << "data->'answers'->'genus_live'->>'selected' in (:params)"
+        fragments << "data->'genera'->'live' ?| array[:params]"
       else
         # If no specific genus selected, then return all reports where genus_live has a selected field that isnt empty (return all genus types)
-        fragments << "(data->'answers'->'genus_live'->>'selected') is not null"
+        fragments << "jsonb_array_length(data->'genera'->'live') > 0"
       end
     end
 
     if params[:status_dead].present?
       if params[:genus].present?
-        fragments << "data->'answers'->'genus_dead'->>'selected' in (:params)"
+        fragments << "data->'genera'->'dead' ?| array[:params]"
       else
-        fragments << "(data->'answers'->'genus_dead'->>'selected') is not null"
+        fragments << "jsonb_array_length(data->'genera'->'dead') > 0"
       end
     end
 
     if params[:status_body_parts].present?
       if params[:genus].present?
-        fragments << "data->'answers'->'genus_body_parts'->>'selected' in (:params)"
+        fragments << "data->'genera'->'parts' ?| array[:params]"
       else
-        fragments << "(data->'answers'->'genus_body_parts'->>'selected') is not null"
+        fragments << "jsonb_array_length(data->'genera'->'parts') > 0"
       end
     end
 
