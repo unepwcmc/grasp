@@ -8,7 +8,7 @@ module SearchBuilder
 
   def self.by_country_of_discovery(query, params)
     if params[:country_of_discovery].present?
-      query = query.where("""data->'answers'->'country_of_discovery'->>'selected' = ?""", params[:country_of_discovery])
+      query = query.where("data->'answers'->'country_of_discovery'->>'selected' in (?)", params[:country_of_discovery])
     end
     query
   end

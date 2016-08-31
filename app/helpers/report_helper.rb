@@ -66,8 +66,10 @@ module ReportHelper
       value = value.join(", ")
     when "from_date"
       value = ParamsUtils.to_formatted_date(value)
-    when "_date"
+    when "to_date"
       value = ParamsUtils.to_formatted_date(value)
+    when "country_of_discovery"
+      value = value.join(", ")
     else
       value
     end
