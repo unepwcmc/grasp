@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {sessions: "sessions",  registrations: "registrations"}
 
-  root "reports#index"
+  root "home#index", as: "landing_page"
+
+  authenticated :user do
+    root "reports#index"
+  end
 
   resources :agencies
   resources :reports
