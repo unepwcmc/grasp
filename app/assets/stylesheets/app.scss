@@ -2,15 +2,15 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+// variables
+@import "variables/colors";
+@import "variables/dimensions";
+
 // utilities
 @import "flex";
 @import "utilities/bem";
 @import "utilities/u-classes";
 @import "utilities/typography";
-
-// variables
-@import "variables/colors";
-@import "variables/dimensions";
 
 // components
 @import "components/answer";
