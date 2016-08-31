@@ -12,6 +12,8 @@
     <%= render "layouts/header" %>
     <%= render "layouts/navigation" %>
 
+    <%= yield :outside_main_container %>
+
     <div class="main-container">
       <%= render "layouts/flash_notification" %>
       <div class="u-hide js-questionnaire-notification"></div>
