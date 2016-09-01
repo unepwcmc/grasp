@@ -1,6 +1,5 @@
 React = require("react")
 Question = require("components/question")
-TabControls = require("components/tab_controls")
 NavigationStore = require("stores/navigation_store")
 
 module.exports = class Page extends React.Component
@@ -10,11 +9,6 @@ module.exports = class Page extends React.Component
 
   render: ->
     <div>
-      <TabControls
-        answers={@props.answers}
-        pageId={@props.data.id}
-        show={@props.data.multiple}
-      />
       <div>{@renderQuestions()}</div>
     </div>
 

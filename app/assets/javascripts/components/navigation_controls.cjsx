@@ -1,17 +1,22 @@
 React = require("react")
 Page = require("components/page")
+TabControls = require("components/tab_controls")
 QuestionnaireStore = require("stores/questionnaire_store")
 NavigationStore = require("stores/navigation_store")
 
 module.exports = class NavigationControls extends React.Component
   constructor: (props, context) ->
     super(props, context)
+
     QuestionnaireStore.addChangeListener(@onChange)
     NavigationStore.addPageChangeListener(@onChange)
+    NavigationStore.addTabChangeListener(@onChange)
+
     @state = ({
       currentPage: NavigationStore.currentPage(),
       currentPageIndex: NavigationStore.getCurrentPageIndex(),
-      allPages: NavigationStore.getPages()
+      allPages: NavigationStore.getPages(),
+      allAnswers: QuestionnaireStore.getAnswers()
     })
 
   render: =>
@@ -26,6 +31,13 @@ module.exports = class NavigationControls extends React.Component
       </div>
       <div className="navigation-controls__inner navigation-controls__inf">
         <h4>{@state.currentPage.title}</h4>
+      </div>
+      <div className="navigation-controls__inner">
+        <TabControls
+          answers={@state.allAnswers}
+          pageId={@state.currentPage.id}
+          show={@state.currentPage.multiple}
+        />
       </div>
     </div>
 
@@ -65,7 +77,8 @@ module.exports = class NavigationControls extends React.Component
     @setState({
       currentPage: NavigationStore.currentPage(),
       currentPageIndex: NavigationStore.getCurrentPageIndex(),
-      allPages: NavigationStore.getPages()
+      allPages: NavigationStore.getPages(),
+      allAnswers: QuestionnaireStore.getAnswers()
     })
 
 
