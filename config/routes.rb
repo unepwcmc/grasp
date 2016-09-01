@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root "home#index", as: "landing_page"
 
   authenticated :user do
-    root "reports#index"
+    root "reports#index", as: :authenticated_root
   end
 
   resources :agencies

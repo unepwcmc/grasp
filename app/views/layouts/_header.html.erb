@@ -3,7 +3,11 @@
     <div class="header__inner">
       <div class="header__title-bar">
         <div class="header__main-logo">
-          <a href="<%= root_path %>"><%= image_tag 'grasp_logo.png' %></a>
+          <% if user_signed_in? %>
+            <a href="<%= authenticated_root_path %>"><%= image_tag 'grasp_logo.png' %></a>
+          <% else %>
+            <a href="<%= landing_page_path %>"><%= image_tag 'grasp_logo.png' %></a>
+        <% end %>
         </div>
 
         <div class="header__right-side">
