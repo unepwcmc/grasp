@@ -53,7 +53,7 @@ module SearchBuilder
 
     if params[:status_body_parts].present?
       if params[:genus].present?
-        fragments << "data->'genera'->'parts' ?| array[:params]"
+        fragments << "COALESCE(data->'genera'->'parts', '[]') ?| array[:params]"
       else
         fragments << "data->'genera'->>'parts' is not null and jsonb_array_length(data->'genera'->'parts') > 0"
       end
