@@ -7,12 +7,14 @@
             <a href="<%= authenticated_root_path %>"><%= image_tag 'grasp_logo.png' %></a>
           <% else %>
             <a href="<%= landing_page_path %>"><%= image_tag 'grasp_logo.png' %></a>
-        <% end %>
+          <% end %>
         </div>
 
         <div class="header__right-side">
           <% if user_signed_in? %>
             <button class="header__menu-button header__menu-button">Menu</button>
+          <% else %>
+            <%= link_to new_user_session_path, class: "header__sign-in" do %>Sign in <i class="fa fa-sign-in"></i><% end %>
           <% end %>
         </div>
       </div>
@@ -57,6 +59,12 @@
               <li><%= link_to 'Agencies', agencies_path %></li>
             <% end %>
           </ul>
+        </div>
+      <% end %>
+
+      <% unless user_signed_in? %>
+        <div class="header__right-side">
+          <%= link_to new_user_session_path, class: "header__sign-in" do %>Sign in <i class="fa fa-sign-in"></i><% end %>
         </div>
       <% end %>
     </div>

@@ -130,4 +130,14 @@ $header__height: 7rem;
       display: none;
     }
   }
+
+  @include e(sign-in) {
+    text-decoration: initial;
+    color: $white;
+
+    &:hover {
+      color: $white;
+      text-decoration: underline;
+    }
+  }
 }
