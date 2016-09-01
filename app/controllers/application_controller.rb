@@ -5,15 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
-    super
-    # Direct each user to their relevant home path on sign in
-    #case resource.role.name
-    #when "admin"      then root_path
-    #when "validator"  then root_path
-    #when "provider"   then root_path
-    #else
-      #root_path
-    #end
+    reports_path
   end
 
   rescue_from CanCan::AccessDenied do |exception|
