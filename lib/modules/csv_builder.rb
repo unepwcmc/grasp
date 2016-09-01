@@ -13,21 +13,20 @@ module CsvBuilder
                     "Confiscation?", "Arrests Made?", "Prosecution?", "Prosecution Successful?", "Punishment Successful?",
                     "Other Illegal Activities", "Man-made disturbances"]
 
-    filepath = "#{Rails.root.to_s}/tmp/csv_export_#{DateTime.now.to_i}"
+    filepath = "#{Rails.root.to_s}/tmp/csv_export_#{DateTime.now.to_i}.csv"
 
     CSV.open(filepath, "wb") do |csv|
       csv << column_names
       reports.each do |report|
         # Make the first row for the report, no apes
-        row = make_report_row(report)
-        csv << row
+        csv << self.make_report_row(report)
 
         # For each ape in live, dead and parts, make a row
-        statuses = ['live', 'dead', 'parts']
-        statuses.each do |status|
-          apes['answers'][status].each do |ape|
-            row = make_report_row(report, ape, status.to_sym)
-            csv << row
+        ['live', 'dead', 'parts'].each do |status|
+          if report.data.dig('answers', status).present? # If any live/dead/parts
+            report.data['answers'][status].each do |ape|
+              csv << self.make_report_row(report, ape, status.to_sym)
+            end
           end
         end
       end
@@ -36,7 +35,7 @@ module CsvBuilder
     filepath
   end
 
-  def make_report_row(report, ape=nil, status=nil)
+  def self.make_report_row(report, ape=nil, status=nil)
     # If an ape is passed in, it create a row with the details of this ape,
     # if not, it leaves these details blank and just creates a report row
 
@@ -47,16 +46,16 @@ module CsvBuilder
       report&.user&.agency&.name,
       report.data.dig('answers', 'own_organisation', 'selected'),
       report.created_at,
-      report.dig('answers', 'country_of_discovery', 'selected'),
-      report.data('answers', 'region_of_discovery', 'selected'),
+      report.data.dig('answers', 'country_of_discovery', 'selected'),
+      report.data.dig('answers', 'region_of_discovery', 'selected'),
       report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y"),
-      report.data.dig('answers', 'location_coords', 'selected'),
+      report.data.dig('answers', 'location_coords', 'selected')&.values&.join(", "),
       report.data.dig('answers', 'type_of_location', 'selected')
     ]
 
     if ape.present? && (status == :live or status == :dead)
       ape_data = [
-        status.titleize,
+        status.to_s.titleize,
         ape.dig("genus_#{status}", 'selected'),
         ape.dig("species_subspecies_#{status}", 'selected'),
         ape.dig("intended_use_#{status}", 'selected'),
@@ -71,8 +70,7 @@ module CsvBuilder
       ]
 
       # Add empty fields for body parts
-      ape_data += Array.new(7, "")
-      end
+      ape_data += Array.new(7, nil)
     else
       #"Bone Qty",
       #"Foot/Hand Qty",
@@ -81,7 +79,7 @@ module CsvBuilder
       #"Meat Kg",
       #"Skin Qty",
       #"Skull Qty"
-      ape_data = Array.new(19, "")
+      ape_data = Array.new(19, nil)
     end
 
     report_data_2 = [
@@ -90,8 +88,8 @@ module CsvBuilder
       report.data.dig('answers', 'prosecution', 'selected'),
       report.data.dig('answers', 'prosecution_successful', 'selected'),
       report.data.dig('answers', 'punishment', 'selected'),
-      report.data.dig('answers', 'illegal_activities', 'selected'),
-      report.data.dig('answers', 'proximity', 'selected')
+      report.data.dig('answers', 'illegal_activities', 'selected')&.join(", "),
+      report.data.dig('answers', 'proximity', 'selected')&.join(", ")
     ]
 
     # Join the segments to form the full row

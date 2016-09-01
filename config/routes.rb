@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     resources :users, controller: "users"
   end
 
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   get "/search", to: "reports#search", as: "search_reports"
   get "/export", to: "reports#export", as: "export_reports"
   get "/reports/:id/validate", to: "reports#validate", as: "validate_report"

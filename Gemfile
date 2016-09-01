@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 # Frameworks
 gem 'rails', '4.2.6'
+gem 'sinatra', :require => false
+
 
 # DB
 gem 'pg', '~> 0.18.4'
