@@ -5,11 +5,18 @@
     height: 100%;
     padding: 3.2rem 1.6rem;
     color: $atomic;
+    font-family: 'Merriweather', serif;
+    font-weight: 300;
+    line-height: 3.2rem;
 
     @media screen and (max-width: $break__phone) {
       height: initial;
       padding: 1.6rem;
     }
+  }
+
+  @include e(title) {
+    font-weight: 700;
   }
 
   @include e(cover) {
