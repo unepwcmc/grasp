@@ -49,6 +49,7 @@
   }
 
   @include e(close) {
+    cursor: pointer;
     float: right;
   }
 }
