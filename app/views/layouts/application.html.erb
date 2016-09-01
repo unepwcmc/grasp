@@ -20,6 +20,8 @@
       <%= yield %>
     </div>
 
+    <%= render "layouts/footer" %>
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
     <% if Rails.env.staging? || Rails.env.production? %>

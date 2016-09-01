@@ -1,0 +1,45 @@
+@include b(footer) {
+  background-color: #4779ba;
+  height: 30rem;
+  width: 100%;
+
+  @include e(inner) {
+    width: $main__width;
+    margin: auto;
+    padding-top: 3rem;
+
+    color: $white;
+  }
+
+  @include e(header) {
+    margin-bottom: .5rem;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  @include e(icon) {
+    vertical-align: middle;
+    margin-right: 1rem;
+  }
+
+  @include e(link) {
+    color: $white;
+    text-decoration: underline;
+    font-weight: 300;
+
+    @include m(no-underline) {
+      text-decoration: initial;
+    }
+  }
+
+  @include e(item) {
+    margin-bottom: 2.5rem;
+    font-size: 1.25rem;
+    line-height: 2.5rem;
+    letter-spacing: .7px;
+  }
+
+  @include e(logo) {
+    width: 10rem;
+  }
+}
