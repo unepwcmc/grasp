@@ -31,7 +31,7 @@ class ReportsControllerTest < ActionController::TestCase
       }
     })
 
-    get :index, country_of_discovery: 'Mali'
+    get :index, country_of_discovery: ['Mali']
     assert_response :success
     assert_equal 1, assigns(:reports).count
     assert_equal @report.id, assigns(:reports).first.id
@@ -63,18 +63,14 @@ class ReportsControllerTest < ActionController::TestCase
 
   test "should search for reports by genus" do
     FactoryGirl.create(:report, data: {
-      'answers': {
-        'genus_dead': {
-          'selected': 'Gorilla (gorilla)'
-        }
+      'genera': {
+        'dead': ['Gorilla (gorilla)']
       }
     })
 
     @report = FactoryGirl.create(:report, data: {
-      'answers': {
-        'genus_live': {
-          'selected': 'Gorilla (gorilla)'
-        }
+      'genera': {
+        'live': ['Gorilla (gorilla)']
       }
     })
 

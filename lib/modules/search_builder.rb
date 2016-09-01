@@ -8,7 +8,7 @@ module SearchBuilder
 
   def self.by_country_of_discovery(query, params)
     if params[:country_of_discovery].present?
-      query = query.where("""data->'answers'->'country_of_discovery'->>'selected' = ?""", params[:country_of_discovery])
+      query = query.where("data->'answers'->'country_of_discovery'->>'selected' in (?)", params[:country_of_discovery])
     end
     query
   end
@@ -36,26 +36,35 @@ module SearchBuilder
     if params[:status_live].present?
       if params[:genus].present?
         # If you check the box for live, add a query to check for any genus type in that genus_live field
-        fragments << "data->'answers'->'genus_live'->>'selected' in (:params)"
+        fragments << "COALESCE(data->'genera'->'live', '[]') ?| array[:params]"
       else
         # If no specific genus selected, then return all reports where genus_live has a selected field that isnt empty (return all genus types)
-        fragments << "(data->'answers'->'genus_live'->>'selected') is not null"
+        fragments << "data->'genera'->>'live' is not null and jsonb_array_length(data->'genera'->'live') > 0"
       end
     end
 
     if params[:status_dead].present?
       if params[:genus].present?
-        fragments << "data->'answers'->'genus_dead'->>'selected' in (:params)"
+        fragments << "COALESCE(data->'genera'->'dead', '[]') ?| array[:params]"
       else
-        fragments << "(data->'answers'->'genus_dead'->>'selected') is not null"
+        fragments << "data->'genera'->>'dead' is not null and jsonb_array_length(data->'genera'->'dead') > 0"
       end
     end
 
     if params[:status_body_parts].present?
       if params[:genus].present?
-        fragments << "data->'answers'->'genus_body_parts'->>'selected' in (:params)"
+        fragments << "COALESCE(data->'genera'->'parts', '[]') ?| array[:params]"
       else
-        fragments << "(data->'answers'->'genus_body_parts'->>'selected') is not null"
+        fragments << "data->'genera'->>'parts' is not null and jsonb_array_length(data->'genera'->'parts') > 0"
+      end
+    end
+
+    # If none of the statuses are checked, treat it like all have been checked and add genus fragment for live dead and parts
+    if params[:status_live].blank? && params[:status_dead].blank? && params[:status_body_parts].blank?
+      if params[:genus].present?
+        fragments << "COALESCE(data->'genera'->'live', '[]') ?| array[:params]"
+        fragments << "COALESCE(data->'genera'->'dead', '[]') ?| array[:params]"
+        fragments << "COALESCE(data->'genera'->'parts', '[]') ?| array[:params]"
       end
     end
 

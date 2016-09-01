@@ -17,7 +17,8 @@ class QuestionnaireStore extends EventEmitter
   report = {
     id: null,
     answers: {},
-    state: "in_progress"
+    state: "in_progress",
+    genera: {}
   }
 
   constructor: ->
@@ -171,6 +172,8 @@ class QuestionnaireStore extends EventEmitter
   addVisibilityListener: (callback) => @on(VISIBILITY_EVENT, callback)
 
   saveOrUpdateReport: (callback) =>
+    @storeGenera()
+
     if report.id?
       @reportRequest("/reports/#{report.id}", "PUT", (response) =>
         @setNotification("success", "Report updated")
@@ -184,6 +187,24 @@ class QuestionnaireStore extends EventEmitter
         callback?(response.headers.get('Location'))
       )
 
+  storeGenera: ->
+    genera = {
+      live: [],
+      dead: [],
+      parts: report.answers?.genus_parts?.selected || []
+    }
+
+    for ape in (report.answers?.live || []) when ape.genus_live?.selected
+      if genera.live.indexOf(ape.genus_live.selected) == -1
+        genera.live.push(ape.genus_live.selected)
+
+    for ape in (report.answers?.dead || []) when ape.genus_dead?.selected
+      if genera.dead.indexOf(ape.genus_dead.selected) == -1
+        genera.dead.push(ape.genus_dead.selected)
+
+    report.genera = genera
+
+
   reportRequest: (path, method, callback) ->
     token = document.getElementsByName("csrf-token")[0].content
     fetch(path, {
@@ -195,7 +216,7 @@ class QuestionnaireStore extends EventEmitter
       },
       credentials: 'include',
       body: JSON.stringify({
-        report: {data: {answers: report.answers, state: report.state}}
+        report: {data: {genera: report.genera, answers: report.answers, state: report.state}}
       })
     }).then(callback)
 

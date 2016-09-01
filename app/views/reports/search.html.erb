@@ -68,17 +68,19 @@
     </div>
   </div>
 
-  <div class="form__group">
-    <%= label_tag :ape_name %>
+  <!-- Temporarily removed ape name from search -->
+  <!--div class="form__group">
+    <% #= label_tag :ape_name %>
     <div class="form__field">
-      <%= text_field_tag :ape_name, params[:ape_name] %>
+      <% #= text_field_tag :ape_name, params[:ape_name] %>
     </div>
-  </div>
+  </div-->
 
   <div class="form__group">
     <%= label_tag :country_of_discovery %>
     <div class="form__field">
-      <%= text_field_tag :country_of_discovery, params[:country_of_discovery] %>
+      <% #text_field_tag :country_of_discovery, params[:country_of_discovery] %>
+      <%= select_tag :country_of_discovery, options_for_select(@countries), multiple: true, class: 'select2' %>
     </div>
   </div>
 
