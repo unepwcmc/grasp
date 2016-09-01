@@ -59,6 +59,15 @@ module SearchBuilder
       end
     end
 
+    # If none of the statuses are checked, treat it like all have been checked and add genus fragment for live dead and parts
+    if params[:status_live].blank? && params[:status_dead].blank? && params[:status_body_parts].blank?
+      if params[:genus].present?
+        fragments << "COALESCE(data->'genera'->'live', '[]') ?| array[:params]"
+        fragments << "COALESCE(data->'genera'->'dead', '[]') ?| array[:params]"
+        fragments << "COALESCE(data->'genera'->'parts', '[]') ?| array[:params]"
+      end
+    end
+
     #Build the final query by joining the array
     sql   = fragments.join(" or ")
     query = query.where(sql, params: params[:genus])
