@@ -1,0 +1,20 @@
+@include b(tab-controls) {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  width: 100%;
+
+  @include e(control) {
+    color: $grey;
+    cursor: pointer;
+    border-bottom: solid .5rem transparent;
+    float: left;
+    margin-right: 2.4rem;
+    background-color: initial;
+    line-height: 4rem;
+
+    &.is-selected {
+      color: initial;
+      border-bottom: solid .5rem $geyser;
+    }
+  }
+}
