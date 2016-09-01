@@ -39,5 +39,5 @@
 </table>
 
 <div class="pagination u-pull-right">
-  <%= paginate reports, params: {table: (table rescue nil)} %>
+  <%= paginate reports, params: {controller: "reports", action: "index", table: (table rescue nil)} %>
 </div>

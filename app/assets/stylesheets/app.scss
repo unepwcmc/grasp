@@ -2,32 +2,35 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+// variables
+@import "variables/colors";
+@import "variables/dimensions";
+
 // utilities
 @import "flex";
 @import "utilities/bem";
 @import "utilities/u-classes";
 @import "utilities/typography";
 
-// variables
-@import "variables/colors";
-@import "variables/dimensions";
-
 // components
+@import "components/alert";
 @import "components/answer";
 @import "components/breadcrumbs";
+@import "components/button";
+@import "components/footer";
+@import "components/form";
 @import "components/header";
+@import "components/hero";
 @import "components/navigation";
 @import "components/navigation-controls";
-@import "components/page-controls";
 @import "components/page";
+@import "components/page-controls";
 @import "components/question";
 @import "components/questionnaire";
-@import "components/table";
-@import "components/form";
 @import "components/select2";
+@import "components/table";
 @import "components/validation";
-@import "components/button";
-@import "components/alert";
 
 // objects
 @import "objects/main-container";
+@import "objects/section";
