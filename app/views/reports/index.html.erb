@@ -3,21 +3,7 @@
   <%= breadcrumb "Reports Dashboard", reports_path %>
 <% end %>
 <%= content_for :page_buttons do %>
-  <% if can? :create, Report %>
-    <%= link_to new_report_path, class: 'button button-primary' do %>
-      <i class="fa fa-pencil-square-o icon icon--closer"></i>New Report
-    <% end %>
-  <% end %>
-  <% if can? :search, @reports %>
-    <%= link_to search_reports_path, class: 'button button-primary' do %>
-      <i class="fa fa-search icon icon--closer"></i>Search Reports
-    <% end %>
-  <% end %>
-  <% if can? :export, @reports %>
-    <%= link_to export_reports_path, class: 'button button-primary' do %>
-      <i class="fa fa-file-text-o icon icon--closer"></i>Export CSV file – all reports
-    <% end %>
-  <% end %>
+  <%= render "page_buttons" %>
 <% end %>
 
 <%= render "welcome_message" %>
