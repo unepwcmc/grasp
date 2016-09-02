@@ -2,6 +2,12 @@
   overflow: hidden;
   margin-bottom: 1.6rem;
 
+
+  @media screen and (min-width: $break__phone) {
+    float: left;
+  }
+
+
   @include e(prev) {
     float: right;
     margin-right: 2rem;

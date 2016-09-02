@@ -26,8 +26,14 @@ class Questionnaire extends React.Component
     <div className="questionnaire">
       {@renderCurrentPage()}
       <PageControls/>
-      <SaveButton/>
-      {@renderSubmitButton()}
+      <div className="hide-mobile six columns u-pull-right questionnaire-buttons">
+        <SaveButton/>
+        {@renderSubmitButton()}
+      </div>
+      <div className="only-mobile">
+        <SaveButton/>
+        {@renderSubmitButton()}
+      </div>
     </div>
 
   renderCurrentPage: =>
@@ -35,7 +41,7 @@ class Questionnaire extends React.Component
       <Page mode={@state.mode} answers={@state.answers} data={@state.currentPage}/>
 
   renderSubmitButton: ->
-    <SubmitButton/> if QuestionnaireStore.requiredQuestionsAnswered()
+    <SubmitButton enabled={QuestionnaireStore.requiredQuestionsAnswered()}/>
 
   onChange: =>
     NavigationStore.updateAnswers()
