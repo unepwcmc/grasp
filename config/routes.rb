@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   root "home#index", as: "landing_page"
 
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   #authenticated :user do
     #root "reports#index", as: :authenticated_root
   #end
