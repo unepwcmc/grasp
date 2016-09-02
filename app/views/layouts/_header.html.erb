@@ -23,7 +23,7 @@
         <% if user_signed_in? %>
           <div class="header__left-side">
             <ul>
-              <li class="divider"></li>
+              <li class="divider divider--no-border"></li>
               <% if can? :read, Report %>
                 <li><%= link_to 'Reports', reports_path %></li>
               <% end %>
@@ -48,7 +48,7 @@
       <% if user_signed_in? %>
         <div class="header__left-side">
           <ul>
-            <li class="divider"></li>
+            <li class="divider divider--no-border"></li>
             <% if can? :read, Report %>
               <li><%= link_to 'Reports', reports_path %></li>
             <% end %>
@@ -73,7 +73,7 @@
   <% if user_signed_in? %>
     <div class="header__lower">
       <div class="header__inner">
-        <div class="header__right-side">
+        <div class="header__right-side header__right-side--lower">
           <ul>
             <li>Hi <%= current_user.first_name.titleize %></li>
             <li><%= link_to 'My Profile', edit_user_registration_path %></li>

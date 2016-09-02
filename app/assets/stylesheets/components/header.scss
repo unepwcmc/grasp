@@ -46,6 +46,11 @@ $header__height: 7rem;
     float: right;
     line-height: $header__height;
 
+    @include m(lower) {
+      line-height: 3.6rem;
+      font-size: 1.25rem;
+    }
+
     @media screen and (max-width: $break__phone) {
       ul {
         li {
@@ -139,5 +144,15 @@ $header__height: 7rem;
       color: $white;
       text-decoration: underline;
     }
+  }
+}
+
+@include b(divider) {
+  border-right: solid 1px $white;
+  height: 1.5rem;
+  vertical-align: middle;
+
+  @include m(no-border) {
+    border-right: initial;
   }
 }
