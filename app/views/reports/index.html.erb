@@ -4,7 +4,9 @@
 <% end %>
 <%= content_for :page_buttons do %>
   <% if can? :create, Report %>
-    <%= link_to "New Report", new_report_path, class: 'button button-primary' %>
+    <%= link_to new_report_path, class: 'button button-primary' do %>
+      <i class="fa fa-pencil-square-o icon icon--closer"></i>New Report
+    <% end %>
   <% end %>
   <% if can? :search, @reports %>
     <%= link_to search_reports_path, class: 'button button-primary' do %>
