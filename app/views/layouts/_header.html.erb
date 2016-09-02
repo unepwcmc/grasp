@@ -25,13 +25,13 @@
             <ul>
               <li class="divider divider--no-border"></li>
               <% if can? :read, Report %>
-                <li><%= link_to 'Reports', reports_path %></li>
+                <li><%= active_link_to 'Reports', reports_path, class: "header__link" %></li>
               <% end %>
               <% if can? :manage, User %>
-                <li><%= link_to 'Users', admin_users_path %></li>
+                <li><%= active_link_to 'Users', admin_users_path, class: "header__link" %></li>
               <% end %>
               <% if can? :read, Agency %>
-                <li><%= link_to 'Agencies', agencies_path %></li>
+                <li><%= active_link_to 'Agencies', agencies_path, class: "header__link" %></li>
               <% end %>
             </ul>
           </div>
@@ -50,13 +50,13 @@
           <ul>
             <li class="divider divider--no-border"></li>
             <% if can? :read, Report %>
-              <li><%= link_to 'Reports', reports_path %></li>
+              <li><%= active_link_to 'Reports', reports_path, class: "header__link" %></li>
             <% end %>
             <% if can? :manage, User %>
-              <li><%= link_to 'Users', admin_users_path %></li>
+              <li><%= active_link_to 'Users', admin_users_path, class: "header__link" %></li>
             <% end %>
             <% if can? :read, Agency %>
-              <li><%= link_to 'Agencies', agencies_path %></li>
+              <li><%= active_link_to 'Agencies', agencies_path, class: "header__link" %></li>
             <% end %>
           </ul>
         </div>

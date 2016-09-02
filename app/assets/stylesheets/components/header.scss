@@ -145,6 +145,21 @@ $header__height: 7rem;
       text-decoration: underline;
     }
   }
+
+  @include e(link) {
+    text-decoration: none;
+    position: relative;
+
+    &.is-active:after {
+      content: "";
+      bottom: 0;
+      width: 100%;
+      position: absolute;
+      background-color: transparentize($white, .5);
+      height: .5em;
+      left: 0;
+    }
+  }
 }
 
 @include b(divider) {

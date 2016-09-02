@@ -14,4 +14,19 @@ module ApplicationHelper
       "info-circle"
     end
   end
+
+  def active_link_to text, url, html_opts={}
+    if current_controller?(url)
+      html_opts[:class] ||= ""
+      html_opts[:class] << " is-active"
+    end
+
+    link_to text, url, html_opts
+  end
+
+  def current_controller?(url)
+    info = Rails.application.routes.recognize_path url
+    params[:controller] == info[:controller]
+  end
+
 end
