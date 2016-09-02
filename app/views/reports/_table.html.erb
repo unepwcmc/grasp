@@ -3,11 +3,11 @@
     <th><%= sortable "id", "ID" %></th>
     <th><%= sortable "username", "User Name" %></th>
     <th><%= sortable "agency" %></th>
-    <th><%= sortable "timestamp" %></th>
-    <th><%= sortable "date_of_discovery" %></th>
-    <th>Status of ape(s)</th>
-    <th><%= sortable "confiscated", "Confiscation" %></th>
+    <th><%= sortable "timestamp", "Started On" %></th>
+    <th><%= sortable "date_of_discovery", "Discovery Date" %></th>
+    <th>Ape Details</th>
     <th><%= sortable "state", "Status" %></th>
+    <th>Actions</th>
   </thead>
   <tbody>
     <% reports.each do |report| %>
@@ -18,7 +18,6 @@
           <td><%= report.timestamp %></td>
           <td><%= report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y") %></td>
           <td><%= status_of_apes(report) %></td>
-          <td><%= report.answer_to("confiscated") %></td>
           <td><%= report.state %></td>
           <td>
             <% if can? :read, report %>

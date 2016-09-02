@@ -30,7 +30,17 @@ module ReportHelper
       cl << " is-#{direction}" if column == params[:sort]
     }
 
-    link_to title, {sort: column, dir: direction}, class: css_class
+    link_to({sort: column, dir: direction}, class: css_class) do
+      if column == params[:sort] && direction == "desc"
+        concat content_tag(:i, "", class: "icon icon--closer  fa fa-sort-desc")
+      elsif column == params[:sort] && direction == "asc"
+        concat content_tag(:i, "", class: "icon icon--closer  fa fa-sort-asc")
+      else
+        concat content_tag(:i, "", class: "icon icon--closer  fa fa-sort")
+      end
+
+      concat title
+    end
   end
 
   def report_state_description(state)
