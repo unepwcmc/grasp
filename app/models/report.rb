@@ -24,6 +24,7 @@ class Report < ActiveRecord::Base
 
   belongs_to :user
   has_many :validations
+  has_many :images
 
   def user_name
     "#{user&.first_name} #{user&.last_name}".strip
