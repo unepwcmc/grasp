@@ -82,8 +82,7 @@ class ReportsController < ApplicationController
   end
 
   def search
-    countries_list  = File.read('config/questionnaire/pages/incident/countries.json.erb')
-    @countries      = JSON.parse(countries_list)
+    @countries = CountryUtilities.all_countries
   end
 
   def export
