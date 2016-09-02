@@ -23,6 +23,7 @@
   <%= f.submit class: 'form__submit button button-secondary' %>
 <% end %>
 
-<hr>
-
-<%= render "admin/users/form/change_password" %>
+<% unless current_page?(action: "new") %>
+  <hr>
+  <%= render "admin/users/form/change_password" %>
+<% end %>
