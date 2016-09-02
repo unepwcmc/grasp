@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   get "/reports", to: "reports#index", as: :authenticated_root
 
   resources :agencies
-  resources :reports
+  resources :reports do
+    resources :images, only: [:create, :show, :destroy]
+  end
+
   resources :validations, only: [:new, :create]
 
   namespace :admin do

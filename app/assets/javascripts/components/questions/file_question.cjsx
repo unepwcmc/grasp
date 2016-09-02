@@ -1,6 +1,7 @@
 React = require("react")
 Question = require("components/question")
 QuestionnaireStore = require("stores/questionnaire_store")
+ImageStore = require("stores/image_store")
 
 module.exports = class FileQuestion extends React.Component
   render: ->
@@ -25,11 +26,18 @@ module.exports = class FileQuestion extends React.Component
     </div>
 
   renderFiles: =>
-    @props.answer?.selected?.map (file) =>
-      <p key={file.name + file.lastModifiedDate} className="file">
-        {@renderImage(file)} {file.name}
-        <small style={{color: "red"}} onClick={@deleteFile.bind(@, file)}>x</small>
-      </p>
+    @props.answer?.selected?.map((file) =>
+      if file.url
+        <p key={file.id} className="file">
+          <img height=48 src="#{file.url}?size=thumb"></img>
+          <small style={{color: "red"}} onClick={@deleteFile.bind(@, file)}>x</small>
+        </p>
+      else
+        <p key={file.file.name + file.file.lastModifiedDate} className="file">
+          {@renderImage(file.file)} {file.file.name}
+          <small style={{color: "red"}} onClick={@deleteFile.bind(@, file)}>x</small>
+        </p>
+    )
 
   renderImage: (file) =>
     if(FileReader)
@@ -40,18 +48,25 @@ module.exports = class FileQuestion extends React.Component
 
   loadThumbnail: (file, imageRef) ->
     reader = new FileReader()
-
     reader.onload = ((event) => @refs[imageRef].src = event.target.result)
+
     try
       reader.readAsDataURL(file)
     catch
       null
 
   addFile: (e) =>
-    QuestionnaireStore.addAnswer(@props.data.id, e.target.files[0])
+    QuestionnaireStore.addAnswer(@props.data.id, {file: e.target.files[0]})
+    QuestionnaireStore.saveOrUpdateReport()
 
   deleteFile: (file) =>
+    ImageStore.deleteImage(file)
     QuestionnaireStore.removeAnswer(@props.data.id, file)
+    QuestionnaireStore.saveOrUpdateReport()
 
   resetFiles: =>
+    @props.answer?.selected?.map((file) =>
+      ImageStore.deleteImage(file)
+    )
     QuestionnaireStore.selectAnswer(@props.data.id, [])
+    QuestionnaireStore.saveOrUpdateReport()

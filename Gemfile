@@ -5,6 +5,7 @@ gem 'rails', '4.2.6'
 
 # DB
 gem 'pg', '~> 0.18.4'
+gem 'paperclip', '~> 5.1.0'
 
 # Frontend
 gem 'kaminari', '~> 0.17.0'

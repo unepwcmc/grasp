@@ -1,5 +1,8 @@
+_ = require("underscore")
+async = require("async")
 {EventEmitter} = require("events")
 NavigationStore = require("stores/navigation_store")
+ImageStore = require("stores/image_store")
 require("whatwg-fetch")
 
 class QuestionnaireStore extends EventEmitter
@@ -18,7 +21,8 @@ class QuestionnaireStore extends EventEmitter
     id: null,
     answers: {},
     state: "in_progress",
-    genera: {}
+    genera: {},
+    images: {}
   }
 
   constructor: ->
@@ -168,6 +172,7 @@ class QuestionnaireStore extends EventEmitter
       report.answers[key].dna_confirmation = false
     @emit(CHANGE_EVENT)
 
+
   addChangeListener:     (callback) => @on(CHANGE_EVENT,     callback)
   addVisibilityListener: (callback) => @on(VISIBILITY_EVENT, callback)
 
@@ -177,14 +182,22 @@ class QuestionnaireStore extends EventEmitter
     if report.id?
       @reportRequest("/reports/#{report.id}", "PUT", (response) =>
         @setNotification("success", "Report updated")
-        callback?(response.headers.get('Location'))
+        ImageStore.storeImages(report, (newReport) =>
+          report = newReport
+          callback?(response.headers.get('Location'))
+        )
       )
     else
       @reportRequest("/reports", "POST", (response) =>
         @setNotification("success", "Report saved")
-        response.json().then((json) -> report.id = json.id)
 
-        callback?(response.headers.get('Location'))
+        response.json().then((json) =>
+          report.id = json.id
+          ImageStore.storeImages(report, (newReport) =>
+            report = newReport
+            callback?(response.headers.get('Location'))
+          )
+        )
       )
 
   storeGenera: ->
@@ -203,7 +216,6 @@ class QuestionnaireStore extends EventEmitter
         genera.dead.push(ape.genus_dead.selected)
 
     report.genera = genera
-
 
   reportRequest: (path, method, callback) ->
     token = document.getElementsByName("csrf-token")[0].content

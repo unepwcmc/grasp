@@ -12,15 +12,15 @@ module.exports = class TabControls extends React.Component
   renderTabs: =>
     numOfTabs = (@props.answers["quantities"]?["selected"]?[@props.pageId] || 1)
     for i in [0..numOfTabs-1]
-      <button onClick={@selectTab.bind(@, i)} className={@buildClassName(i)}>
-        Ape #{i+1}
-      </button>
+      <div onClick={@selectTab.bind(@, i)} className={@buildClassName(i)}>
+        Ape Nº {i+1}
+      </div>
 
   selectTab: (i) ->
     NavigationStore.selectTab(i)
 
   buildClassName: (i) ->
-    name = "page-controls__control"
+    name = "tab-controls__control"
     name += " is-selected" if NavigationStore.tabIndexForCurrentPage() == i
 
     name
