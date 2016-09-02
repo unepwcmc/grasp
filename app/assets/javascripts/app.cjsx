@@ -4,6 +4,9 @@ Questionnaire = require("components/questionnaire")
 NavigationControls = require("components/navigation_controls")
 QuestionnaireStore = require("stores/questionnaire_store")
 
+# modules
+UserFormHandler = require("modules/user_form_handler")
+
 module.exports =
   start: ->
     if questionnaireEl = document.getElementById("report-container")
@@ -37,6 +40,8 @@ module.exports =
     $('.alert').click(->
       $(this).slideUp()
     )
+
+    UserFormHandler.initialize()
 
     if ($validationEl = $(".js-validating")).length > 0
       reportId = $validationEl.data("report")
