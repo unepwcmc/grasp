@@ -5,7 +5,7 @@ module ParamsUtils
 
   def self.strip_ordering_params(params)
     params = strip_rails_defaults(params)
-    params.except(:sort, :dir)
+    params.except(:sort, :dir, :page)
   end
 
   def self.strip_empty(params)
