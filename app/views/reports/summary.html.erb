@@ -80,6 +80,53 @@
 
 <h3>Ape details</h3>
 
+<div class="u-group">
+  <div class="form__group">
+    <strong> Total live apes</strong>
+    <div class="form__field">
+      <%= @report.data.dig('answers', 'quantities', 'selected', 'live') %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <strong> Total dead apes</strong>
+    <div class="form__field">
+      <%= @report.data.dig('answers', 'quantities', 'selected', 'dead') %>
+    </div>
+  </div>
+
+  <div class="form__group">
+    <strong> Body parts?</strong>
+    <div class="form__field">
+      <%= @report.data.dig('answers', 'quantities', 'selected', 'body_parts')&.to_s&.titleize %>
+    </div>
+  </div>
+</div>
+
+<% if @live_apes.any? %>
+  <% @live_apes.each_with_index do |ape, index| %>
+    <%= render partial: "reports/ape_summary", locals: { ape: ape, status: "live", index: index} %>
+  <% end %>
+<% end %>
+
+<% if @dead_apes.any? %>
+  <% @dead_apes.each_with_index do |ape, index| %>
+    <%= render partial: "reports/ape_summary", locals: { ape: ape, status: "dead", index: index} %>
+  <% end %>
+<% end %>
+
+<% if @body_parts.any? %>
+  <p><strong>Body parts</strong></p>
+  <% @body_parts.each do |genus| %>
+    <div class="form__group">
+      <%= genus %>
+      <div class="form__field">
+
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
 <hr>
 
 <h3>Validation history</h3>
