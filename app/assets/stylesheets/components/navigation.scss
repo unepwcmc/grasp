@@ -14,14 +14,7 @@
       float: none;
       margin-top: 1em;
       width: 100%;
-      a {
-        width: 100%;
-      }
-    }
-
-    @media screen and (max-width: $break__tablet) {
-      float: left;
-      margin-top: 1em;
+      a { width: 100%; }
     }
   }
 }
