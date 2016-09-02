@@ -8,7 +8,7 @@
 </div>
 
 <div class="form__group">
-  <%= f.label :email %>
+  <%= f.label :email, "Email *" %>
   <div class="form__field">
     <%= f.email_field :email %>
   </div>
@@ -58,7 +58,7 @@
 </div>
 
 <div class="form__group">
-  <%= f.label :country %>
+  <%= f.label :country, "Country *" %>
   <div class="form__field">
     <%= f.select :country, CountryUtilities.all_countries.map { |c| [c, c] }, include_blank: true %>
   </div>
