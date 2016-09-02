@@ -22,11 +22,13 @@ module CsvBuilder
         csv << self.make_report_row(report)
 
         # For each ape in live, dead and parts, make a row
-        ['live', 'dead', 'parts'].each do |status|
+        ['live', 'dead'].each do |status|
           if report.data.dig('answers', status).present? # If any live/dead/parts
             report.data['answers'][status].each do |ape|
               csv << self.make_report_row(report, ape, status.to_sym)
             end
+
+            # Iterate for parts?
           end
         end
       end
@@ -53,33 +55,38 @@ module CsvBuilder
       report.data.dig('answers', 'type_of_location', 'selected')
     ]
 
-    if ape.present? && (status == :live or status == :dead)
-      ape_data = [
-        status.to_s.titleize,
-        ape.dig("genus_#{status}", 'selected'),
-        ape.dig("species_subspecies_#{status}", 'selected'),
-        ape.dig("intended_use_#{status}", 'selected'),
-        "Photo TBC",
-        ape.dig("age_#{status}", 'selected'),
-        ape.dig("gender_#{status}", 'selected'),
-        ape.dig("last_known_location_#{status}", 'selected'),
-        ape.dig("alleged_origin_country_#{status}", 'selected'),
-        ape.dig("condition_#{status}", 'selected'),
-        ape.dig("unique_identifiers_#{status}", 'selected'),
-        ape.dig("individual_name_#{status}", 'selected')
-      ]
+    ape_data = [
+      status.to_s.titleize,
+      ape.dig("genus_#{status}", 'selected'),
+      ape.dig("species_subspecies_#{status}", 'selected'),
+      ape.dig("intended_use_#{status}", 'selected'),
+      "Photo TBC",
+      ape.dig("age_#{status}", 'selected'),
+      ape.dig("gender_#{status}", 'selected'),
+      ape.dig("last_known_location_#{status}", 'selected'),
+      ape.dig("alleged_origin_country_#{status}", 'selected'),
+      ape.dig("condition_#{status}", 'selected'),
+      ape.dig("unique_identifiers_#{status}", 'selected'),
+      ape.dig("individual_name_#{status}", 'selected')
+    ]
 
-      # Add empty fields for body parts
+    if ape.present? && (status == :live or status == :dead)
+      # Add empty fields for body parts section
       ape_data += Array.new(7, nil)
-    else
-      #"Bone Qty",
-      #"Foot/Hand Qty",
-      #"Genitalia Qty",
-      #"Hair Qty",
-      #"Meat Kg",
-      #"Skin Qty",
-      #"Skull Qty"
-      ape_data = Array.new(19, nil)
+    elsif ape.present?? (status == :parts)
+      # Create a new row for each genus
+
+      #ape_data = Array.new(12, nil)
+      #parts = self.sum_genus_parts(report)
+      #ape_data += [
+        #parts.dig('parts', 'bone', 'selected'),
+        #parts.dig('parts', 'foot_hand', 'selected'),
+        #parts.dig('parts', 'genitalia', 'selected'),
+        #parts.dig('parts', 'hair', 'selected'),
+        #parts.dig('parts', 'meat', 'selected'),
+        #parts.dig('parts', 'skin', 'selected'),
+        #parts.dig('parts', 'skull', 'selected')
+      #]
     end
 
     report_data_2 = [
@@ -94,5 +101,12 @@ module CsvBuilder
 
     # Join the segments to form the full row
     report_data_1 + ape_data + report_data_2
+  end
+
+  def self.sum_genus_parts(report)
+    # Fetch, merge and sum the genus parts for each ape genus into one totalled hash
+    genus = ['bonobo', 'chimpanzee', 'gorilla', 'orangutan', 'unknown']
+    genus_parts = genus.map {|genus| report.data.dig('answers', "parts_#{genus}")}
+    genus_parts.inject{|total, hash| total.deep_merge(hash) {|_, value_1, value_2| value_1 + value_2 }}
   end
 end
