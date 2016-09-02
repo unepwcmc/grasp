@@ -2,6 +2,11 @@
   <%= link_to search_reports_path, class: 'button button-primary' do %>
     <i class="fa fa-search icon icon--closer"></i>Search Again
   <% end %>
+  <% if can? :export, @reports %>
+    <%= link_to export_reports_path(ParamsUtils.strip_to_search_params(params)), class: 'button button-primary' do %>
+      <i class="fa fa-file-text-o icon icon--closer"></i>Export results as CSV file
+    <% end %>
+  <% end %>
 <% else %>
   <% if can? :create, Report %>
     <%= link_to new_report_path, class: 'button button-primary' do %>
@@ -14,7 +19,7 @@
     <% end %>
   <% end %>
   <% if can? :export, @reports %>
-    <%= link_to export_reports_path, class: 'button button-primary' do %>
+    <%= link_to export_reports_path(ParamsUtils.strip_to_search_params(params)), class: 'button button-primary' do %>
       <i class="fa fa-file-text-o icon icon--closer"></i>Export CSV file – all reports
     <% end %>
   <% end %>
