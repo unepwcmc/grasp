@@ -4,7 +4,7 @@
   <%= breadcrumb @agency.name, agency_path(@agency.id) %>
 <% end %>
 <%= content_for :page_buttons do %>
-  <%= link_to 'Edit Agency', edit_agency_path(@agency), class: 'button' %>
+  <%= link_to 'Edit Agency', edit_agency_path(@agency), class: 'button button-primary' %>
 <% end %>
 
 <p>
