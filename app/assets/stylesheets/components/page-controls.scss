@@ -1,10 +1,23 @@
 @include b(page-controls) {
   overflow: hidden;
+  margin-bottom: 1.6rem;
 
-  @include e(control) {
-    margin-right: 2rem;
+  @include e(prev) {
     float: right;
+    margin-right: 2rem;
+    height: initial;
+    padding: initial;
+    border: initial;
+    text-transform: initial;
+    text-decoration: underline;
+    color: $link__color;
 
-    &.is-selected { background-color: green; }
+    @media screen and (max-width: $break__phone) {
+      float: left;
+    }
+  }
+
+  @include e(next) {
+    float: right;
   }
 }

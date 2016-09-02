@@ -5,20 +5,22 @@ Page = require("components/page")
 module.exports = class PageControls extends React.Component
   render: =>
     <div className="page-controls">
-      {@renderNextPage()}
-      {@renderPreviousPage()}
+      <div className="row">
+        {@renderNextPage()}
+        {@renderPreviousPage()}
+      </div>
     </div>
-
-  renderNextPage: =>
-    unless NavigationStore.isLastPage()
-      <button onClick={@nextPage} className="page-controls__control">
-        Next step
-      </button>
 
   renderPreviousPage: =>
     unless NavigationStore.isFirstPage()
-      <button onClick={@previousPage} className="page-controls__control">
-        Previous step
+      <button onClick={@previousPage} className="page-controls__prev">
+        < Previous step
+      </button>
+
+  renderNextPage: =>
+    unless NavigationStore.isLastPage()
+      <button onClick={@nextPage} className="button button-primary page-controls__next">
+        Next step >
       </button>
 
   previousPage: -> NavigationStore.previousPage()

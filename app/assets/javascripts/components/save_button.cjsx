@@ -3,8 +3,8 @@ React = require("react")
 
 module.exports = class SaveButton extends React.Component
   render: =>
-    <div className="save-report">
-      <input type="submit" value="Save Report" onClick={@saveReport}/>
+    <div>
+      <input className="columns button button-primary" type="submit" value="Save Report" onClick={@saveReport}/>
     </div>
 
   saveReport: =>
