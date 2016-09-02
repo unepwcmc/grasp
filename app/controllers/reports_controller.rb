@@ -34,6 +34,9 @@ class ReportsController < ApplicationController
 
   def summary
     @report = Report.find(params[:id])
+    @live_apes = @report.data.dig('answers', 'live')
+    @dead_apes = @report.data.dig('answers', 'dead')
+    @body_parts = @report.data.dig('answers', 'genus_parts', 'selected')
   end
 
   def show
