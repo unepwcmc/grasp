@@ -7,7 +7,7 @@ module ReportHelper
           concat content_tag(:strong, "Live ape(s)")
           apes_by_type[:live].each do |(type, quantity)|
             concat tag("br")
-            concat "#{quantity} #{type}"
+            concat "#{quantity} #{type.gsub(/\(.*\)/, "")}"
           end
         }
       end
@@ -16,7 +16,7 @@ module ReportHelper
           concat content_tag(:strong, "Dead ape(s)")
           apes_by_type[:dead].each do |(type, quantity)|
             concat tag("br")
-            concat "#{quantity} #{type}"
+            concat "#{quantity} #{type.gsub(/\(.*\)/, "")}"
           end
         }
       end
