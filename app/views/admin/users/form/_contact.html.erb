@@ -60,6 +60,6 @@
 <div class="form__group">
   <%= f.label :country %>
   <div class="form__field">
-    <%= f.text_field :country %>
+    <%= f.select :country, CountryUtilities.all_countries.map { |c| [c, c] }, include_blank: true %>
   </div>
 </div>
