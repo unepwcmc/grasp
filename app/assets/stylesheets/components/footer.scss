@@ -21,11 +21,6 @@
     font-weight: 400;
   }
 
-  @include e(icon) {
-    vertical-align: middle;
-    margin-right: 1rem;
-  }
-
   @include e(link) {
     color: $white;
     display: block;
