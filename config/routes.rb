@@ -6,10 +6,6 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
-  #authenticated :user do
-    #root "reports#index", as: :authenticated_root
-  #end
-
   get "/reports", to: "reports#index", as: :authenticated_root
 
   resources :agencies
