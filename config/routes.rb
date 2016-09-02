@@ -3,9 +3,11 @@ Rails.application.routes.draw do
 
   root "home#index", as: "landing_page"
 
-  authenticated :user do
-    root "reports#index", as: :authenticated_root
-  end
+  #authenticated :user do
+    #root "reports#index", as: :authenticated_root
+  #end
+
+  get "/reports", to: "reports#index", as: :authenticated_root
 
   resources :agencies
   resources :reports
