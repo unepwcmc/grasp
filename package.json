@@ -1,6 +1,7 @@
 {
   "name": "grasp",
   "dependencies": {
+    "async": "^2.0.1",
     "browserify": "~10.2.4",
     "browserify-incremental": "^3.0.1",
     "coffee-reactify": "^5.0.0",

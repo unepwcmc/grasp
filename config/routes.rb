@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   end
 
   resources :agencies
-  resources :reports
+  resources :reports do
+    resources :images, only: [:create, :show, :destroy]
+  end
+
   resources :validations, only: [:new, :create]
 
   namespace :admin do
