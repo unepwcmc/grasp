@@ -7,7 +7,7 @@ class SingleAnswerQuestion extends React.Component
     @state = {}
 
   render: ->
-    <ul>
+    <ul className="question__list">
       {@renderAnswers()}
       {@renderOther()}
     </ul>

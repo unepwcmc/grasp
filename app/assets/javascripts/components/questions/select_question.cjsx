@@ -7,7 +7,7 @@ class SelectQuestion extends React.Component
     @state = {}
 
   render: ->
-    <select value={@props.answer?.selected} onChange={@props.onChange}>
+    <select className="question__select" value={@props.answer?.selected} onChange={@props.onChange}>
       <option value={@props.emptyOption}>Select {@props.emptyOption}</option>
       {@props.data.options.map( (option) ->
         <option value={option}>{option}</option>
