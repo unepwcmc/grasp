@@ -40,9 +40,14 @@ class QuantitiesQuestion extends React.Component
   update: (type, answer) =>
     return unless 0 <= answer < 100
 
-    @props.answer?.selected ||= {}
-    @props.answer?.selected[type] = answer
-    QuestionnaireStore.selectAnswer(@props.data.id, @props.answer?.selected)
+    selectedAnswers = {
+      live: @props.answer?.selected?.live,
+      dead: @props.answer?.selected?.dead,
+      body_parts: @props.answer?.selected?.body_parts
+    }
+
+    selectedAnswers[type] = answer
+    QuestionnaireStore.selectAnswer(@props.data.id, selectedAnswers)
 
   valueFor: (type) => parseInt(@props.answer?.selected?[type] || 0)
 
