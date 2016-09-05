@@ -1,4 +1,4 @@
-module Sorter
+module Sorters::Reports
   COLUMNS = {
     "id" => "reports.id",
     "username" => "users.first_name",
