@@ -1,0 +1,29 @@
+<h3>General information</h3>
+
+<div class="form__group">
+  <%= f.label :first_name, "First Name *" %>
+  <div class="form__field">
+    <%= f.text_field :first_name %>
+  </div>
+</div>
+
+<div class="form__group">
+  <%= f.label :last_name, "Last Name *" %>
+  <div class="form__field">
+    <%= f.text_field :last_name %>
+  </div>
+</div>
+
+<div class="form__group">
+  <%= f.label :agency_id %>
+  <div class="form__field">
+    <%= f.collection_select :agency_id, Agency.all, :id, :name %>
+  </div>
+</div>
+
+<div class="form__group">
+  <%= f.label :role_id %>
+  <div class="form__field">
+    <%= f.collection_select :role_id, Role.all, :id, :titleized_name, {}, class: "js-role-selection" %>
+  </div>
+</div>
