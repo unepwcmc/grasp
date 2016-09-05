@@ -1,0 +1,65 @@
+<h3>Contact information</h3>
+
+<div class="form__group">
+  <%= f.label :mobile_number %>
+  <div class="form__field">
+    <%= f.text_field :mobile_number %>
+  </div>
+</div>
+
+<div class="form__group">
+  <%= f.label :email, "Email *" %>
+  <div class="form__field">
+    <%= f.email_field :email %>
+  </div>
+</div>
+
+<div class="form__group">
+  <%= f.label :second_email, 'Additional email address' %>
+  <div class="form__field">
+    <%= f.email_field :second_email %>
+  </div>
+</div>
+
+
+<div class="form__group">
+  <%= f.label :skype_username %>
+  <div class="form__field">
+    <%= f.text_field :skype_username %>
+  </div>
+</div>
+
+<div class="form__group">
+  <%= f.label :address_1 %>
+  <div class="form__field">
+    <%= f.text_field :address_1 %>
+  </div>
+</div>
+
+<div class="form__group">
+  <%= f.label :address_2 %>
+  <div class="form__field">
+    <%= f.text_field :address_2 %>
+  </div>
+</div>
+
+<div class="form__group">
+  <%= f.label :city %>
+  <div class="form__field">
+    <%= f.text_field :city %>
+  </div>
+</div>
+
+<div class="form__group">
+  <%= f.label :post_code %>
+  <div class="form__field">
+    <%= f.text_field :post_code %>
+  </div>
+</div>
+
+<div class="form__group">
+  <%= f.label :country, "Country *" %>
+  <div class="form__field">
+    <%= f.select :country, CountryUtilities.all_countries.map { |c| [c, c] }, include_blank: true %>
+  </div>
+</div>

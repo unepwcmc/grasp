@@ -1,0 +1,10 @@
+<h3>Validation expertise</h3>
+
+<%= f.collection_check_boxes(:expertise_ids, Expertise.all, :id, :name) do |b| %>
+  <div class="form__field">
+    <%= b.label do %>
+      <%= b.check_box %>
+      <span class="label-body"><%= b.text %></span>
+    <% end %>
+  </div>
+<% end %>

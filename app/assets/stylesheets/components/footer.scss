@@ -21,11 +21,6 @@
     font-weight: 400;
   }
 
-  @include e(icon) {
-    vertical-align: middle;
-    margin-right: 1rem;
-  }
-
   @include e(link) {
     color: $white;
     display: block;
@@ -51,16 +46,16 @@
     @include m(strip) {
       margin-bottom: 0;
       margin-right: 1rem;
-      height: 1.75rem;
+      height: 2rem;
       width: auto;
-      vertical-align: sub;
+      vertical-align: middle;
     }
   }
 
   @include e(strip) {
     background-color: $mariner;
     line-height: 3.5rem;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
   @include e(strip-inner) {

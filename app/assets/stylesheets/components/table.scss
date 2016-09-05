@@ -64,6 +64,10 @@
     @include responsive-table("ID", "User name", "Agency", "Timestamp", "Date of discovery", "Status of ape(s)", "Confiscation", "Status", "Actions")
   }
 
+  @include e(element) {
+    padding-left: 1rem;
+  }
+
   @include m(users) {
     @include responsive-table("First name", "Last name", "Agency", "Email", "Role", "Actions")
   }

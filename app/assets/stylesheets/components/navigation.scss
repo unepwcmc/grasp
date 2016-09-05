@@ -1,6 +1,6 @@
 @include b(navigation) {
   width: 100%;
-  border-bottom: solid 2px $grey;
+  border-bottom: solid 2px $geyser;
   margin-bottom: 3rem;
 
   @include e(inner) {
@@ -14,14 +14,7 @@
       float: none;
       margin-top: 1em;
       width: 100%;
-      a {
-        width: 100%;
-      }
-    }
-
-    @media screen and (max-width: $break__tablet) {
-      float: left;
-      margin-top: 1em;
+      a { width: 100%; }
     }
   }
 }

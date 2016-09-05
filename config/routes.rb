@@ -3,12 +3,16 @@ Rails.application.routes.draw do
 
   root "home#index", as: "landing_page"
 
-  authenticated :user do
-    root "reports#index", as: :authenticated_root
-  end
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
+  get "/reports", to: "reports#index", as: :authenticated_root
 
   resources :agencies
-  resources :reports
+  resources :reports do
+    resources :images, only: [:create, :show, :destroy]
+  end
+
   resources :validations, only: [:new, :create]
 
   namespace :admin do

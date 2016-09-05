@@ -10,5 +10,16 @@ module CountryUtilities
     hash = COUNTRIES.select { |_k,v| v.include? country }
     hash.keys.first.to_s
   end
-end
 
+  def self.all_countries
+    # "config/questionnaire/pages/incident/countries.json.erb"
+    # |> Rails.root.join
+    # |> File.read
+    # |> JSON.parse
+
+    countries_list  = File.read(
+      Rails.root.join('config/questionnaire/pages/incident/countries.json.erb')
+    )
+    JSON.parse(countries_list)
+  end
+end

@@ -57,7 +57,7 @@
   <div class="form__group">
     <%= label_tag :genus, 'Ape (Genus)' %>
     <div class="form__field">
-      <%= select_tag :genus, options_for_select(["Bonobo (pan)", "Chimpanzee (pan)", "Gorilla (gorilla)", "Orang-utan (pongo)", "Unknown"]), multiple: true, class: 'select2' %>
+      <%= select_tag :genus, options_for_select(["Bonobo (Pan)", "Chimpanzee (Pan)", "Gorilla (Gorilla)", "Orang-utan (Pongo)", "Unknown"]), multiple: true, class: 'select2' %>
     </div>
   </div>
 
@@ -85,6 +85,8 @@
   </div>
 
   <div class="form__submit">
-    <%= submit_tag "Search", name: nil, class: 'button button-primary' %>
+    <button type="submit" class="button button-primary">
+      <i class="fa fa-search icon icon--closer"></i>Search
+    </button>
   </div>
 <% end %>

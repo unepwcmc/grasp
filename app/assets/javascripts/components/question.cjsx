@@ -118,7 +118,7 @@ class Question extends React.Component
         </div>
 
   renderAnswerLabel: (answer) ->
-    if matches = answer.match(/(.*) \((.*)\)/)
+    if (answer.constructor == String) and (matches = answer.match(/(.*) \((.*)\)/))
       <p>{matches[1]} (<em>{matches[2]}</em>)</p>
     else
       <p>{answer}</p>

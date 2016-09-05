@@ -1,5 +1,9 @@
 @include b(page) {
   @include e(title) {
     margin-bottom: 0;
+
+    @media only screen and (min-width: $break__phone) {
+      float: left;
+    }
   }
 }

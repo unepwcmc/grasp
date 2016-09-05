@@ -1,26 +1,25 @@
 <table class="table u-full-width table--reports">
   <thead class="table__head">
-    <th><%= sortable "id", "ID" %></th>
-    <th><%= sortable "username", "User Name" %></th>
-    <th><%= sortable "agency" %></th>
-    <th><%= sortable "timestamp" %></th>
-    <th><%= sortable "date_of_discovery" %></th>
-    <th>Status of ape(s)</th>
-    <th><%= sortable "confiscated", "Confiscation" %></th>
-    <th><%= sortable "state", "Status" %></th>
+    <th class="table__element"><%= sortable "id", "ID" %></th>
+    <th class="table__element"><%= sortable "username", "User Name" %></th>
+    <th class="table__element"><%= sortable "agency" %></th>
+    <th class="table__element"><%= sortable "timestamp", "Started On" %></th>
+    <th class="table__element"><%= sortable "date_of_discovery", "Discovery Date" %></th>
+    <th class="table__element">Ape Details</th>
+    <th class="table__element"><%= sortable "state", "Status" %></th>
+    <th class="table__element">Actions</th>
   </thead>
   <tbody>
     <% reports.each do |report| %>
         <tr>
-          <td><%= report.id %></td>
-          <td><%= report.user_name %></td>
-          <td><%= report.user&.agency&.name %></td>
-          <td><%= report.timestamp %></td>
-          <td><%= report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y") %></td>
-          <td><%= status_of_apes(report) %></td>
-          <td><%= report.answer_to("confiscated") %></td>
-          <td><%= report.state %></td>
-          <td>
+          <td class="table__element"><%= report.id %></td>
+          <td class="table__element"><%= report.user_name %></td>
+          <td class="table__element"><%= report.user&.agency&.name %></td>
+          <td class="table__element"><%= report.timestamp %></td>
+          <td class="table__element"><%= report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y") %></td>
+          <td class="table__element"><%= status_of_apes(report) %></td>
+          <td class="table__element"><%= report.state %></td>
+          <td class="table__element">
             <% if can? :read, report %>
               <% unless current_user.is_role? :validator %>
                 <a href="<%= report_summary_path(report.id) %>">View</a>

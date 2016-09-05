@@ -16,6 +16,11 @@
     border: 2px solid $button__bg-color--hover;
   }
 
+  &[disabled] {
+    background-color: $grey;
+    border-color: $grey;
+  }
+
   &.button-secondary, .button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, .button:focus, button:focus, input[type="submit"]:focus, input[type="reset"]:focus, input[type="button"]:focus {
     @include button {
       border: 2px solid $button__border-color--secondary;
@@ -30,4 +35,3 @@
     }
   }
 }
-

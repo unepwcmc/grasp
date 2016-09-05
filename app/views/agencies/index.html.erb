@@ -1,4 +1,4 @@
-<%= content_for :page_title, "Listing Agencies" %>
+<%= content_for :page_title, "Agencies" %>
 <%= content_for :breadcrumbs do %>
   <%= breadcrumb "Agencies", agencies_path %>
 <% end %>
@@ -24,7 +24,7 @@
         <td><%= agency.url %></td>
         <td><%= link_to 'Show', agency %></td>
         <td><%= link_to 'Edit', edit_agency_path(agency) %></td>
-        <td><%= link_to 'Delete', agency, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', agency, method: :delete, data: { confirm: 'Are you sure you want to permanently delete this agency?' } %></td>
       </tr>
     <% end %>
   </tbody>

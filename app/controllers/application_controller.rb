@@ -1,19 +1,16 @@
 class ApplicationController < ActionController::Base
+  class PageNotFoundError < StandardError; end
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
-    super
-    # Direct each user to their relevant home path on sign in
-    #case resource.role.name
-    #when "admin"      then root_path
-    #when "validator"  then root_path
-    #when "provider"   then root_path
-    #else
-      #root_path
-    #end
+    reports_path
+  end
+
+  def raise_404
+    raise PageNotFoundError
   end
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -21,6 +18,10 @@ class ApplicationController < ActionController::Base
       format.json { head :forbidden }
       format.html { redirect_to :back, alert: exception.message }
     end
+  end
+
+  rescue_from PageNotFoundError do |exception|
+    head 404
   end
 
   protected

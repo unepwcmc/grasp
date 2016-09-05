@@ -3,149 +3,27 @@
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
       <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <h3>General information</h3>
-
-  <div class="form__group">
-    <%= f.label :first_name %>
-    <div class="form__field">
-      <%= f.text_field :first_name %>
-    </div>
-  </div>
-
-  <div class="form__group">
-    <%= f.label :last_name %>
-    <div class="form__field">
-      <%= f.text_field :last_name %>
-    </div>
-  </div>
-
-  <div class="form__group">
-    <%= f.label :agency_id %>
-    <div class="form__field">
-      <%= f.collection_select :agency_id, Agency.all, :id, :name %>
-    </div>
-  </div>
-
-  <div class="form__group">
-    <%= f.label :role_id %>
-    <div class="form__field">
-      <%= f.collection_select :role_id, Role.all, :id, :name %>
-    </div>
-  </div>
-
+  <%= render "admin/users/form/general", f: f %>
   <hr>
 
-  <h3>Validation expertise</h3>
-
-  <%= f.collection_check_boxes(:expertise_ids, Expertise.all, :id, :name) do |b| %>
-    <div class="form__group">
-      <%= b.label %>
-      <div class="form__field">
-        <%= b.check_box %>
-      </div>
-    </div>
-  <% end %>
-
-  <hr>
-
-  <h3>Contact information</h3>
-
-  <div class="form__group">
-    <%= f.label :mobile_number %>
-    <div class="form__field">
-      <%= f.text_field :mobile_number %>
-    </div>
+  <div class="js-form-expertise">
+    <%= render "admin/users/form/expertise", f: f %>
+    <hr>
   </div>
 
-  <div class="form__group">
-    <%= f.label :email %>
-    <div class="form__field">
-      <%= f.email_field :email %>
-    </div>
-  </div>
-
-  <div class="form__group">
-    <%= f.label :second_email, 'Additional email address' %>
-    <div class="form__field">
-      <%= f.email_field :second_email %>
-    </div>
-  </div>
-
-
-  <div class="form__group">
-    <%= f.label :skype_username %>
-    <div class="form__field">
-      <%= f.text_field :skype_username %>
-    </div>
-  </div>
-
-  <div class="form__group">
-    <%= f.label :address_1 %>
-    <div class="form__field">
-      <%= f.text_field :address_1 %>
-    </div>
-  </div>
-
-  <div class="form__group">
-    <%= f.label :address_2 %>
-    <div class="form__field">
-      <%= f.text_field :address_2 %>
-    </div>
-  </div>
-
-  <div class="form__group">
-    <%= f.label :city %>
-    <div class="form__field">
-      <%= f.text_field :city %>
-    </div>
-  </div>
-
-  <div class="form__group">
-    <%= f.label :post_code %>
-    <div class="form__field">
-      <%= f.text_field :post_code %>
-    </div>
-  </div>
-
-  <div class="form__group">
-    <%= f.label :country %>
-    <div class="form__field">
-      <%= f.text_field :country %>
-    </div>
-  </div>
+  <%= render "admin/users/form/contact", f: f %>
 
   <%= f.submit class: 'form__submit button button-secondary' %>
 <% end %>
 
-<hr>
-
-<h3>Change password</h3>
-
-<%= form_for [:admin, @user] do |f| %>
-  <div class="form__group">
-    <%= f.label :password %>
-    <div class="form__field">
-      <%= f.password_field :password, autocomplete: "off" %>
-      <% if @minimum_password_length %>
-        <br />
-        <em><%= @minimum_password_length %> characters minimum</em>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="form__group">
-    <%= f.label :password_confirmation %>
-    <div class="form__field">
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
-    </div>
-  </div>
-
-  <%= f.submit "Change password", class: 'form__submit button button-secondary' %>
+<% unless current_page?(action: "new") %>
+  <hr>
+  <%= render "admin/users/form/change_password" %>
 <% end %>

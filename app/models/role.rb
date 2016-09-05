@@ -11,4 +11,8 @@
 class Role < ActiveRecord::Base
   validates :name, presence: true
   has_many :users
+
+  def titleized_name
+    name.titleize
+  end
 end
