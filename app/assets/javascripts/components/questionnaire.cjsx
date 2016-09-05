@@ -35,12 +35,14 @@ class Questionnaire extends React.Component
 
   renderButtons: =>
     unless @state.mode == "show"
-      <div className="hide-mobile six columns u-pull-right questionnaire-buttons">
-        <SaveButton/> {@renderSubmitButton()}
-      </div>
-      <div className="only-mobile">
-        <SaveButton/> {@renderSubmitButton()}
-      </div>
+      [
+        <div className="hide-mobile six columns u-pull-right questionnaire-buttons">
+          <SaveButton/> {@renderSubmitButton()}
+        </div>,
+        <div className="only-mobile">
+          <SaveButton/> {@renderSubmitButton()}
+        </div>
+      ]
 
   renderSubmitButton: ->
     <SubmitButton enabled={QuestionnaireStore.requiredQuestionsAnswered()}/>
