@@ -8,6 +8,8 @@ class Admin::UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
+    @users = Sorters::Users.sort(@users, params[:sort], params[:dir])
+    @users = @users.page(params[:page])
   end
 
   # GET /users/1
