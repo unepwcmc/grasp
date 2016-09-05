@@ -28,7 +28,7 @@
         <td><%= user.role.name %></td>
         <td><%= link_to 'Show', admin_user_path(user) %></td>
         <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
-        <td><%= link_to 'Delete', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure you want to permanently delete this user?' } %></td>
       </tr>
     <% end %>
   </tbody>
