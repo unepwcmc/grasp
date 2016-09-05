@@ -6,6 +6,8 @@ class AgenciesController < ApplicationController
   # GET /agencies
   def index
     @agencies = Agency.all
+    @agencies = Sorters::Agencies.sort(@agencies, params[:sort], params[:dir])
+    @agencies = @agencies.page(params[:page])
   end
 
   # GET /agencies/1
