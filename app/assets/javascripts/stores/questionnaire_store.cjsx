@@ -39,6 +39,7 @@ class QuestionnaireStore extends EventEmitter
     @emit(CHANGE_EVENT)
 
   startAutoSave: ->
+    return if questionnaireMode == "show"
     autoSaveTimer = setInterval(@saveOrUpdateReport, autoSaveInterval)
 
   stopAutoSave: ->
@@ -177,6 +178,7 @@ class QuestionnaireStore extends EventEmitter
   addVisibilityListener: (callback) => @on(VISIBILITY_EVENT, callback)
 
   saveOrUpdateReport: (callback) =>
+    return if questionnaireMode == "show"
     @storeGenera()
 
     if report.id?
@@ -261,6 +263,7 @@ class QuestionnaireStore extends EventEmitter
     )
 
   submitReport: =>
+    return if questionnaireMode == "show"
     report.state = "submitted"
 
     @stopAutoSave()

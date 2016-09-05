@@ -99,6 +99,8 @@ class NavigationStore extends EventEmitter
 
   updateAnswers: =>
     QuestionnaireStore = require("stores/questionnaire_store")
+    return if QuestionnaireStore.getMode() == "show"
+
     answers = QuestionnaireStore.getAnswers()
     questions = QuestionnaireStore.getQuestions()
 
