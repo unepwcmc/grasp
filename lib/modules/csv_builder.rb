@@ -22,7 +22,7 @@ module CsvBuilder
         csv << self.make_report_row(report)
 
         # For each ape in live, dead and parts, make a row
-        ['live', 'dead'].each do |status|
+        ['live', 'dead', 'parts'].each do |status|
           if report.data.dig('answers', status).present? # If any live/dead/parts
             report.data['answers'][status].each do |ape|
               csv << self.make_report_row(report, ape, status.to_sym)
@@ -55,39 +55,47 @@ module CsvBuilder
       report.data.dig('answers', 'type_of_location', 'selected')
     ]
 
-    ape_data = [
-      status.to_s.titleize,
-      ape.dig("genus_#{status}", 'selected'),
-      ape.dig("species_subspecies_#{status}", 'selected'),
-      ape.dig("intended_use_#{status}", 'selected'),
-      "Photo TBC",
-      ape.dig("age_#{status}", 'selected'),
-      ape.dig("gender_#{status}", 'selected'),
-      ape.dig("last_known_location_#{status}", 'selected'),
-      ape.dig("alleged_origin_country_#{status}", 'selected'),
-      ape.dig("condition_#{status}", 'selected'),
-      ape.dig("unique_identifiers_#{status}", 'selected'),
-      ape.dig("individual_name_#{status}", 'selected')
-    ]
+    ape_data = Array.new(19, nil)
 
-    if ape.present? && (status == :live or status == :dead)
-      # Add empty fields for body parts section
-      ape_data += Array.new(7, nil)
-    elsif ape.present?? (status == :parts)
-      # Create a new row for each genus
+    if ape.present?
+      ape_data = [
+        status.to_s.titleize,
+        ape.dig("genus_#{status}", 'selected'),
+        ape.dig("species_subspecies_#{status}", 'selected'),
+        ape.dig("intended_use_#{status}", 'selected'),
+        "Photo TBC",
+        ape.dig("age_#{status}", 'selected'),
+        ape.dig("gender_#{status}", 'selected'),
+        ape.dig("last_known_location_#{status}", 'selected'),
+        ape.dig("alleged_origin_country_#{status}", 'selected'),
+        ape.dig("condition_#{status}", 'selected'),
+        ape.dig("unique_identifiers_#{status}", 'selected'),
+        ape.dig("individual_name_#{status}", 'selected')
+      ]
 
-      #ape_data = Array.new(12, nil)
-      #parts = self.sum_genus_parts(report)
-      #ape_data += [
-        #parts.dig('parts', 'bone', 'selected'),
-        #parts.dig('parts', 'foot_hand', 'selected'),
-        #parts.dig('parts', 'genitalia', 'selected'),
-        #parts.dig('parts', 'hair', 'selected'),
-        #parts.dig('parts', 'meat', 'selected'),
-        #parts.dig('parts', 'skin', 'selected'),
-        #parts.dig('parts', 'skull', 'selected')
-      #]
+      if status == :live or status == :dead
+        # Add empty fields for body parts section
+        ape_data += Array.new(7, nil)
+      elsif status == :parts
+        # Create a new row for each genus
+        ape_data += Array.new(7, 0)
+
+        #ape_data = Array.new(12, nil)
+        #parts = self.sum_genus_parts(report)
+        #ape_data += [
+          #parts.dig('parts', 'bone', 'selected'),
+          #parts.dig('parts', 'foot_hand', 'selected'),
+          #parts.dig('parts', 'genitalia', 'selected'),
+          #parts.dig('parts', 'hair', 'selected'),
+          #parts.dig('parts', 'meat', 'selected'),
+          #parts.dig('parts', 'skin', 'selected'),
+          #parts.dig('parts', 'skull', 'selected')
+        #]
+      else
+        ape_data += Array.new(7, nil)
+      end
     end
+
 
     report_data_2 = [
       report.data.dig('answers', 'confiscated', 'selected'),
