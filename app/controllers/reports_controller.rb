@@ -34,9 +34,9 @@ class ReportsController < ApplicationController
 
   def summary
     @report = Report.find(params[:id])
-    @live_apes = @report.data.dig('answers', 'live')
-    @dead_apes = @report.data.dig('answers', 'dead')
-    @body_parts = @report.data.dig('answers', 'genus_parts', 'selected')
+    @live_apes  = Array.wrap(@report.data.dig('answers', 'live'))
+    @dead_apes  = Array.wrap(@report.data.dig('answers', 'dead'))
+    @body_parts = Array.wrap(@report.data.dig('answers', 'genus_parts', 'selected'))
   end
 
   def show
@@ -86,7 +86,7 @@ class ReportsController < ApplicationController
   end
 
   def export
-    reports = @reports.pluck(:id)
+    reports = Report.search(search_params).pluck(:id)
     CsvExportJob.perform_later(reports, current_user)
     redirect_to reports_path, notice: t("csv_export.being_generated")
   end
