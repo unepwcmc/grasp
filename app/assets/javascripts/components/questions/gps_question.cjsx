@@ -11,13 +11,13 @@ class GpsQuestion extends React.Component
     <div>
       <fieldset>
         <label htmlFor="latitude">Latitude</label>
-        <input ref="latitude" id="latitude" type="text"
+        <input ref="latitude" id="latitude" type="number"
           onChange={@handleLatChange} value={@getLat()}/>
       </fieldset>
 
       <fieldset>
         <label htmlFor="longitude">Longitude</label>
-        <input ref="longitude" id="longitude" type="text"
+        <input ref="longitude" id="longitude" type="number"
           onChange={@handleLngChange} value={@getLng()}/>
       </fieldset>
 
