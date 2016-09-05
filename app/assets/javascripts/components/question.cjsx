@@ -22,15 +22,34 @@ Tooltip = require("components/tooltip")
 class Question extends React.Component
   constructor: (props, context) ->
     super(props, context)
-    @state = {}
+    @state = {hidden: false}
 
   render: =>
     <div className="question">
-      <h5><strong>{@props.data.question}</strong></h5>
-      {@renderTooltip()}
-      {@renderAppropriateAnswer()}
-      {@renderAppropriateQuestion()}
+      <h5 onClick={@toggleQuestion} className={@titleClassName()}>
+        <strong>{@props.data.question}</strong>
+        <i className={@toggleClassName()}></i>
+      </h5>
+      {@renderQuestionBody()}
     </div>
+
+  toggleClassName: =>
+    className = "fa u-pull-right"
+    className += (if @state.hidden then " fa-chevron-down" else " fa-chevron-up")
+    className
+
+  titleClassName: =>
+    className = "question__title"
+    className += " is-inactive" if @state.hidden
+    className
+
+  renderQuestionBody: =>
+    return if @state.hidden
+    [
+      @renderTooltip(),
+      @renderAppropriateAnswer(),
+      @renderAppropriateQuestion()
+    ]
 
   renderTooltip: =>
     return null unless @props.data.tooltip
@@ -134,5 +153,8 @@ class Question extends React.Component
 
   handleOtherChange: (e) =>
     QuestionnaireStore.updateOtherAnswer(@props.data.id, e.target.value)
+
+  toggleQuestion: =>
+    @setState({hidden: !@state.hidden})
 
 module.exports = Question
