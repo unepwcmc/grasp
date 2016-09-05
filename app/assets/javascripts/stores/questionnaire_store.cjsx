@@ -111,8 +111,17 @@ class QuestionnaireStore extends EventEmitter
     @emit(CHANGE_EVENT) if fireChange
 
   updateOtherAnswer: (key, text) ->
-    report.answers[key] ||= {}
-    report.answers[key].other_answer = text
+    currentPage = NavigationStore.currentPage()
+    tabIndex = NavigationStore.tabIndexForCurrentPage()
+
+    if currentPage.multiple
+      report.answers[currentPage.id] ||= []
+      report.answers[currentPage.id][tabIndex] ||= {}
+      report.answers[currentPage.id][tabIndex][key] ||= {}
+      report.answers[currentPage.id][tabIndex][key].other_answer = text
+    else
+      report.answers[key] ||= {}
+      report.answers[key].other_answer = text
     @emit(CHANGE_EVENT)
 
   addAnswer: (key, answer) ->

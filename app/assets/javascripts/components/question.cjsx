@@ -83,8 +83,8 @@ class Question extends React.Component
                                     data={@props.data} answer={@props.answer} mode={@props.mode}/>
 
   renderAppropriateAnswer: =>
-    return null if @props.mode != "show" or !@props.answer?.selected?
-    general = @renderAnswerLabel(@props.answer?.selected)
+    return null if @props.mode != "show"
+    general = @renderAnswerLabel(@props.answer)
 
     switch @props.data.type
       when "single"           then general
@@ -118,10 +118,14 @@ class Question extends React.Component
         </div>
 
   renderAnswerLabel: (answer) ->
-    if (answer.constructor == String) and (matches = answer.match(/(.*) \((.*)\)/))
+    return <p>N/A</p> unless answer?.selected
+
+    if (answer.selected.constructor == String) and (matches = answer.selected.match(/(.*) \((.*)\)/))
       <p>{matches[1]} (<em>{matches[2]}</em>)</p>
+    else if answer.selected == "other"
+      <p>Other: {answer.other_answer} </p>
     else
-      <p>{answer}</p>
+      <p>{answer.selected}</p>
 
   renderOtherField: =>
     if "other" == @props.answer?.selected
