@@ -9,11 +9,11 @@
 <table class="table u-full-width table--users">
   <thead class="table__head">
     <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Agency</th>
-      <th>Email</th>
-      <th>Role</th>
+      <th class="table__element"><%= sortable "first_name" %></th>
+      <th class="table__element"><%= sortable "last_name" %></th>
+      <th class="table__element"><%= sortable "agency" %></th>
+      <th class="table__element"><%= sortable "email" %></th>
+      <th class="table__element"><%= sortable "role" %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -34,4 +34,6 @@
   </tbody>
 </table>
 
-
+<div class="pagination u-pull-right">
+  <%= paginate @users %>
+</div>

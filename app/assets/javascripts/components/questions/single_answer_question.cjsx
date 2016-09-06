@@ -52,7 +52,7 @@ class SingleAnswerQuestion extends React.Component
 
   renderOtherField: =>
     if "other" == @props.answer?.selected
-      <input type="text" value={@props.data.other_answer}
+      <input type="text" value={@props.answer?.other_answer}
         onChange={@props.onOtherChange}/>
 
 module.exports = SingleAnswerQuestion

@@ -15,17 +15,17 @@ class ReportsController < ApplicationController
     elsif current_user.is_role?(:provider)
       user_page     = params[:table] == "user" ? params[:page] : 0
       user_reports  = current_user.reports
-      @user_reports = Sorter.sort(user_reports, params[:sort], params[:dir]).page(user_page)
+      @user_reports = Sorters::Reports.sort(user_reports, params[:sort], params[:dir]).page(user_page)
 
       agency_page     = params[:table] == "agency" ? params[:page] : 0
       agency_reports  = Report.accessible_by(current_ability)
-      @agency_reports = Sorter.sort(agency_reports, params[:sort], params[:dir]).page(agency_page)
+      @agency_reports = Sorters::Reports.sort(agency_reports, params[:sort], params[:dir]).page(agency_page)
     else
       @reports = Report.search(search_params)
     end
 
     if @reports
-      @reports = Sorter.sort(@reports, params[:sort], params[:dir]).page(params[:page])
+      @reports = Sorters::Reports.sort(@reports, params[:sort], params[:dir]).page(params[:page])
     end
   end
 
