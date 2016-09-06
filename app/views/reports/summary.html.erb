@@ -155,3 +155,19 @@
   </div>
 <% end %>
 
+
+<% if current_user.is_role?(:admin) %>
+  <hr>
+
+  <h3>Matched validators <small class="u-small">(this might change as the questionnaire is modified)</small></h3>
+
+  <ul>
+    <% ExpertiseMatcher.find_experts(@report).each do |validator| %>
+      <li>
+        <%= link_to admin_user_path(validator.id) do %>
+          <%= validator.full_name %> (<%= validator.email %>)
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
