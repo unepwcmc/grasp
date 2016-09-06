@@ -1,14 +1,26 @@
-Hello <%= @user.full_name %>,
+<h3>
+  Hello <%= @user.full_name %>,
+</h3>
 
-Your report <%= link_to report_url(@report), report_url(@report) %> has been returned.
+<p>
+  Your report <%= link_to report_url(@report), report_url(@report) %> has been returned.
+</p>
 
 <% if @validation.comments_for_provider.present? %>
-  Remarks from Validator:
+  <p><strong>
+    Remarks from Validator:
+  </strong></p>
 
-  <%= @validation.comments_for_provider %>
+  <p>
+    <%= @validation.comments_for_provider %>
+  </p>
 <% end %>
 
-Please review your report to update it as necessary. You will need to re-submit your report after making changes.
+<p>
+  Please review your report to update it as necessary. You will need to re-submit your report after making changes.
+</p>
 
-Many thanks,
-GRASP
+<p>
+  Many thanks,<br>
+  GRASP
+</p>

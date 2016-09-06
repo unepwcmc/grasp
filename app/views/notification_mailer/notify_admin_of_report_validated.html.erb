@@ -1,18 +1,32 @@
-Hello <%= @admin.full_name %>,
+<h3>
+  Hello <%= @admin.full_name %>,
+</h3>
 
-A report <%= link_to report_url(@report), report_path(@report) %> from <%= @report.user.try(:full_name) %> has been validated.
+<h1>
+  A report <%= link_to report_url(@report), report_path(@report) %> from <%= @report.user.try(:full_name) %> has been validated.
+</h1>
 
 <% if @validation.comments_for_provider.present? %>
-  Remarks to Provider:
+  <p><strong>
+    Remarks to Provider:
+  </strong></p>
 
-  <%= @validation.comments_for_provider %>
+  <p>
+    <%= @validation.comments_for_provider %>
+  </p>
 <% end %>
 
 <% if @validation.comments_for_admin.present? %>
-  Remarks to Admin:
+  <p><strong>
+    Remarks to Admin:
+  </strong></p>
 
-  <%= @validation.comments_for_admin %>
+  <p>
+    <%= @validation.comments_for_admin %>
+  </p>
 <% end %>
 
-Many thanks,
-GRASP
+<p>
+  Many thanks,<br>
+  GRASP
+</p>

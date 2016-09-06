@@ -1,10 +1,17 @@
-Hello <%= @admin.full_name %>,
+<h3>
+  Hello <%= @admin.full_name %>,
+</h3>
 
-A new report has been submitted by <%= @report.user.try(:full_name) %> from <%= @report.user.try(:agency).try(:name) %>.
+<p>
+  A new report has been submitted by <%= @report.user.try(:full_name) %> from <%= @report.user.try(:agency).try(:name) %>.
+</p>
 
-You can view the report here: <%= link_to report_url(@report), report_url(@report) %>
+<p>
+  You can view the report here: <%= link_to report_url(@report), report_url(@report) %>
+</p>
 
-Many thanks,
-
-GRASP
+<p>
+  Many thanks,<br>
+  GRASP
+</p>
 

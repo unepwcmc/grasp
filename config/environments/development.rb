@@ -38,7 +38,7 @@ Rails.application.configure do
 
   # Open emails in the browser
   config.action_mailer.delivery_method = :letter_opener
-  config.action_mailer.default_url_options = { host: Rails.application.secrets.mailer['host'] }
+  config.action_mailer.default_url_options = { host: "localhost:3000" }
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

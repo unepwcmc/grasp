@@ -1,0 +1,25 @@
+<h3>
+  Hello <%= @user.full_name %>,
+</h3>
+
+<p>
+  You have been registered as a new user with the role of <%= @user.role.name %> in the GRASP database (database.un-grasp.org).
+</p>
+
+<p>
+  Your sign in details are as follows:
+</p>
+
+<p>
+  Email address: <%= @user.email %><br>
+  Password: <%= @generated_password %>
+</p>
+
+<p>
+  We recommend that you change your password by visiting <%= link_to edit_user_registration_url, edit_user_registration_url %>
+</p>
+
+<p>
+  Many thanks,<br>
+  GRASP
+</p>
