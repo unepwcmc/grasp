@@ -24,10 +24,16 @@ class ValidationsController < ApplicationController
       # Wait until validation has been committed to DB before we can send related emails
       if params[:accept].present?
         NotificationMailer.notify_user_of_report_validated(@validation).deliver_later
-        NotificationMailer.notify_all_admins_of_report_validated(@validation).deliver_later
+
+        User.all_admins.each do |admin|
+          NotificationMailer.notify_admin_of_report_validated(@validation, admin).deliver_later
+        end
       elsif params[:return]
         NotificationMailer.notify_user_of_report_returned(@validation).deliver_later
-        NotificationMailer.notify_all_admins_of_report_returned(@validation).deliver_later
+
+        User.all_admins.each do |admin|
+          NotificationMailer.notify_all_admins_of_report_returned(@validation, admin).deliver_later
+        end
       end
 
       redirect_to validation_thank_you_path

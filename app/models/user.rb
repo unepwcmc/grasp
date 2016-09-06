@@ -55,6 +55,9 @@ class User < ActiveRecord::Base
 
   validates :role_id, :agency_id, :first_name, :last_name, :email, :country, presence: true
 
+  scope :all_admins,     -> { joins(:role).where(roles: {name: "admin"}) }
+  scope :all_validators, -> { joins(:role).where(roles: {name: "validator"}) }
+
   def full_name
     [first_name, last_name].join(" ")
   end

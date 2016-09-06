@@ -1,23 +1,16 @@
 class NotificationMailer < ApplicationMailer
   # Use for sending notification to a user or admin when they complete an action like joining a user or submitting a report
 
-  def notify_all_admins_of_submitted_report(report)
+  def notify_all_admins_of_submitted_report(report, admin)
     @report = report
-    @admins = User.joins(:role).where(roles: {name: "admin"})
-
-    @admins.each do |admin|
-      @admin = admin
-      mail(to: @admin.email, subject: 'GRASP Database: New Report Submitted')
-    end
+    @admin = admin
+    mail(to: @admin.email, subject: 'GRASP Database: New Report Submitted')
   end
 
-  def notify_validators_of_submitted_report(report)
+  def notify_validator_of_submitted_report(report, validator)
     @report = report
-
-    ExpertiseMatcher.find_experts(@report).each do |validator|
-      @validator = validator
-      mail(to: @validator.email, subject: 'GRASP Database: New Report Submitted')
-    end
+    @validator = validator
+    mail(to: @validator.email, subject: 'GRASP Database: New Report Submitted')
   end
 
   def notify_user_of_account_creation(user, generated_password)
@@ -46,25 +39,17 @@ class NotificationMailer < ApplicationMailer
     mail(to: @user.email, subject: 'GRASP Database: Your report has been Accepted')
   end
 
-  def notify_all_admins_of_report_validated(validation)
-    @admins     = User.joins(:role).where(roles: {name: "admin"})
+  def notify_admin_of_report_validated(validation, admin)
     @validation = validation
     @report     = validation.report
-
-    @admins.each do |admin|
-      @admin = admin
-      mail(to: @admin.email, subject: 'GRASP Database: A report has been Validated')
-    end
+    @admin      = admin
+    mail(to: @admin.email, subject: 'GRASP Database: A report has been Validated')
   end
 
-  def notify_all_admins_of_report_returned(validation)
-    @admins     = User.joins(:role).where(roles: {name: "admin"})
+  def notify_all_admins_of_report_returned(validation, admin)
     @validation = validation
     @report     = validation.report
-
-    @admins.each do |admin|
-      @admin = admin
-      mail(to: @admin.email, subject: 'GRASP Database: A report has been Returned')
-    end
+    @admin      = admin
+    mail(to: @admin.email, subject: 'GRASP Database: A report has been Returned')
   end
 end

@@ -64,8 +64,14 @@ class ReportsController < ApplicationController
 
     if @report.update(report_params)
       if @report.state == "Submitted"
-        NotificationMailer.notify_validators_of_submitted_report(@report).deliver_later
-        NotificationMailer.notify_all_admins_of_submitted_report(@report).deliver_later
+        ExpertiseMatcher.find_experts(@report).each do |validator|
+          NotificationMailer.notify_validator_of_submitted_report(@report, validator).deliver_later
+        end
+
+        User.all_admins.each do |admin|
+          NotificationMailer.notify_all_admins_of_submitted_report(@report, admin).deliver_later
+        end
+
         render json: @report, location: report_thank_you_path
       else
         render json: @report, location: reports_path
