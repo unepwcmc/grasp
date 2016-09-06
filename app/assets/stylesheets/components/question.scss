@@ -1,4 +1,24 @@
 @include b(question) {
   border-bottom: 1px solid $grey;
   margin-bottom: 2rem;
+  padding-bottom: 2rem;
+
+  @include e(title) {
+    cursor: pointer;
+
+    &.is-inactive {
+      color: $grey;
+    }
+    &.is-completed {
+      color: $steel-blue;
+    }
+  }
+
+  @include e(select) {
+    border-radius: 0;
+  }
+
+  @include e(list) {
+    margin-bottom: initial;
+  }
 }

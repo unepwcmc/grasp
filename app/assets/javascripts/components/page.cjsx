@@ -1,6 +1,7 @@
 React = require("react")
 Question = require("components/question")
 NavigationStore = require("stores/navigation_store")
+QuestionnaireStore = require("stores/questionnaire_store")
 
 module.exports = class Page extends React.Component
   constructor: (props, context) ->
@@ -18,6 +19,7 @@ module.exports = class Page extends React.Component
         mode={@props.mode}
         key={question.id}
         answer={@getAnswers(question.id)}
+        answered={QuestionnaireStore.isQuestionAnswered(question)}
         data={question}
       />
 

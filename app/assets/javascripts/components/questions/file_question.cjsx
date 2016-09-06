@@ -13,7 +13,7 @@ module.exports = class FileQuestion extends React.Component
       <div><label>Upload file(s)</label></div>
       <input type="file" onChange={@addFile}/>
 
-      <label htmlFor={@props.data.id + "-no-photo"}>
+      <label className="answer" htmlFor={@props.data.id + "-no-photo"}>
         <input
           checked={@props.answer?.selected?.length == 0}
           type="radio"

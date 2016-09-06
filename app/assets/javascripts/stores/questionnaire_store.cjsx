@@ -53,30 +53,36 @@ class QuestionnaireStore extends EventEmitter
   getAnswers:   -> report.answers
   getQuestions: -> questionnaire
 
-  requiredQuestionsAnswered: ->
+  requiredQuestionsAnswered: =>
     allAnswered = true
 
     for page, pageIndex in NavigationStore.getPages() when NavigationStore.isPageVisible(page)
-      for questionId in page.questions
+      for questionId in page.questions when questionnaire[questionId].required
         question = questionnaire[questionId]
 
         if page.multiple
-          answersForPage = report.answers[page.id]
-
-          if answersForPage
-            for answersInTab, tabIndex in answersForPage
-              if question.required and NavigationStore.isQuestionVisible(question, page, tabIndex)
-                if answersInTab[question.id] is undefined or answersInTab[question.id]?.selected == ""
-                  allAnswered = false
-          else
-            allAnswered = false if question.required
-
-        else
-          if question.required and NavigationStore.isQuestionVisible(question, page)
-            if report.answers[question.id] is undefined or report.answers[question.id]?.selected == ""
+          for tab, tabIndex in (report.answers[page.id] || [])
+            unless @isQuestionAnswered(question, page, tabIndex)
+              console.log("Unanswered: #{question.id}")
               allAnswered = false
+        else
+          unless @isQuestionAnswered(question, page, null)
+            console.log("Unanswered: #{question.id}")
+            allAnswered = false
 
     allAnswered
+
+  isQuestionAnswered: (question, page, tabIndex) ->
+    page ||= NavigationStore.currentPage()
+    tabIndex ||= NavigationStore.tabIndexForCurrentPage()
+    return true if not NavigationStore.isQuestionVisible(question, page, tabIndex)
+
+    if page.multiple
+      answerForTab = report.answers?[page.id]?[tabIndex]?[question.id]
+      return (answerForTab?.selected || "") != ""
+    else
+      answer = report.answers[question.id]
+      return (answer?.selected || "") != ""
 
   selectAnswer: (key, answer) ->
     currentPage = NavigationStore.currentPage()
