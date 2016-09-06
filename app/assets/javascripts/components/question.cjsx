@@ -54,7 +54,9 @@ class Question extends React.Component
     className
 
   renderQuestionBody: =>
-    if @state.hidden
+    return if @state.hidden and not @props.answered
+
+    if (@state.hidden and @props.answered) or @props.mode == "show"
       @renderAppropriateAnswer()
     else
       [
@@ -172,6 +174,6 @@ class Question extends React.Component
     QuestionnaireStore.updateOtherAnswer(@props.data.id, e.target.value)
 
   toggleQuestion: =>
-    @setState({hidden: !@state.hidden})
+    @setState({hidden: !@state.hidden}) unless @props.mode == "show"
 
 module.exports = Question

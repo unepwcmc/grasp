@@ -6,9 +6,10 @@ Question = require("components/question")
 
 class DateQuestion extends React.Component
   componentDidMount: =>
-    setTimeout(=>
-      QuestionnaireStore.selectAnswer(@props.data.id, moment().format("DD/MM/YYYY"))
-    , 100)
+    unless QuestionnaireStore.isQuestionAnswered(@props.data)
+      setTimeout(=>
+        QuestionnaireStore.selectAnswer(@props.data.id, moment().format("DD/MM/YYYY"))
+      , 100)
 
   render: ->
     <DatePicker inline={false} dateFormat="DD/MM/YYYY" maxDate={moment()}
