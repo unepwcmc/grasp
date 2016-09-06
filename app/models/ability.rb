@@ -20,6 +20,7 @@ class Ability
       can :read, Report, user: {agency_id: user.agency.id}
       can :update, Report, user: user
       can :destroy, Report, user: user
+      can :upload, Report
     else
     end
 

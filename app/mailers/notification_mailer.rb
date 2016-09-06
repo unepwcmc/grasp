@@ -67,4 +67,16 @@ class NotificationMailer < ApplicationMailer
       mail(to: @admin.email, subject: 'GRASP Database: A report has been Returned')
     end
   end
+
+  def notify_all_admins_of_csv_uploaded(user, file)
+    @admins = User.joins(:role).where(roles: {name: "admin"})
+    @user   = user
+    @file   = file
+
+    @admins.each do |admin|
+      @admin = admin
+      attachments["#{@file.original_filename}"] = File.read(@file.path)
+      mail(to: @admin.email, subject: 'GRASP Database: A user wants to upload a CSV')
+    end
+  end
 end

@@ -1,0 +1,14 @@
+<%= content_for :page_title, "New CSV upload" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Reports Dashboard", reports_path %>
+  <%= breadcrumb "New CSV upload", new_reports_upload_path %>
+<% end %>
+
+<p> If you have a number of multiple records that you would like to add to the system, you can submit a .CSV file of records using this <%= link_to 'template', download_template_path %>.  </p>
+<p> Your file will be reviewed and, if approved, added to the system by an administrator.  </p>
+<p> The administrator may be in touch regarding your submission.  </p>
+
+<%= form_tag(reports_uploads_path, :html => { :multipart => true}) do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Upload CSV", class: 'button button-primary' %>
+<% end %>
