@@ -1,7 +1,7 @@
 class NotificationMailer < ApplicationMailer
   # Use for sending notification to a user or admin when they complete an action like joining a user or submitting a report
 
-  def notify_all_admins_of_submitted_report(report, admin)
+  def notify_admin_of_submitted_report(report, admin)
     @report = report
     @admin = admin
     mail(to: @admin.email, subject: 'GRASP Database: New Report Submitted')
@@ -46,7 +46,7 @@ class NotificationMailer < ApplicationMailer
     mail(to: @admin.email, subject: 'GRASP Database: A report has been Validated')
   end
 
-  def notify_all_admins_of_report_returned(validation, admin)
+  def notify_admin_of_report_returned(validation, admin)
     @validation = validation
     @report     = validation.report
     @admin      = admin

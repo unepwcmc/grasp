@@ -69,7 +69,7 @@ class ReportsController < ApplicationController
         end
 
         User.all_admins.each do |admin|
-          NotificationMailer.notify_all_admins_of_submitted_report(@report, admin).deliver_later
+          NotificationMailer.notify_admin_of_submitted_report(@report, admin).deliver_later
         end
 
         render json: @report, location: report_thank_you_path

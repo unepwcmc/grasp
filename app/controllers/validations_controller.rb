@@ -32,7 +32,7 @@ class ValidationsController < ApplicationController
         NotificationMailer.notify_user_of_report_returned(@validation).deliver_later
 
         User.all_admins.each do |admin|
-          NotificationMailer.notify_all_admins_of_report_returned(@validation, admin).deliver_later
+          NotificationMailer.notify_admin_of_report_returned(@validation, admin).deliver_later
         end
       end
 
