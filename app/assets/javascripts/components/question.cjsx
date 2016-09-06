@@ -33,13 +33,14 @@ class Question extends React.Component
     <div className="question">
       <h5 onClick={@toggleQuestion} className={@titleClassName()}>
         <strong>{@props.data.question}</strong>
+        {@renderToggleChevron()}
       </h5>
       {@renderQuestionBody()}
     </div>
 
 
   renderToggleChevron: =>
-    <i className={@toggleClassName()}></i> unless @props.mode != "show"
+    <i className={@toggleClassName()}></i> if @props.mode != "show"
 
   toggleClassName: =>
     className = "fa u-pull-right"
