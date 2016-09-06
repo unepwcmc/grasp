@@ -20,9 +20,14 @@ BodyPartsQuestion      = require("components/questions/body_parts_question")
 Tooltip = require("components/tooltip")
 
 class Question extends React.Component
+  ALWAYS_OPEN_QUESTIONS = ["quantities", "multi"]
+
   constructor: (props, context) ->
     super(props, context)
     @state = {hidden: false}
+
+  componentWillReceiveProps: (nextProps) =>
+    @setState(hidden: true) if nextProps.answered and @props.data.type not in ALWAYS_OPEN_QUESTIONS
 
   render: =>
     <div className="question">
@@ -40,16 +45,19 @@ class Question extends React.Component
 
   titleClassName: =>
     className = "question__title"
-    className += " is-inactive" if @state.hidden
+    className += " is-inactive"  if @state.hidden
+    className += " is-completed" if @props.answered
     className
 
   renderQuestionBody: =>
-    return if @state.hidden
-    [
-      @renderTooltip(),
-      @renderAppropriateAnswer(),
-      @renderAppropriateQuestion()
-    ]
+    if @state.hidden
+      @renderAppropriateAnswer()
+    else
+      [
+        @renderTooltip(),
+        @renderAppropriateAnswer(),
+        @renderAppropriateQuestion()
+      ]
 
   renderTooltip: =>
     return null unless @props.data.tooltip
@@ -102,11 +110,12 @@ class Question extends React.Component
                                     data={@props.data} answer={@props.answer} mode={@props.mode}/>
 
   renderAppropriateAnswer: =>
-    return null if @props.mode != "show" or !@props.answer?.selected?
+    return null if (@props.mode != "show" and (!@props.answered or !@state.hidden)) or !@props.answer?.selected?
     general = @renderAnswerLabel(@props.answer?.selected)
 
     switch @props.data.type
       when "single"           then general
+      when "select"           then general
       when "agency"           then general
       when "date"             then general
       when "text"             then general
