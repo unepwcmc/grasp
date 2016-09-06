@@ -29,4 +29,7 @@ module ApplicationHelper
     params[:controller] == info[:controller]
   end
 
+  def display_or_default(data, default="N/A")
+    data.present? ? data : default
+  end
 end

@@ -20,34 +20,34 @@
 
 <h5>
 <strong><%= @report.user.full_name %></strong><br>
-  <%= @report.user.agency.name %>
+  <%= display_or_default(@report.user.agency.name) %>
 </h5>
 
 <div class="form__group">
   <strong> Email (primary) </strong>
   <div class="form__field">
-    <%= @report.user.email %>
+    <%= display_or_default(@report.user.email)  %>
   </div>
 </div>
 
 <div class="form__group">
   <strong> Email (secondary) </strong>
   <div class="form__field">
-    <%= @report.user.second_email %>
+    <%= display_or_default(@report.user.second_email) %>
   </div>
 </div>
 
 <div class="form__group">
   <strong> Mobile phone </strong>
   <div class="form__field">
-    <%= @report.user.mobile_number %>
+    <%= display_or_default(@report.user.mobile_number) %>
   </div>
 </div>
 
 <div class="form__group">
   <strong> Skype username </strong>
   <div class="form__field">
-    <%= @report.user.skype_username %>
+    <%= display_or_default(@report.user.skype_username) %>
   </div>
 </div>
 
@@ -58,21 +58,21 @@
 <div class="form__group">
   <strong> Country of discovery </strong>
   <div class="form__field">
-    <%= @report.answer_to('country_of_discovery') %>
+    <%= display_or_default(@report.answer_to('country_of_discovery')) %>
   </div>
 </div>
 
 <div class="form__group">
   <strong> Law enforcement confiscation? </strong>
   <div class="form__field">
-    <%= @report.answer_to('confiscated') %>
+    <%= display_or_default(@report.answer_to('confiscated')) %>
   </div>
 </div>
 
 <div class="form__group">
   <strong> Date of incident </strong>
   <div class="form__field">
-    <%= @report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y") %>
+    <%= display_or_default(@report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y")) %>
   </div>
 </div>
 
@@ -84,21 +84,21 @@
   <div class="form__group">
     <strong> Total live apes</strong>
     <div class="form__field">
-      <%= @report.data.dig('answers', 'quantities', 'selected', 'live') %>
+      <%= display_or_default(@report.data.dig('answers', 'quantities', 'selected', 'live')) %>
     </div>
   </div>
 
   <div class="form__group">
     <strong> Total dead apes</strong>
     <div class="form__field">
-      <%= @report.data.dig('answers', 'quantities', 'selected', 'dead') %>
+      <%= display_or_default(@report.data.dig('answers', 'quantities', 'selected', 'dead')) %>
     </div>
   </div>
 
   <div class="form__group">
     <strong> Body parts?</strong>
     <div class="form__field">
-      <%= @report.data.dig('answers', 'quantities', 'selected', 'body_parts')&.to_s&.titleize %>
+      <%= display_or_default(@report.data.dig('answers', 'quantities', 'selected', 'body_parts')&.to_s&.titleize) %>
     </div>
   </div>
 </div>
@@ -108,7 +108,6 @@
     <%= render partial: "reports/ape_summary", locals: { ape: ape, status: "live", index: index} %>
   <% end %>
 <% end %>
-
 <% if @dead_apes.any? %>
   <% @dead_apes.each_with_index do |ape, index| %>
     <%= render partial: "reports/ape_summary", locals: { ape: ape, status: "dead", index: index} %>
