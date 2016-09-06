@@ -20,7 +20,11 @@ BodyPartsQuestion      = require("components/questions/body_parts_question")
 Tooltip = require("components/tooltip")
 
 class Question extends React.Component
-  ALWAYS_OPEN_QUESTIONS = ["quantities", "multi", "subspecies"]
+  ALWAYS_OPEN_QUESTIONS = [
+    "quantities", "multi", "subspecies",
+    "gps", "body_parts", "form", "text",
+    "numeric", "file", "decimal_numeric"
+  ]
 
   constructor: (props, context) ->
     super(props, context)
