@@ -5,6 +5,11 @@ class RegistrationsController < Devise::RegistrationsController
     disable_registration
   end
 
+  protected
+    def after_update_path_for(_resource)
+      reports_path
+    end
+
   private
     def disable_registration
       flash[:info] = "Registration is currently disabled, please contact UNEP-WCMC to create a user account"
