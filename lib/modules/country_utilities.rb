@@ -8,7 +8,7 @@ COUNTRIES = {
 module CountryUtilities
   def self.country_to_region(country)
     hash = COUNTRIES.select { |_k,v| v.include? country }
-    hash.keys.first.to_s
+    hash.keys.first || "Rest of the World"
   end
 
   def self.all_countries

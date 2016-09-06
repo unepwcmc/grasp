@@ -2,7 +2,7 @@ module ExpertiseMatcher
   def self.find_experts(report)
     # Takes a report and returns an array of the users matching expertise mentioned in that report
     region = self.get_region_expertise(report)
-    region.users
+    Array.wrap(region&.users)
   end
 
   def self.is_expert?(report, user)
