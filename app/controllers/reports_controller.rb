@@ -34,6 +34,7 @@ class ReportsController < ApplicationController
 
   def summary
     @report = Report.find(params[:id])
+    @matched_validators = ExpertiseMatcher.find_experts(@report)
     @live_apes  = Array.wrap(@report.data.dig('answers', 'live'))
     @dead_apes  = Array.wrap(@report.data.dig('answers', 'dead'))
     @body_parts = Array.wrap(@report.data.dig('answers', 'genus_parts', 'selected'))

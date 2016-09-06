@@ -159,15 +159,19 @@
 <% if current_user.is_role?(:admin) %>
   <hr>
 
-  <h3>Matched validators <small class="u-small">(this might change as the questionnaire is modified)</small></h3>
-
-  <ul>
-    <% ExpertiseMatcher.find_experts(@report).each do |validator| %>
-      <li>
-        <%= link_to admin_user_path(validator.id) do %>
-          <%= validator.full_name %> (<%= validator.email %>)
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+  <h3>Matched validators</h3>
+  <p>This list may change as the questionnaire is modified.</p>
+  <% if @matched_validators.any? %>
+    <ul>
+      <% @matched_validators.each do |validator| %>
+        <li>
+          <%= link_to admin_user_path(validator.id) do %>
+            <%= validator.full_name %> (<%= validator.email %>)
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No validators matched.</p>
+  <% end %>
 <% end %>
