@@ -20,14 +20,15 @@ BodyPartsQuestion      = require("components/questions/body_parts_question")
 Tooltip = require("components/tooltip")
 
 class Question extends React.Component
-  ALWAYS_OPEN_QUESTIONS = ["quantities", "multi"]
+  ALWAYS_OPEN_QUESTIONS = ["quantities", "multi", "subspecies"]
 
   constructor: (props, context) ->
     super(props, context)
     @state = {hidden: false}
 
   componentWillReceiveProps: (nextProps) =>
-    @setState(hidden: true) if nextProps.answered and @props.data.type not in ALWAYS_OPEN_QUESTIONS
+    if nextProps.answered and nextProps.answer?.selected != "other" and @props.data.type not in ALWAYS_OPEN_QUESTIONS
+      @setState(hidden: true)
 
   render: =>
     <div className="question">
