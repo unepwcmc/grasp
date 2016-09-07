@@ -7,7 +7,11 @@ class Reports::UploadsController < ApplicationController
 
   def create
     file = params[:file]
-    NotificationMailer.notify_all_admins_of_csv_uploaded(current_user, file).deliver_later
+
+    User.all_admins.each do |admin|
+      NotificationMailer.notify_all_admins_of_csv_uploaded(current_user, admin, file).deliver_later
+    end
+
     redirect_to reports_path, notice: "Thank you! Your multiple records file has been successfully submitted."
   end
 
