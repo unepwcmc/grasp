@@ -1,42 +1,47 @@
-<table class="table u-full-width table--reports">
-  <thead class="table__head">
-    <th class="table__element"><%= sortable "id", "ID" %></th>
-    <th class="table__element"><%= sortable "username", "User Name" %></th>
-    <th class="table__element"><%= sortable "agency" %></th>
-    <th class="table__element"><%= sortable "timestamp", "Started On" %></th>
-    <th class="table__element"><%= sortable "date_of_discovery", "Discovery Date" %></th>
-    <th class="table__element">Ape Details</th>
-    <th class="table__element"><%= sortable "state", "Status" %></th>
-    <th class="table__element">Actions</th>
-  </thead>
-  <tbody>
-    <% reports.each do |report| %>
-        <tr>
-          <td class="table__element"><%= report.id %></td>
-          <td class="table__element"><%= report.user_name %></td>
-          <td class="table__element"><%= report.user&.agency&.name %></td>
-          <td class="table__element"><%= report.timestamp %></td>
-          <td class="table__element"><%= report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y") %></td>
-          <td class="table__element"><%= status_of_apes(report) %></td>
-          <td class="table__element"><%= report.state %></td>
-          <td class="table__element">
-            <% if can? :read, report %>
-              <% unless current_user.is_role? :validator %>
-                <a href="<%= report_summary_path(report.id) %>">View</a>
+<% if reports.any? %>
+  <table class="table u-full-width table--reports">
+    <thead class="table__head">
+      <th class="table__element"><%= sortable "id", "ID" %></th>
+      <th class="table__element"><%= sortable "username", "User Name" %></th>
+      <th class="table__element"><%= sortable "agency" %></th>
+      <th class="table__element"><%= sortable "timestamp", "Started On" %></th>
+      <th class="table__element"><%= sortable "date_of_discovery", "Discovery Date" %></th>
+      <th class="table__element">Ape Details</th>
+      <th class="table__element"><%= sortable "state", "Status" %></th>
+      <th class="table__element">Actions</th>
+    </thead>
+    <tbody>
+      <% reports.each do |report| %>
+          <tr>
+            <td class="table__element"><%= report.id %></td>
+            <td class="table__element"><%= report.user_name %></td>
+            <td class="table__element"><%= report.user&.agency&.name %></td>
+            <td class="table__element"><%= report.timestamp %></td>
+            <td class="table__element"><%= report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y") %></td>
+            <td class="table__element"><%= status_of_apes(report) %></td>
+            <td class="table__element"><%= report.state %></td>
+            <td class="table__element">
+              <% if can? :read, report %>
+                <% unless current_user.is_role? :validator %>
+                  <a href="<%= report_summary_path(report.id) %>">View</a>
+                <% end %>
               <% end %>
-            <% end %>
-            <% if can? :update, report %>
-              <a href="<%= edit_report_path(report.id) %>">Edit</a>
-            <% end %>
-            <% if can?(:validate, report) && !report.is_being_validated? %>
-              <a href="<%= validate_report_path(report.id) %>">Validate</a>
-            <% end %>
-          </td>
-        </tr>
-    <% end %>
-  </tbody>
-</table>
+              <% if can? :update, report %>
+                <a href="<%= edit_report_path(report.id) %>">Edit</a>
+              <% end %>
+              <% if can?(:validate, report) && !report.is_being_validated? %>
+                <a href="<%= validate_report_path(report.id) %>">Validate</a>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<div class="pagination u-pull-right">
-  <%= paginate reports, params: {controller: "reports", action: "index", table: (table rescue nil)} %>
-</div>
+  <div class="pagination u-pull-right">
+    <%= paginate reports, params: {controller: "reports", action: "index", table: (table rescue nil)} %>
+  </div>
+<% else %>
+
+  <p>There are currently no reports available to display for this category.</p>
+<% end %>

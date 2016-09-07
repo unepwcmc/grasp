@@ -1,4 +1,7 @@
 class Reports::UploadsController < ApplicationController
+  # FIXME - Cancancan not locking the namespaced controller
+  # authorize_resource :class => false
+
   def new
   end
 
