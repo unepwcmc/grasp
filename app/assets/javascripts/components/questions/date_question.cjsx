@@ -5,14 +5,8 @@ QuestionnaireStore = require("stores/questionnaire_store")
 Question = require("components/question")
 
 class DateQuestion extends React.Component
-  componentDidMount: =>
-    unless QuestionnaireStore.isQuestionAnswered(@props.data)
-      setTimeout(=>
-        QuestionnaireStore.selectAnswer(@props.data.id, moment().format("DD/MM/YYYY"))
-      , 100)
-
   render: ->
-    <DatePicker inline={false} dateFormat="DD/MM/YYYY" maxDate={moment()}
+    <DatePicker dateFormat="DD/MM/YYYY" maxDate={moment()}
       readOnly={true} selected={@selectedDate()} onChange={@handleChange}/>
 
   handleChange: (date) =>
@@ -20,7 +14,7 @@ class DateQuestion extends React.Component
 
   selectedDate: =>
     parsedDate = moment(@props.answer?.selected, "DD/MM/YYYY")
-    if parsedDate.isValid() then parsedDate else moment()
+    if parsedDate.isValid() then parsedDate else ""
 
 
 module.exports = DateQuestion
