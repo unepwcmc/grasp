@@ -58,6 +58,12 @@ module CsvBuilder
     ape_data = Array.new(19, nil)
 
     if ape.present?
+      last_known_location = ape.dig("last_known_location_#{status}", 'selected')
+      if last_known_location == "other" || last_known_location == "With other organisation (please specify)"
+        other_answer = ape.dig("last_known_location_#{status}", 'other_answer')
+        last_known_location = last_known_location + ": " + (other_answer || "N/A")
+      end
+
       ape_data = [
         status.to_s.titleize,
         ape.dig("genus_#{status}", 'selected'),
@@ -66,7 +72,7 @@ module CsvBuilder
         "Photo TBC",
         ape.dig("age_#{status}", 'selected'),
         ape.dig("gender_#{status}", 'selected'),
-        ape.dig("last_known_location_#{status}", 'selected'),
+        last_known_location,
         ape.dig("alleged_origin_country_#{status}", 'selected'),
         ape.dig("condition_#{status}", 'selected'),
         ape.dig("unique_identifiers_#{status}", 'selected'),
