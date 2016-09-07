@@ -52,4 +52,13 @@ class NotificationMailer < ApplicationMailer
     @admin      = admin
     mail(to: @admin.email, subject: 'GRASP Database: A report has been Returned')
   end
+
+  def notify_all_admins_of_csv_uploaded(user, admin, file)
+    @user   = user
+    @file   = file
+    @admin = admin
+
+    attachments["#{@file.original_filename}"] = File.read(@file.path)
+    mail(to: @admin.email, subject: 'GRASP Database: A user wants to upload a CSV')
+  end
 end

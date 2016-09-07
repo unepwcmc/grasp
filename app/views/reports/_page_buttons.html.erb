@@ -8,6 +8,11 @@
     <% end %>
   <% end %>
 <% else %>
+  <% if can? :manage, 'reports/uploads' %>
+    <%= link_to new_reports_upload_path, class: 'button button-primary' do %>
+      <i class="fa fa-upload icon icon--closer"></i>Upload CSV
+    <% end %>
+  <% end %>
   <% if can? :create, Report %>
     <%= link_to new_report_path, class: 'button button-primary' do %>
       <i class="fa fa-pencil-square-o icon icon--closer"></i>New Report

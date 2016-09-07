@@ -9,8 +9,13 @@ Rails.application.routes.draw do
   get "/reports", to: "reports#index", as: :authenticated_root
 
   resources :agencies
+
   resources :reports do
     resources :images, only: [:create, :show, :destroy]
+  end
+
+  namespace :reports do
+    resources :uploads, only: [:new, :create], controller: "uploads"
   end
 
   resources :validations, only: [:new, :create]
@@ -19,6 +24,7 @@ Rails.application.routes.draw do
     resources :users, controller: "users"
   end
 
+
   get "/search", to: "reports#search", as: "search_reports"
   get "/export", to: "reports#export", as: "export_reports"
   get "/reports/:id/validate", to: "reports#validate", as: "validate_report"
@@ -26,6 +32,8 @@ Rails.application.routes.draw do
   get "/reports/:id/lock", to: "reports#lock", as: "lock_report"
   get "/validations/thank_you", to: "validations#thank_you", as: "validation_thank_you"
   get "/report_submitted/thank_you", to: "reports#thank_you", as: "report_thank_you"
+  get "/reports/uploads/download_template", to: "reports/uploads#download_template", as: "download_template"
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

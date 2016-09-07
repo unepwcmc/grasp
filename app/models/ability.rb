@@ -10,16 +10,19 @@ class Ability
     case user.role.name
     when "admin"
       can :manage, :all
+      cannot :manage, 'reports/uploads'
     when "validator"
       can :read, Report
       can :validate, Report
       can :lock, Report
       can :thank_you, Validation
+      cannot :manage, 'reports/uploads'
     when "provider"
       can :create, Report
       can :read, Report, user: {agency_id: user.agency.id}
       can :update, Report, user: user
       can :destroy, Report, user: user
+      can :manage, 'reports/uploads'
     else
     end
 
