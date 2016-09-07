@@ -69,11 +69,7 @@ class Question extends React.Component
     if (@state.hidden and @props.answered) or @props.mode == "show"
       @renderAppropriateAnswer()
     else
-      [
-        @renderTooltip(),
-        @renderAppropriateAnswer(),
-        @renderAppropriateQuestion()
-      ]
+      [@renderTooltip(), @renderAppropriateQuestion()]
 
   renderTooltip: =>
     return null unless @props.data.tooltip
