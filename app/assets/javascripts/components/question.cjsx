@@ -1,3 +1,4 @@
+_ = require("underscore")
 React = require("react")
 QuestionnaireStore = require("stores/questionnaire_store")
 
@@ -31,7 +32,11 @@ class Question extends React.Component
     @state = {hidden: false}
 
   componentWillReceiveProps: (nextProps) =>
-    if nextProps.answered and nextProps.answer?.selected != "other" and @props.data.type not in ALWAYS_OPEN_QUESTIONS
+    selected = nextProps.answer?.selected
+    notOtherAnswer = selected != "other" and not _.contains(@props.data.other_answers, selected)
+    alwaysOpen = @props.data.type not in ALWAYS_OPEN_QUESTIONS
+
+    if nextProps.answered and notOtherAnswer and alwaysOpen
       @setState(hidden: true)
 
   render: =>
@@ -121,9 +126,9 @@ class Question extends React.Component
                                     data={@props.data} answer={@props.answer} mode={@props.mode}/>
 
   renderAppropriateAnswer: =>
-    return null if (@props.mode != "show" and (!@props.answered or !@state.hidden)) or !@props.answer?.selected?
-    general = @renderAnswerLabel(@props.answer)
+    return <p>N/A</p> unless @props.answer?.selected
 
+    general = @renderAnswerLabel(@props.answer)
     switch @props.data.type
       when "single"           then general
       when "select"           then general
@@ -156,13 +161,17 @@ class Question extends React.Component
           <p>DNA Confirmation: {"✓" if @props.answer?.dna_confirmation}</p>
         </div>
 
-  renderAnswerLabel: (answer) ->
-    return <p>N/A</p> unless answer?.selected
+  renderAnswerLabel: (answer) =>
+    isString = answer.selected.constructor == String
+    matches = if isString then answer.selected.match(/(.*) \((.*)\)/) else false
+    isAnOtherAnswer = _.contains(@props.data.other_answers, answer.selected)
 
-    if (answer.selected.constructor == String) and (matches = answer.selected.match(/(.*) \((.*)\)/))
+    if not isAnOtherAnswer and isString and matches
       <p>{matches[1]} (<em>{matches[2]}</em>)</p>
     else if answer.selected == "other"
       <p>Other: {answer.other_answer} </p>
+    else if isAnOtherAnswer
+      <p>{answer.selected}: {answer.other_answer} </p>
     else
       <p>{answer.selected}</p>
 
@@ -176,7 +185,8 @@ class Question extends React.Component
     QuestionnaireStore.selectAnswer(@props.data.id, answer)
 
   handleOtherChange: (e) =>
-    QuestionnaireStore.updateOtherAnswer(@props.data.id, e.target.value)
+    answer = if e?.target then e.target.value else e
+    QuestionnaireStore.updateOtherAnswer(@props.data.id, answer)
 
   toggleQuestion: =>
     @setState({hidden: !@state.hidden}) unless @props.mode == "show"
