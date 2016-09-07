@@ -63,11 +63,9 @@ class QuestionnaireStore extends EventEmitter
         if page.multiple
           for tab, tabIndex in (report.answers[page.id] || [])
             unless @isQuestionAnswered(question, page, tabIndex)
-              console.log("Unanswered: #{question.id}")
               allAnswered = false
         else
           unless @isQuestionAnswered(question, page, null)
-            console.log("Unanswered: #{question.id}")
             allAnswered = false
 
     allAnswered

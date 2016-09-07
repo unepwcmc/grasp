@@ -1,3 +1,4 @@
+_ = require("underscore")
 React = require("react")
 Question = require("components/question")
 
@@ -26,11 +27,13 @@ class SingleAnswerQuestion extends React.Component
           />
           {@renderAnswerLabel(answer)}
         </label>
+
+        {@renderOtherField(answer)}
       </li>
     )
 
-  renderAnswerLabel: (answer) ->
-    if matches = answer.match(/(.*) \((.*)\)/)
+  renderAnswerLabel: (answer) =>
+    if (matches = answer.match(/(.*) \((.*)\)/)) and not _.contains(@props.data.other_answers, answer)
       <span className="label-body">{matches[1]} (<em>{matches[2]}</em>)</span>
     else
       <span className="label-body">{answer}</span>
@@ -46,12 +49,14 @@ class SingleAnswerQuestion extends React.Component
           <span className="label-body">Other (please specify)</span>
         </label>
 
-        {@renderOtherField()}
+        {@renderOtherField("other")}
       </li>
 
+  renderOtherField: (triggerAnswer) =>
+    if triggerAnswer != "other" and not _.contains(@props.data.other_answers, triggerAnswer)
+      return
 
-  renderOtherField: =>
-    if "other" == @props.answer?.selected
+    if triggerAnswer == @props.answer?.selected
       <input type="text" value={@props.answer?.other_answer}
         onChange={@props.onOtherChange}/>
 

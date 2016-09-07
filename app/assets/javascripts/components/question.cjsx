@@ -1,3 +1,4 @@
+_ = require("underscore")
 React = require("react")
 QuestionnaireStore = require("stores/questionnaire_store")
 
@@ -31,7 +32,11 @@ class Question extends React.Component
     @state = {hidden: false}
 
   componentWillReceiveProps: (nextProps) =>
-    if nextProps.answered and nextProps.answer?.selected != "other" and @props.data.type not in ALWAYS_OPEN_QUESTIONS
+    selected = nextProps.answer?.selected
+    notOtherAnswer = selected != "other" and not _.contains(@props.data.other_answers, selected)
+    alwaysOpen = @props.data.type not in ALWAYS_OPEN_QUESTIONS
+
+    if nextProps.answered and notOtherAnswer and alwaysOpen
       @setState(hidden: true)
 
   render: =>
@@ -176,7 +181,8 @@ class Question extends React.Component
     QuestionnaireStore.selectAnswer(@props.data.id, answer)
 
   handleOtherChange: (e) =>
-    QuestionnaireStore.updateOtherAnswer(@props.data.id, e.target.value)
+    answer = if e?.target then e.target.value else e
+    QuestionnaireStore.updateOtherAnswer(@props.data.id, answer)
 
   toggleQuestion: =>
     @setState({hidden: !@state.hidden}) unless @props.mode == "show"
