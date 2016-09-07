@@ -126,9 +126,9 @@ class Question extends React.Component
                                     data={@props.data} answer={@props.answer} mode={@props.mode}/>
 
   renderAppropriateAnswer: =>
-    return null if (@props.mode != "show" and (!@props.answered or !@state.hidden)) or !@props.answer?.selected?
-    general = @renderAnswerLabel(@props.answer)
+    return <p>N/A</p> unless @props.answer?.selected
 
+    general = @renderAnswerLabel(@props.answer)
     switch @props.data.type
       when "single"           then general
       when "select"           then general
@@ -161,13 +161,17 @@ class Question extends React.Component
           <p>DNA Confirmation: {"✓" if @props.answer?.dna_confirmation}</p>
         </div>
 
-  renderAnswerLabel: (answer) ->
-    return <p>N/A</p> unless answer?.selected
+  renderAnswerLabel: (answer) =>
+    isString = answer.selected.constructor == String
+    matches = if isString then answer.selected.match(/(.*) \((.*)\)/) else false
+    isAnOtherAnswer = _.contains(@props.data.other_answers, answer.selected)
 
-    if (answer.selected.constructor == String) and (matches = answer.selected.match(/(.*) \((.*)\)/))
+    if not isAnOtherAnswer and isString and matches
       <p>{matches[1]} (<em>{matches[2]}</em>)</p>
     else if answer.selected == "other"
       <p>Other: {answer.other_answer} </p>
+    else if isAnOtherAnswer
+      <p>{answer.selected}: {answer.other_answer} </p>
     else
       <p>{answer.selected}</p>
 
