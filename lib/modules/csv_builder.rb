@@ -13,7 +13,10 @@ module CsvBuilder
                     "Confiscation?", "Arrests Made?", "Prosecution?", "Prosecution Successful?", "Punishment Successful?",
                     "Other Illegal Activities", "Man-made disturbances"]
 
-    filepath = "#{Rails.root.to_s}/tmp/csv_export_#{DateTime.now.to_i}.csv"
+    folder = Rails.root.join("public", "csv_exports")
+    FileUtils.mkdir_p(folder)
+
+    filepath = folder.join("csv_export_#{DateTime.now.to_i}.csv")
 
     CSV.open(filepath, "wb") do |csv|
       csv << column_names

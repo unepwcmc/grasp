@@ -3,7 +3,7 @@
 </h3>
 
 <p>
-  The csv file that you recently requested has been succesfully generated and can be downloaded here: <%= link_to @file, @file %>
+  The csv file that you recently requested has been succesfully generated and can be downloaded <%= link_to "here", File.join(landing_page_url, "csv_exports", @file.basename) %>
 </p>
 
 <p>

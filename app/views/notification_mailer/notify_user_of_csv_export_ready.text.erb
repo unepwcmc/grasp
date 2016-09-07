@@ -1,6 +1,6 @@
 Hello <%= @user.full_name %>,
 
-The csv file that you recently requested has been succesfully generated and can be downloaded here: <%= @file %>
+The csv file that you recently requested has been succesfully generated and can be downloaded here: <%= File.join(landing_page_url, "csv_exports", @file.basename) %>
 
 Many thanks,
 GRASP
