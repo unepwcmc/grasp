@@ -16,10 +16,12 @@ class Ability
       can :validate, Report
       can :lock, Report
       can :thank_you, Validation
+      can :summary, Report
       cannot :manage, 'reports/uploads'
     when "provider"
       can :create, Report
       can :read, Report, user: {agency_id: user.agency.id}
+      can :summary, Report, user: { agency_id: user.agency.id }
       can :update, Report, user: user
       can :destroy, Report, user: user
       can :manage, 'reports/uploads'
