@@ -42,8 +42,12 @@ class Report < ActiveRecord::Base
     "date_of_discovery" => lambda { |value| Date.strptime(value, "%d/%m/%Y") }
   }
 
-  def answer_to question
-    answer = data["answers"][question]["selected"]
+  def answer_to question, page=nil, tab_index=0
+    answer = if page
+      data["answers"][page][tab_index][question]["selected"]
+    else
+      data["answers"][question]["selected"]
+    end
     CONVERSIONS.has_key?(question) ? CONVERSIONS[question][answer] : answer
   rescue NoMethodError
     nil
