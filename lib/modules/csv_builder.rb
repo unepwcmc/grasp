@@ -14,10 +14,8 @@ module CsvBuilder
 
         # Make a row for each live or dead ape, if any
         ['live', 'dead'].each do |status|
-          if report.data.dig('answers', status)&.present? # If any live/dead
-            report.data['answers'][status].each do |ape|
-              csv << self.make_report_row(report, ape, status.to_sym)
-            end
+          report.data.dig('answers', status).each do |ape|
+            csv << self.make_report_row(report, ape, status.to_sym)
           end
         end
 
@@ -25,12 +23,10 @@ module CsvBuilder
         report.data.dig('genera', 'parts').each do |genus|
           csv << self.make_report_row(report, nil, status.to_sym, genus)
         end
-
       end
     end
 
-    # Return the...
-    filepath
+    filepath # Return the file path
   end
 
   def self.make_report_row(report, ape=nil, status=nil, genus=nil)
@@ -133,13 +129,13 @@ module CsvBuilder
   def self.build_parts_data report, genus
     genus = self.to_db_name(genus)
     [
-      report.data.dig('answers', "bone_#{genus}", 'selected'),
-      report.data.dig('answers', "foot_hand_#{genus}", 'selected'),
-      report.data.dig('answers', "genitalia_#{genus}", 'selected'),
-      report.data.dig('answers', "hair_#{genus}", 'selected'),
-      report.data.dig('answers', "meat_#{genus}", 'selected'),
-      report.data.dig('answers', "skin_#{genus}", 'selected'),
-      report.data.dig('answers', "skull_#{genus}", 'selected')
+      report.data.dig('answers', "bone_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "foot_hand_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "genitalia_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "hair_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "meat_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "skin_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "skull_#{genus}", 'selected') || 0
     ]
   end
 
