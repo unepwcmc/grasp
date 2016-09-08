@@ -2,11 +2,12 @@
 #
 # Table name: reports
 #
-#  id         :integer          not null, primary key
-#  data       :jsonb
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :integer
+#  id             :integer          not null, primary key
+#  data           :jsonb
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  user_id        :integer
+#  bulk_upload_id :integer
 #
 # Indexes
 #
@@ -16,13 +17,13 @@
 #
 #  fk_rails_c7699d537d  (user_id => users.id)
 #
-#
 
 class Report < ActiveRecord::Base
   include ParamsUtils
   include SearchBuilder
 
   belongs_to :user
+  belongs_to :bulk_upload
   has_many :validations
   has_many :images
 

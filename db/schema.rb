@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902095857) do
+ActiveRecord::Schema.define(version: 20160908120554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 20160902095857) do
     t.string   "city"
     t.string   "post_code"
     t.string   "country"
+  end
+
+  create_table "bulk_uploads", force: :cascade do |t|
+    t.json     "happy_accidents"
+    t.boolean  "successful"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "expertises", force: :cascade do |t|
@@ -50,9 +57,10 @@ ActiveRecord::Schema.define(version: 20160902095857) do
 
   create_table "reports", force: :cascade do |t|
     t.jsonb    "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "user_id"
+    t.integer  "bulk_upload_id"
   end
 
   add_index "reports", ["user_id"], name: "index_reports_on_user_id", using: :btree
