@@ -14,14 +14,14 @@ module CsvBuilder
 
         # Make a row for each live or dead ape, if any
         ['live', 'dead'].each do |status|
-          report.data.dig('answers', status).each do |ape|
+          report.data.dig('answers', status)&.each do |ape|
             csv << self.make_report_row(report, ape, status.to_sym)
           end
         end
 
         # Create a body parts row for each genus
-        report.data.dig('genera', 'parts').each do |genus|
-          csv << self.make_report_row(report, nil, status.to_sym, genus)
+        report.data.dig('genera', 'parts')&.each do |genus|
+          csv << self.make_report_row(report, nil, :parts, genus)
         end
       end
     end

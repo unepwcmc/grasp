@@ -6,6 +6,6 @@ class CsvExportJob < ActiveJob::Base
 
     reports   = Report.find(report_ids)
     filepath  = CsvBuilder.build(reports)
-    NotificationMailer.notify_user_of_csv_export_ready(user, filepath).deliver_now
+    NotificationMailer.notify_user_of_csv_export_ready(user, filepath).deliver_later
   end
 end
