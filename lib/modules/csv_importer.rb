@@ -2,7 +2,7 @@ require 'csv'
 
 module CsvImporter
   def self.import(csv_path)
-    errors = []
+    happy_accidents = []
     reports = []
     line = 1
 
@@ -13,20 +13,21 @@ module CsvImporter
       row.each do |header, value|
         begin
           converter.convert(header, value)
-          reports << converter.report
         rescue CsvConverter::CsvConversionError => e
-          errors << {line: line, column: column, message: e.message}
+          happy_accidents << {line: line, column: column, message: e.message}
         end
 
         column += 1
       end
 
+      reports << converter.report
       line += 1
     end
 
-    if errors.any?
-      {successful: false, errors: errors}
+    if happy_accidents.any?
+      {successful: false, happy_accidents: happy_accidents}
     else
+      ActiveRecord::Base.transaction { reports.each(&:save!) }
       {successful: true, reports: reports}
     end
   end
