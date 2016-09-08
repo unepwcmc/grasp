@@ -1,0 +1,46 @@
+<%= content_for :page_title, "Bulk Uploads" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Bulk Uploads", bulk_uploads_path %>
+<% end %>
+<%= content_for :page_buttons do %>
+  <%= render "page_buttons" %>
+<% end %>
+
+<p>Some explanation text here</p>
+
+
+<% if @bulk_uploads.any? %>
+  <table class="table u-full-width table--reports">
+    <thead class="table__head">
+      <th class="table__element"><%= sortable "id", "ID" %></th>
+      <th class="table__element"><%= sortable "created_at", "Created at" %></th>
+      <th class="table__element">Nº of Reports</th>
+      <th class="table__element">Successful</th>
+      <th class="table__element">Actions</th>
+    </thead>
+    <tbody>
+      <% @bulk_uploads.each do |bulk_upload| %>
+          <tr>
+            <td class="table__element"><%= bulk_upload.id %></td>
+            <td class="table__element"><%= bulk_upload.created_at.strftime("%D %T")  %></td>
+            <td class="table__element"><%= bulk_upload.reports.count %></td>
+            <td class="table__element"><%= bulk_upload.successful ? "Yes" : "No" %></td>
+            <td class="table__element">
+              <% if can? :read, bulk_upload %>
+                <%= link_to "View", bulk_upload_path(bulk_upload) %>
+              <% end %>
+              <% if can? :destroy, bulk_upload %>
+                <%= link_to "Delete", bulk_upload_path(bulk_upload), method: :delete %>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="pagination u-pull-right">
+    <%= paginate @bulk_uploads %>
+  </div>
+<% else %>
+  <p>There are currently no bulk uploads available to display.</p>
+<% end %>

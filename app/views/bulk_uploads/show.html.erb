@@ -1,0 +1,10 @@
+<%= content_for :page_title, "Bulk Upload ##{@bulk_upload.id}" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Bulk Uploads", bulk_uploads_path %>
+  <%= breadcrumb "Bulk Upload ##{@bulk_upload.id}", bulk_upload_path(@bulk_upload) %>
+<% end %>
+<%= content_for :page_buttons do %>
+  <%= render "page_buttons" %>
+<% end %>
+
+<%= render "reports/table", reports: @bulk_upload.reports.page(params[:page]) %>
