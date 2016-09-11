@@ -14,7 +14,7 @@ module CsvImporter
         begin
           converter.convert(header, value)
         rescue CsvConverter::CsvConversionError => e
-          happy_accidents << {line: line, column: column, message: e.message}
+          happy_accidents << {line: line, column: column, header: header, message: e.message}
         end
 
         column += 1

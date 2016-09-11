@@ -4,7 +4,19 @@
   <%= breadcrumb "Bulk Upload ##{@bulk_upload.id}", bulk_upload_path(@bulk_upload) %>
 <% end %>
 <%= content_for :page_buttons do %>
-  <%= render "page_buttons" %>
+  <% unless @bulk_upload.successful %>
+    <%= link_to edit_bulk_upload_path(@bulk_upload), class: "button button-primary" do %>
+      <i class="fa fa-upload icon icon--closer"></i>Re-upload CSV File
+    <% end %>
+  <% end %>
+
+  <%= link_to @bulk_upload, method: :delete, class: "button button-primary", data: {confirm: t("bulk_uploads.delete_confirmation")} do %>
+    <i class="fa fa-trash icon icon--closer"></i>Delete Bulk Upload
+  <% end %>
 <% end %>
 
-<%= render "reports/table", reports: @bulk_upload.reports.page(params[:page]) %>
+<% if @bulk_upload.successful %>
+  <%= render "reports/table", reports: @bulk_upload.reports.page(params[:page]) %>
+<% else %>
+  <%= render "errors_table", happy_accidents: @bulk_upload.happy_accidents %>
+<% end %>

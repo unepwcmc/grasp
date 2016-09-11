@@ -3,14 +3,16 @@
   <%= breadcrumb "Bulk Uploads", bulk_uploads_path %>
 <% end %>
 <%= content_for :page_buttons do %>
-  <%= render "page_buttons" %>
+  <%= link_to new_bulk_upload_path, class: 'button button-primary' do %>
+    <i class="fa fa-upload icon icon--closer"></i>New Bulk Upload
+  <% end %>
 <% end %>
 
 <p>Some explanation text here</p>
 
 
 <% if @bulk_uploads.any? %>
-  <table class="table u-full-width table--reports">
+  <table class="table u-full-width table--bulk-uploads">
     <thead class="table__head">
       <th class="table__element"><%= sortable "id", "ID" %></th>
       <th class="table__element"><%= sortable "created_at", "Created at" %></th>
@@ -30,7 +32,7 @@
                 <%= link_to "View", bulk_upload_path(bulk_upload) %>
               <% end %>
               <% if can? :destroy, bulk_upload %>
-                <%= link_to "Delete", bulk_upload_path(bulk_upload), method: :delete %>
+                <%= link_to "Delete", bulk_upload, method: :delete, data: { confirm: 'Are you sure you want to permanently delete this bulk upload (and its reports)?' } %>
               <% end %>
             </td>
           </tr>

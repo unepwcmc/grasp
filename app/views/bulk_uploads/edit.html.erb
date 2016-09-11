@@ -1,12 +1,12 @@
-<%= content_for :page_title, "New Bulk Upload" %>
+<%= content_for :page_title, "Edit Bulk Upload ##{@bulk_upload.id}" %>
 <%= content_for :breadcrumbs do %>
   <%= breadcrumb "Bulk Uploads", bulk_uploads_path %>
-  <%= breadcrumb "New Bulk Upload", new_bulk_upload_path %>
+  <%= breadcrumb "Edit Bulk Upload ##{@bulk_upload.id}", edit_bulk_upload_path(@bulk_upload) %>
 <% end %>
 
 <p>Some explanation text</p>
 
-<%= form_tag bulk_uploads_path, multipart: true do %>
+<%= form_tag bulk_upload_path(@bulk_upload), method: :put, multipart: true do %>
   <fieldset class="form__group">
     <%= file_field_tag "file" %>
   </fieldset>

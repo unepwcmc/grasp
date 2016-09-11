@@ -12,15 +12,36 @@ class BulkUploadsController < ApplicationController
   def new
   end
 
+  def edit
+    @bulk_upload = BulkUpload.find(params[:id]) or raise_404
+  end
+
+  def update
+    @bulk_upload = BulkUpload.find(params[:id]) or raise_404
+
+    result = CsvImporter.import(params[:file].path)
+    @bulk_upload.update(result)
+
+    if result[:successful]
+      redirect_to @bulk_upload, flash: {success: t("bulk_uploads.upload_successful")}
+    else
+      redirect_to @bulk_upload, flash: {error: t("bulk_uploads.upload_error")}
+    end
+  end
+
   def create
-    result = CsvImporter.import(params[:file])
-    redirect_to BulkUpload.create(result)
+    result = CsvImporter.import(params[:file].path)
+    if result[:successful]
+      redirect_to BulkUpload.create(result), flash: {success: t("bulk_uploads.upload_successful")}
+    else
+      redirect_to BulkUpload.create(result), flash: {error: t("bulk_uploads.upload_error")}
+    end
   end
 
   def destroy
     bulk_upload = BulkUpload.find(params[:id]) or raise_404
     bulk_upload.destroy
 
-    redirect_to :index, notice: "That bulk upload has been successfully deleted from the system. Thank you!"
+    redirect_to action: :index, notice: "That bulk upload has been successfully deleted from the system. Thank you!"
   end
 end
