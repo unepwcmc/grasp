@@ -20,6 +20,15 @@ module ReportHelper
           end
         }
       end
+      if report.data.dig('genera', 'parts')&.any?
+        concat content_tag(:p, class: "u-no-margin") {
+          concat content_tag(:strong, "Body part(s)")
+          report.data['genera']['parts'].each do |genera|
+            concat tag("br")
+            concat "#{genera}"
+          end
+        }
+      end
     }
   end
 
