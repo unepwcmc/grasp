@@ -1,6 +1,13 @@
 <h4><%= status.titleize %> ape #<%= index + 1 %></h4>
 
 <div class="form__group">
+  <strong>Genus</strong>
+  <div class="form__field">
+    <%= display_or_default(ape.dig("genus_#{status}", 'selected')) %>
+  </div>
+</div>
+
+<div class="form__group">
   <strong>Individual's name</strong>
   <div class="form__field">
     <%= display_or_default(ape.dig("individual_name_#{status}", 'selected')) %>

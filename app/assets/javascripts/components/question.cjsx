@@ -131,10 +131,16 @@ class Question extends React.Component
       when "agency"           then general
       when "date"             then general
       when "text"             then general
-      when "file"             then general
       when "numeric"          then general
       when "decimal_numeric"  then general
       when "form"             then general
+      when "file"
+        if @props.answer?.selected?.length > 0
+          <ul>
+            {_.map(@props.answer?.selected, (image) ->
+              <li className="answer" key={image.id}><img src={image.url} width=48></img></li>
+            )}
+          </ul>
       when "multi"
         if @props.answer?.selected?.length > 0
           <ul>
