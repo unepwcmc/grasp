@@ -4,7 +4,13 @@
   <%= breadcrumb "New Bulk Upload", new_bulk_upload_path %>
 <% end %>
 
-<p>Some explanation text</p>
+<p>
+  A new report will be created for each line of the .CSV file – unfortunately it is not possible to add reports containing multiple apes.
+</p>
+
+<p>
+  Please take the time to ensure that the .CSV file matches the correct parameters before uploading.
+</p>
 
 <%= form_tag bulk_uploads_path, multipart: true do %>
   <fieldset class="form__group">
