@@ -7,4 +7,64 @@
   @include e(radio) {
     margin-right: 1rem;
   }
+
+  @include m(numeric) {
+    width: 4.6rem !important;
+    height: 4rem !important;
+    padding: 0;
+    text-align: center;
+    color: $nevada;
+  }
+
+  @include e(num-label) {
+    line-height: 4rem;
+
+    @media only screen and (min-width: $break__phone) {
+      width: 25rem;
+    }
+  }
+
+  @include e(num-container) {
+    float: right;
+    @include flexbox;
+  }
+
+  @include e(num-check) {
+    border: solid 2px #d1d1d1;
+    float: left;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-top: 6px;
+    margin-right: 10px;
+
+    &.is-checked {
+      position: relative;
+      &:after {
+        content: "\f00c";
+        font-family: FontAwesome;
+        color: $steel-blue;
+
+        position: absolute;
+        line-height: 2.4rem;
+        width: 2.4rem;
+        text-align: center;
+      }
+    }
+  }
+
+  @include e(num-button) {
+    border: solid 2px $steel-blue;
+    width: 4rem !important;
+    height: 4rem !important;
+    padding: 0;
+    border-radius: 0;
+
+    &:hover {
+      border: solid 3px $steel-blue;
+    }
+  }
+
+  @include e(subpart) {
+    overflow: hidden;
+  }
 }

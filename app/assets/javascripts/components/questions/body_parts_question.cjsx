@@ -13,18 +13,15 @@ class BodyPartsQuestion extends React.Component
 
   renderParts: =>
     _.map(@props.data.parts, (part) =>
-      <div>
-        <h6>{part.question}</h6>
-        <div>{@renderAppropriateQuestion(part)}</div>
-      </div>
+      <div className="answer__subpart">{@renderAppropriateQuestion(part)}</div>
     )
 
   renderAppropriateQuestion: (part) =>
     switch part.type
       when "numeric"         then <NumericQuestion onChange={@handleChangeFor(part)}
-                                   answer={@props.answer?.parts?[part.id]}/>
+                                   partName={part.question} answer={@props.answer?.parts?[part.id]}/>
       when "decimal_numeric" then <DecimalNumericQuestion onChange={@handleChangeFor(part)}
-                                   answer={@props.answer?.parts?[part.id]}/>
+                                   partName={part.question} answer={@props.answer?.parts?[part.id]}/>
 
   handleChangeFor: (part) =>
     (answer) => QuestionnaireStore.selectPart(@props.data.id, part.id, answer)
