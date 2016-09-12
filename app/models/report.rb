@@ -16,7 +16,6 @@
 #
 #  fk_rails_c7699d537d  (user_id => users.id)
 #
-#
 
 class Report < ActiveRecord::Base
   include ParamsUtils
