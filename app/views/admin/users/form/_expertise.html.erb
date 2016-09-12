@@ -15,7 +15,7 @@
   <div class="form__field">
     <%= b.label do %>
       <%= b.check_box %>
-      <span class="label-body"><%= b.text %></span>
+      <span class="label-body"><%= b.text.gsub(/\(.*/, "") %></span>
     <% end %>
   </div>
 <% end %>
