@@ -46,9 +46,10 @@
     </tbody>
   </table>
 
-  <div class="pagination u-pull-right">
-    <%= paginate @bulk_uploads %>
-  </div>
+<div class="pagination u-pull-right">
+  <%= page_entries_info @bulk_uploads %>
+  <%= paginate @bulk_uploads %>
+</div>
 <% else %>
   <p>There are currently no bulk uploads available to display.</p>
 <% end %>
