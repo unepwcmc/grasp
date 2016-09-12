@@ -3,7 +3,7 @@ React = require("react")
 
 module.exports = class SaveButton extends React.Component
   render: =>
-    <input className="six columns button button-primary" type="submit" value="Save Report" onClick={@saveReport}/>
+    <input className="six columns button button-primary button--larger" type="submit" value="Save Report" onClick={@saveReport}/>
 
   saveReport: =>
     QuestionnaireStore.saveOrUpdateReport()
