@@ -3,7 +3,7 @@ class AddKindToExpertises < ActiveRecord::Migration
     add_column :expertises, :kind, :text
 
     geographic_expertises = ["West Africa", "Central Africa", "East Africa", "Southeast Asia", "Rest of the World"]
-    taxonomic_expertises = ["Bonobo (Pan)", "Gorilla (Gorilla)", "Chimpanzee (Pan)", "Orang-utan (Pongo)"]
+    taxonomic_expertises = ["Bonobo", "Gorilla", "Chimpanzee", "Orangutan"]
 
     Expertise.where(name: geographic_expertises).update_all(kind: "region")
     Expertise.where(name: taxonomic_expertises).update_all(kind: "genus")
