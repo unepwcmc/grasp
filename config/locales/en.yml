@@ -46,6 +46,15 @@ en:
     upload_successful: "Thank you! Your bulk upload was successful"
     upload_error: "Sorry, your bulk upload contains errors. Be sure to solve these issues before re-uploading the CSV file"
 
+  helpers:
+    page_entries_info:
+      more_pages:
+        display_entries: "%{first} - %{last} of %{total}"
+  views:
+    pagination:
+      next: <i class="fa fa-angle-right"></i>
+      previous: <i class="fa fa-angle-left"></i>
+
 # French
 fr:
   hello: "Hello world"

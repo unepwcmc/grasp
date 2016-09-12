@@ -38,11 +38,9 @@
     </tbody>
   </table>
 
-  <div class="u-pull-left">
-    <%= page_entries_info reports %>
-  </div>
 
   <div class="pagination u-pull-right">
+    <%= page_entries_info reports %>
     <%= paginate reports, params: {controller: "reports", action: "index", table: (table rescue nil)} %>
   </div>
 <% else %>
