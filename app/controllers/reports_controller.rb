@@ -107,6 +107,9 @@ class ReportsController < ApplicationController
       end
     else
       @validation = Validation.new
+      @live_apes  = Array.wrap(@report.data.dig('answers', 'live'))
+      @dead_apes  = Array.wrap(@report.data.dig('answers', 'dead'))
+      @body_parts = Array.wrap(@report.data.dig('answers', 'genus_parts', 'selected'))
     end
   end
 

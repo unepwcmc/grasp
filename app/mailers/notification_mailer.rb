@@ -29,28 +29,28 @@ class NotificationMailer < ApplicationMailer
     @validation = validation
     @user       = validation.user
     @report     = validation.report
-    mail(to: @user.email, subject: 'GRASP Database: Your report has been Accepted')
+    mail(to: @user.email, subject: 'GRASP Database: Your report has been accepted')
   end
 
   def notify_user_of_report_returned(validation)
     @validation = validation
     @user       = validation.user
     @report     = validation.report
-    mail(to: @user.email, subject: 'GRASP Database: Your report has been Accepted')
+    mail(to: @user.email, subject: 'GRASP Database: Your report has been returned')
   end
 
   def notify_admin_of_report_validated(validation, admin)
     @validation = validation
     @report     = validation.report
     @admin      = admin
-    mail(to: @admin.email, subject: 'GRASP Database: A report has been Validated')
+    mail(to: @admin.email, subject: 'GRASP Database: A report has been validated')
   end
 
   def notify_admin_of_report_returned(validation, admin)
     @validation = validation
     @report     = validation.report
     @admin      = admin
-    mail(to: @admin.email, subject: 'GRASP Database: A report has been Returned')
+    mail(to: @admin.email, subject: 'GRASP Database: A report has been returned')
   end
 
   def notify_all_admins_of_csv_uploaded(user, admin, file)

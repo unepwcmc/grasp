@@ -13,13 +13,13 @@ module.exports = class PageControls extends React.Component
 
   renderPreviousPage: =>
     unless NavigationStore.isFirstPage()
-      <button onClick={@previousPage} className="page-controls__prev">
+      <button onClick={@previousPage} className="page-controls__prev button--larger">
         < Previous step
       </button>
 
   renderNextPage: =>
     unless NavigationStore.isLastPage()
-      <button onClick={@nextPage} className="button button-primary page-controls__next">
+      <button onClick={@nextPage} className="button button-primary button--larger page-controls__next">
         Next step >
       </button>
 

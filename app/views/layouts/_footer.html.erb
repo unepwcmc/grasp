@@ -44,7 +44,9 @@
   <div class="footer__strip">
     <div class="footer__strip-inner">
       <div>
-        <img src="<%= image_path("wcmc-footer-logo@2x.png") %>" class="footer__logo footer__logo--strip" alt="UNEP-WCMC logo">
+        <%= link_to 'http://www.unep-wcmc.org/', target: '_blank' do %>
+          <img src="<%= image_path("wcmc-footer-logo@2x.png") %>" class="footer__logo footer__logo--strip" alt="UNEP-WCMC logo">
+        <% end %>
         <span>Powered by UNEP-WCMC.</span>
       </div>
       <div>

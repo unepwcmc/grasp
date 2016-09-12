@@ -2,49 +2,93 @@ require 'csv'
 
 module CsvBuilder
   def self.build(reports)
-    column_names = ["ID", "Report Status", "User Name", "Agency", "Collaboration?", "Timestamp", "Country of Discovery",
-                    "Region of Discovery", "Date of Discovery", "GPS Location", "Type of Location", "Ape Status",
-                    # Looping names for live/dead
-                    "Ape (Genus)", "Species/Subspecies", "Intended Use", "Photo", "Age", "Gender", "Last Location",
-                    "Country of Origin", "Condition", "Identifiers", "Name",
-                    # Additional looping columns for body parts
-                    "Bone Qty", "Foot/Hand Qty", "Genitalia Qty", "Hair Qty", "Meat Kg", "Skin Qty", "Skull Qty",
-                    # Report columns
-                    "Confiscation?", "Arrests Made?", "Prosecution?", "Prosecution Successful?", "Punishment Successful?",
-                    "Other Illegal Activities", "Man-made disturbances"]
-
     folder = Rails.root.join("public", "csv_exports")
     FileUtils.mkdir_p(folder)
-
     filepath = folder.join("csv_export_#{DateTime.now.to_i}.csv")
 
     CSV.open(filepath, "wb") do |csv|
-      csv << column_names
+      csv << self.build_column_names
       reports.each do |report|
         # Make the first row for the report, no apes
         csv << self.make_report_row(report)
 
-        # For each ape in live, dead and parts, make a row
-        ['live', 'dead', 'parts'].each do |status|
-          if report.data.dig('answers', status).present? # If any live/dead/parts
-            report.data['answers'][status].each do |ape|
-              csv << self.make_report_row(report, ape, status.to_sym)
-            end
-
-            # Iterate for parts?
+        # Make a row for each live or dead ape, if any
+        ['live', 'dead'].each do |status|
+          report.data.dig('answers', status)&.each do |ape|
+            csv << self.make_report_row(report, ape, status.to_sym)
           end
+        end
+
+        # Create a body parts row for each genus
+        report.data.dig('genera', 'parts')&.each do |genus|
+          csv << self.make_report_row(report, nil, :parts, genus)
         end
       end
     end
 
-    filepath
+    filepath # Return the file path
   end
 
-  def self.make_report_row(report, ape=nil, status=nil)
-    # If an ape is passed in, it create a row with the details of this ape,
-    # if not, it leaves these details blank and just creates a report row
+  def self.make_report_row(report, ape=nil, status=nil, genus=nil)
+    # Construct the segments of a row, if the data is not needed,
+    # return the same amount of columns with a nil value to make rows equal
 
-    report_data_1 = [
+    report_data       = self.build_report_data(report)
+    ape_data          = ape ? self.build_ape_data(ape, status) : Array.new(12, nil)
+    parts_data        = status == :parts ? self.build_parts_data(report, genus) : Array.new(7, nil)
+    confiscation_data = self.build_confiscation_data(report)
+
+    report_data + ape_data + parts_data + confiscation_data
+  end
+
+  def self.build_column_names
+    [
+      # Report metadata
+      "ID",
+      "Report Status",
+      "User Name",
+      "Agency",
+      "Collaboration?",
+      "Timestamp",
+      "Country of Discovery",
+      "Region of Discovery",
+      "Date of Discovery",
+      "GPS Location",
+      "Type of Location",
+      "Ape Status",
+      # Looping names for live/dead
+      "Ape (Genus)",
+      "Species/Subspecies",
+      "Intended Use",
+      "Photo",
+      "Age",
+      "Gender",
+      "Last Location",
+      "Country of Origin",
+      "Condition",
+      "Identifiers",
+      "Name",
+      # Additional looping columns for body parts
+      "Bone Qty",
+      "Foot/Hand Qty",
+      "Genitalia Qty",
+      "Hair Qty",
+      "Meat Kg",
+      "Skin Qty",
+      "Skull Qty",
+      # Confiscation columns
+      "Confiscation?",
+      "Arrests Made?",
+      "Prosecution?",
+      "Prosecution Successful?",
+      "Punishment Successful?",
+      "Other Illegal Activities",
+      "Man-made disturbances"
+    ]
+  end
+
+  def self.build_report_data report
+    [
       report.id,
       report.state,
       report&.user&.full_name,
@@ -57,56 +101,46 @@ module CsvBuilder
       report.data.dig('answers', 'location_coords', 'selected')&.values&.join(", "),
       report.data.dig('answers', 'type_of_location', 'selected')
     ]
+  end
 
-    ape_data = Array.new(19, nil)
-
-    if ape.present?
-      last_known_location = ape.dig("last_known_location_#{status}", 'selected')
-      if last_known_location == "other" || last_known_location == "With other organisation (please specify)"
-        other_answer = ape.dig("last_known_location_#{status}", 'other_answer')
-        last_known_location = last_known_location + ": " + (other_answer || "N/A")
-      end
-
-      ape_data = [
-        status.to_s.titleize,
-        ape.dig("genus_#{status}", 'selected'),
-        ape.dig("species_subspecies_#{status}", 'selected'),
-        ape.dig("intended_use_#{status}", 'selected'),
-        "Photo TBC",
-        ape.dig("age_#{status}", 'selected'),
-        ape.dig("gender_#{status}", 'selected'),
-        last_known_location,
-        ape.dig("alleged_origin_country_#{status}", 'selected'),
-        ape.dig("condition_#{status}", 'selected'),
-        ape.dig("unique_identifiers_#{status}", 'selected'),
-        ape.dig("individual_name_#{status}", 'selected')
-      ]
-
-      if status == :live or status == :dead
-        # Add empty fields for body parts section
-        ape_data += Array.new(7, nil)
-      elsif status == :parts
-        # Create a new row for each genus
-        ape_data += Array.new(7, 0)
-
-        #ape_data = Array.new(12, nil)
-        #parts = self.sum_genus_parts(report)
-        #ape_data += [
-          #parts.dig('parts', 'bone', 'selected'),
-          #parts.dig('parts', 'foot_hand', 'selected'),
-          #parts.dig('parts', 'genitalia', 'selected'),
-          #parts.dig('parts', 'hair', 'selected'),
-          #parts.dig('parts', 'meat', 'selected'),
-          #parts.dig('parts', 'skin', 'selected'),
-          #parts.dig('parts', 'skull', 'selected')
-        #]
-      else
-        ape_data += Array.new(7, nil)
-      end
+  def self.build_ape_data ape, status
+    last_known_location = ape.dig("last_known_location_#{status}", 'selected')
+    if last_known_location == "other" || last_known_location == "with other organisation (please specify)"
+      other_answer = ape.dig("last_known_location_#{status}", 'other_answer')
+      last_known_location = last_known_location + ": " + (other_answer || "n/a")
     end
 
+    [
+      status.to_s.titleize,
+      ape.dig("genus_#{status}", 'selected'),
+      ape.dig("species_subspecies_#{status}", 'selected'),
+      ape.dig("intended_use_#{status}", 'selected'),
+      "photo tbc",
+      ape.dig("age_#{status}", 'selected'),
+      ape.dig("gender_#{status}", 'selected'),
+      last_known_location,
+      ape.dig("alleged_origin_country_#{status}", 'selected'),
+      ape.dig("condition_#{status}", 'selected'),
+      ape.dig("unique_identifiers_#{status}", 'selected'),
+      ape.dig("individual_name_#{status}", 'selected')
+    ]
+  end
 
-    report_data_2 = [
+  def self.build_parts_data report, genus
+    genus = self.to_db_name(genus)
+    [
+      report.data.dig('answers', "bone_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "foot_hand_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "genitalia_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "hair_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "meat_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "skin_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "skull_#{genus}", 'selected') || 0
+    ]
+  end
+
+  def self.build_confiscation_data report
+    [
       report.data.dig('answers', 'confiscated', 'selected'),
       report.data.dig('answers', 'arrests_made', 'selected'),
       report.data.dig('answers', 'prosecution', 'selected'),
@@ -115,15 +149,17 @@ module CsvBuilder
       report.data.dig('answers', 'illegal_activities', 'selected')&.join(", "),
       report.data.dig('answers', 'proximity', 'selected')&.join(", ")
     ]
-
-    # Join the segments to form the full row
-    report_data_1 + ape_data + report_data_2
   end
 
-  def self.sum_genus_parts(report)
-    # Fetch, merge and sum the genus parts for each ape genus into one totalled hash
-    genus = ['bonobo', 'chimpanzee', 'gorilla', 'orangutan', 'unknown']
-    genus_parts = genus.map {|genus| report.data.dig('answers', "parts_#{genus}")}
-    genus_parts.inject{|total, hash| total.deep_merge(hash) {|_, value_1, value_2| value_1 + value_2 }}
+  def self.to_db_name genus
+    genera = {
+      "bonobo (pan)" => "bonobo",
+      "chimpanzee (pan)" => "chimpanzee",
+      "gorilla (gorilla)" => "gorilla",
+      "orang-utan (pongo)" => "orangutan",
+      "unknown" => "unknown"
+    }
+
+    genera[genus.downcase]
   end
 end
