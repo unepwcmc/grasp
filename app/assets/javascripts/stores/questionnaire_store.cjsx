@@ -80,7 +80,10 @@ class QuestionnaireStore extends EventEmitter
       return (answerForTab?.selected || "") != ""
     else
       answer = report.answers[question.id]
-      return (answer?.selected || "") != ""
+      if question.type == "select"
+        return (answer?.selected || "") in question.options
+      else
+        return (answer?.selected || "") != ""
 
   selectAnswer: (key, answer) ->
     currentPage = NavigationStore.currentPage()

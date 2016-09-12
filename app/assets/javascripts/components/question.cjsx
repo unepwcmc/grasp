@@ -38,6 +38,8 @@ class Question extends React.Component
 
     if nextProps.answered and notOtherAnswer and alwaysOpen
       @setState(hidden: true)
+    if not nextProps.answered and @props.answered
+      @setState(hidden: false)
 
   render: =>
     <div className="question">
