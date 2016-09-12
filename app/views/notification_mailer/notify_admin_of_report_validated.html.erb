@@ -3,7 +3,8 @@
 </h3>
 
 <p>
-  A report <%= link_to report_url(@report), report_path(@report) %> from <%= @report.user.try(:full_name) %> has been validated.
+  A <%= link_to "report", report_summary_url(@report) %> from
+  <%= link_to @report.user.try(:full_name), admin_user_url(@report.user) %> has been validated.
 </p>
 
 <% if @validation.comments_for_provider.present? %>

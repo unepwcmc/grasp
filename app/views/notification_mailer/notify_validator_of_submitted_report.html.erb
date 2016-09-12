@@ -3,11 +3,11 @@
 </h3>
 
 <p>
-  A new report <%= link_to report_url(@report), report_url(@report) %> matching your expertise has been submitted for validation.
+  A new <%= link_to "report", report_summary_url(@report) %> matching your expertise has been submitted for validation.
 </p>
 
 <p>
-  You can view all reports awaiting validation here: <%= link_to validate_report_url(@report), validate_report_url(@report) %>
+  You can view all reports awaiting validation <%= link_to "here", validate_report_url(@report) %>.
 </p>
 
 <p>

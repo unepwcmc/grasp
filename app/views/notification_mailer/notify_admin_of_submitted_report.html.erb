@@ -3,11 +3,11 @@
 </h3>
 
 <p>
-  A new report has been submitted by <%= @report.user.try(:full_name) %> from <%= @report.user.try(:agency).try(:name) %>.
+  A new report has been submitted by <%= link_to @report.user.try(:full_name), admin_user_url(@report.user) %> from <%= link_to @report.user.try(:agency).try(:name), agency_url(@report.user.try(:agency)) %>.
 </p>
 
 <p>
-  You can view the report here: <%= link_to report_url(@report), report_url(@report) %>
+  You can view the report <%= link_to "here", report_summary_url(@report) %>
 </p>
 
 <p>

@@ -3,7 +3,7 @@
 </h3>
 
 <p>
-  Your report <%= link_to report_url(@report), report_url(@report) %> has been returned.
+  Your <%= link_to "report", report_summary_url(@report) %> has been returned.
 </p>
 
 <% if @validation.comments_for_provider.present? %>
