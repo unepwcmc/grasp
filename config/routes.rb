@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :users, controller: "users"
   end
 
+  resources :bulk_uploads
 
   get "/search", to: "reports#search", as: "search_reports"
   get "/export", to: "reports#export", as: "export_reports"

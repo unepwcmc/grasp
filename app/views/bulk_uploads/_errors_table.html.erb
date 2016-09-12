@@ -1,0 +1,16 @@
+<table class="table u-full-width table--bulk-upload-errors">
+  <thead class="table__head">
+    <th class="table__element">Row</th>
+    <th class="table__element">Column</th>
+    <th class="table__element">Error</th>
+  </thead>
+  <tbody>
+    <% happy_accidents.each do |happy_accident| %>
+        <tr>
+          <td class="table__element"><%= happy_accident["line"] %></td>
+          <td class="table__element"><%= happy_accident["header"] %></td>
+          <td class="table__element"><%= happy_accident["message"] %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

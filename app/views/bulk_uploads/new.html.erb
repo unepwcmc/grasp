@@ -1,0 +1,15 @@
+<%= content_for :page_title, "New Bulk Upload" %>
+<%= content_for :breadcrumbs do %>
+  <%= breadcrumb "Bulk Uploads", bulk_uploads_path %>
+  <%= breadcrumb "New Bulk Upload", new_bulk_upload_path %>
+<% end %>
+
+<p>Some explanation text</p>
+
+<%= form_tag bulk_uploads_path, multipart: true do %>
+  <fieldset class="form__group">
+    <%= file_field_tag "file" %>
+  </fieldset>
+
+  <%= submit_tag "Upload file", class: "button button-primary" %>
+<% end %>

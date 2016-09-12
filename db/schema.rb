@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 20160912094928) do
     t.string   "country"
   end
 
+  create_table "bulk_uploads", force: :cascade do |t|
+    t.json     "happy_accidents"
+    t.boolean  "successful"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "expertises", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -51,9 +58,10 @@ ActiveRecord::Schema.define(version: 20160912094928) do
 
   create_table "reports", force: :cascade do |t|
     t.jsonb    "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "user_id"
+    t.integer  "bulk_upload_id"
   end
 
   add_index "reports", ["user_id"], name: "index_reports_on_user_id", using: :btree

@@ -33,6 +33,9 @@
               <% if can? :read, Agency %>
                 <li><%= active_link_to 'Agencies', agencies_path, class: "header__link" %></li>
               <% end %>
+              <% if can? :manage, BulkUpload %>
+                <li><%= active_link_to 'Bulk uploads', bulk_uploads_path, class: "header__link" %></li>
+              <% end %>
             </ul>
           </div>
         <% end %>
@@ -61,6 +64,9 @@
             <% end %>
             <% if can? :read, Agency %>
               <li><%= active_link_to 'Agencies', agencies_path, class: "header__link" %></li>
+            <% end %>
+            <% if can? :manage, BulkUpload %>
+              <li><%= active_link_to 'Bulk uploads', bulk_uploads_path, class: "header__link" %></li>
             <% end %>
           </ul>
         </div>

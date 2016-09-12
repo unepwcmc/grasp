@@ -64,6 +64,14 @@
     @include responsive-table("ID", "User name", "Agency", "Started On", "Discovery Date", "Ape Details", "Status", "Actions")
   }
 
+  @include m(bulk-uploads) {
+    @include responsive-table("ID", "Created at", "Nº of Reports", "Successful", "Actions")
+  }
+
+  @include m(bulk-upload-errors) {
+    @include responsive-table("Row", "Column", "Error")
+  }
+
   @include e(element) {
     padding-left: 1rem;
   }

@@ -2,11 +2,12 @@
 #
 # Table name: reports
 #
-#  id         :integer          not null, primary key
-#  data       :jsonb
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :integer
+#  id             :integer          not null, primary key
+#  data           :jsonb
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  user_id        :integer
+#  bulk_upload_id :integer
 #
 # Indexes
 #
@@ -22,6 +23,7 @@ class Report < ActiveRecord::Base
   include SearchBuilder
 
   belongs_to :user
+  belongs_to :bulk_upload
   has_many :validations
   has_many :images
 
@@ -41,8 +43,12 @@ class Report < ActiveRecord::Base
     "date_of_discovery" => lambda { |value| Date.strptime(value, "%d/%m/%Y") }
   }
 
-  def answer_to question
-    answer = data["answers"][question]["selected"]
+  def answer_to question, page=nil, tab_index=0
+    answer = if page
+      data["answers"][page][tab_index][question]["selected"]
+    else
+      data["answers"][question]["selected"]
+    end
     CONVERSIONS.has_key?(question) ? CONVERSIONS[question][answer] : answer
   rescue NoMethodError
     nil

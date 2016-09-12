@@ -41,6 +41,10 @@ en:
       Success!<br>
 
       Your csv file is now being generated.  We'll email you a link to download the file as soon as it's ready. Thank you.
+  bulk_uploads:
+    delete_confirmation: "Are you sure you want to permanently delete this bulk upload (and its reports)?"
+    upload_successful: "Thank you! Your bulk upload was successful"
+    upload_error: "Sorry, your bulk upload contains errors. Be sure to solve these issues before re-uploading the CSV file"
 
 # French
 fr:
