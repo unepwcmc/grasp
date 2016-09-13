@@ -16,7 +16,7 @@
     border: 2px solid $button__bg-color--hover;
   }
 
-  &[disabled] {
+  &[disabled], &.is-disabled {
     background-color: $grey;
     border-color: $grey;
   }
