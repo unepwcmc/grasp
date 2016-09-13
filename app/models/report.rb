@@ -40,7 +40,7 @@ class Report < ActiveRecord::Base
   end
 
   def can_be_validated?
-    state.downcase == "submitted"
+    state&.downcase == "submitted"
   end
 
   CONVERSIONS = {
