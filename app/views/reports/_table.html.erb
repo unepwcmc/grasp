@@ -29,7 +29,7 @@
               <% if can? :update, report %>
                 <a href="<%= edit_report_path(report.id) %>">Edit</a>
               <% end %>
-              <% if can?(:validate, report) && !report.is_being_validated? %>
+              <% if can?(:validate, report) && report.can_be_validated? %>
                 <a href="<%= validate_report_path(report.id) %>">Validate</a>
               <% end %>
             </td>

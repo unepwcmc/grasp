@@ -39,6 +39,10 @@ class Report < ActiveRecord::Base
     is_being_validated? ? "Being validated" : data["state"]&.humanize
   end
 
+  def can_be_validated?
+    state.downcase == "submitted"
+  end
+
   CONVERSIONS = {
     "date_of_discovery" => lambda { |value| Date.strptime(value, "%d/%m/%Y") }
   }
