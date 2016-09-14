@@ -8,7 +8,7 @@
 <p> Your file will be reviewed and, if approved, added to the system by an administrator.  </p>
 <p> The administrator may be in touch regarding your submission.  </p>
 
-<%= form_tag(reports_uploads_path, :html => { :multipart => true}) do %>
+<%= form_tag(reports_uploads_path, multipart: true) do %>
   <%= file_field_tag :file %>
   <%= submit_tag "Upload CSV", class: 'button button-primary' %>
 <% end %>
