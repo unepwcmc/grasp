@@ -108,6 +108,7 @@
     <%= render partial: "reports/ape_summary", locals: { ape: ape, status: "live", index: index} %>
   <% end %>
 <% end %>
+
 <% if @dead_apes.any? %>
   <% @dead_apes.each_with_index do |ape, index| %>
     <%= render partial: "reports/ape_summary", locals: { ape: ape, status: "dead", index: index} %>
@@ -115,15 +116,14 @@
 <% end %>
 
 <% if @body_parts.any? %>
-  <p><strong>Body parts</strong></p>
-  <% @body_parts.each do |genus| %>
-    <div class="form__group">
-      <%= genus %>
-      <div class="form__field">
-
-      </div>
-    </div>
-  <% end %>
+  <div class="form__group">
+    <strong>Body parts</strong>
+    <ul>
+      <% @body_parts.each do |genus| %>
+        <li><%= ape_genus(genus) %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
 <hr>

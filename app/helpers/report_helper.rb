@@ -32,6 +32,18 @@ module ReportHelper
     }
   end
 
+  def ape_genus genus
+    if matches = genus.match(/(.*) (\(.*\))/)
+      capture {
+        concat content_tag(:span, matches[1])
+        concat " "
+        concat content_tag(:i, matches[2])
+      }
+    else
+      genus
+    end
+  end
+
   def sortable(column, title = nil)
     title ||= column.titleize
     direction = (column == params[:sort] && params[:dir] == "asc") ? "desc" : "asc"
