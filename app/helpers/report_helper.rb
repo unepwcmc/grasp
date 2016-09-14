@@ -92,7 +92,7 @@ module ReportHelper
     when "status_body_parts"
       value = "Yes"
     when "genus"
-      value = value.join(", ")
+      value = value.map(&method(:ape_genus)).join(", ").html_safe
     when "last_known_location"
       value = value.join(", ")
     when "from_date"
