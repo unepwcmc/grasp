@@ -8,10 +8,10 @@
 
 .only-mobile {
   display: none;
-  @media screen and (max-width: $break__phone) { display: inline; }
+  @media screen and (max-width: $break__phone) { display: block; }
 }
 
 .hide-mobile {
-  display: inline;
+  display: block;
   @media screen and (max-width: $break__phone) { display: none; }
 }

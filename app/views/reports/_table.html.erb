@@ -1,4 +1,9 @@
 <% if reports.any? %>
+  <div class="pagination u-full-width only-mobile">
+    <%= page_entries_info reports %>
+    <%= paginate reports, params: {controller: "reports", action: "index", table: (table rescue nil)} %>
+  </div>
+
   <table class="table u-full-width table--reports">
     <thead class="table__head">
       <th class="table__element"><%= sortable "id", "ID" %></th>
@@ -39,7 +44,12 @@
   </table>
 
 
-  <div class="pagination u-pull-right">
+  <div class="pagination u-full-width only-mobile">
+    <%= page_entries_info reports %>
+    <%= paginate reports, params: {controller: "reports", action: "index", table: (table rescue nil)} %>
+  </div>
+
+  <div class="pagination u-pull-right hide-mobile">
     <%= page_entries_info reports %>
     <%= paginate reports, params: {controller: "reports", action: "index", table: (table rescue nil)} %>
   </div>

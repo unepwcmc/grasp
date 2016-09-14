@@ -3,6 +3,13 @@
   float: right;
   line-height: 36px;
 
+  @media only screen and (max-width: $break__phone) {
+    text-align: center;
+    float: initial;
+    margin-left: 0;
+    margin-bottom: 2rem;
+  }
+
   @include e(button) {
     display: inline-block;
     border-radius: 32px;
@@ -13,5 +20,17 @@
     font-weight: 100;
     line-height: 34px;
     border: solid 2px $steel-blue;
+  }
+
+  @include e(page-nums-container) {
+    display: inline-block;
+    @include only-mobile { display: none; }
+  }
+
+  @include e(page-num) {
+    display: inline-block;
+    line-height: 36px;
+    vertical-align: super;
+    margin: 0 3px;
   }
 }

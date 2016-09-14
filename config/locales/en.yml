@@ -49,11 +49,13 @@ en:
   helpers:
     page_entries_info:
       more_pages:
-        display_entries: "%{first} - %{last} of %{total}"
+        display_entries: "%{first} - %{last} of %{total} %{entry_name}"
   views:
     pagination:
-      next: <i class="fa fa-angle-right"></i>
+      first: <i class="fa fa-angle-left"></i><i class="fa fa-angle-left"></i>
+      last: <i class="fa fa-angle-right"></i><i class="fa fa-angle-right"></i>
       previous: <i class="fa fa-angle-left"></i>
+      next: <i class="fa fa-angle-right"></i>
 
 # French
 fr:

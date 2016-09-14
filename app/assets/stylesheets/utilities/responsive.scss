@@ -1,0 +1,11 @@
+@mixin only-mobile {
+  @media only screen and (max-width: $break__phone) {
+    @content;
+  }
+}
+
+@mixin only-desktop {
+  @media only screen and (min-width: $break__phone) {
+    @content;
+  }
+}
