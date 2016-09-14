@@ -20,7 +20,12 @@ module.exports =
 
       render(<NavigationControls/>, document.getElementById("navigation"))
 
-    $(".select2").select2(tags: true, width: "100%")
+    $(".select2").select2(
+      tags: true,
+      width: "100%",
+      templateSelection: @select2Formatting,
+      templateResult: @select2Formatting
+    )
 
     $(".validation__info").click( ->
       $(@).parent().find(".validation__comments").slideToggle()
@@ -59,3 +64,9 @@ module.exports =
         'X-CSRF-Token': token
       }, credentials: 'include'
     })
+
+  select2Formatting: (data, container) ->
+    if matches = data.text.match(/(.*) \((.*)\)/)
+      $("<span>#{matches[1]} <em>(#{matches[2]})</em></span>")
+    else
+      data.text
