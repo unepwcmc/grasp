@@ -39,6 +39,9 @@ module.exports = class NavigationControls extends React.Component
           show={@state.currentPage.multiple}
         />
       </div>
+      <p className="navigation-controls__inner navigation-controls__inner--last">
+        All questions must be answered, unless marked (optional).
+      </p>
     </div>
 
   renderIfPageVisible: (text, pageIndex, withDivider=true, additionalClass) =>
@@ -81,9 +84,15 @@ module.exports = class NavigationControls extends React.Component
       allAnswers: QuestionnaireStore.getAnswers()
     })
 
-
   onClick: (pageIndex) ->
-    if pageIndex.constructor == Array
-      NavigationStore.setPage(pageIndex[0])
+    if NavigationStore.isCurrentPageCompleted()
+      if pageIndex.constructor == Array
+        NavigationStore.setPage(pageIndex[0])
+      else
+        NavigationStore.setPage(pageIndex)
     else
-      NavigationStore.setPage(pageIndex)
+      alert("""
+        Sorry! You can't move onto other pages yet, as there are some required questions without answers.
+
+        #{QuestionnaireStore.unansweredQuestionsForPage(NavigationStore.currentPage()).join("\n")}"
+      """)

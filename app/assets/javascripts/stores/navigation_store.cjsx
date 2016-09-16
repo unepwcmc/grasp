@@ -89,13 +89,16 @@ class NavigationStore extends EventEmitter
       else
         question.show_if.answer == answers[question.show_if.question]?.selected
 
-
   isPageVisible: (page) ->
     return true unless page.show_if
 
     QuestionnaireStore = require("stores/questionnaire_store")
     answers   = QuestionnaireStore.getAnswers()
     answers[page.show_if]?.selected?[page.id]
+
+  isCurrentPageCompleted: ->
+    QuestionnaireStore = require("stores/questionnaire_store")
+    QuestionnaireStore.isPageCompleted(pages[currentPageIndex])
 
   updateAnswers: =>
     QuestionnaireStore = require("stores/questionnaire_store")

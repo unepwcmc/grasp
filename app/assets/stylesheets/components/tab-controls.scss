@@ -2,6 +2,7 @@
   overflow-y: hidden;
   overflow-x: scroll;
   width: 100%;
+  margin-bottom: 1rem;
 
   @include e(control) {
     color: $grey;

@@ -1,5 +1,6 @@
 @include b(navigation-controls) {
   background-color: $navigation-controls__bg-color;
+  overflow-y: hidden;
 
   @include e(inner) {
     max-width: 1280px;
@@ -11,6 +12,10 @@
     @include flexbox;
     @include align-items(center);
     @include justify-content(flex-start);
+
+    @include m(last) {
+      margin-bottom: 1rem;
+    }
   }
 
   @include e(sup) { min-height: 6rem; height: 60%; }
