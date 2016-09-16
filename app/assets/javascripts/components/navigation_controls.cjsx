@@ -39,6 +39,9 @@ module.exports = class NavigationControls extends React.Component
           show={@state.currentPage.multiple}
         />
       </div>
+      <p className="navigation-controls__inner navigation-controls__inner--last">
+        All questions must be answered, unless marked (optional).
+      </p>
     </div>
 
   renderIfPageVisible: (text, pageIndex, withDivider=true, additionalClass) =>
