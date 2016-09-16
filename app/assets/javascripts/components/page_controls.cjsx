@@ -20,9 +20,18 @@ module.exports = class PageControls extends React.Component
 
   renderNextPage: =>
     unless NavigationStore.isLastPage()
-      <button onClick={@nextPage} className="button button-primary button--larger page-controls__next">
+      <button onClick={@nextPage} className={@nextPageClassName()}>
         {if QuestionnaireStore.getMode() == "show" then "Next >" else "Next step >"}
       </button>
 
+  nextPageClassName: ->
+    className = "button button-primary button--larger page-controls__next"
+    className += " is-disabled" unless NavigationStore.isCurrentPageCompleted()
+    className
+
   previousPage: -> NavigationStore.previousPage()
-  nextPage:     -> NavigationStore.nextPage()
+  nextPage:     ->
+    if NavigationStore.isCurrentPageCompleted()
+      NavigationStore.nextPage()
+    else
+      alert("Sorry! You can't move onto the next page yet as there are some required questions without answers.")

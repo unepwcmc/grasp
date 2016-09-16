@@ -53,22 +53,27 @@ class QuestionnaireStore extends EventEmitter
   getAnswers:   -> report.answers
   getQuestions: -> questionnaire
 
-  requiredQuestionsAnswered: =>
-    allAnswered = true
+  requiredQuestionsAnswered: ->
+    mixAllAnswered = (allAnswered, page) => allAnswered && @isPageCompleted(page)
 
-    for page, pageIndex in NavigationStore.getPages() when NavigationStore.isPageVisible(page)
-      for questionId in page.questions when questionnaire[questionId].required
-        question = questionnaire[questionId]
+    _.chain(NavigationStore.getPages())
+      .filter(NavigationStore.isPageVisible)
+      .reduce(mixAllAnswered, true)
+      .value()
 
-        if page.multiple
-          for tab, tabIndex in (report.answers[page.id] || [])
-            unless @isQuestionAnswered(question, page, tabIndex)
-              allAnswered = false
-        else
-          unless @isQuestionAnswered(question, page, null)
-            allAnswered = false
+  isPageCompleted: (page) =>
+    for questionId in page.questions when questionnaire[questionId].required
+      question = questionnaire[questionId]
 
-    allAnswered
+      if page.multiple
+        for tab, tabIndex in (report.answers[page.id] || [])
+          unless @isQuestionAnswered(question, page, tabIndex)
+            return false
+      else
+        unless @isQuestionAnswered(question, page, null)
+          return false
+
+    return true
 
   isQuestionAnswered: (question, page, tabIndex) ->
     page ||= NavigationStore.currentPage()
