@@ -90,6 +90,34 @@ class QuestionnaireStore extends EventEmitter
       else
         return (answer?.selected || "") != ""
 
+  unansweredQuestionsForAllPages: =>
+    _.chain(NavigationStore.getPages())
+      .filter(NavigationStore.isPageVisible)
+      .map(@unansweredQuestionsForPage)
+      .flatten()
+      .value()
+
+  unansweredQuestionsForPage: (page) =>
+    _.chain(page.questions)
+      .map( (questionId) ->
+        if questionId.constructor == String
+          questionnaire[questionId]
+        else
+          questionId
+      )
+      .filter( (question) -> question.required)
+      .reject( (question) =>
+        if page.multiple
+          for tab, tabIndex in (report.answers[page.id] || [])
+            return false unless @isQuestionAnswered(question, page, tabIndex)
+        else
+          return false unless @isQuestionAnswered(question, page, null)
+
+        return true
+      )
+      .map((question) -> question.question)
+      .value()
+
   selectAnswer: (key, answer) ->
     currentPage = NavigationStore.currentPage()
     tabIndex = NavigationStore.tabIndexForCurrentPage()

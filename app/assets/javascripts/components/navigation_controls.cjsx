@@ -84,7 +84,6 @@ module.exports = class NavigationControls extends React.Component
       allAnswers: QuestionnaireStore.getAnswers()
     })
 
-
   onClick: (pageIndex) ->
     if NavigationStore.isCurrentPageCompleted()
       if pageIndex.constructor == Array
@@ -92,4 +91,8 @@ module.exports = class NavigationControls extends React.Component
       else
         NavigationStore.setPage(pageIndex)
     else
-      alert("Sorry! You can't move onto other pages yet, as there are some required questions without answers.")
+      alert("""
+        Sorry! You can't move onto other pages yet, as there are some required questions without answers.
+
+        #{QuestionnaireStore.unansweredQuestionsForPage(NavigationStore.currentPage()).join("\n")}"
+      """)

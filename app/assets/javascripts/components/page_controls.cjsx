@@ -34,4 +34,9 @@ module.exports = class PageControls extends React.Component
     if NavigationStore.isCurrentPageCompleted()
       NavigationStore.nextPage()
     else
-      alert("Sorry! You can't move onto the next page yet as there are some required questions without answers.")
+      alert("""
+        Sorry! You can't move onto the next page yet as there are
+        some required questions without answers.
+
+        #{QuestionnaireStore.unansweredQuestionsForPage(NavigationStore.currentPage()).join("\n")}
+      """)
