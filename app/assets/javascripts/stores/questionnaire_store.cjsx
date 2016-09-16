@@ -66,12 +66,12 @@ class QuestionnaireStore extends EventEmitter
       question = questionnaire[questionId]
 
       if page.multiple
-        for tab, tabIndex in (report.answers[page.id] || [])
-          unless @isQuestionAnswered(question, page, tabIndex)
-            return false
+        return false unless report.answers?[page.id]
+
+        for tab, tabIndex in report.answers[page.id]
+          return false unless @isQuestionAnswered(question, page, tabIndex)
       else
-        unless @isQuestionAnswered(question, page, null)
-          return false
+        return false unless @isQuestionAnswered(question, page, null)
 
     return true
 
