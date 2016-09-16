@@ -86,7 +86,10 @@ module.exports = class NavigationControls extends React.Component
 
 
   onClick: (pageIndex) ->
-    if pageIndex.constructor == Array
-      NavigationStore.setPage(pageIndex[0])
+    if NavigationStore.isCurrentPageCompleted()
+      if pageIndex.constructor == Array
+        NavigationStore.setPage(pageIndex[0])
+      else
+        NavigationStore.setPage(pageIndex)
     else
-      NavigationStore.setPage(pageIndex)
+      alert("Sorry! You can't move onto other pages yet, as there are some required questions without answers.")
