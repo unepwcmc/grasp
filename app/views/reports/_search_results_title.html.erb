@@ -1,5 +1,5 @@
 <% if ParamsUtils.strip_ordering_params(params).any? %>
-  <h3><%= pluralize(@reports.count, "Search Result") %></h3>
+  <h3><%= pluralize(@reports.total_count, "Search Result") %></h3>
 
   <h5>Search parameters</h5>
   <p>
