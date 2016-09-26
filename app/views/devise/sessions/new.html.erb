@@ -3,6 +3,13 @@
   <%= breadcrumb "Sign In" %>
 <% end %>
 
+<div class="alert alert-notice">
+  <p class="alert__close"><i class="fa fa-close"></i> Close</p>
+  <p class="alert__body">
+  Access to this database is restricted to GRASP partners and affiliates. To gain access, please send an email to database@un-grasp.org.
+  </p>
+</div>
+
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
