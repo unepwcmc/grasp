@@ -31,4 +31,8 @@ module CsvImporter
       {successful: true, reports: reports}
     end
   end
+
+  def self.generate_template
+    CsvConverter.columns.join(",")
+  end
 end
