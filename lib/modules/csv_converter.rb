@@ -85,7 +85,7 @@ class CsvConverter
 
   {
     "User Name"                => proc { |value| @report.user = find_user(value) },
-    "Collaboration?"           => proc { |value| answer("own_organisation", value) },
+    "Own Agency?"              => proc { |value| answer("own_organisation", value) },
     "Country of Discovery"     => proc { |value| answer("country_of_discovery", value) },
     "Region of Discovery"      => proc { |value| answer("region_of_discovery", value) },
     "Date of Discovery"        => proc { |value| answer("date_of_discovery", value) },
@@ -123,13 +123,12 @@ class CsvConverter
       answer("genus_parts", [value])
       add_genus(value, "parts")
     },
-    "Bone Qty"                 => proc { |value| answer_body_part("bone", value) },
-    "Foot/Hand Qty"            => proc { |value| answer_body_part("foot_hand", value) },
-    "Genitalia Qty"            => proc { |value| answer_body_part("genitalia", value) },
-    "Hair Qty"                 => proc { |value| answer_body_part("hair", value) },
-    "Meat Kg"                  => proc { |value| answer_body_part("meat", value, true) },
-    "Skin Qty"                 => proc { |value| answer_body_part("skin", value) },
+    "Bone (Femur) Qty"         => proc { |value| answer_body_part("bone_femur", value) },
+    "Bone (Humerus) Qty"       => proc { |value| answer_body_part("bone_humerus", value) },
+    "Foot Qty"                 => proc { |value| answer_body_part("foot", value) },
+    "Hand Qty"                 => proc { |value| answer_body_part("hand", value) },
     "Skull Qty"                => proc { |value| answer_body_part("skull", value) },
+    "Torso Qty"                => proc { |value| answer_body_part("torso", value) },
     "Confiscation?"            => proc { |value| answer("confiscated", value) },
     "Arrests Made?"            => proc { |value| answer("arrests_made", value) },
     "Prosecution?"             => proc { |value| answer("prosecution", value) },

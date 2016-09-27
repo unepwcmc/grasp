@@ -14,7 +14,7 @@ class QuantitiesQuestion extends React.Component
       <fieldset>
         <div className="label label--left answer__num-label">
           <div onClick={@handleClick.bind(@, "live")} className={@checkboxClassName("live")}></div>
-          <span className="label-body">Live</span>
+          <span className="label-body">Live ape</span>
 
           <div className="answer__num-container">
             <button className="answer__num-button" onClick={@decrement.bind(@, "live")}>-</button>
@@ -27,7 +27,7 @@ class QuantitiesQuestion extends React.Component
       <fieldset>
         <div className="label label--left answer__num-label">
           <div onClick={@handleClick.bind(@, "dead")} className={@checkboxClassName("dead")}></div>
-          <span className="label-body">Dead</span>
+          <span className="label-body">Dead ape</span>
 
           <div className="answer__num-container">
             <button className="answer__num-button" onClick={@decrement.bind(@, "dead")}>-</button>

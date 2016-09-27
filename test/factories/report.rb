@@ -8,8 +8,8 @@ FactoryGirl.define do
             "id": "own_organisation",
             "visible": true,
             "type": "single",
-            "question": "Are you reporting in collaboration with another Agency?",
-            "answers": ["Yes", "No"],
+            "question": "Are you reporting an incident observed by your own agency or an incident observed by another agency?",
+            "answers": ["Own Agency", "Another Agency"],
             "required": true,
             "children": {
               "Yes": ["new_agency_contact"]
