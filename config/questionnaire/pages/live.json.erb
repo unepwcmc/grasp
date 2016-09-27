@@ -157,6 +157,23 @@
   ],
   "other": true
 },
+"ape_for_sale_live": {
+  "id": "ape_for_sale_live",
+  "required": false,
+  "type": "single",
+  "question": "Was ape for sale? (optional)",
+  "answers": [
+    "Yes",
+    "No"
+  ]
+},
+"sale_price_live": {
+  "id": "sale_price_live",
+  "required": false,
+  "show_if": {"question": "ape_for_sale_live", "answer": "Yes"},
+  "type": "text",
+  "question": "What was sale price? (optional)"
+},
 "unique_identifiers_live": {
   "id": "unique_identifiers_live",
   "type": "text",
