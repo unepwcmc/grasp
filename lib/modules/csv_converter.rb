@@ -119,7 +119,7 @@ class CsvConverter
     "Dead Condition"           => proc { |value| answer("condition_dead", value, "dead") },
     "Dead Identifiers"         => proc { |value| answer("unique_identifiers_dead", value, "dead") },
     "Dead Name"                => proc { |value| answer("individual_name_dead", value, "dead") },
-    "Body Parts Ape (Genus)"   => proc { |value|
+    "Body Parts (Genus)"       => proc { |value|
       answer("genus_parts", [value])
       add_genus(value, "parts")
     },

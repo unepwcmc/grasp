@@ -57,7 +57,7 @@ module CsvBuilder
       "Type of Location",
       "Ape Status",
       # Looping names for live/dead
-      "Ape (Genus)",
+      "Species (Genus)",
       "Species/Subspecies",
       "Intended Use",
       "Photo",
