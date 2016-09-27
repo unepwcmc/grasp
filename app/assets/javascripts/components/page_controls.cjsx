@@ -26,12 +26,12 @@ module.exports = class PageControls extends React.Component
 
   nextPageClassName: ->
     className = "button button-primary button--larger page-controls__next"
-    className += " is-disabled" unless NavigationStore.isCurrentPageCompleted()
+    className += " is-disabled" if not NavigationStore.isCurrentPageCompleted() and QuestionnaireStore.getMode() != "show"
     className
 
   previousPage: -> NavigationStore.previousPage()
   nextPage:     ->
-    if NavigationStore.isCurrentPageCompleted()
+    if NavigationStore.isCurrentPageCompleted() or QuestionnaireStore.getMode() == "show"
       NavigationStore.nextPage()
     else
       alert("""

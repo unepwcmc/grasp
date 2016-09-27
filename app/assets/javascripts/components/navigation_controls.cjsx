@@ -85,7 +85,7 @@ module.exports = class NavigationControls extends React.Component
     })
 
   onClick: (pageIndex) ->
-    if NavigationStore.isCurrentPageCompleted()
+    if NavigationStore.isCurrentPageCompleted() or QuestionnaireStore.getMode() == "show"
       if pageIndex.constructor == Array
         NavigationStore.setPage(pageIndex[0])
       else
