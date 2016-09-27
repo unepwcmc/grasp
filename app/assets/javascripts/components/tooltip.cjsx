@@ -8,11 +8,9 @@ module.exports = class Tooltip extends React.Component
     }
 
   render: =>
-    <div>
-      <p>
-        <em onClick={@toggleTooltip}>
-          <i className="fa fa-question-circle"></i> Show help text
-        </em>
+    <div className="tooltip">
+      <p className="tooltip__trigger" onClick={@toggleTooltip}>
+        <i className="fa fa-question-circle tooltip__icon"></i> Show help text
       </p>
       {@renderTooltip()}
     </div>

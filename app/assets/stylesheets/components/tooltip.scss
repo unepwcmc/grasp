@@ -1,0 +1,15 @@
+@include b(tooltip) {
+  margin-bottom: 2.5rem;
+
+  @include e(trigger) {
+    font-family: 'Merriweather';
+    color: $steel-blue;
+    cursor: pointer;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  @include e(icon) {
+    margin-right: .5rem;
+  }
+}
