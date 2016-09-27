@@ -2,7 +2,6 @@
   "id": "genus_live",
   "required": true,
   "type": "single",
-  "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   "question": "Ape (Genus)",
   "answers": [
     "Bonobo (Pan)",
@@ -16,6 +15,7 @@
   "id": "species_subspecies_live",
   "type": "subspecies",
   "show_if": {"question": "genus_live", "answer": "Chimpanzee (Pan)"},
+  "tooltip": "Please do not guess the subspecies; input only on surety, ideally confirmed by DNA analysis.",
   "question": "Confirmation of Species/subspecies (optional)",
   "answers": [
     "Central chimpanzee (Pan troglodytes troglodytes)",
@@ -28,6 +28,7 @@
   "id": "species_subspecies_live",
   "type": "subspecies",
   "show_if": {"question": "genus_live", "answer": "Gorilla (Gorilla)"},
+  "tooltip": "Please do not guess the subspecies; input only on surety, ideally confirmed by DNA analysis.",
   "question": "Confirmation of Species/subspecies (optional)",
   "answers": [
     "Western lowland gorilla (Gorilla gorilla gorilla)",
@@ -40,6 +41,7 @@
   "id": "species_subspecies_live",
   "type": "subspecies",
   "show_if": {"question": "genus_live", "answer": "Orang-utan (Pongo)"},
+  "tooltip": "Please do not guess the subspecies; input only on surety, ideally confirmed by DNA analysis.",
   "question": "Confirmation of Species/subspecies (optional)",
   "answers": [
     "Bornean orang-utan (Pongo pygmaeus pygmaeus) – northwest populations",
@@ -52,7 +54,6 @@
   "id": "intended_use_live",
   "required": false,
   "type": "single",
-  "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   "question": "Intended use (optional)",
   "answers": [
     "Trophy" ,
@@ -67,14 +68,13 @@
   "id": "photo_live",
   "required": true,
   "type": "file",
-  "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "tooltip": "Be aware that you will have the option to upload photos at a later date if you do not have one available now.",
   "question": "Do you have a photo?"
 },
 "age_live": {
   "id": "age_live",
   "required": true,
   "type": "single",
-  "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   "question": "Age",
   "answers": [
     "Juvenile",
@@ -86,7 +86,6 @@
   "id": "gender_live",
   "required": true,
   "type": "single",
-  "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   "question": "Gender",
   "answers": [
     "Male",
@@ -98,7 +97,7 @@
   "id": "last_known_location_live",
   "required": true,
   "type": "single",
-  "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "tooltip": "Where is the ape currently, to the best of your knowledge?",
   "question": "Last known location of ape",
   "answers": [
     "With my organisation",
@@ -146,7 +145,6 @@
   "id": "condition_live",
   "required": true,
   "type": "single",
-  "tooltip": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
   "question": "Condition of ape",
   "answers": [
     "Good",
@@ -159,6 +157,7 @@
 "unique_identifiers_live": {
   "id": "unique_identifiers_live",
   "type": "text",
+  "tooltip": "Scars, missing digits, missing eyes, missing ears, etc.",
   "question": "Unique identifiers (optional)"
 },
 "individual_name_live": {

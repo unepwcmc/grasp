@@ -1,6 +1,7 @@
 "own_organisation": {
   "id": "own_organisation",
   "type": "single",
+  "tooltip": "Many seizures are made in collaboration with other agencies, sanctuaries, or law enforcement bodies. Please let us know what other organizations are involved with this incident.",
   "question": "Are you reporting in collaboration with another Agency?",
   "answers": ["Yes", "No"],
   "required": true
@@ -15,6 +16,7 @@
 "date_of_discovery": {
   "id": "date_of_discovery",
   "required": true,
+  "tooltip": "If you have seen this ape multiple times, please enter the date of the first sighting.",
   "type": "date",
   "question": "Date of discovery"
 },
@@ -27,6 +29,7 @@
   "id": "country_of_discovery",
   "required": true,
   "type": "select",
+  "tooltip": "Country of discovery may not necessarily be country of origin.",
   "question": "Country of discovery",
   "options": <%= partial("incident/countries") %>
 },
@@ -36,6 +39,7 @@
 "location_coords": {
   "id": "location_coords",
   "type": "gps",
+  "tooltip": "Please enter numerical values only.",
   "question": "Location of discovery: GPS coordinates (optional)"
 },
 "type_of_location": {
