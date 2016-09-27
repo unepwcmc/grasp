@@ -66,6 +66,8 @@ module CsvBuilder
       "Last Location",
       "Country of Origin",
       "Condition",
+      "Was ape for sale?",
+      "What was sale price?",
       "Identifiers",
       "Name",
       # Additional looping columns for body parts
@@ -121,6 +123,8 @@ module CsvBuilder
       last_known_location,
       ape.dig("alleged_origin_country_#{status}", 'selected'),
       ape.dig("condition_#{status}", 'selected'),
+      ape.dig("ape_for_sale_#{status}", 'selected'),
+      ape.dig("sale_price_#{status}", 'selected'),
       ape.dig("unique_identifiers_#{status}", 'selected'),
       ape.dig("individual_name_#{status}", 'selected')
     ]

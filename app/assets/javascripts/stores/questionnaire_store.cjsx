@@ -87,6 +87,8 @@ class QuestionnaireStore extends EventEmitter
       answer = report.answers[question.id]
       if question.type == "select"
         return (answer?.selected || "") in question.options
+      else if question.type == "form"
+        return (answer?.selected?.agency_name || "") != ""
       else
         return (answer?.selected || "") != ""
 
