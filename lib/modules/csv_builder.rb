@@ -71,13 +71,12 @@ module CsvBuilder
       "Identifiers",
       "Name",
       # Additional looping columns for body parts
-      "Bone Qty",
-      "Foot/Hand Qty",
-      "Genitalia Qty",
-      "Hair Qty",
-      "Meat Kg",
-      "Skin Qty",
+      "Bone (Femur) Qty",
+      "Bone (Humerus) Qty",
+      "Foot Qty",
+      "Hand Qty",
       "Skull Qty",
+      "Torso Qty",
       # Confiscation columns
       "Confiscation?",
       "Arrests Made?",
@@ -133,13 +132,12 @@ module CsvBuilder
   def self.build_parts_data report, genus
     genus = self.to_db_name(genus)
     [
-      report.data.dig('answers', "bone_#{genus}", 'selected') || 0,
-      report.data.dig('answers', "foot_hand_#{genus}", 'selected') || 0,
-      report.data.dig('answers', "genitalia_#{genus}", 'selected') || 0,
-      report.data.dig('answers', "hair_#{genus}", 'selected') || 0,
-      report.data.dig('answers', "meat_#{genus}", 'selected') || 0,
-      report.data.dig('answers', "skin_#{genus}", 'selected') || 0,
-      report.data.dig('answers', "skull_#{genus}", 'selected') || 0
+      report.data.dig('answers', "bone_femur_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "bone_humerus_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "foot_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "hand_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "skull_#{genus}", 'selected') || 0,
+      report.data.dig('answers', "torso_#{genus}", 'selected') || 0
     ]
   end
 
