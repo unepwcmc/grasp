@@ -102,6 +102,8 @@ class CsvConverter
     "Live Last Location"       => proc { |value| answer("last_known_location_live", value, "live") },
     "Live Country of Origin"   => proc { |value| answer("alleged_origin_country_live", value, "live") },
     "Live Condition"           => proc { |value| answer("condition_live", value, "live") },
+    "Live Ape For Sale"        => proc { |value| answer("ape_for_sale_live", value, "live") },
+    "Live Sale Price"          => proc { |value| answer("sale_price_live", value, "live") },
     "Live Identifiers"         => proc { |value| answer("unique_identifiers_live", value, "live") },
     "Live Name"                => proc { |value| answer("individual_name_live", value) },
     "Dead Ape (Genus)"         => proc { |value|
