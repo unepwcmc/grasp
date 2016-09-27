@@ -2,15 +2,15 @@
   "id": "own_organisation",
   "type": "single",
   "tooltip": "Many seizures are made in collaboration with other agencies, sanctuaries, or law enforcement bodies. Please let us know what other organizations are involved with this incident.",
-  "question": "Are you reporting in collaboration with another Agency?",
-  "answers": ["Yes", "No"],
+  "question": "Are you reporting an incident observed by your own agency or an incident observed by another agency?",
+  "answers": ["Own Agency", "Another Agency"],
   "required": true
 },
 "new_agency_contact": {
   "id": "new_agency_contact",
   "required": true,
   "type": "form",
-  "show_if": {"question": "own_organisation", "answer": "Yes"},
+  "show_if": {"question": "own_organisation", "answer": "Another Agency"},
   "question": "Agency contact details"
 },
 "date_of_discovery": {

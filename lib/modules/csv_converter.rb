@@ -85,7 +85,7 @@ class CsvConverter
 
   {
     "User Name"                => proc { |value| @report.user = find_user(value) },
-    "Collaboration?"           => proc { |value| answer("own_organisation", value) },
+    "Own Agency?"              => proc { |value| answer("own_organisation", value) },
     "Country of Discovery"     => proc { |value| answer("country_of_discovery", value) },
     "Region of Discovery"      => proc { |value| answer("region_of_discovery", value) },
     "Date of Discovery"        => proc { |value| answer("date_of_discovery", value) },
