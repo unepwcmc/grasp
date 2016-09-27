@@ -94,5 +94,5 @@ module.exports = class NavigationControls extends React.Component
       alert("""
         Sorry! You can't move onto other pages yet, as there are some required questions without answers.
 
-        #{QuestionnaireStore.unansweredQuestionsForPage(NavigationStore.currentPage()).join("\n")}"
+        #{QuestionnaireStore.unansweredQuestionsForPage(NavigationStore.currentPage()).join("\n")}
       """)
