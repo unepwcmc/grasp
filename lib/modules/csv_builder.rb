@@ -57,7 +57,7 @@ module CsvBuilder
       "Type of Location",
       "Ape Status",
       # Looping names for live/dead
-      "Ape (Genus)",
+      "Species (Genus)",
       "Species/Subspecies",
       "Intended Use",
       "Photo",
@@ -158,7 +158,7 @@ module CsvBuilder
       "bonobo (pan)" => "bonobo",
       "chimpanzee (pan)" => "chimpanzee",
       "gorilla (gorilla)" => "gorilla",
-      "orang-utan (pongo)" => "orangutan",
+      "orangutan (pongo)" => "orangutan",
       "unknown" => "unknown"
     }
 

@@ -6,7 +6,7 @@
 roles = ["admin", "validator", "provider"]
 roles.each { |r| Role.where(name: r).first_or_create }
 
-expertise = ["Bonobo (Pan)", "Gorilla (Gorilla)", "Chimpanzee (Pan)", "Orang-utan (Pongo)",
+expertise = ["Bonobo (Pan)", "Gorilla (Gorilla)", "Chimpanzee (Pan)", "Orangutan (Pongo)",
              "West Africa", "Central Africa", "East Africa", "Southeast Asia", "Rest of the World"]
 expertise.each { |e| Expertise.where(name: e).first_or_create }
 

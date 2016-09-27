@@ -75,7 +75,7 @@ class CsvConverter
       "Bonobo (Pan)" => "bonobo",
       "Chimpanzee (Pan)" => "chimpanzee",
       "Gorilla (Gorilla)" => "gorilla",
-      "Orang-utan (Pongo)" => "orangutan",
+      "Orangutan (Pongo)" => "orangutan",
       "Unknown" => "unknown"
     }
 
@@ -83,7 +83,7 @@ class CsvConverter
     genera[value] or raise CsvConversionError, error_message
   end
 
-  {
+  CONVERSIONS = {
     "User Name"                => proc { |value| @report.user = find_user(value) },
     "Own Agency?"              => proc { |value| answer("own_organisation", value) },
     "Country of Discovery"     => proc { |value| answer("country_of_discovery", value) },
@@ -119,7 +119,7 @@ class CsvConverter
     "Dead Condition"           => proc { |value| answer("condition_dead", value, "dead") },
     "Dead Identifiers"         => proc { |value| answer("unique_identifiers_dead", value, "dead") },
     "Dead Name"                => proc { |value| answer("individual_name_dead", value, "dead") },
-    "Body Parts Ape (Genus)"   => proc { |value|
+    "Body Parts (Genus)"       => proc { |value|
       answer("genus_parts", [value])
       add_genus(value, "parts")
     },
@@ -136,7 +136,13 @@ class CsvConverter
     "Punishment Successful?"   => proc { |value| answer("punishment", value) },
     "Other Illegal Activities" => proc { |value| answer("illegal_activities", value.split(",")) },
     "Man-made disturbances"    => proc { |value| answer("proximity", value.split(",")) }
-  }.each do |header, method|
+  }
+
+  CONVERSIONS.each do |header, method|
     self.send(:define_method, header, method)
+  end
+
+  def self.columns
+    CONVERSIONS.keys
   end
 end

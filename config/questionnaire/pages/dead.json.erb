@@ -2,12 +2,12 @@
   "id": "genus_dead",
   "required": true,
   "type": "single",
-  "question": "Ape (Genus)",
+  "question": "Species (Genus)",
   "answers": [
     "Bonobo (Pan)",
     "Chimpanzee (Pan)",
     "Gorilla (Gorilla)",
-    "Orang-utan (Pongo)",
+    "Orangutan (Pongo)",
     "Unknown"
   ]
 },
@@ -16,7 +16,7 @@
   "type": "subspecies",
   "show_if": {"question": "genus_dead", "answer": "Chimpanzee (Pan)"},
   "tooltip": "Please do not guess the subspecies; input only on surety, ideally confirmed by DNA analysis.",
-  "question": "Confirmation of Species/subspecies (optional)",
+  "question": "Confirmation of species/subspecies (optional)",
   "answers": [
     "Central chimpanzee (Pan troglodytes troglodytes)",
     "Western chimpanzee (Pan troglodytes verus)",
@@ -29,7 +29,7 @@
   "type": "subspecies",
   "show_if": {"question": "genus_dead", "answer": "Gorilla (Gorilla)"},
   "tooltip": "Please do not guess the subspecies; input only on surety, ideally confirmed by DNA analysis.",
-  "question": "Confirmation of Species/subspecies (optional)",
+  "question": "Confirmation of species/subspecies (optional)",
   "answers": [
     "Western lowland gorilla (Gorilla gorilla gorilla)",
     "Cross River gorilla (Gorilla gorilla diehli)",
@@ -40,14 +40,14 @@
 "orangutan_species_dead": {
   "id": "species_subspecies_dead",
   "type": "subspecies",
-  "show_if": {"question": "genus_dead", "answer": "Orang-utan (Pongo)"},
+  "show_if": {"question": "genus_dead", "answer": "Orangutan (Pongo)"},
   "tooltip": "Please do not guess the subspecies; input only on surety, ideally confirmed by DNA analysis.",
-  "question": "Confirmation of Species/subspecies (optional)",
+  "question": "Confirmation of species/subspecies (optional)",
   "answers": [
-    "Bornean orang-utan (Pongo pygmaeus pygmaeus) – northwest populations",
-    "Bornean orang-utan (Pongo pygmaeus morio) – east populations",
-    "Bornean orang-utan (Pongo pygmaeus wurmbii) – southwest populations",
-    "Sumatran orang-utan (Pongo abelii)"
+    "Bornean orangutan (Pongo pygmaeus pygmaeus) – northwest populations",
+    "Bornean orangutan (Pongo pygmaeus morio) – east populations",
+    "Bornean orangutan (Pongo pygmaeus wurmbii) – southwest populations",
+    "Sumatran orangutan (Pongo abelii)"
   ]
 },
 "intended_use_dead": {
