@@ -158,7 +158,7 @@ module CsvBuilder
       "bonobo (pan)" => "bonobo",
       "chimpanzee (pan)" => "chimpanzee",
       "gorilla (gorilla)" => "gorilla",
-      "orang-utan (pongo)" => "orangutan",
+      "orangutan (pongo)" => "orangutan",
       "unknown" => "unknown"
     }
 

@@ -75,7 +75,7 @@ class CsvConverter
       "Bonobo (Pan)" => "bonobo",
       "Chimpanzee (Pan)" => "chimpanzee",
       "Gorilla (Gorilla)" => "gorilla",
-      "Orang-utan (Pongo)" => "orangutan",
+      "Orangutan (Pongo)" => "orangutan",
       "Unknown" => "unknown"
     }
 
