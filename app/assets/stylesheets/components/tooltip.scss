@@ -1,15 +1,36 @@
 @include b(tooltip) {
   margin-bottom: 2.5rem;
+  background-color: $wild-sand;
+  padding: 1.5rem;
+  border-radius: 3px;
 
   @include e(trigger) {
     font-family: 'Merriweather';
     color: $steel-blue;
     cursor: pointer;
-    font-style: italic;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
   }
 
   @include e(icon) {
     margin-right: .5rem;
+  }
+
+  @include e(image) {
+    float: left;
+    margin-right: 2rem;
+    max-width: 30%;
+
+    @include only-mobile {
+      margin-bottom: 1rem;
+      margin-right: initial;
+      max-width: initial;
+      width: 100%;
+      float: none;
+    }
+  }
+
+  @include e(paragraph) {
+    margin-top: 2.5rem;
+    overflow: hidden;
   }
 }

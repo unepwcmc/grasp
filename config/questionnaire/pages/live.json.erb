@@ -28,7 +28,7 @@
   "id": "species_subspecies_live",
   "type": "subspecies",
   "show_if": {"question": "genus_live", "answer": "Gorilla (Gorilla)"},
-  "tooltip": "Please do not guess the subspecies; input only on surety, ideally confirmed by DNA analysis.",
+  "tooltip": "<%= tooltip("gorilla_species").gsub("\n", "") %>",
   "question": "Confirmation of species/subspecies (optional)",
   "answers": [
     "Western lowland gorilla (Gorilla gorilla gorilla)",

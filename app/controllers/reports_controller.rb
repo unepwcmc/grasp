@@ -61,9 +61,10 @@ class ReportsController < ApplicationController
 
   def update
     @report = Report.find(params[:id])
+    old_state = @report.state
 
     if @report.update(report_params)
-      if @report.state == "Submitted"
+      if @report.state == "Submitted" && old_state != @report.state
         ExpertiseMatcher.find_experts(@report).each do |validator|
           NotificationMailer.notify_validator_of_submitted_report(@report, validator).deliver_later
         end

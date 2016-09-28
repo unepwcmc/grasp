@@ -294,7 +294,9 @@ input[type="radio"] {
 label > .label-body {
   display: inline-block;
   margin-left: .5rem;
-  font-weight: normal; }
+  font-weight: normal;
+  max-width: 80%;
+  vertical-align: middle; }
 
 
 /* Lists
