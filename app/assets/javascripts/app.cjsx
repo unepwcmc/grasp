@@ -38,11 +38,11 @@ module.exports =
     )
 
     setTimeout (->
-      $('.alert').slideUp()
+      $(".alert:not('.js-stay')").slideUp()
       return
     ), 10000
 
-    $('.alert').click(->
+    $(".alert:not('.js-stay')").click(->
       $(this).slideUp()
     )
 
