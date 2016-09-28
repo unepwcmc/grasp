@@ -1,0 +1,53 @@
+<h1>Questionnaire Template</h1>
+
+<div class="s-template">
+
+  <div>
+    <h3>Pages Index</h3>
+    <ul>
+      <% @template["pages"].each do |page| %>
+        <li>
+          <a href="#<%= page["id"] %>">
+            <%= page["title"] %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <% @template["pages"].each do |page| %>
+    <h4 id="<%= page["id"] %>">
+      <a href="#<%= page["id"] %>">
+        <%= page["title"] %>
+      </a>
+    </h4>
+
+    <% page["questions"].map { |id| [@template["questions"][id], id] }.each do |(question, id)| %>
+      <div class="row">
+        <h5 id="<%= id %>">
+          <a href="#<%= id %>">
+            <%= question["question"] %>
+          </a>
+        </h5>
+
+        <p><strong>Type:</strong> <%= question["type"].titleize %></p>
+        <% if question["tooltip"] %>
+          <p><strong>Help text:</strong> <%= question["tooltip"].html_safe %></p>
+        <% end %>
+        <% if show_if = question["show_if"] %>
+          <p><strong>It is displayed if</strong> question <strong><%= show_if["question"].titleize %></strong> has answer <strong><%= show_if["answer"] %></strong></p>
+        <% end %>
+
+        <% if question["answers"] || question["options"] %>
+          <p><strong>Options:</strong></p>
+          <ul>
+            <% (question["answers"] || question["options"]).each do |answer| %>
+              <li><%= answer %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
+      </div>
+    <% end %>
+  <% end %>
+</div>

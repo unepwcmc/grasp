@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   get "/reports", to: "reports#index", as: :authenticated_root
+  get "/questionnaire_template", to: "questionnaires#template"
 
   resources :agencies
 
