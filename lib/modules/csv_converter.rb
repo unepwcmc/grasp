@@ -1,8 +1,9 @@
 class CsvConverter
   class CsvConversionError < RuntimeError; end
-  attr_reader :report
+  attr_reader :report, :has_data
 
   def initialize report
+    @has_data = false
     @report = report
     @report.data = {
       "answers" => {},
@@ -12,7 +13,10 @@ class CsvConverter
   end
 
   def convert header, value
-    send(header.to_sym, value) if value && self.class.method_defined?(header)
+    if value && self.class.method_defined?(header)
+      @has_data = true
+      send(header.to_sym, value)
+    end
   end
 
   def add_genus value, type

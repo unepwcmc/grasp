@@ -20,7 +20,7 @@ module CsvImporter
         column += 1
       end
 
-      reports << converter.report
+      reports << converter.report if converter.has_data
       line += 1
     end
 
