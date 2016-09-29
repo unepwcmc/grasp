@@ -32,9 +32,8 @@ module CsvBuilder
   def self.make_report_row(report, ape=nil, status=nil, genus=nil)
     # Construct the segments of a row, if the data is not needed,
     # return the same amount of columns with a nil value to make rows equal
-
     report_data       = self.build_report_data(report)
-    ape_data          = ape ? self.build_ape_data(ape, status) : Array.new(12, nil)
+    ape_data          = ape ? self.build_ape_data(ape, status) : Array.new(14, nil)
     parts_data        = status == :parts ? self.build_parts_data(report, genus) : Array.new(7, nil)
     confiscation_data = self.build_confiscation_data(report)
 

@@ -17,9 +17,10 @@ class BulkUploadsController < ApplicationController
   end
 
   def update
-    @bulk_upload = BulkUpload.find(params[:id]) or raise_404
+    redirect_to(:back) and return if params[:file].nil?
 
     result = CsvImporter.import(params[:file].path)
+    @bulk_upload = BulkUpload.find(params[:id]) or raise_404
     @bulk_upload.update(result)
 
     if result[:successful]
@@ -30,6 +31,8 @@ class BulkUploadsController < ApplicationController
   end
 
   def create
+    redirect_to(:back) and return if params[:file].nil?
+
     result = CsvImporter.import(params[:file].path)
     if result[:successful]
       redirect_to BulkUpload.create(result), flash: {success: t("bulk_uploads.upload_successful")}

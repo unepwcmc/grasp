@@ -14,7 +14,7 @@
 
 <%= form_tag bulk_uploads_path, multipart: true do %>
   <fieldset class="form__group">
-    <%= file_field_tag "file" %>
+    <%= file_field_tag "file", required: true %>
   </fieldset>
 
   <%= submit_tag "Upload file", class: "button button-primary" %>

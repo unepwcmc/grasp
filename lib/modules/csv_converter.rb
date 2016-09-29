@@ -4,10 +4,10 @@ class CsvConverter
 
   def initialize report
     @report = report
-    report.data = {
-      answers: {},
-      genera: {},
-      state: "Validated"
+    @report.data = {
+      "answers" => {},
+      "genera"  => {},
+      "state"   => "Validated"
     }
   end
 
@@ -16,10 +16,10 @@ class CsvConverter
   end
 
   def add_genus value, type
-    @report.data[:genera][type] ||= []
+    @report.data["genera"][type] ||= []
 
-    unless @report.data[:genera][type].include?(value)
-      @report.data[:genera][type] << value
+    unless @report.data["genera"][type].include?(value)
+      @report.data["genera"][type] << value
     end
   end
 
