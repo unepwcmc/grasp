@@ -15,7 +15,7 @@ class CsvConverter
   def convert header, value
     if value && self.class.method_defined?(header)
       @has_data = true
-      send(header.to_sym, value)
+      send(header.to_sym, value.strip)
     end
   end
 
@@ -59,10 +59,10 @@ class CsvConverter
     raise CsvConversionError, missing_error if coords.size != 2
 
     lat_conversion_error = "Incorrect GPS coordinates supplied. Latitude is not a valid number"
-    lat = Float(coords.first) rescue(raise CsvConversionError, lat_conversion_error)
+    lat = Float(coords.first.strip) rescue(raise CsvConversionError, lat_conversion_error)
 
     lng_conversion_error = "Incorrect GPS coordinates supplied. Longitude is not a valid number"
-    lng = Float(coords.last) rescue(raise CsvConversionError, lng_conversion_error)
+    lng = Float(coords.last.strip) rescue(raise CsvConversionError, lng_conversion_error)
 
     answer("location_coords", {lat: lat, lng: lng})
   end
@@ -93,7 +93,7 @@ class CsvConverter
     "Country of Discovery"     => proc { |value| answer("country_of_discovery", value) },
     "Region of Discovery"      => proc { |value| answer("region_of_discovery", value) },
     "Date of Discovery"        => proc { |value| answer("date_of_discovery", value) },
-    "GPS Location"             => proc { |value|  },
+    "GPS Location"             => proc { |value| answer_coords(value) },
     "Type of Location"         => proc { |value| answer("type_of_location", value) },
     "Live Ape (Genus)"         => proc { |value|
       answer("genus_live", value, "live")
