@@ -6,7 +6,7 @@ module CsvImporter
     reports = []
     line = 1
 
-    CSV.foreach(csv_path, headers: true) do |row|
+    CSV.foreach(csv_path, headers: true, encoding: "ISO-8859-1") do |row|
       converter = CsvConverter.new(Report.new)
 
       column = 1
