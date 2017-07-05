@@ -24,8 +24,8 @@ class Report < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :bulk_upload
-  has_many :validations
-  has_many :images
+  has_many :validations, dependent: :destroy
+  has_many :images, dependent: :destroy
 
   def user_name
     "#{user&.first_name} #{user&.last_name}".strip
