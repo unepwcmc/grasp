@@ -15,10 +15,10 @@
 #
 # Foreign Keys
 #
-#  fk_rails_c7699d537d  (user_id => users.id)
+#  fk_rails_...  (user_id => users.id)
 #
 
-class Report < ActiveRecord::Base
+class Report < ApplicationRecord
   include ParamsUtils
   include SearchBuilder
 

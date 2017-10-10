@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Frameworks
-gem 'rails', '4.2.6'
+gem 'rails', '~> 5.0.0'
 gem 'sinatra', :require => false
 
 # DB
@@ -22,7 +22,7 @@ gem 'dotenv-rails', '~> 2.1.1'
 
 # Logging'n'tracking
 gem 'appsignal', '~> 1.1.9'
-gem 'exception_notification', '~> 4.1.4'
+gem 'exception_notification', '~> 4.2.2'
 gem 'slack-notifier', '~> 1.5.1'
 
 # Authentication and Authorization

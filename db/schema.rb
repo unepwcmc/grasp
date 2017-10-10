@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -62,9 +61,8 @@ ActiveRecord::Schema.define(version: 20160927163754) do
     t.datetime "updated_at",     null: false
     t.integer  "user_id"
     t.integer  "bulk_upload_id"
+    t.index ["user_id"], name: "index_reports_on_user_id", using: :btree
   end
-
-  add_index "reports", ["user_id"], name: "index_reports_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -97,12 +95,11 @@ ActiveRecord::Schema.define(version: 20160927163754) do
     t.string   "post_code"
     t.string   "country"
     t.string   "mobile_number"
+    t.index ["agency_id"], name: "index_users_on_agency_id", using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["role_id"], name: "index_users_on_role_id", using: :btree
   end
-
-  add_index "users", ["agency_id"], name: "index_users_on_agency_id", using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
   create_table "validations", force: :cascade do |t|
     t.integer  "user_id"
@@ -112,10 +109,9 @@ ActiveRecord::Schema.define(version: 20160927163754) do
     t.string   "state"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.index ["report_id"], name: "index_validations_on_report_id", using: :btree
+    t.index ["user_id"], name: "index_validations_on_user_id", using: :btree
   end
-
-  add_index "validations", ["report_id"], name: "index_validations_on_report_id", using: :btree
-  add_index "validations", ["user_id"], name: "index_validations_on_user_id", using: :btree
 
   add_foreign_key "reports", "users"
   add_foreign_key "users", "agencies"

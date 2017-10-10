@@ -15,7 +15,7 @@
 #  country    :string
 #
 
-class Agency < ActiveRecord::Base
+class Agency < ApplicationRecord
   has_many :users
   has_many :reports, through: :users
 

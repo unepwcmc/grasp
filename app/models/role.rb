@@ -8,7 +8,7 @@
 #  updated_at :datetime         not null
 #
 
-class Role < ActiveRecord::Base
+class Role < ApplicationRecord
   validates :name, presence: true
   has_many :users
 

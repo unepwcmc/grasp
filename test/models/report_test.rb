@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: reports
+#
+#  id             :integer          not null, primary key
+#  data           :jsonb
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  user_id        :integer
+#  bulk_upload_id :integer
+#
+# Indexes
+#
+#  index_reports_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
+
 require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase

@@ -1,4 +1,4 @@
-class CsvExportJob < ActiveJob::Base
+class CsvExportJob < ApplicationJob
   queue_as :default
 
   def perform(report_ids, user)

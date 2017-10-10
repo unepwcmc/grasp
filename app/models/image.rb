@@ -10,9 +10,9 @@
 #  report_id         :integer
 #
 
-class Image < ActiveRecord::Base
+class Image < ApplicationRecord
   has_attached_file :file, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\z/
 
-  belongs_to :report
+  belongs_to :report, optional: true
 end

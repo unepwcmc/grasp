@@ -9,6 +9,6 @@
 #  updated_at      :datetime
 #
 
-class BulkUpload < ActiveRecord::Base
+class BulkUpload < ApplicationRecord
   has_many :reports
 end

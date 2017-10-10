@@ -37,11 +37,11 @@
 #
 # Foreign Keys
 #
-#  fk_rails_627daf9bbe  (agency_id => agencies.id)
-#  fk_rails_642f17018b  (role_id => roles.id)
+#  fk_rails_...  (agency_id => agencies.id)
+#  fk_rails_...  (role_id => roles.id)
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

@@ -18,11 +18,11 @@
 #
 # Foreign Keys
 #
-#  fk_rails_1b0584397c  (user_id => users.id)
-#  fk_rails_6ad3d98312  (report_id => reports.id)
+#  fk_rails_...  (report_id => reports.id)
+#  fk_rails_...  (user_id => users.id)
 #
 
-class Validation < ActiveRecord::Base
+class Validation < ApplicationRecord
   belongs_to :user
   belongs_to :report
 end
