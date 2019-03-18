@@ -19,6 +19,13 @@ set :scm, :git
 set :scm_username, "unepwcmc-read"
 
 
+set :nvm_type, :user # or :system, depends on your nvm setup
+set :nvm_node, 'v10.15.1'
+set :nvm_map_bins, %w{node npm yarn}
+
+set :npm_flags, '--silent --no-progress'
+
+
 set :rvm_type, :user
 set :rvm_ruby_version, '2.3.1'
 
