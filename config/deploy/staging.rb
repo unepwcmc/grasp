@@ -1,10 +1,11 @@
 set :stage, :staging
+set :branch, "supported-staging"
 
-server "web-staging.linode.unep-wcmc.org", user: 'wcmc', roles: %w{app web db}
+server "web-supported-staging.linode.unep-wcmc.org", user: 'wcmc', roles: %w{app web db}
 
 
 set :application, "grasp"
-set :server_name, "grasp.web-staging.linode.unep-wcmc.org"
+set :server_name, "grasp.web-supported-staging.linode.unep-wcmc.org"
 set :sudo_user, "wcmc"
 set :app_port, "80"
 
