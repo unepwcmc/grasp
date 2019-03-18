@@ -23,7 +23,23 @@ set :nvm_type, :user # or :system, depends on your nvm setup
 set :nvm_node, 'v10.15.1'
 set :nvm_map_bins, %w{node npm yarn}
 
-set :npm_flags, '--silent --no-progress'
+
+
+namespace :npm do
+  desc 'Install dependencies with npm'
+  task :install do
+    on roles(:web) do
+      within release_path do
+        execute "cd '#{release_path}'; npm install"
+      end
+    end
+  end
+end
+
+
+before 'deploy:started', 'npm:install'
+
+
 
 
 set :rvm_type, :user
