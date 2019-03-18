@@ -30,16 +30,16 @@ namespace :npm do
   task :install do
     on roles(:web) do
       within release_path do
-        execute "cd '#{release_path}'; npm install"
+        execute "bash -c 'source ~/.nvm/nvm.sh && cd '#{release_path}' && npm install'"
       end
     end
   end
 end
 
 
-before 'deploy:started', 'npm:install'
+#before 'deploy:starting', 'npm:install'
 
-
+before 'deploy:compile_assets', 'npm:install'
 
 
 set :rvm_type, :user
