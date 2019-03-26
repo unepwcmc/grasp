@@ -19,6 +19,29 @@ set :scm, :git
 set :scm_username, "unepwcmc-read"
 
 
+set :nvm_type, :user # or :system, depends on your nvm setup
+set :nvm_node, 'v10.15.1'
+set :nvm_map_bins, %w{node npm yarn}
+
+
+
+namespace :npm do
+  desc 'Install dependencies with npm'
+  task :install do
+    on roles(:web) do
+      within release_path do
+        execute "bash -c 'source ~/.nvm/nvm.sh && cd '#{release_path}' && npm install'"
+      end
+    end
+  end
+end
+
+
+#before 'deploy:starting', 'npm:install'
+
+before 'deploy:compile_assets', 'npm:install'
+
+
 set :rvm_type, :user
 set :rvm_ruby_version, '2.3.1'
 
