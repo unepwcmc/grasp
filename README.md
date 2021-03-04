@@ -17,6 +17,24 @@ sudo apt install libssl1.0-dev
 rbenv install 2.3.1
 ```
 
+Note also that the version of bundler used `cat Gemfile.lock` is 1.12.5:
+
+```
+BUNDLED WITH
+   1.12.5
+```
+
+So, (if you don't already have 2.3.1 installed) you should install that version:
+
+```
+gem install bundler -v 1.12.5
+```
+
+If you already have multiple versions of bundler installed, you can specify the version when using it like so:
+
+```
+bundle _1.12.5_ install
+```
 
 ```
   $ git clone https://github.com/unepwcmc/grasp
