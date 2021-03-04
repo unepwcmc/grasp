@@ -8,6 +8,16 @@ GRASP is a Rails 4 app, using a Postgres database, built with Facebook's React.
 Needless to say, make sure to have Ruby and Node.js installed. From there, it's
 all pretty standard:
 
+Dependencies:
+* Ruby v2.3.1
+
+In Linux (with rbenv) ensure you have OpenSSL lib installed before proceeding to install Ruby v2.3.1:
+```
+sudo apt install libssl1.0-dev
+rbenv install 2.3.1
+```
+
+
 ```
   $ git clone https://github.com/unepwcmc/grasp
   $ cd grasp
