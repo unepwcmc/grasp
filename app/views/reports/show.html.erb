@@ -10,7 +10,7 @@
   <% end %>
 <% end %>
 
-<div id="report-container" data-report-mode="show" data-report-id=<%= @report.id %>></div>
+<div id="report-container" data-report-mode="show" data-report-id="<%= @report.id %>"></div>
 
 <script>var questionnaireTemplate = <%= raw(@questionnaire_template) %></script>
 <script>var reportData = <%= raw(@report.data.to_json) %></script>

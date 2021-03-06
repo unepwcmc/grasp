@@ -50,7 +50,7 @@ class QuestionnaireStore extends EventEmitter
   setMode: (mode) -> questionnaireMode = mode
   getMode: -> questionnaireMode
 
-  getAnswers:   -> report.answers
+  getAnswers: -> report.answers
   getQuestions: -> questionnaire
 
   requiredQuestionsAnswered: ->

@@ -126,16 +126,21 @@ class Question extends React.Component
   renderAppropriateAnswer: =>
     return <p>N/A</p> unless @props.answer?.selected
 
-    general = @renderAnswerLabel(@props.answer)
     switch @props.data.type
-      when "single"           then general
-      when "select"           then general
-      when "agency"           then general
-      when "date"             then general
-      when "text"             then general
-      when "numeric"          then general
-      when "decimal_numeric"  then general
-      when "form"             then general
+      when "single"           then @renderAnswerLabel(@props.answer)
+      when "select"           then @renderAnswerLabel(@props.answer)
+      when "agency"           then @renderAnswerLabel(@props.answer)
+      when "date"             then @renderAnswerLabel(@props.answer)
+      when "text"             then @renderAnswerLabel(@props.answer)
+      when "numeric"          then @renderAnswerLabel(@props.answer)
+      when "decimal_numeric"  then @renderAnswerLabel(@props.answer)
+      when "form"
+        <div>
+          <p>Agency Name: {@props.answer?.selected?.agency_name || 'N/A'}</p>
+          <p>Contact Name: {@props.answer?.selected?.contact_name || 'N/A'}</p>
+          <p>Telephone: {@props.answer?.selected?.telephone || 'N/A'}</p>
+          <p>Email: {@props.answer?.selected?.email || 'N/A'}</p>
+        </div>
       when "file"
         if @props.answer?.selected?.length > 0
           <ul>
@@ -166,7 +171,7 @@ class Question extends React.Component
         </div>
 
   renderAnswerLabel: (answer) =>
-    isString = answer.selected.constructor == String
+    isString = _.isString(answer.selected)
     matches = if isString then answer.selected.match(/(.*) \((.*)\)/) else false
     isAnOtherAnswer = _.contains(@props.data.other_answers, answer.selected)
 

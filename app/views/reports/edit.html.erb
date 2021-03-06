@@ -5,7 +5,7 @@
   <%= breadcrumb "Edit Report", edit_report_path(@report.id) %>
 <% end %>
 
-<div id="report-container" data-report-mode="edit" data-report-id=<%= @report.id %>></div>
+<div id="report-container" data-report-mode="edit" data-report-id="<%= @report.id %>"></div>
 
 <script>var questionnaireTemplate = <%= raw(@questionnaire_template) %></script>
 <script>var reportData = <%= raw(@report.data.to_json) %></script>

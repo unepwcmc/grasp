@@ -1,3 +1,4 @@
+_ = require("underscore")
 React = require("react")
 Question = require("components/question")
 NavigationStore = require("stores/navigation_store")
