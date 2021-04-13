@@ -10,8 +10,8 @@ gem 'mimemagic', '~> 0.3.6'
 
 # DB
 gem 'pg', '~> 0.18.4'
-# This is the only reverse-dependency of mimemagic and is
-# deprecated in favour of ActiveStorage.
+# Paperclip is the only reverse-dependency of mimemagic and is deprecated in 
+# favour of ActiveStorage. It can be refactored out when upgrading to Rails 5.2.
 # If this is removed, also remove mimemagic.
 gem 'paperclip', '~> 5.1.0'
 
