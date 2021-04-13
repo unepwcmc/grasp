@@ -3,9 +3,16 @@ source 'https://rubygems.org'
 # Frameworks
 gem 'rails', '4.2.6'
 gem 'sinatra', :require => false
+# The previous version of mimemagic was pulled on 20/03/21 
+# and licensing changed to GPL2.
+# Can be removed if paperclip is removed.
+gem 'mimemagic', '~> 0.3.6'
 
 # DB
 gem 'pg', '~> 0.18.4'
+# This is the only reverse-dependency of mimemagic and is
+# deprecated in favour of ActiveStorage.
+# If this is removed, also remove mimemagic.
 gem 'paperclip', '~> 5.1.0'
 
 # Frontend
