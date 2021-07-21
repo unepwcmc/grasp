@@ -8,6 +8,23 @@
   @content
 }
 
+@mixin button--outline {
+  @include button {
+    background-color: transparent;
+    border: 1px solid $white;
+    color: $white;
+    padding: 10px;
+    text-decoration: none;
+
+    display: inline-block;
+
+    &:hover {
+      background-color: $button__bg-color;
+      color: $white;
+    }
+  }
+}
+
 .button, .button.button-primary, button.button-primary, input.button-primary[type="submit"], input.button-primary[type="reset"], input.button-primary[type="button"] {
   @include button;
 
