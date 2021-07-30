@@ -32,6 +32,11 @@
     }
   }
 
+  @include e(button) {
+    @include button--outline;
+    font-weight: 300;
+  }
+
   @include e(item) {
     margin-bottom: 2.5rem;
     font-size: 1.25rem;
