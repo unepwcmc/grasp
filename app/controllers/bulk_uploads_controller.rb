@@ -31,13 +31,19 @@ class BulkUploadsController < ApplicationController
   end
 
   def create
-    redirect_to(:back) and return if params[:file].nil?
+    redirect_to(:back) and return if params[:files].nil?
 
-    result = CsvImporter.import(params[:file].path)
-    if result[:successful]
-      redirect_to BulkUpload.create(result), flash: {success: t("bulk_uploads.upload_successful")}
-    else
-      redirect_to BulkUpload.create(result), flash: {error: t("bulk_uploads.upload_error")}
+    params[:files].each_with_index do |file, index|
+      result = CsvImporter.import(file.path)
+      
+      if result[:successful]
+        BulkUpload.create(result)
+        
+        next if params[:files][index+1]
+        redirect_to bulk_uploads_path flash: {success: t("bulk_uploads.upload_successful")}
+      else
+        redirect_to BulkUpload.create(result), flash: {error: t("bulk_uploads.upload_error")}
+      end
     end
   end
 
