@@ -33,17 +33,14 @@ class BulkUploadsController < ApplicationController
   def create
     redirect_to(:back) and return if params[:files].nil?
 
-    params[:files].each_with_index do |file, index|
-      result = CsvImporter.import(file.path)
-      
-      if result[:successful]
-        BulkUpload.create(result)
-        
-        next if params[:files][index+1]
-        redirect_to bulk_uploads_path flash: {success: t("bulk_uploads.upload_successful")}
-      else
-        redirect_to BulkUpload.create(result), flash: {error: t("bulk_uploads.upload_error")}
-      end
+    results = params[:files].map { |file| CsvImporter.import(file.path) }
+    bulk_upload_possible = results.all? { |result| result[:successful] }
+
+    if bulk_upload_possible
+      results.each { |result| BulkUpload.create(result) }
+      redirect_to bulk_uploads_path flash: {success: t("bulk_uploads.upload_successful")}
+    else
+      redirect_to BulkUpload.create(result), flash: {error: t("bulk_uploads.upload_error")}
     end
   end
 
