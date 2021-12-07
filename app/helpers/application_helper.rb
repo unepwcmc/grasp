@@ -32,4 +32,16 @@ module ApplicationHelper
   def display_or_default(data, default="N/A")
     data.present? ? data : default
   end
+
+  # Bulk Upload index errors should persist so users can see the errors in their bulk upload
+  def flash_should_persist?
+    return false unless controller_name == 'bulk_uploads' && action_name == 'index'
+    return false unless flash.present?
+
+    begin
+      flash.any? { |key, val| key == 'error' }
+    rescue
+      false
+    end
+  end
 end

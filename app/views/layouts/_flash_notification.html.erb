@@ -1,6 +1,8 @@
 <% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>">
+  <div class="alert alert-<%= key %> <%= 'js-stay' if flash_should_persist? %>"
+  <% unless flash_should_persist? %>
     <p class="alert__close"><i class="fa fa-close"></i> Close</p>
+  <% end %>
     <h4 class="alert__title">
       <i class="fa fa-<%= alert_key_to_fa_icon(key) %>"></i> <%= key.titleize %>!
     </h4>

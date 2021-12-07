@@ -2,6 +2,7 @@ require 'csv'
 
 module CsvImporter
   def self.import(csv_path)
+    # the presence of happy_accidents ultimately determines the value of the :successful key in the output hash
     happy_accidents = []
     reports = []
     line = 1
@@ -14,6 +15,7 @@ module CsvImporter
         begin
           converter.convert(header, value)
         rescue CsvConverter::CsvConversionError => e
+          # "happy_accidents" only added when this error is raised.
           happy_accidents << {line: line, column: column, header: header, message: e.message}
         end
 
