@@ -25,10 +25,10 @@ module CsvImporter
     end
 
     if happy_accidents.any?
-      {successful: false, happy_accidents: happy_accidents}
+      { successful: false, happy_accidents: happy_accidents }
     else
       ActiveRecord::Base.transaction { reports.each(&:save!) }
-      {successful: true, reports: reports}
+      { successful: true, reports: reports }
     end
   end
 
