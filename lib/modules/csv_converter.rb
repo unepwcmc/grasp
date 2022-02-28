@@ -13,6 +13,9 @@ class CsvConverter
   end
 
   def convert header, value
+    invalid_header_error_message = "'#{header}' is not a valid column header."
+    raise CsvConversionError, invalid_header_error_message unless self.class.columns.include? header
+
     if value && self.class.method_defined?(header)
       @has_data = true
       send(header.to_sym, value.strip)
