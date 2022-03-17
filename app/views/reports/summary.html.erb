@@ -16,42 +16,45 @@
 <h3>Report status</h3>
 <%= report_state_description(@report.state) %>
 
-<h3>Report provider</h3>
+<% if @report.user.present? %>
+  <h3>Report provider</h3>
 
-<h5>
-<strong><%= @report.user.full_name %></strong><br>
-  <%= display_or_default(@report.user.agency.name) %>
-</h5>
+  <h5>
+    <strong><%= @report.user.full_name %></strong>
+    <br>
+    <%= display_or_default(@report.user.agency.name) %>
+  </h5>
 
-<div class="form__group">
-  <strong> Email (primary) </strong>
-  <div class="form__field">
-    <%= display_or_default(@report.user.email)  %>
+  <div class="form__group">
+    <strong> Email (primary) </strong>
+    <div class="form__field">
+      <%= display_or_default(@report.user.email)  %>
+    </div>
   </div>
-</div>
 
-<div class="form__group">
-  <strong> Email (secondary) </strong>
-  <div class="form__field">
-    <%= display_or_default(@report.user.second_email) %>
+  <div class="form__group">
+    <strong> Email (secondary) </strong>
+    <div class="form__field">
+      <%= display_or_default(@report.user.second_email) %>
+    </div>
   </div>
-</div>
 
-<div class="form__group">
-  <strong> Mobile phone </strong>
-  <div class="form__field">
-    <%= display_or_default(@report.user.mobile_number) %>
+  <div class="form__group">
+    <strong> Mobile phone </strong>
+    <div class="form__field">
+      <%= display_or_default(@report.user.mobile_number) %>
+    </div>
   </div>
-</div>
 
-<div class="form__group">
-  <strong> Skype username </strong>
-  <div class="form__field">
-    <%= display_or_default(@report.user.skype_username) %>
+  <div class="form__group">
+    <strong> Skype username </strong>
+    <div class="form__field">
+      <%= display_or_default(@report.user.skype_username) %>
+    </div>
   </div>
-</div>
-
-<hr>
+  
+  <hr>
+<% end %>
 
 <h3>Report details</h3>
 
