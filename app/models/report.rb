@@ -26,6 +26,8 @@ class Report < ActiveRecord::Base
   belongs_to :bulk_upload
   has_many :validations, dependent: :destroy
   has_many :images, dependent: :destroy
+  
+  validates :user_id, presence: true
 
   def user_name
     "#{user&.first_name} #{user&.last_name}".strip
