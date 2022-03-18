@@ -10,5 +10,5 @@
 #
 
 class BulkUpload < ActiveRecord::Base
-  has_many :reports
+  has_many :reports, dependent: :destroy
 end
