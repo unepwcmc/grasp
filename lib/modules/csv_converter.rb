@@ -46,7 +46,7 @@ class CsvConverter
       Body parts data need a genus to be specified.
       Do you have a "Body Parts Genus (Ape)" column in your CSV?
     ERROR
-    genus_name = @report.answer_to("genus_parts") or raise CsvConversionError, error_message
+    genus_name = @report.answer_to("genus_parts")[0] or raise CsvConversionError, error_message
     question_name = "parts_#{find_genus(genus_name)}"
 
     selected = @report.answer_to(question_name) || {"parts" => {}}
@@ -127,6 +127,7 @@ class CsvConverter
     "Dead Identifiers"         => proc { |value| answer("unique_identifiers_dead", value, "dead") },
     "Dead Name"                => proc { |value| answer("individual_name_dead", value, "dead") },
     "Body Parts (Genus)"       => proc { |value|
+      # THE ISSUE WE HAVE IS THAT THE INDIVIDUAL REPORT FORM ALLOWS A 
       answer("genus_parts", [value])
       add_genus(value, "parts")
     },
