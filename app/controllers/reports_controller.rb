@@ -117,6 +117,12 @@ class ReportsController < ApplicationController
   def thank_you
   end
 
+  def destroy
+    Report.find(params['id']).destroy
+    flash[:success] = "The report with ID #{params['id']} has been successfully deleted from the system."
+    redirect_to action: :index
+  end
+
   private
     def report_params
       {data: params.require(:report)[:data]}

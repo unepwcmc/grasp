@@ -76,3 +76,5 @@ end
 gem 'web-console', '~> 2.0', group: :development
 gem 'byebug', group: [:development, :test]
 gem 'annotate', '~> 2.7.1'
+
+gem "activerecord-session_store", "~> 1.1"

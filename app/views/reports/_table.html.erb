@@ -31,11 +31,17 @@
                   <a href="<%= report_summary_path(report.id) %>">View</a>
                 <% end %>
               <% end %>
+
               <% if can? :update, report %>
                 <a href="<%= edit_report_path(report.id) %>">Edit</a>
               <% end %>
+
               <% if can?(:validate, report) && report.can_be_validated? %>
                 <a href="<%= validate_report_path(report.id) %>">Validate</a>
+              <% end %>
+
+              <% if can?(:destroy, report) %>
+                <%= link_to 'Delete', "/reports/#{report.id}", method: :delete %>
               <% end %>
             </td>
           </tr>
