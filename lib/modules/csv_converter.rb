@@ -46,7 +46,7 @@ class CsvConverter
       Body parts data need a genus to be specified.
       Do you have a "Body Parts Genus (Ape)" column in your CSV?
     ERROR
-    genus_name = @report.answer_to("genus_parts") or raise CsvConversionError, error_message
+    genus_name = @report.answer_to("genus_parts")[0] or raise CsvConversionError, error_message
     question_name = "parts_#{find_genus(genus_name)}"
 
     selected = @report.answer_to(question_name) || {"parts" => {}}
@@ -90,6 +90,27 @@ class CsvConverter
     genera[value] or raise CsvConversionError, error_message
   end
 
+  # Enforces a quantity of 1 ape per CSV row
+  def add_quantity value, ape_condition
+    return if value.blank?
+
+     error_message = <<-ERROR
+      Genus data present in multiple columns.
+      Are you entering data for multiple apes?
+      Please enter data for different on separate rows
+    ERROR
+
+    raise CsvConversionError, multiple_apes_error_message if @report.answer_to('quantities').present?
+
+    answer = {
+      'body_parts' => false,
+      'dead' => 0,
+      'live' => 0
+    }
+    answer[ape_condition] = (ape_condition == 'body_parts' ? true : 1)
+    answer('quantities', answer)
+  end
+
   CONVERSIONS = {
     "User Name"                => proc { |value| @report.user = find_user(value) },
     "Own Agency?"              => proc { |value| answer("own_organisation", value) },
@@ -101,6 +122,7 @@ class CsvConverter
     "Live Ape (Genus)"         => proc { |value|
       answer("genus_live", value, "live")
       add_genus(value, "live")
+      add_quantity(value, "live")
     },
     "Live Species/Subspecies"  => proc { |value| answer("species_subspecies_live", value, "live") },
     "Live Intended Use"        => proc { |value| answer("intended_use_live", value, "live") },
@@ -112,10 +134,14 @@ class CsvConverter
     "Live Ape For Sale"        => proc { |value| answer("ape_for_sale_live", value, "live") },
     "Live Sale Price"          => proc { |value| answer("sale_price_live", value, "live") },
     "Live Identifiers"         => proc { |value| answer("unique_identifiers_live", value, "live") },
-    "Live Name"                => proc { |value| answer("individual_name_live", value) },
+    "Live Name"                => proc { |value| 
+      answer("individual_name_live", value)
+      answer("individual_name_live", value, 'live')
+    },
     "Dead Ape (Genus)"         => proc { |value|
       answer("genus_dead", value, "dead")
       add_genus(value, "dead")
+      add_quantity(value, "dead")
     },
     "Dead Species/Subspecies"  => proc { |value| answer("species_subspecies_dead", value, "dead") },
     "Dead Intended Use"        => proc { |value| answer("intended_use_dead", value, "dead") },
@@ -129,6 +155,7 @@ class CsvConverter
     "Body Parts (Genus)"       => proc { |value|
       answer("genus_parts", [value])
       add_genus(value, "parts")
+      add_quantity(value, "body_parts")
     },
     "Bone (Femur) Qty"         => proc { |value| answer_body_part("bone_femur", value) },
     "Bone (Humerus) Qty"       => proc { |value| answer_body_part("bone_humerus", value) },

@@ -1,12 +1,15 @@
 <%= content_for :page_title, "Report Summary ##{@report.id}" %>
+
 <%= content_for :breadcrumbs do %>
   <%= breadcrumb "Reports Dashboard", reports_path %>
   <%= breadcrumb "Report ##{@report.id}", report_summary_path(@report.id) %>
 <% end %>
+
 <%= content_for :page_buttons do %>
   <% if can? :read, @report %>
     <%= link_to 'View Full Report', report_path(@report), class: 'button button-primary' %>
   <% end %>
+
   <% if can? :edit, @report %>
     <%= link_to 'Edit Report', edit_report_path(@report), class: 'button button-primary' %>
   <% end %>
@@ -16,47 +19,51 @@
 <h3>Report status</h3>
 <%= report_state_description(@report.state) %>
 
-<h3>Report provider</h3>
+<% if @report.user.present? %>
+  <h3>Report provider</h3>
 
 <h5>
-<strong><%= @report.user.full_name %></strong><br>
+  <strong><%= @report.user.full_name %></strong>
+  <br>
   <%= display_or_default(@report.user.agency.name) %>
 </h5>
 
 <div class="form__group">
   <strong> Email (primary) </strong>
+
   <div class="form__field">
-    <%= display_or_default(@report.user.email)  %>
+    <%= display_or_default(@report.user.email) %>
   </div>
-</div>
 
 <div class="form__group">
   <strong> Email (secondary) </strong>
+
   <div class="form__field">
     <%= display_or_default(@report.user.second_email) %>
   </div>
-</div>
 
 <div class="form__group">
   <strong> Mobile phone </strong>
+
   <div class="form__field">
     <%= display_or_default(@report.user.mobile_number) %>
   </div>
-</div>
 
 <div class="form__group">
   <strong> Skype username </strong>
+
   <div class="form__field">
     <%= display_or_default(@report.user.skype_username) %>
   </div>
-</div>
-
-<hr>
+  
+  <hr>
+<% end %>
 
 <h3>Report details</h3>
 
 <div class="form__group">
   <strong> Country of discovery </strong>
+
   <div class="form__field">
     <%= display_or_default(@report.answer_to('country_of_discovery')) %>
   </div>
@@ -64,6 +71,7 @@
 
 <div class="form__group">
   <strong> Law enforcement confiscation? </strong>
+
   <div class="form__field">
     <%= display_or_default(@report.answer_to('confiscated')) %>
   </div>
@@ -71,6 +79,7 @@
 
 <div class="form__group">
   <strong> Date of incident </strong>
+
   <div class="form__field">
     <%= display_or_default(@report.answer_to("date_of_discovery")&.strftime("%d/%m/%Y")) %>
   </div>
@@ -83,22 +92,25 @@
 <div class="u-group">
   <div class="form__group">
     <strong> Total live apes</strong>
+
     <div class="form__field">
-      <%= display_or_default(@report.data.dig('answers', 'quantities', 'selected', 'live')) %>
+      <%= display_or_default(@live_apes.count) %>
     </div>
   </div>
 
   <div class="form__group">
     <strong> Total dead apes</strong>
+
     <div class="form__field">
-      <%= display_or_default(@report.data.dig('answers', 'quantities', 'selected', 'dead')) %>
+      <%= display_or_default(@dead_apes.count) %>
     </div>
   </div>
 
   <div class="form__group">
     <strong> Body parts?</strong>
+
     <div class="form__field">
-      <%= display_or_default(@report.data.dig('answers', 'quantities', 'selected', 'body_parts')&.to_s&.titleize) %>
+      <%= display_or_default(@body_parts.count) %>
     </div>
   </div>
 </div>
@@ -140,6 +152,7 @@
     <div class="validation__comments" style="display:none;">
       <div class="form__group">
         <strong> Comments for provider </strong>
+
         <div class="form__field">
           <%= validation.comments_for_provider %>
         </div>
@@ -147,6 +160,7 @@
 
       <div class="form__group">
         <strong> Comments for admin</strong>
+
         <div class="form__field">
           <%= validation.comments_for_admin %>
         </div>
@@ -160,6 +174,7 @@
   <hr>
 
   <h3>Matched validators</h3>
+
   <p>This list may change as the report is modified.</p>
   <% if @matched_validators.any? %>
     <ul>
