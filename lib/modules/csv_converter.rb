@@ -100,7 +100,7 @@ class CsvConverter
       Please enter data for different on separate rows
     ERROR
 
-    raise CsvConversionError, multiple_apes_error_message if @report.answer_to('quantities').present?
+    raise CsvConversionError, error_message if @report.answer_to('quantities').present?
 
     answer = {
       'body_parts' => false,
