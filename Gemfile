@@ -9,7 +9,7 @@ gem 'sinatra', :require => false
 gem 'mimemagic', '~> 0.3.6'
 
 # DB
-gem 'pg', '~> 0.18.4'
+#gem 'pg', '~> 0.18.4'
 # Paperclip is the only reverse-dependency of mimemagic and is deprecated in 
 # favour of ActiveStorage. It can be refactored out when upgrading to Rails 5.2.
 # If this is removed, also remove mimemagic.
