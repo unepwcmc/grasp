@@ -7,7 +7,7 @@ set :application, "grasp"
 set :server_name, "grasp.web-staging.linode.unep-wcmc.org"
 set :sudo_user, "wcmc"
 set :app_port, "80"
-set :branch, "develop"
+set :branch, "test/joeb_ssh_issue"
 
 
 
