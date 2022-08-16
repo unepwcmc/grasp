@@ -54,7 +54,7 @@ class Report < ActiveRecord::Base
       data["answers"][question]["selected"]
     end
     CONVERSIONS.has_key?(question) ? CONVERSIONS[question][answer] : answer
-  rescue NoMethodError
+  rescue NoMethodError, ArgumentError
     nil
   end
 
