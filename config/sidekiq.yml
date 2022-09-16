@@ -2,6 +2,7 @@
 :pidfile: tmp/pids/sidekiq.pid
 staging:
   :concurrency: 2
+  :logfile: ./log/sidekiq.log
 production:
   :concurrency: 10
 :queues:
