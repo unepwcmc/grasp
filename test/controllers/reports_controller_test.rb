@@ -38,7 +38,18 @@ class ReportsControllerTest < ActionController::TestCase
   end
 
   test "should search for reports by date range" do
-    @report   = FactoryGirl.create(:report, created_at: Date.today- 1.day)
+    @report   = FactoryGirl.create(:report)
+    date = Date.today - 1.day
+    date_of_discovery = {
+      'answers': {
+        'date_of_discovery': {
+          'selected': date.strftime('%d/%m/%Y')
+        }
+      }
+    }
+    report_data = @report.data
+    @report.update(data: report_data.merge(date_of_discovery))
+
     date_f    = Date.today - 2.days
     date_t    = Date.today - 1.day
     from_date = {"(1i)": date_f.year, "(2i)": date_f.month, "(3i)": date_f.day}
