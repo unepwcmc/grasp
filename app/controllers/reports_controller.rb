@@ -91,6 +91,12 @@ class ReportsController < ApplicationController
 
   def search
     @countries = CountryUtilities.all_countries
+
+    # Find date of earliest record, to limit the date range filters.
+    report_dates = Report.pluck("data -> 'answers' -> 'date_of_discovery' -> 'selected'").compact
+    report_years = report_dates.map { |report_date| report_date.split('/').last }
+    
+    @earliest_report_year = report_years.present? ? report_years.uniq.min.to_i : 1950
   end
 
   def export

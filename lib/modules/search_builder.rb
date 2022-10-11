@@ -13,13 +13,18 @@ module SearchBuilder
     query
   end
 
-  def self.by_date_created_range(query, params)
+  def self.by_date_of_discovery_range(query, params)
     if params[:to_date].present? && params[:from_date].present?
-      from_date = self.to_datetime(params[:from_date]).beginning_of_day
-      to_date   = self.to_datetime(params[:to_date]).end_of_day
-      query     = query.where(created_at: from_date..to_date)
+      from_date = params[:from_date].values.join('/').to_date
+      to_date   = params[:to_date].values.join('/').to_date
+
+      # Errors in database mean that we need to filter 'Err:540' out before searching.
+      query.where("data->'answers'->'date_of_discovery'->>'selected' != ?", 'Err:540')
+        .where("TO_DATE(data->'answers'->'date_of_discovery'->>'selected', 'DD-MM-YYYY') <= ?", to_date)
+        .where("TO_DATE(data->'answers'->'date_of_discovery'->>'selected', 'DD-MM-YYYY') >= ?", from_date)
+    else
+      query
     end
-    query
   end
 
   def self.by_agencies(query, params)

@@ -35,6 +35,7 @@ gem 'slack-notifier', '~> 1.5.1'
 # Authentication and Authorization
 gem 'cancancan', '~> 1.10'
 gem 'devise', '~> 4.2.0'
+gem 'bcrypt', '~> 3.1.17' # Required on Ubuntu 20+
 
 # Background jobs
 gem 'redis', '~> 3.3.1'

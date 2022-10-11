@@ -59,7 +59,7 @@ GEM
       rack
       thread_safe
     arel (6.0.3)
-    bcrypt (3.1.11)
+    bcrypt (3.1.18)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     browserify-rails (3.1.0)
@@ -265,6 +265,7 @@ DEPENDENCIES
   activerecord-session_store (~> 1.1)
   annotate (~> 2.7.1)
   appsignal (~> 1.1.9)
+  bcrypt (~> 3.1.17)
   browserify-rails (~> 3.1.0)
   byebug
   cancancan (~> 1.10)
