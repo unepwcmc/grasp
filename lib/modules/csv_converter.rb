@@ -25,6 +25,10 @@ class CsvConverter
   def add_genus value, type
     @report.data["genera"][type] ||= []
 
+    # Call find_genus using the species name. 
+    # Will raise CsvConversionError if the genus is invalid, thereby invalidating the whole CSV import
+    find_genus(value)
+
     unless @report.data["genera"][type].include?(value)
       @report.data["genera"][type] << value
     end
