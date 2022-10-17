@@ -23,6 +23,7 @@ class CsvConverter
   end
 
   def add_genus value, type
+    remove_non_breaking_spaces(value)
     @report.data["genera"][type] ||= []
 
     # Call find_genus using the species name. 
@@ -35,6 +36,7 @@ class CsvConverter
   end
 
   def answer question, value, page=nil
+    remove_non_breaking_spaces(value)
     if page
       @report.data["answers"][page] ||= [{}]
       @report.data["answers"][page][0][question] ||= {}
@@ -82,6 +84,7 @@ class CsvConverter
   end
 
   def find_genus value
+    remove_non_breaking_spaces(value)
     genera = {
       "Bonobo (Pan)" => "bonobo",
       "Chimpanzee (Pan)" => "chimpanzee",
@@ -182,5 +185,11 @@ class CsvConverter
 
   def self.columns
     CONVERSIONS.keys
+  end
+
+  def remove_non_breaking_spaces(value)
+    # Some file uploads contain data that has non-breaking sapces instead of spaces,
+    # so replace them with spaces.
+    value.gsub!(/\u00a0/," ") if value.is_a?(String)
   end
 end
