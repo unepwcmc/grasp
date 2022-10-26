@@ -48,7 +48,7 @@ gem 'faker', '~> 1.6.5'
 group :development do
   # Docs
   gem 'yard', '~> 0.8.7.6'
-  gem 'redcarpet', '~> 3.3.4'
+  gem 'redcarpet', '~> 3.5.1'
 
   # Deployment
   gem 'capistrano-rails'
