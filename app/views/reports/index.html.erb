@@ -11,11 +11,11 @@
 
 <% if current_user.is_role?(:provider) %>
   <h2>My reports</h2>
-  <%= render partial: "table", locals: {reports: @user_reports, table: "user"}  %>
+  <%= render partial: "table", locals: { reports: @user_reports, table: "user" }  %>
 
   <h2>Agency reports</h2>
-  <%= render partial: "table", locals: {reports: @agency_reports, table: "agency"}  %>
+  <%= render partial: "table", locals: { reports: @agency_reports, table: "agency" }  %>
 <% else %>
-  <%= render partial: "table", locals: {reports: @reports}  %>
+  <%= render partial: "table", locals: { reports: @reports}  %>
 <% end %>
 

@@ -13,6 +13,9 @@ class CsvConverter
   end
 
   def convert header, value
+    invalid_header_error_message = "'#{header}' is not a valid column header."
+    raise CsvConversionError, invalid_header_error_message unless self.class.columns.include? header
+
     if value && self.class.method_defined?(header)
       @has_data = true
       send(header.to_sym, value.strip)
@@ -20,7 +23,12 @@ class CsvConverter
   end
 
   def add_genus value, type
+    remove_non_breaking_spaces(value)
     @report.data["genera"][type] ||= []
+
+    # Call find_genus using the species name. 
+    # Will raise CsvConversionError if the genus is invalid, thereby invalidating the whole CSV import
+    find_genus(value)
 
     unless @report.data["genera"][type].include?(value)
       @report.data["genera"][type] << value
@@ -28,6 +36,7 @@ class CsvConverter
   end
 
   def answer question, value, page=nil
+    remove_non_breaking_spaces(value)
     if page
       @report.data["answers"][page] ||= [{}]
       @report.data["answers"][page][0][question] ||= {}
@@ -43,7 +52,7 @@ class CsvConverter
       Body parts data need a genus to be specified.
       Do you have a "Body Parts Genus (Ape)" column in your CSV?
     ERROR
-    genus_name = @report.answer_to("genus_parts") or raise CsvConversionError, error_message
+    genus_name = @report.answer_to("genus_parts")[0] or raise CsvConversionError, error_message
     question_name = "parts_#{find_genus(genus_name)}"
 
     selected = @report.answer_to(question_name) || {"parts" => {}}
@@ -75,6 +84,7 @@ class CsvConverter
   end
 
   def find_genus value
+    remove_non_breaking_spaces(value)
     genera = {
       "Bonobo (Pan)" => "bonobo",
       "Chimpanzee (Pan)" => "chimpanzee",
@@ -85,6 +95,27 @@ class CsvConverter
 
     error_message = "Can't find genus '#{value}'. Available genera are #{genera.keys.join(", ")}"
     genera[value] or raise CsvConversionError, error_message
+  end
+
+  # Enforces a quantity of 1 ape per CSV row
+  def add_quantity value, ape_condition
+    return if value.blank?
+
+     error_message = <<-ERROR
+      Genus data present in multiple columns.
+      Are you entering data for multiple apes?
+      Please enter data for different on separate rows
+    ERROR
+
+    raise CsvConversionError, error_message if @report.answer_to('quantities').present?
+
+    answer = {
+      'body_parts' => false,
+      'dead' => 0,
+      'live' => 0
+    }
+    answer[ape_condition] = (ape_condition == 'body_parts' ? true : 1)
+    answer('quantities', answer)
   end
 
   CONVERSIONS = {
@@ -98,6 +129,7 @@ class CsvConverter
     "Live Ape (Genus)"         => proc { |value|
       answer("genus_live", value, "live")
       add_genus(value, "live")
+      add_quantity(value, "live")
     },
     "Live Species/Subspecies"  => proc { |value| answer("species_subspecies_live", value, "live") },
     "Live Intended Use"        => proc { |value| answer("intended_use_live", value, "live") },
@@ -109,10 +141,14 @@ class CsvConverter
     "Live Ape For Sale"        => proc { |value| answer("ape_for_sale_live", value, "live") },
     "Live Sale Price"          => proc { |value| answer("sale_price_live", value, "live") },
     "Live Identifiers"         => proc { |value| answer("unique_identifiers_live", value, "live") },
-    "Live Name"                => proc { |value| answer("individual_name_live", value) },
+    "Live Name"                => proc { |value| 
+      answer("individual_name_live", value)
+      answer("individual_name_live", value, 'live')
+    },
     "Dead Ape (Genus)"         => proc { |value|
       answer("genus_dead", value, "dead")
       add_genus(value, "dead")
+      add_quantity(value, "dead")
     },
     "Dead Species/Subspecies"  => proc { |value| answer("species_subspecies_dead", value, "dead") },
     "Dead Intended Use"        => proc { |value| answer("intended_use_dead", value, "dead") },
@@ -126,6 +162,7 @@ class CsvConverter
     "Body Parts (Genus)"       => proc { |value|
       answer("genus_parts", [value])
       add_genus(value, "parts")
+      add_quantity(value, "body_parts")
     },
     "Bone (Femur) Qty"         => proc { |value| answer_body_part("bone_femur", value) },
     "Bone (Humerus) Qty"       => proc { |value| answer_body_part("bone_humerus", value) },
@@ -148,5 +185,11 @@ class CsvConverter
 
   def self.columns
     CONVERSIONS.keys
+  end
+
+  def remove_non_breaking_spaces(value)
+    # Some file uploads contain data that has non-breaking sapces instead of spaces,
+    # so replace them with spaces.
+    value.gsub!(/\u00a0/," ") if value.is_a?(String)
   end
 end

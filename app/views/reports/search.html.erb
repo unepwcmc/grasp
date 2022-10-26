@@ -29,14 +29,14 @@
 
     <%= label_tag :from_date, 'Date of discovery (from)' %>
     <div class="form__field">
-      <%= date_select :from_date, params[:from_date], include_blank: true, order: [:day, :month, :year], default: nil %>
+      <%= date_select :from_date, params[:from_date], include_blank: true, start_year: @earliest_report_year, order: [:day, :month, :year], default: nil %>
     </div>
   </div>
 
   <div class="form__group">
     <%= label_tag :to_date, 'Date of discovery (to)' %>
     <div class="form__field">
-      <%= date_select :to_date, params[:to_date], include_blank: true, order: [:day, :month, :year], default: nil %>
+      <%= date_select :to_date, params[:to_date], include_blank: true, start_year: @earliest_report_year, order: [:day, :month, :year], default: nil %>
     </div>
   </div>
 

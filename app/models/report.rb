@@ -26,6 +26,8 @@ class Report < ActiveRecord::Base
   belongs_to :bulk_upload
   has_many :validations, dependent: :destroy
   has_many :images, dependent: :destroy
+  
+  validates :user_id, presence: true
 
   def user_name
     "#{user&.first_name} #{user&.last_name}".strip
@@ -43,8 +45,9 @@ class Report < ActiveRecord::Base
     state&.downcase == "submitted"
   end
 
+  # Rescue required because of invalid dates in database.
   CONVERSIONS = {
-    "date_of_discovery" => lambda { |value| Date.strptime(value, "%d/%m/%Y") }
+    "date_of_discovery" => lambda { |value| Date.strptime(value, "%d/%m/%Y") rescue nil }
   }
 
   def answer_to question, page=nil, tab_index=0
@@ -88,7 +91,7 @@ class Report < ActiveRecord::Base
       query = self
       query = SearchBuilder.by_report_id(query, params)
       query = SearchBuilder.by_country_of_discovery(query, params)
-      query = SearchBuilder.by_date_created_range(query, params)
+      query = SearchBuilder.by_date_of_discovery_range(query, params)
       query = SearchBuilder.by_agencies(query, params)
       query = SearchBuilder.by_genus(query, params)
       query = SearchBuilder.by_users(query, params)

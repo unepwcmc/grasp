@@ -44,8 +44,12 @@ en:
   bulk_uploads:
     delete_confirmation: "Are you sure you want to permanently delete this bulk upload (and its reports)?"
     upload_successful: "Thank you! Your bulk upload was successful"
-    upload_error: "Sorry, your bulk upload contains errors. Be sure to solve these issues before re-uploading the CSV file"
+    upload_error: |
+      One or more file(s) in your bulk upload is invalid. No reports have been created.<br><br>
+      
+      Below is a list of invalid files and possible reasons they were not valid.<br><br>
 
+      Please exclude or fix these files and try again.<br><br>
   helpers:
     page_entries_info:
       more_pages:
