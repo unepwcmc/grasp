@@ -1,0 +1,54 @@
+services:
+  web: 
+    build: .
+    command: /bin/bash -l -c "rm -f /grasp/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    depends_on: 
+      - db
+      - redis
+    ports: 
+      - "3000:3000"
+    volumes:
+      - .:/grasp
+      - grasp_node_modules:/grasp/node_modules
+    env_file: '.env'
+
+  db:
+    image: postgres:10
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    volumes:
+      - grasp_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432"
+    env_file:
+      - '.env'
+
+  redis:
+    image: redis
+    ports:
+      - "6379"
+    env_file:
+      - '.env'
+    volumes:
+      - grasp_redis_data:/data
+ 
+  sidekiq:
+    build:
+      context: .
+    volumes:
+      - .:/grasp
+    command: /bin/bash -l -c "bundle exec sidekiq"
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - '.env'
+
+volumes:
+  grasp_node_modules:
+  grasp_db_data:
+  grasp_redis_data: 
+  grasp_bundler_gems:
